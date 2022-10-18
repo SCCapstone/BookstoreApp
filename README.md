@@ -25,7 +25,7 @@ Here you list all the one-time things the developer needs to do after cloning yo
 
 ## Running
 
-Specify the commands for a developer to run the app from the cloned repo.
+To run the app run `npm start` in the terminal.
 
 # Deployment
 
