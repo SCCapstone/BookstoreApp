@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Buffer Overload Book Store Project
-=======
 # Hobbs messing stuff up
->>>>>>> 23c9c738698514cb6b91168c55df186e75d5c506
 
 This first paragraph should be a short description of the app. You can add links to your wiki pages that have more detailed descriptions.  
 
