@@ -21,7 +21,7 @@ You only need to add instructions for the OS you are using.
 
 ## Setup
 
-Here you list all the one-time things the developer needs to do after cloning your repo. Sometimes there is no need for this section, but some apps require some first-time configuration from the developer, for example: setting up a database for running your webapp locally.  
+Install npm (npm install react-scripts) and install MongoDB.
 
 ## Running
 
