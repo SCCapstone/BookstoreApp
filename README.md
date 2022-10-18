@@ -1,4 +1,4 @@
-# Book Store App by Us
+# Book Store App 
 
 We are making a Bookstore App 
 Rahul did it wrong and edited this line This first paragraph should be a short description of the app. You can add links to your wiki pages that have more detailed descriptions.  
