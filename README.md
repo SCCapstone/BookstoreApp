@@ -28,13 +28,11 @@ Here you list all the one-time things the developer needs to do after cloning yo
 Specify the commands for a developer to run the app from the cloned repo.
 
 # Deployment
+To deploy our bookstore web application we plan on using DigitalOcean. Embedded into DigitalOcean comes the option of using the mongoDB database which will be used for storing user information and the book inventory. Integrated with this, we plan to use the Amazon API for book browsing and potential book purchases. The stored user information and book inventory will follow JSON formatting. https://www.digitalocean.com/community/tutorials/how-to-deploy-a-react-application-to-digitalocean-app-platform
 
-Webapps need a deployment section that explains how to get it deployed on the Internet. These should be detailed enough so anyone can re-deploy if needed  
-. Note that you **do not put passwords in git**. 
+In using DigitalOcean as the method to deploy our bookstore web application, we will be using Docker containers for development. Using these containers for our web app are essential because they are small, executable packages which are easy to use for development and running the application. The up side to Docker is that it is faster, scalable, and easy to use compared to virtual-machines. https://www.docker.com/
 
-Mobile apps will also sometimes need some instructions on how to build a
-"release" version, maybe how to sign it, and how to run that binary in an
-emulator or in a physical phone.
+We will use a traditional web app model because the DigitalOcean hosting platform will easily handle the small load of server operations for our app.
 
 # Testing
 
