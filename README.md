@@ -21,7 +21,7 @@ Install npm (npm install react-scripts) and install MongoDB.
 
 ## Running
 
-To run the app run `npm start` in the terminal.
+To run the app, first enter /client directory. This can be done by running `cd client` and run `npm start` in the terminal.
 
 # Deployment
 To deploy our bookstore web application we plan on using DigitalOcean. Embedded into DigitalOcean comes the option of using the mongoDB database which will be used for storing user information and the book inventory. Integrated with this, we plan to use the Amazon API for book browsing and potential book purchases. The stored user information and book inventory will follow JSON formatting. https://www.digitalocean.com/community/tutorials/how-to-deploy-a-react-application-to-digitalocean-app-platform
