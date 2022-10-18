@@ -17,7 +17,7 @@ In order to build this project you first have to install:
 for how to download Git based on the OS system you use (i.e. Windows, Mac, or Linux - Ubuntu)
 ## Setup
 
-Here you list all the one-time things the developer needs to do after cloning your repo. Sometimes there is no need for this section, but some apps require some first-time configuration from the developer, for example: setting up a database for running your webapp locally.  
+Install npm (npm install react-scripts) and install MongoDB.
 
 ## Running
 
