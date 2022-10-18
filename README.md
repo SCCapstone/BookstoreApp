@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-# Buffer Overload Book Store Project
-=======
-# Hobbs messing stuff up
->>>>>>> 23c9c738698514cb6b91168c55df186e75d5c506
+# Book Store App by Us
 
+We are making a Bookstore App 
 Rahul did it wrong and edited this line This first paragraph should be a short description of the app. You can add links to your wiki pages that have more detailed descriptions.  
 
 Your audience for the Readme.md are other developers who are joining your team.  
@@ -58,4 +55,4 @@ Explain how to run the automated tests.
 
 # Authors
 
-Your names and emails yadda yadda yadda rahul is cool
+William Hobbs, Jack Oberman... blah blah blah
