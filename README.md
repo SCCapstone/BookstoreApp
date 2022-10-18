@@ -50,9 +50,9 @@ In some cases you need to install test runners, etc. Explain how.
 Explain how to run the automated tests.
 
 # Authors
-Rahul Bulusu: rbulusu@email.sc.edu
-William Hobbs: wihobbs@email.sc.edu
-Jack Oberman: joberman@email.sc.edu 
-Sai Oruganti: orugants@email.sc.edu
-Alfred Lin: alfredl@email.sc.edu
+* Rahul Bulusu: rbulusu@email.sc.edu
+* William Hobbs: wihobbs@email.sc.edu
+* Jack Oberman: joberman@email.sc.edu 
+* Sai Oruganti: orugants@email.sc.edu
+* Alfred Lin: alfredl@email.sc.edu
 
