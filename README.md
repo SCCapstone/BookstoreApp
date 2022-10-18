@@ -14,11 +14,10 @@ In order to build this project you first have to install:
 
 * [Node.js](https://nodejs.org/en/)
 * [MongoDB](https://www.mongodb.com/)
-
-If possible, list the actual commands you used to install these, so the reader can just cut-n-paste the commands and get everything setup.  
-
-You only need to add instructions for the OS you are using.
-
+* [npm](npm i react-download)
+* [React](npm install react-scripts)
+* [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03) - This website has detailed explainations 
+for how to download Git based on the OS system you use (i.e. Windows, Mac, or Linux - Ubuntu)
 ## Setup
 
 Here you list all the one-time things the developer needs to do after cloning your repo. Sometimes there is no need for this section, but some apps require some first-time configuration from the developer, for example: setting up a database for running your webapp locally.  
@@ -54,5 +53,9 @@ In some cases you need to install test runners, etc. Explain how.
 Explain how to run the automated tests.
 
 # Authors
+Rahul Bulusu: rbulusu@email.sc.edu
+William Hobbs: wihobbs@email.sc.edu
+Jack Oberman: joberman@email.sc.edu 
+Sai Oruganti: orugants@email.sc.edu
+Alfred Lin: alfredl@email.sc.edu
 
-William Hobbs, Jack Oberman... blah blah blah
