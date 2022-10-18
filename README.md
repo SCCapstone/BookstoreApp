@@ -55,4 +55,4 @@ Explain how to run the automated tests.
 
 # Authors
 
-Your names and emails
+William Hobbs, Jack Oberman... blah blah blah
