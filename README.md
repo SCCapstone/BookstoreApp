@@ -1,11 +1,9 @@
-# Hobbs messing stuff up
+# Book Store App 
 
-This first paragraph should be a short description of the app. You can add links to your wiki pages that have more detailed descriptions.  
-
-Your audience for the Readme.md are other developers who are joining your team.  
+We are making a Bookstore App Your audience for the Readme.md are other developers who are joining your team.  
 Specifically, the file should contain detailed instructions that any developer can follow to install, compile, run, and test your project. These are not only useful to new developers, but also to you when you have to re-install everything because your old laptop crashed. Also, the teachers of this class will be following your instructions.  
 
-## External Requirements
+## ALfred was here (External Requirements)
 
 List all the stuff the reader will need to install in order to get you app to run in their laptop. For example:  
 
@@ -54,4 +52,4 @@ Explain how to run the automated tests.
 
 # Authors
 
-Your names and emails
+William Hobbs, Jack Oberman... blah blah blah
