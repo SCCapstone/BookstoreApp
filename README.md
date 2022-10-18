@@ -25,7 +25,7 @@ Here you list all the one-time things the developer needs to do after cloning yo
 
 ## Running
 
-To run the app run `npm start` in the terminal.
+To run the app, first enter /client directory. This can be done by running `cd client` and run `npm start` in the terminal.
 
 # Deployment
 
