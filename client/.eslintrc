@@ -1,4 +1,4 @@
-{
+/*{
     "parser": "@typescript-eslint/parser",
     "extends": [
         "airbnb",
@@ -27,4 +27,4 @@
         "react/prefer-stateless-function":      [1],
         "react/static-property-placement":      [1, "property assignment"]
     }
-}
+}*/
