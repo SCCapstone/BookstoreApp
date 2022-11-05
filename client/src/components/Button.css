@@ -1,5 +1,5 @@
 :root {
-    --primary: #3acbf7;
+    --primary: Gainsboro;
 }
 
 .btn {
@@ -13,8 +13,8 @@
 .btn:hover {
     padding: 8px 20px;
     transition: all 0.3s ease-out;
-    background: #fff;
-    color: blue;
+    background: #00120B;
+    color: Gainsboro;
     transition: 250ms;
 }
 
@@ -35,12 +35,12 @@
     padding: 8px 20px;
     border-radius: 4px;
     font-size: 18px;
-    color: #fff;
+    color: Gainsboro;
 }
 
 .btn--large {
     padding: 12px 26px;
     border-radius: 4px;
     font-size: 20px;
-    color: #fff;
+    color: Gainsboro;
 }

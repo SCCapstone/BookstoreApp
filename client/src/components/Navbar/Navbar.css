@@ -1,5 +1,5 @@
 .NavbarElements {
-    background: linear-gradient(90 deg, rgb(110, 94, 254) 0%, rgba(73, 63, 252, 1) 100%);
+    background: linear-gradient(90 deg, #00120B 0%, #00120B 100%);
     height: 80px;
     display: flex;
     justify-content: center;
@@ -8,7 +8,7 @@
 }
 
 .navbar-logo {
-    color: #fff;
+    color: Gainsboro;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
@@ -37,7 +37,7 @@
 }
 
 .nav-links:hover {
-    background-color: blue;
+    background-color: #00120B;
     border-radius: 4px;
     transition: all 0.2s ease-out;
 }
@@ -71,7 +71,7 @@
     }   
     
     .nav-menu.active {
-        background: blue;
+        background: #00120B;
         left: 0;
         opacity: 1;
         transition: all 0.5s ease;
@@ -86,7 +86,7 @@
     }
 
     .nav-links:hover {
-        background-color: blue;
+        background-color: #00120B;
         border-radius: 0;
     }
 
@@ -119,7 +119,7 @@
         margin: 2rem auto;
         border-radius: 4px;
         width: 80%;
-        background: blue;
+        background: #00120B;
         text-decoration: none;
         color: #fff;
         font-size: 1.5rem;
@@ -127,7 +127,7 @@
 
     .nav-links-mobile:hover {
         background: #fff;
-        color: blue;
+        color: #00120B;
         transition: 250ms;
     }
 
