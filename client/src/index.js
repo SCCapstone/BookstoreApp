@@ -1,18 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-// import App from './App';
+// client/src/index.js
 
-function HiThere() {
-    const element = <h1 style={{textAlign: "center"}} >The Bookstore App</h1>;
-    return element;
-  }
+import App from "./App";
+import { register } from "register-service-worker";
 
+var React = require("react");
+var ReactDOM = require("react-dom/client");
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <>
-      <HiThere></HiThere>
-    </>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
+//ReactDOM.render(<App />, document.getElementById("root"));
+register();
