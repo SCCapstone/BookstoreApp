@@ -1,5 +1,5 @@
 //import React, { Component } from "react";
-//import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./views/Home";
 
@@ -101,7 +101,11 @@ class App extends Component {
     //const { data } = this.state;
     return (
       <div className="App">
-        <Home />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     );
   }
