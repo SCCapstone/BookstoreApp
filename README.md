@@ -12,6 +12,7 @@ In order to build this project you first have to install:
 * [MongoDB](https://www.mongodb.com/)
 * npm `npm i react-download`
 * React `npm install react-scripts`
+* React DOM v5 `npm install react-router-dom@5` (you may have to `--force`)
 * [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03) - This website has detailed explainations 
 for how to download Git based on the OS system you use (i.e. Windows, Mac, or Linux - Ubuntu)
 ## Setup
