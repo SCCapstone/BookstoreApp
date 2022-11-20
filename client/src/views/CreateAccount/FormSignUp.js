@@ -1,58 +1,58 @@
-import { toHaveErrorMessage } from '@testing-library/jest-dom/dist/matchers';
+//import { toHaveErrorMessage } from '@testing-library/jest-dom/dist/matchers';
 import React from 'react'
 import useForm from './UseForm'
 import validate from './validateInfo';
 import './Form.css';
 
-const FormSignUp = () => {
+const CreateAccount = () => {
   const {handleChange, values, handleSubmit, errors} = useForm(validate);
-
   return (
-    <div className='form-content-right'>
-      <form className='form' onSubmit={handleSubmit}>
+
+    <div classname='form'>
+      <form classname='form' onSubmit={handleSubmit}>
         <h1>
           New User Account
         </h1>
-        <div className='form-inputs'>
+        <div classname='form-inputs'>
           <label 
             htmlFor='firstname' 
-            className='form-label'>
+            classname='form-label'>
             First Name
           </label>
           <input
-            id='name'
+            id='firstname'
             type='text' 
-            name='name'
+            name='firstname'
             classname='form-input'
-            placeholder='Enter Your first name'
+            placeholder='Enter your first name'
             value={values.firstname}
             onChange={handleChange}
             >
           </input>
           {errors.firstname && <p>{errors.firstname}</p>}
         </div>
-        <div className='form-inputs'>
+        <div classname='form-inputs'>
           <label 
             htmlFor='lasttname' 
-            className='form-label'>
+            classname='form-label'>
             Last Name
           </label>
           <input
-            id='name'
+            id='lastname'
             type='text' 
-            name='name'
+            name='lastname'
             classname='form-input'
-            placeholder='Enter Your Last name'
+            placeholder='Enter your last name'
             value={values.lastname}
             onChange={handleChange}
             >
           </input>
           {errors.lastname && <p>{errors.lastname}</p>}
         </div>
-        <div className='form-inputs'>
+        <div classname='form-inputs'>
           <label 
             htmlFor='username' 
-            className='form-label'>
+            classname='form-label'>
             Username
           </label>
           <input
@@ -60,17 +60,17 @@ const FormSignUp = () => {
             type='text' 
             name='username'
             classname='form-input'
-            placeholder='Enter Your username'
+            placeholder='Enter your username'
             value={values.username}
             onChange={handleChange}
             >
           </input>
           {errors.username && <p>{errors.username}</p>}
         </div>
-        <div className='form-inputs'>
+        <div classname='form-inputs'>
           <label 
             htmlFor='email' 
-            className='form-label'>
+            classname='form-label'>
             Email
           </label>
           <input
@@ -78,17 +78,17 @@ const FormSignUp = () => {
             type='email' 
             name='email'
             classname='form-input'
-            placeholder='Enter Your email'
+            placeholder='Enter your email'
             value={values.email}
             onChange={handleChange}
             >
           </input>
           {errors.email && <p>{errors.email}</p>}
         </div>
-        <div className='form-inputs'>
+        <div classname='form-inputs'>
           <label 
             htmlFor='password' 
-            className='form-label'>
+            classname='form-label'>
             Password
           </label>
           <input
@@ -96,17 +96,17 @@ const FormSignUp = () => {
             type='password' 
             name='password'
             classname='form-input'
-            placeholder='Enter Your password'
+            placeholder='Enter your password'
             value={values.password}
             onChange={handleChange}
             >
           </input>
           {errors.password && <p>{errors.password}</p>}
         </div>
-        <div className='form-inputs'>
+        <div classname='form-inputs'>
           <label 
             htmlFor='password2' 
-            className='form-label'>
+            classname='form-label'>
             Confirm Password
           </label>
           <input
@@ -114,26 +114,26 @@ const FormSignUp = () => {
             type='password' 
             name='password2'
             classname='form-input'
-            placeholder='Enter Your password2'
+            placeholder='Enter your password again'
             value={values.password2}
             onChange={handleChange}
             >
           </input>
           {errors.password2 && <p>{errors.password2}</p>}
         </div>
-        <button className='form-input'
+        <button classname='form-input'
           type='submit'>
           Create an Account
         </button>
-        <span className='form-input-login'>
+        <span classname='form-input-login'>
           Already have an account? Login 
-          <a href='#'>
-            here  
+          <a href='# ' > here  
           </a>
         </span>
       </form>
     </div>
+
   )
 }
 
-export default FormSignUp
+export default CreateAccount

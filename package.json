@@ -1,8 +1,25 @@
 {
+  "name": "bufferoverload",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SCCapstone/BufferOverload.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SCCapstone/BufferOverload/issues"
+  },
   "dependencies": {
-    "framer-motion": "^7.6.4",
-    "react-icons": "^4.6.0",
-    "react-router-dom": "^6.4.3",
-    "styled-components": "^5.3.6"
-  }
+    "@emailjs/browser": "^3.9.1",
+    "concurrently": "^4.1.2",
+    "react-icons": "^4.6.0"
+  },
+  "homepage": "https://github.com/SCCapstone/BufferOverload#readme",
+  "description": ""
 }
