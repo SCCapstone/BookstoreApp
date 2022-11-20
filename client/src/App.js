@@ -112,13 +112,15 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
         <LeftSideNavBar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/browse' element={<Browse />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/contactus' element={<ContactUs />} />
-            <Route path='/createaccount' element={<CreateAccount />} />
-          </Routes>
+
+
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/browse' element={<Browse />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/contactus' element={<ContactUs />} />
+          <Route path='/createaccount' element={<CreateAccount />} />
+        </Routes>
         </BrowserRouter>
       </div>
     );

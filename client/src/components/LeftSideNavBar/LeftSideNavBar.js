@@ -5,6 +5,8 @@ import { IconContext } from 'react-icons';
 import './LeftSideNavBar.css';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
+import CreateAccount from '../../pages/CreateAccount/FormSignUp';
+
 
 function LeftSideNavBar() {
   const [sidebar, setSidebar] = useState(false);
@@ -13,10 +15,19 @@ function LeftSideNavBar() {
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
+
         <div className='navbar'>
           <Link to='#' className='menu-bars'>
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
+          <div class = "button">
+
+            <button>Login</button>
+            <form action="/createaccount" method="get">
+    <input type="submit" value="create account" 
+         name="Submit" id="frm1_submit" />
+</form>
+          </div>
         </div>
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
           <ul className='nav-menu-items' onClick={showSidebar}>
