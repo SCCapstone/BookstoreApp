@@ -16,8 +16,8 @@ const LoginForm = () => {
                 <a href='# ' > here  
                 </a>
             </p>
-            <button onClick >Forgot Username</button>
-            <button onClick >Forgot Password</button>
+            <button onClick = "user-btn">Forgot Username</button>
+            <button onClick = "pass-btn">Forgot Password</button>
         </div>
     )
 }
