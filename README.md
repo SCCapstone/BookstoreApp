@@ -17,8 +17,7 @@ Ensure you are in "BufferOverload" and run these commands:
 `cd` into the backend folder and run: `npm i -S mongoose express body-parser morgan cors`  
 
 #### Client    
-`cd` into the client folder and run: `npm i -S axios register-service-worker`  
-`npm i @emailjs/browser` (needed for the Contact-Us Page)
+`cd` into the client folder and run: `npm i -S axios register-service-worker @emailjs/browser`  
 
 ## Running
 To run the app make sure to cd into the base-folder (Buffer-Overload) and run `npm start` in the terminal.
