@@ -21,6 +21,11 @@ const LoginForm = () => {
                 <a href='# ' > forgot password
                 </a>
             </p>
+            <p className="text">
+                Click here if 
+                <a href='# ' > forgot username
+                </a>
+            </p>
         </div>
     )
 }
