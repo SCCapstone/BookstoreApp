@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons';
 import './LeftSideNavBar.css';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import CreateAccount from '../../pages/CreateAccount/FormSignUp';
+import CreateAccount from '../../views/CreateAccount/FormSignUp';
 
 
 function LeftSideNavBar() {

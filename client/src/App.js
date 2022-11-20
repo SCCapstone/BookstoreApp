@@ -2,11 +2,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 //import Home from "./views/Home";
-import Home from './pages/Home';
-import Browse from './pages/Browse';
-import About from './pages/About';
-import ContactUs from './pages/ContactUs';
-import CreateAccount from './pages/CreateAccount/FormSignUp';
+import Home from './views/Home';
+import Browse from './views/Browse';
+import About from './views/About';
+import ContactUs from './views/ContactUs';
+import CreateAccount from './views/CreateAccount/FormSignUp';
 
 
 import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
@@ -112,8 +112,6 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
         <LeftSideNavBar />
-
-
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/browse' element={<Browse />} />
