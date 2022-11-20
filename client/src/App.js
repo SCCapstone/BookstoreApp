@@ -3,11 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./views/Home";
 import ContactForm from "./views/ContactUs";
-//import Home from "./views/Home";
-import Browse from './pages/Browse';
-import About from './pages/About';
-import CreateAccount from './pages/CreateAccount/FormSignUp';
-
+import Browse from "./views/Browse";
+import About from "./views/About";
+import CreateAccount from "./views/CreateAccount/FormSignUp";
 
 import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
 
@@ -110,13 +108,13 @@ class App extends Component {
     return (
       <div className="App">
         <BrowserRouter>
-        <LeftSideNavBar />
+          <LeftSideNavBar />
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/browse' element={<Browse />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/contactus' element={<ContactForm />} />
-            <Route path='/createaccount' element={<CreateAccount />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/browse" element={<Browse />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contactus" element={<ContactForm />} />
+            <Route path="/createaccount" element={<CreateAccount />} />
           </Routes>
         </BrowserRouter>
       </div>
