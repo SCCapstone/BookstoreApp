@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Book Store App 
+We are making a Bookstore App that renders on both mobile and desktop web devices natively. Users and employees will have the ability to create an account, login, browse and purchase books, and more. Ultimately, we hope that this web application will be used by local businesses to grow their web presence and increase revenue.  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## External Requirements Installation
+In order to build this project install:
+* [Node.js](https://nodejs.org/en/)
 
-## Available Scripts
+## Setup
+Before running the app a few things have to be installed in both the client and backend. Run these instructions in the terminal:  
+#### Base Folder 
+Ensure you are in "BufferOverload" and run these commands:  
+`npm i`  
+`npm i react-scripts`  
+`npm i -S concurrently` (Used for running npm start in the terminal)  
 
-In the project directory, you can run:
+#### Back-End  
+`cd` into the backend folder and run: `npm i -S mongoose express body-parser morgan cors`  
 
-### `npm start`
+#### Client    
+`cd` into the client folder and run: `npm i -S axios register-service-worker`  
+`npm i @emailjs/browser` (needed for the Contact-Us Page)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Running
+To run the app make sure to cd into the base-folder (Buffer-Overload) and run `npm start` in the terminal.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Deployment
+To deploy our bookstore web application we plan on using Heroku. Embedded into Heroku comes the option of using the mongoDB database which will be used for storing user information and the book inventory. Integrated with this, we plan to use the Amazon API for book browsing and potential book purchases. The stored user information and book inventory will follow JSON formatting. https://www.heroku.com/
 
-### `npm test`
+In using Heroku as the method to deploy our bookstore web application, we will be using Docker containers for development. Using these containers for our web app are essential because they are small, executable packages which are easy to use for development and running the application. The up side to Docker is that it is faster, scalable, and easy to use compared to virtual-machines. https://www.docker.com/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We will use a traditional web app model because the Heroku hosting platform will easily handle the small load of server operations for our app.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In 492 we will write automated tests for our app. TO-DO
+## Testing
+The unit tests are in `/test/unit`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The behavioral tests are in `/test/casper/`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Testing Technology
 
-### `npm run eject`
+In some cases you need to install test runners, etc. Explain how.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Running Tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Explain how to run the automated tests.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Authors
+* Rahul Bulusu: rbulusu@email.sc.edu
+* William Hobbs: wihobbs@email.sc.edu
+* Jack Oberman: joberman@email.sc.edu 
+* Sai Oruganti: orugants@email.sc.edu
+* Alfred Lin: alfredl@email.sc.edu
