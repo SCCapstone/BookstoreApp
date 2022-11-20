@@ -18,6 +18,7 @@ Ensure you are in "BufferOverload" and run these commands:
 
 #### Client    
 `cd` into the client folder and run: `npm i -S axios register-service-worker`  
+`npm i @emailjs/browser` (needed for the Contact-Us Page)
 
 ## Running
 To run the app make sure to cd into the base-folder (Buffer-Overload) and run `npm start` in the terminal.
