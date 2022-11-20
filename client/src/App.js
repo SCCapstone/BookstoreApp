@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Browse from './pages/Browse';
 import About from './pages/About';
 import ContactUs from './pages/ContactUs';
+import CreateAccount from './pages/CreateAccount/FormSignUp';
+
 
 import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
 
@@ -115,6 +117,7 @@ class App extends Component {
             <Route path='/browse' element={<Browse />} />
             <Route path='/about' element={<About />} />
             <Route path='/contactus' element={<ContactUs />} />
+            <Route path='/createaccount' element={<CreateAccount />} />
           </Routes>
         </BrowserRouter>
       </div>

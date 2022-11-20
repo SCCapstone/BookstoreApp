@@ -25,6 +25,11 @@ export const LeftSideNavBarData = [
       title: 'Contact Us',
       path: '/contactus',
       classname: 'nav-text'
+    },
+    {
+      title: 'Create Account',
+      path: '/createaccount',
+      classname: 'nav-text'
     }
   ];
   
