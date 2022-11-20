@@ -5,19 +5,21 @@ We are making a Bookstore App that renders on both mobile and desktop web device
 In order to build this project install:
 * [Node.js](https://nodejs.org/en/)
 
-## Terminal Requirements Installation
-* npm `npm i`
-* React `npm install react-scripts`
-* [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03) - This website has detailed explanations for how to download Git based on the OS system you use (i.e. Windows, Mac, or Linux - Ubuntu)
 ## Setup
-Before running the app a few things have to be installed in both the client and backend:
-<u>Base Folder</u>
-npm i -S concurrently (Used for running npm start in the terminal)
-<u>Back-End</u>
-1)install MongoDB (https://www.mongodb.com/).
-2) npm i -S mongoose express body-parser morgan cors
-<u>Client</u>
-1)npm i -S axios register-service-worker
+Before running the app a few things have to be installed in both the client and backend. Run these instructions in the terminal:  
+<u>Base Folder</u>  
+Ensure you are in "BufferOverload" and run these commands:  
+`npm i`
+`npm i react-scripts`
+`npm i -S concurrently` (Used for running npm start in the terminal)  
+
+<u>Back-End</u>  
+`cd` into the backend folder and run:
+1) npm i -S mongoose express body-parser morgan cors  
+
+<u>Client</u>  
+`cd` into the client folder and run:  
+1)npm i -S axios register-service-worker  
 
 ## Running
 To run the app make sure to cd into the base-folder (Buffer-Overload) and run `npm start` in the terminal.
