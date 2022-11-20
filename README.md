@@ -20,9 +20,9 @@ Install npm (npm install react-scripts) and install MongoDB.
 
 ## Running
 Before running the app a few things have to be installed in both the client and backend:
-<u>Back-End<u>
+<u>Back-End</u>
 1) npm i -S mongoose express body-parser morgan cors
-<u>Client<u>
+<u>Client</u>
 1) npm i -S axios
 2) npm i register-service-worker
 To run the app, first enter /client directory. This can be done by running `cd client` and run `npm start` in the terminal.
