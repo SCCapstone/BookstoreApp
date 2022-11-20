@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./views/Home";
 import ContactForm from "./views/ContactUs";
+import AboutUs from "./views/AboutUs";
 
 var React = require("react");
 var Component = React.Component;
@@ -106,6 +107,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contactus" element={<ContactForm />} />
+            <Route path="/aboutus" element={<AboutUs />} />
           </Routes>
         </BrowserRouter>
       </div>
