@@ -16,16 +16,8 @@ const LoginForm = () => {
                 <a href='# ' > here  
                 </a>
             </p>
-            <p className="text">
-                Click here if 
-                <a href='# ' > forgot password
-                </a>
-            </p>
-            <p className="text">
-                Click here if 
-                <a href='# ' > forgot username
-                </a>
-            </p>
+            <button onClick >Forgot Username</button>
+            <button onClick >Forgot Password</button>
         </div>
     )
 }
