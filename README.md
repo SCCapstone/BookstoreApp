@@ -9,17 +9,17 @@ In order to build this project install:
 Before running the app a few things have to be installed in both the client and backend. Run these instructions in the terminal:  
 <u>Base Folder</u>  
 Ensure you are in "BufferOverload" and run these commands:  
-`npm i`
-`npm i react-scripts`
+`npm i`  
+`npm i react-scripts`  
 `npm i -S concurrently` (Used for running npm start in the terminal)  
 
 <u>Back-End</u>  
 `cd` into the backend folder and run:
-1) npm i -S mongoose express body-parser morgan cors  
+`npm i -S mongoose express body-parser morgan cors`  
 
 <u>Client</u>  
 `cd` into the client folder and run:  
-1)npm i -S axios register-service-worker  
+`npm i -S axios register-service-worker`  
 
 ## Running
 To run the app make sure to cd into the base-folder (Buffer-Overload) and run `npm start` in the terminal.
