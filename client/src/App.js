@@ -112,7 +112,7 @@ class App extends Component {
             <Route path="/" element={<Home />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/contactus" element={<ContactForm />} />
-            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route path="/createaccount" element={<CreateAccount />} />
           </Routes>
         </BrowserRouter>

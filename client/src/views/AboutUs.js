@@ -1,6 +1,6 @@
 // About Us Page
 import React from "react";
-import bookstorepic from './bookstorepic.jpg'; 
+import bookstorepic from '../assets/bookstorepic.jpg'; 
 
 function AboutUs() {
   return (
