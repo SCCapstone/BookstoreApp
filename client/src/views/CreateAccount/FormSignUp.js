@@ -114,7 +114,7 @@ const CreateAccount = () => {
             type='password' 
             name='password2'
             classname='form-input'
-            placeholder='Enter your password'
+            placeholder='Enter your password again'
             value={values.password2}
             onChange={handleChange}
             >
