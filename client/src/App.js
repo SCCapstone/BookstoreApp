@@ -3,10 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./views/Home";
 import ContactForm from "./views/ContactUs";
+import AboutUs from "./views/AboutUs";
 import Browse from "./views/Browse";
-import About from "./views/About";
 import CreateAccount from "./views/CreateAccount/FormSignUp";
-
 import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
 
 var React = require("react");
@@ -112,8 +111,8 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/browse" element={<Browse />} />
-            <Route path="/about" element={<About />} />
             <Route path="/contactus" element={<ContactForm />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route path="/createaccount" element={<CreateAccount />} />
           </Routes>
         </BrowserRouter>
