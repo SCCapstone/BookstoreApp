@@ -4,6 +4,9 @@ import axios from "axios";
 import Home from "./views/Home";
 import ContactForm from "./views/ContactUs";
 import AboutUs from "./views/AboutUs";
+import Browse from "./views/Browse";
+import CreateAccount from "./views/CreateAccount/FormSignUp";
+import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
 
 var React = require("react");
 var Component = React.Component;
@@ -104,10 +107,13 @@ class App extends Component {
     return (
       <div className="App">
         <BrowserRouter>
+          <LeftSideNavBar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/browse" element={<Browse />} />
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/createaccount" element={<CreateAccount />} />
           </Routes>
         </BrowserRouter>
       </div>
