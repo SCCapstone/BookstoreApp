@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
+    background-color: #D9D9D9;
 }
 
 .cover {
@@ -36,13 +36,13 @@ input {
 }
 
 input:focus {
-    outline-color: rgb(32, 177, 255);
+    outline-color: #70161E;
 }
 
 .login-btn {
     width: 40%;
     height: 3em;
-    background-color: rgb(32, 177, 255);
+    background-color: #70161E;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,5 +56,13 @@ input:focus {
 .text{
     position: relative;
     bottom: 0.5%;
+}
+
+.user-btn {
+    color: black;
+}
+
+.pass-btn{
+    background-color: black;
 }
 
