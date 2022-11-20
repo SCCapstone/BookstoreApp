@@ -58,11 +58,39 @@ input:focus {
     bottom: 0.5%;
 }
 
-.user-btn {
-    color: black;
+.user-btn:hover {
+    transform:scale(1.25);
 }
 
-.pass-btn{
+.pass-btn:hover {
+    transform:scale(1.25);
+}
+
+.pass-btn:hover{
+    transform:scale(1.25);
+}
+
+.user-btn {
+    width: 30%;
+    height: 2em;
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+}
+
+.pass-btn {
+    width: 30%;
+    height: 2em;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
 }
 

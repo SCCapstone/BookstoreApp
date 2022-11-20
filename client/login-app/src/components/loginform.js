@@ -16,8 +16,19 @@ const LoginForm = () => {
                 <a href='# ' > here  
                 </a>
             </p>
-            <button onClick = "user-btn">Forgot Username</button>
-            <button onClick = "pass-btn">Forgot Password</button>
+            
+            <div className="user-btn">
+                <h6 style={{ color: "white" }}>
+                    Forgot Username
+                </h6>
+            </div>
+            
+             <div className="pass-btn">
+                <h6 style={{ color: "white" }}>
+                    Forgot Password
+                </h6>
+            </div>
+            
         </div>
     )
 }
