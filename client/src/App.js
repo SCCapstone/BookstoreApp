@@ -3,6 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./views/Home";
 import ContactForm from "./views/ContactUs";
+//import Home from "./views/Home";
+import Home from './pages/Home';
+import Browse from './pages/Browse';
+import About from './pages/About';
+import ContactUs from './pages/ContactUs';
+
+import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
 
 var React = require("react");
 var Component = React.Component;
@@ -103,9 +110,12 @@ class App extends Component {
     return (
       <div className="App">
         <BrowserRouter>
+        <LeftSideNavBar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contactus" element={<ContactForm />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/browse' element={<Browse />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/contactus' element={<ContactForm={} />} />
           </Routes>
         </BrowserRouter>
       </div>
