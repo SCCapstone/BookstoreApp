@@ -23,7 +23,7 @@
 
 @media only screen and (max-width: 600px) {
   .button{
-    margin: -1% -2% 0% 60%;
+    margin: -1% -2% 10% 65%;
   }
 }
 
@@ -41,7 +41,7 @@
 }
 
 .login {
-  margin: -20% 10% 10% 10%;
+  margin: -20% 10% 10% 30%;
 
 }
 

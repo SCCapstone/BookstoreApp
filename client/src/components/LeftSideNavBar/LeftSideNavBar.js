@@ -22,6 +22,9 @@ function LeftSideNavBar() {
             <a href="/createaccount" class="button-solid signup">
               Sign up
             </a>
+            <a href="/login" class="button-solid login">
+              Login
+            </a>
           </div>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
