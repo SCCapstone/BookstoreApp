@@ -13,13 +13,41 @@
   float: right;
 }
 
-.navbar .button {
-  float: right;
-  font-size: 16px;
-  color: white;
-  text-align: right;
-  padding: 14px 16px 10px 80%;
+.button {
+  padding: 10px 1px 10px 0%;
+  text-align: center;
   text-decoration: none;
+  font-size: 16px;
+  margin: -1% -2% 0% 75%;
+}
+
+@media only screen and (max-width: 600px) {
+  .button{
+    margin: -1% -2% 0% 60%;
+  }
+}
+
+.button-solid {
+  text-align: center;
+  text-decoration: none;
+  font-size: 121%;
+  background-color: #70161E; 
+  color: #D9D9D9;
+}
+
+.signup {
+  margin: -20% 10% 10% -80%;
+
+}
+
+.login {
+  margin: -20% 10% 10% 10%;
+
+}
+
+.button-solid:focus {
+  border: none;
+  outline: none;
 }
 
 .menu-bars {
