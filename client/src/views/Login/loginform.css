@@ -1,6 +1,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  position: relative;
 }
 
 .page {
@@ -26,13 +27,25 @@
   justify-content: space-around;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 530px) {
     .cover{
         margin: 10% 15% 10% 0%;
     }
 }
 
-input {
+@media only screen and (min-width: 530px) and (max-width: 800px){
+  .cover{
+      margin: 10% 15% 10% 15%;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .cover{
+      margin: 10% 15% 10% 35%;
+  }
+}
+
+input[name=username] {
   border: none;
   background-color: #d9d9d9;
   height: 4em;
@@ -42,7 +55,7 @@ input {
   padding: 2em;
 }
 
-input:focus {
+input:focus[name=username] {
   outline-color: #70161e;
 }
 

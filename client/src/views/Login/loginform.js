@@ -3,10 +3,10 @@ import "./loginform.css";
 
 const LoginForm = () => {
   return (
-    <div className="cover">
+    <div className="cover login">
       <h1>Login</h1>
-      <input type="text" placeholder="username" />
-      <input type="password" placeholder="password" />
+      <input type="text" name="username" placeholder="username" />
+      <input type="password" name="username" placeholder="password" />
       <div className="login-btn">Login</div>
       <p className="text">
         Or create an account
