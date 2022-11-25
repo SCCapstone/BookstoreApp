@@ -8,6 +8,7 @@ import Browse from "./views/Browse";
 import CreateAccount from "./views/CreateAccount/FormSignUp";
 import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
 
+
 var React = require("react");
 var Component = React.Component;
 
@@ -114,6 +115,7 @@ class App extends Component {
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/createaccount" element={<CreateAccount />} />
+            
           </Routes>
         </BrowserRouter>
       </div>

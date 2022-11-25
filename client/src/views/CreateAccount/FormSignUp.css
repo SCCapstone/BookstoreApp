@@ -1,0 +1,18 @@
+.form-inputs p {
+  color: red;
+  text-align: center;
+}
+
+.form {
+  padding: 1% 10% 0% 5%;
+  text-align: left;
+}
+
+.space {
+  padding: -4% 1% 10% 10%;
+  margin: 2% 0% 1% 10%;
+}
+
+h1 {
+  text-align: center;
+}
