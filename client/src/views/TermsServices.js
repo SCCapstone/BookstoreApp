@@ -4,7 +4,7 @@ import React from "react";
 function TermsServices() {
   return (
     <div className="termsservices">
-      <h1 style={{ color: 'green' }}>Terms and Services</h1>
+      <h1 style={{ color: 'green' }}>Terms of Service</h1>
       <p>
         Our site uses an order form for customers to request information, products, and services.
         We request visitor's contact information (name, address, and email address) and financial information
