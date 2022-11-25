@@ -6,7 +6,6 @@ import "./LeftSideNavBar.css";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 
-
 function LeftSideNavBar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
@@ -18,10 +17,16 @@ function LeftSideNavBar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
+          <div className="title">
+            <a href="/" class="button-solid">
+              Bookstore Website
+            </a>
+          </div>
           <div className="button">
             <a href="/createaccount" class="button-solid signup">
               Sign up
             </a>
+
             <a href="/login" class="button-solid login">
               Login
             </a>

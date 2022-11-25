@@ -13,17 +13,41 @@
   float: right;
 }
 
+.title{
+  font-size: 20px;
+  margin: 0% -20% 0% 1%;
+}
+
+
 .button {
-  padding: 10px 1px 10px 0%;
+  padding: 10px 1px 10px -2%;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
   margin: -1% -2% 0% 75%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 800px) {
   .button{
-    margin: 8% 1% 10% 65%;
+    margin: 9% 0% 10% 80%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 800px) {
+  .button{
+    margin: 9% 0% 10% 65%;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 600px) {
+  .button{
+    margin: 9% 0% 10% 55%;
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 500px) {
+  .button{
+    margin: 8% 1% 10% 45%;
   }
 }
 
@@ -36,13 +60,11 @@
 }
 
 .signup {
-  margin: -20% 10% 10% -80%;
-
+  margin: -20% 40% 20% -80%;
 }
 
 .login {
   margin: -20% 10% 10% 30%;
-
 }
 
 .button-solid:focus {
@@ -54,7 +76,6 @@
   margin-left: 2rem;
   font-size: 2rem;
   background: none;
-  
 }
 
 .nav-menu {
@@ -68,8 +89,6 @@
   top: 0;
   left: -100%;
   transition: 850ms;
-  
-  
 }
 
 .nav-menu.active {
@@ -84,7 +103,6 @@
   padding: 8px 0px 8px 16px;
   list-style: none;
   height: 60px;
-  
 }
 
 .nav-text a {
@@ -115,5 +133,4 @@
   justify-content: flex-start;
   align-items: center;
   outline: 5px solid black;
-
 }

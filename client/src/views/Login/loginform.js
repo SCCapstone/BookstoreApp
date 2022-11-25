@@ -5,8 +5,8 @@ const LoginForm = () => {
   return (
     <div className="cover login">
       <h1>Login</h1>
-      <input type="text" name="username" placeholder="username" />
-      <input type="password" name="username" placeholder="password" />
+      <input type="text" name="uname" placeholder="username" />
+      <input type="password" name="uname" placeholder="password" />
       <div className="login-btn">Login</div>
       <p className="text">
         Or create an account
