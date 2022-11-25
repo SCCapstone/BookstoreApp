@@ -27,11 +27,6 @@ export const LeftSideNavBarData = [
       classname: 'nav-text'
     },
     {
-      title: 'Create Account',
-      path: '/createaccount',
-      classname: 'nav-text'
-    },
-    {
       title: 'Terms of Service',
       path: '/termsservices',
       classname: 'nav-text'
