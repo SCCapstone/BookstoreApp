@@ -8,7 +8,7 @@ const CreateAccount = () => {
   const { handleChange, values, handleSubmit, errors } = useForm(validate);
 
   return (
-    <div className="form">
+    <div className="form" >
       <form className="form" onSubmit={handleSubmit}>
         <h1>New User Account</h1>
 

@@ -51,7 +51,7 @@
   }
 }
 
-input[name=uname] {
+input[name=uname ] {
   border: none;
   background-color: #d9d9d9;
   height: 4em;
@@ -64,6 +64,21 @@ input[name=uname] {
 input:focus[name=uname] {
   outline-color: #70161e;
 }
+
+input[classname=form-input] {
+  border: none;
+  background-color: #d9d9d9;
+  height: 0.1em;
+  width: 80%;
+  border-radius: 0.25em;
+  text-align: center;
+  padding: 2em;
+}
+
+input:focus[classname=form-input] {
+  outline-color: #70161e;
+}
+
 
 .login-btn {
   width: 40%;
