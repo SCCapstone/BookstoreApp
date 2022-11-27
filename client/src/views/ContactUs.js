@@ -31,7 +31,7 @@ const ContactForm = () => {
   return (
     <>
       <div>
-        <h1>Contact Us</h1>
+        <h1 style={{ color: 'green' }}>Contact Us</h1>
         <p>Send an email to the Bookstore by filling out the form below.</p>
       </div>
       <form ref={form} onSubmit={sendEmail}>
