@@ -1,0 +1,110 @@
+.login {
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.page {
+  height: 10vh;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d9d9d9;
+}
+
+.cover {
+  background-color: #b49a67;
+  width: 30em;
+  height: 35em;
+  position: relative;
+  border-radius: 1em;
+  box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10% 15% 10% 20%;
+  justify-content: space-around;
+}
+
+@media only screen and (max-width: 530px) {
+    .cover{
+        margin: 10% 15% 10% 0%;
+    }
+}
+
+@media only screen and (min-width: 530px) and (max-width: 600px){
+  .cover{
+      margin: 10% 15% 10% 10%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 800px){
+  .cover{
+      margin: 10% 15% 10% 25%;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .cover{
+      margin: 10% 15% 10% 35%;
+  }
+}
+
+input[name=uname ] {
+  border: none;
+  background-color: #d9d9d9;
+  height: 4em;
+  width: 80%;
+  border-radius: 0.25em;
+  text-align: center;
+  padding: 2em;
+}
+
+input:focus[name=uname] {
+  outline-color: #70161e;
+}
+
+input[classname=form-input] {
+  border: none;
+  background-color: #d9d9d9;
+  height: 0.1em;
+  width: 80%;
+  border-radius: 0.25em;
+  text-align: center;
+  padding: 2em;
+}
+
+input:focus[classname=form-input] {
+  outline-color: #70161e;
+}
+
+
+.login-btn {
+  width: 40%;
+  height: 3em;
+  background-color: #70161e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 0.25em;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  transform: scale(1.25);
+}
+
+.text {
+  position: relative;
+  bottom: 0.5%;
+}
+
+.user-btn {
+  color: black;
+}
+
+.pass-btn {
+  background-color: black;
+}

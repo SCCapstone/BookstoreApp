@@ -7,6 +7,7 @@ import AboutUs from "./views/AboutUs";
 import Browse from "./views/Browse";
 import CreateAccount from "./views/CreateAccount/FormSignUp";
 import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
+import LoginForm from "./views/Login/loginform";
 
 var React = require("react");
 var Component = React.Component;
@@ -114,6 +115,7 @@ class App extends Component {
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/createaccount" element={<CreateAccount />} />
+            <Route path="/login" element={<LoginForm />} />
           </Routes>
         </BrowserRouter>
       </div>
