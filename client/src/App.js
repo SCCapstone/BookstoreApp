@@ -8,6 +8,7 @@ import Browse from "./views/Browse";
 import CreateAccount from "./views/CreateAccount/FormSignUp";
 import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
 import TermsServices from "./views/TermsServices";
+import LoginForm from "./views/Login/loginform";
 
 var React = require("react");
 var Component = React.Component;
@@ -116,6 +117,7 @@ class App extends Component {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/createaccount" element={<CreateAccount />} />
             <Route path="/termsservices" element={<TermsServices />} />
+            <Route path="/login" element={<LoginForm />} />
           </Routes>
         </BrowserRouter>
       </div>
