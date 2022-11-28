@@ -5,7 +5,7 @@ import bookstorepic from '../assets/bookstorepic.jpg';
 function AboutUs() {
   return (
     <div className="aboutus">
-      <h1>About Us</h1>
+      <h1 style={{ color: 'green' }}>About Us</h1>
       <p>
         The Book Dispensary is a local, family owned business that began life December 2, 1975
         in Columbia's St. Andrews area, near the intersection of Bush River Road and I-126 in 
