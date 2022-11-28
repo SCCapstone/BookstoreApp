@@ -4,8 +4,9 @@ var cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
+const path = require("path");
 
-const API_PORT = 3001;
+// const API_PORT = 3001;
 const app = express();
 app.use(cors());
 const router = express.Router();
@@ -84,4 +85,19 @@ router.post("/putData", (req, res) => {
 app.use("/api", router);
 
 // launch our backend into a port
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+// app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+// This was changed by Hobbs on 11-28. Does the backend need to be on a different port now?
+app.listen(process.env.PORT || 3001);
+__dirname = path.resolve();
+
+
+// Deployment code -- Very Important
+if (process.env.NODE_ENV === 'production') {
+  console.log(path.join(__dirname, 'client/build'));
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.get('*', (req,res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+
