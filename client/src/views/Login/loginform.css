@@ -65,7 +65,7 @@ input:focus[name=uname] {
   outline-color: #70161e;
 }
 
-input[classname=form-input] {
+input[className=form-input] {
   border: none;
   background-color: #d9d9d9;
   height: 0.1em;
@@ -75,7 +75,7 @@ input[classname=form-input] {
   padding: 2em;
 }
 
-input:focus[classname=form-input] {
+input:focus[className=form-input] {
   outline-color: #70161e;
 }
 

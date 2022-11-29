@@ -8,7 +8,7 @@ const CreateAccount = () => {
   const { handleChange, values, handleSubmit, errors } = useForm(validate);
 
   return (
-    <div className="form" >
+    <div className="form">
       <form className="form" onSubmit={handleSubmit}>
         <h1>New User Account</h1>
 
@@ -17,32 +17,32 @@ const CreateAccount = () => {
             First Name &nbsp;
           </label>
           <input
-            id="firstname"
+            id="firstName"
             type="text"
-            name="firstname"
+            name="firstName"
             classname="form-input"
             placeholder="Enter your first name"
-            maxlen = "30"
-            value={values.firstname}
+            maxlen="30"
+            value={values.firstName}
             onChange={handleChange}
           ></input>
-          {errors.firstname && <p>{errors.firstname}</p>}
+          {errors.firstname && <p>{errors.firstName}</p>}
         </div>
 
         <div className="form-inputs space">
-          <label htmlFor="lasttname" className="form-label">
+          <label htmlFor="lastName" className="form-label">
             Last Name &nbsp;
           </label>
           <input
-            id="lastname"
+            id="lastName"
             type="text"
-            name="lastname"
+            name="lastName"
             classname="form-input"
             placeholder="Enter your last name"
-            value={values.lastname}
+            value={values.lastName}
             onChange={handleChange}
           ></input>
-          {errors.lastname && <p>{errors.lastname}</p>}
+          {errors.lastName && <p>{errors.lastName}</p>}
         </div>
 
         <div className="form-inputs space">
@@ -108,8 +108,9 @@ const CreateAccount = () => {
         <button className="form-input" type="submit">
           Create an Account
         </button>
-        <span className="form-input-login"> &nbsp;
-          Already have an account? Login
+        <span className="form-input-login">
+          {" "}
+          &nbsp; Already have an account? Login
           <a href="/login"> here</a>
         </span>
       </form>

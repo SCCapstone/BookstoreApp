@@ -41,7 +41,7 @@ function LeftSideNavBar() {
             </li>
             {LeftSideNavBarData.map((item, index) => {
               return (
-                <li key={index} className={item.classname}>
+                <li key={index} className={item.className}>
                   <Link to={item.path}>
                     {item.icon}
                     <span>{item.title}</span>
