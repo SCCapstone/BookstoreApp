@@ -18,6 +18,7 @@
   "dependencies": {
     "@emailjs/browser": "^3.9.1",
     "concurrently": "^4.1.2",
+    "nodemon": "^2.0.20",
     "react-icons": "^4.6.0"
   },
   "homepage": "https://github.com/SCCapstone/BufferOverload#readme",

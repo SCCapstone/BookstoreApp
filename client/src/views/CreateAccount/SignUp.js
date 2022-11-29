@@ -1,32 +1,64 @@
 //import { toHaveErrorMessage } from '@testing-library/jest-dom/dist/matchers';
-import React from "react";
-import useForm from "./UseForm";
-import validate from "./validateInfo";
-import "./FormSignUp.css";
+import React, { useState } from "react";
+import axios from "axios";
+// import validate from "./validateInfo";
+import "./SignUp.css";
+import { useNavigate } from "react-router-dom";
 
-const CreateAccount = () => {
-  const { handleChange, values, handleSubmit, errors } = useForm(validate);
+const SignUp = () => {
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      // [e.target.name]: e.target.value
+      // not need beacuse of const {name, value} = e.target
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const url = "http://localhost:3001/api/users";
+      const { data: res } = await axios.post(url, data);
+      navigate("/login");
+      console.log(res.message);
+    } catch (error) {
+      if (error.response?.status >= 400 && error.response.status <= 500) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   return (
     <div className="form">
       <form className="form" onSubmit={handleSubmit}>
-        <h1>New User Account</h1>
+        <h1>Create Account</h1>
 
         <div className="form-inputs space">
-          <label htmlFor="firstname" className="form-label">
+          <label htmlFor="firstName" className="form-label">
             First Name &nbsp;
           </label>
           <input
-            id="firstName"
             type="text"
             name="firstName"
-            classname="form-input"
-            placeholder="Enter your first name"
+            className="form-input"
+            placeholder="First name"
             maxlen="30"
-            value={values.firstName}
+            value={data.firstName}
             onChange={handleChange}
-          ></input>
-          {errors.firstname && <p>{errors.firstName}</p>}
+          />
+          {/* {errors.firstname && <p>{errors.firstName}</p>} */}
         </div>
 
         <div className="form-inputs space">
@@ -34,18 +66,17 @@ const CreateAccount = () => {
             Last Name &nbsp;
           </label>
           <input
-            id="lastName"
             type="text"
             name="lastName"
-            classname="form-input"
-            placeholder="Enter your last name"
-            value={values.lastName}
+            className="form-input"
+            placeholder="Last name"
+            value={data.lastName}
             onChange={handleChange}
           ></input>
-          {errors.lastName && <p>{errors.lastName}</p>}
+          {/* {errors.lastName && <p>{errors.lastName}</p>} */}
         </div>
 
-        <div className="form-inputs space">
+        {/* <div className="form-inputs space">
           <label htmlFor="username" className="form-label">
             Username &nbsp;
           </label>
@@ -53,44 +84,44 @@ const CreateAccount = () => {
             id="username"
             type="text"
             name="username"
-            classname="form-input"
+            className="form-input"
             placeholder="Enter your username"
-            value={values.username}
+            value={data.username}
             onChange={handleChange}
           ></input>
           {errors.username && <p>{errors.username}</p>}
-        </div>
+        </div> */}
         <div className="form-inputs space">
           <label htmlFor="email" className="form-label">
             Email &nbsp; &nbsp; &nbsp; &nbsp;
           </label>
           <input
-            id="email"
             type="email"
             name="email"
-            classname="form-input"
-            placeholder="Enter your email"
-            value={values.email}
+            className="form-input"
+            placeholder="Email"
+            value={data.email}
+            required
             onChange={handleChange}
           ></input>
-          {errors.email && <p>{errors.email}</p>}
+          {/* {errors.email && <p>{errors.email}</p>} */}
         </div>
         <div className="form-inputs space">
           <label htmlFor="password" className="form-label">
             Password &nbsp;
           </label>
           <input
-            id="password"
             type="password"
             name="password"
-            classname="form-input"
-            placeholder="Enter your password"
-            value={values.password}
+            className="form-input"
+            placeholder="Password"
+            value={data.password}
+            required
             onChange={handleChange}
           ></input>
-          {errors.password && <p>{errors.password}</p>}
+          {/* {errors.password && <p>{errors.password}</p>} */}
         </div>
-        <div className="form-inputs space">
+        {/* <div className="form-inputs space">
           <label htmlFor="password2" className="form-label">
             Confirm Password &nbsp;
           </label>
@@ -98,13 +129,14 @@ const CreateAccount = () => {
             id="password2"
             type="password"
             name="password2"
-            classname="form-input"
+            className="form-input"
             placeholder="Confirm your password"
-            value={values.password2}
+            value={data.password2}
             onChange={handleChange}
           ></input>
           {errors.password2 && <p>{errors.password2}</p>}
-        </div>
+        </div> */}
+        {error && <div>{error}</div>}
         <button className="form-input" type="submit">
           Create an Account
         </button>
@@ -118,4 +150,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default SignUp;
