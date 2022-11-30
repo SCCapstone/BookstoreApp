@@ -16,7 +16,9 @@ function LeftSideNavBar({ user }) {
     // console.log(user);
     // if (user.email === "") return false;
     // return true;
-    return false;
+    console.log(user);
+    console.log(!(user === ""));
+    return !(!user || user.length === 0);
   };
 
   return (

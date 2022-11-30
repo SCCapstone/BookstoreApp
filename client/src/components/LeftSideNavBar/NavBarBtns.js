@@ -1,8 +1,15 @@
 export default function NavBarBtns({ isLoggedIn }) {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   if (isLoggedIn) {
     return (
       <div>
-        <h1>Hello love</h1>
+        <button onClick={handleLogout} class="button-solid signup">
+          Logout
+        </button>
       </div>
     );
   } else {

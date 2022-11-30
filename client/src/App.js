@@ -107,6 +107,7 @@ class App extends Component {
   render() {
     //const { data } = this.state;
     const user = localStorage.getItem("token");
+    console.log(user);
     return (
       <div className="App">
         <BrowserRouter>

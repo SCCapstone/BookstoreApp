@@ -1,7 +1,5 @@
-//import { toHaveErrorMessage } from '@testing-library/jest-dom/dist/matchers';
 import React, { useState } from "react";
 import axios from "axios";
-// import validate from "./validateInfo";
 import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
 
@@ -17,23 +15,24 @@ const SignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log("handle change is being called");
     setData({
       ...data,
-      // [e.target.name]: e.target.value
-      // not need beacuse of const {name, value} = e.target
       [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("handle submit is being called");
     try {
       const url = "http://localhost:3001/api/users";
-      const { data: res } = await axios.post(url, data);
+      console.log(data);
+      const res = await axios.post(url, data);
       navigate("/login");
       console.log(res.message);
     } catch (error) {
+      console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {
         setError(error.response.data.message);
       }
