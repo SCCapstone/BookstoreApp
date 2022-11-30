@@ -6,9 +6,11 @@ import ContactForm from "./views/ContactUs";
 import AboutUs from "./views/AboutUs";
 import Browse from "./views/Browse";
 import SignUp from "./views/CreateAccount/SignUp";
-import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
+import NavBars from "./components/NavBars/NavBar";
 import TermsServices from "./views/TermsServices";
 import LoginForm from "./views/Login/loginform";
+import AdminPage from "./views/AdminPage/AdminPage";
+//import "./App.css";
 
 var React = require("react");
 var Component = React.Component;
@@ -111,7 +113,7 @@ class App extends Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <LeftSideNavBar user={user} />
+          <NavBars user={user} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/browse" element={<Browse />} />
@@ -120,6 +122,7 @@ class App extends Component {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/termsservices" element={<TermsServices />} />
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/users" element={<AdminPage user={user} />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { LeftSideNavBarData } from "./LeftSideNavBarData";
+import LeftSideNavBar from "./LeftSideNavBar";
 import { IconContext } from "react-icons";
-import "./LeftSideNavBar.css";
+import "./NavBar.css";
 import "./NavBarBtns";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import NavBarBtns from "./NavBarBtns";
 
-function LeftSideNavBar({ user }) {
+function NavBar({ user }) {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
 
   var isLoggedIn = () => {
-    // console.log(user);
-    // if (user.email === "") return false;
-    // return true;
-    console.log(user);
-    console.log(!(user === ""));
-    return !(!user || user.length === 0);
+    return user && user.length !== 0;
   };
 
   return (
@@ -42,16 +37,7 @@ function LeftSideNavBar({ user }) {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {LeftSideNavBarData.map((item, index) => {
-              return (
-                <li key={index} className={item.className}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
-            })}
+            <LeftSideNavBar isLoggedIn={isLoggedIn()} />
           </ul>
         </nav>
       </IconContext.Provider>
@@ -59,4 +45,4 @@ function LeftSideNavBar({ user }) {
   );
 }
 
-export default LeftSideNavBar;
+export default NavBar;
