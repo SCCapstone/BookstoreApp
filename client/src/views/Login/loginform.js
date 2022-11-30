@@ -10,7 +10,6 @@ const SignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("handle change is being called");
     setData({
       ...data,
       [name]: value,
@@ -19,7 +18,6 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("handle submit is being called");
     try {
       const url = "http://localhost:3001/api/auth";
       const { data: res } = await axios.post(url, data);
