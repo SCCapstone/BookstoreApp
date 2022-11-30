@@ -5,7 +5,7 @@ import data from "./users.json";
 import ReadOnlyRow from "../../components/AdminPage/ReadOnlyRow";
 import EditableRow from "../../components/AdminPage/EditableRow";
 
-const AdminPage = () => {
+const AdminPage = ({ user }) => {
   const [contacts, setContacts] = useState(data);
   const [addFormData, setAddFormData] = useState({
     fullName: "",
@@ -111,7 +111,16 @@ const AdminPage = () => {
     setContacts(newContacts);
   };
 
-  return (
+  // functionality for ensuring unauthenticated users cannot view
+  const isLoggedIn = () => {
+    return user && user.length !== 0;
+  };
+
+  const sendToLogin = () => {
+    window.location.href = "/login";
+  };
+
+  return isLoggedIn() ? (
     <div className="app-container">
       <form onSubmit={handleEditFormSubmit}>
         <table>
@@ -179,6 +188,13 @@ const AdminPage = () => {
         <button type="submit">Add</button>
       </form>
     </div>
+  ) : (
+    (sendToLogin(),
+    (
+      <div>
+        <h1>Restricted to authenticated users only!</h1>
+      </div>
+    ))
   );
 };
 

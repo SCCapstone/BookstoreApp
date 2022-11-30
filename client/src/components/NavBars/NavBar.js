@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { LeftSideNavBarData } from "./LeftSideNavBarData";
+import LeftSideNavBar from "./LeftSideNavBar";
 import { IconContext } from "react-icons";
-import "./LeftSideNavBar.css";
+import "./NavBar.css";
+import "./NavBarBtns";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
+import NavBarBtns from "./NavBarBtns";
 
-function LeftSideNavBar() {
+function NavBar({ user }) {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+
+  var isLoggedIn = () => {
+    return user && user.length !== 0;
+  };
 
   return (
     <>
@@ -22,15 +28,7 @@ function LeftSideNavBar() {
               Bookstore Website
             </a>
           </div>
-          <div className="button">
-            <a href="/createaccount" class="button-solid signup">
-              Sign up
-            </a>
-
-            <a href="/login" class="button-solid login">
-              Login
-            </a>
-          </div>
+          <NavBarBtns isLoggedIn={isLoggedIn()} />
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
@@ -39,16 +37,7 @@ function LeftSideNavBar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {LeftSideNavBarData.map((item, index) => {
-              return (
-                <li key={index} className={item.classname}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
-            })}
+            <LeftSideNavBar isLoggedIn={isLoggedIn()} />
           </ul>
         </nav>
       </IconContext.Provider>
@@ -56,4 +45,4 @@ function LeftSideNavBar() {
   );
 }
 
-export default LeftSideNavBar;
+export default NavBar;
