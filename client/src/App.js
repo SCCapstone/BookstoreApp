@@ -10,6 +10,7 @@ import LeftSideNavBar from "./components/LeftSideNavBar/LeftSideNavBar";
 import TermsServices from "./views/TermsServices";
 import LoginForm from "./views/Login/loginform";
 import AdminPage from "./views/AdminPage/AdminPage";
+//import "./App.css";
 
 var React = require("react");
 var Component = React.Component;
