@@ -6,6 +6,7 @@ var cors = require("cors");
 const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const path = require("path");
 
 // database connection
 connection();
@@ -18,6 +19,15 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 
+__dirname = path.resolve();
+if (process.env.NODE_ENV === 'production') {
+  console.log(path.join(__dirname, 'client/build'));
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.get('*', (req,res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
 // launch our backend into a port
-const API_PORT = 3001;
+const API_PORT = process.env.PORT || 3001;
 app.listen(API_PORT, console.log(`LISTENING ON PORT ${API_PORT}`));

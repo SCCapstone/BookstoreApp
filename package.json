@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
+    "start": "node backend/server.js",
+    "dev": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "install-backend": "cd backend && npm install",
+    "heroku-postbuild": "npm run install-backend && npm run install-client && npm run build"
   },
   "repository": {
     "type": "git",
