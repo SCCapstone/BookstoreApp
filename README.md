@@ -5,6 +5,7 @@ We are making a Bookstore App that renders on both mobile and desktop web device
 In order to build this project install:
 * [Node Package Manager](https://www.npmjs.com/)
 * [Node.js](https://nodejs.org/en/)
+* All of the required packages, APIs, and libraries - description for how to do this in Setup.
 
 ## Setup
 Before running the app a few things have to be installed in both the client and backend. Run these instructions in the terminal:  
