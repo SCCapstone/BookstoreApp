@@ -34,9 +34,20 @@ router.get("/", async (req, res) => {
       // });
 
       // console.log(userMap);
-      console.log(users);
+      //console.log(users);
       res.send(users);
     });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    // does not work, come back to this
+    res.send("Got a DELETE request at /user");
   } catch (error) {
     console.log(error);
   }

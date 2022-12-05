@@ -1,6 +1,6 @@
 import React from "react";
 
-const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
+const ReadOnlyRow = ({ contact, handleEditClick, handleDelete }) => {
   return (
     <tr>
       <td>
@@ -11,13 +11,13 @@ const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
       <td>{contact.username ? contact.username : contact._id}</td>
       <td>{contact.email}</td>
       <td>
-        <button
+        {/* <button
           type="button"
           onClick={(event) => handleEditClick(event, contact)}
         >
           Edit
-        </button>
-        <button type="button" onClick={() => handleDeleteClick(contact.id)}>
+        </button> */}
+        <button type="button" onClick={() => handleDelete(contact)}>
           Delete
         </button>
       </td>
