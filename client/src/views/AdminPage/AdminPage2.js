@@ -67,11 +67,6 @@ export default class AdminPage extends React.Component {
             ))}
           </tbody>
         </table>
-        <ul>
-          {this.state.users.map((user) => (
-            <li key={user._id}>{user.firstName}</li>
-          ))}
-        </ul>
       </div>
     ) : (
       (this.sendToLogin(),
