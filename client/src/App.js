@@ -7,7 +7,7 @@ import SignUp from "./views/CreateAccount/SignUp";
 import NavBars from "./components/NavBars/NavBar";
 import TermsServices from "./views/TermsServices";
 import LoginForm from "./views/Login/loginform";
-import AdminPage from "./views/AdminPage/AdminPage";
+import AdminPage from "./views/AdminPage/AdminPage2";
 //import "./App.css";
 
 var React = require("react");
@@ -29,7 +29,7 @@ class App extends Component {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/termsservices" element={<TermsServices />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/users" element={<AdminPage user={user} />} />
+            <Route path="/users" element={<AdminPage currentUser={user} />} />
           </Routes>
         </BrowserRouter>
       </div>
