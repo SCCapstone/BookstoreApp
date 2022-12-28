@@ -3,7 +3,9 @@ import React from "react";
 function Home() {
   return (
     <div className="home">
-      <h1 style={{ color: 'green', textAlign: 'center'}}>Welcome</h1>
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center',background: '#00120B', height: '6vh', width: '20vw'}}>
+          <h1 style={{ color: 'white'}}>Welcome</h1>
+      </div>
       <h2 style={{ textAlign: 'center'}}>
         Welcome to the Book Store Website!
         If You Love Books, You'll Love Our Book Store!

@@ -14,7 +14,9 @@ const point2 = "2. You can send a letter to the following postal address.";
 function TermsServices() {
   return (
     <div className="termsservices">
-      <h1 style={{ color: 'green' }}>Terms of Service</h1>
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center',background: '#00120B', height: '6vh', width: '20vw'}}>
+        <h1 style={{ color: 'white' }}>Terms of Service</h1>
+      </div>
         <p>{longText}</p>
         <p>{longText2}</p>
         <p>{longText3}</p>

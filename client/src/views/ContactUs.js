@@ -32,8 +32,10 @@ const ContactForm = () => {
 
   return (
     <>
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center',background: '#00120B', height: '6vh', width: '20vw'}}>
+        <h1 style={{ color: 'white' }}>Contact Us</h1>
+      </div>
       <div style={{ textAlign: 'center'}}>
-        <h1 style={{ color: 'green' }}>Contact Us</h1>
         <h2>Want to get in touch? Call us at the number below or send an email to the Bookstore by filling out the form below. We would love to hear from you!</h2>
       </div>
       <div style={{background: '#B49A67', float: 'left', height: '40vh', width: '30vw'}}>
