@@ -4,7 +4,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node backend/server.js",
-    "start_windows": "set NODE_ENV=production&&node backend/server.js",
     "dev": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",

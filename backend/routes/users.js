@@ -27,14 +27,6 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     User.find({}, function (err, users) {
-      // var userMap = {};
-
-      // users.forEach(function (user) {
-      //   userMap[user._id] = user;
-      // });
-
-      // console.log(userMap);
-      //console.log(users);
       res.send(users);
     });
   } catch (error) {
