@@ -34,7 +34,7 @@ const ContactForm = () => {
     <>
       <div style={{ textAlign: 'center'}}>
         <h1 style={{ color: 'green' }}>Contact Us</h1>
-        <p>Want to get in touch? Call us at the number below or send an email to the Bookstore by filling out the form below. We would love to hear from you!</p>
+        <h2>Want to get in touch? Call us at the number below or send an email to the Bookstore by filling out the form below. We would love to hear from you!</h2>
       </div>
       <div style={{background: '#B49A67', float: 'left', height: '40vh', width: '30vw'}}>
         <h2>Email</h2>
