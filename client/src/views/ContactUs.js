@@ -4,6 +4,8 @@
 
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import phoneicon from '../assets/phoneicon.jpg';
+import emailicon from '../assets/emailicon.jpg';
 
 const ContactForm = () => {
   const form = useRef();
@@ -30,26 +32,40 @@ const ContactForm = () => {
 
   return (
     <>
-      <div>
+      <div style={{ textAlign: 'center'}}>
         <h1 style={{ color: 'green' }}>Contact Us</h1>
-        <p>Send an email to the Bookstore by filling out the form below.</p>
+        <p>Want to get in touch? Call us at the number below or send an email to the Bookstore by filling out the form below. We would love to hear from you!</p>
       </div>
-      <form ref={form} onSubmit={sendEmail}>
-        <div>
-          <label>Name: </label>
-          <input type="text" name="from_name" />
+      <div style={{background: '#B49A67', float: 'left', height: '40vh', width: '30vw'}}>
+        <h2>Email</h2>
+        <div style={{ textAlign: 'center'}}>
+          <img src={emailicon} alt="Email" />
         </div>
-        <div>
-          <label>Email: </label>
-          <input type="email" name="from_email" />
-        </div>
-        <p> </p>
-        <div>
-          <label>Message: </label>
-          <textarea name="message" />
-        </div>
-        <input type="submit" value="Send" />
-      </form>
+        <p>Too lazy to dial the number, feel free to chat with us through email.</p>
+        <form ref={form} onSubmit={sendEmail}>
+          <div>
+            <label>Name: </label>
+            <input type="text" name="from_name" />
+          </div>
+          <div>
+            <label>Email: </label>
+            <input type="email" name="from_email" />
+          </div>
+          <p> </p>
+          <div>
+            <label>Message: </label>
+            <textarea name="message" />
+          </div>
+          <input type="submit" value="Send" />
+        </form>
+      </div>
+      <div style={{background: '#B49A67', float: 'right', height: '40vh', width: '30vw'}}>
+      <h2>Phone</h2>
+      <div style={{ textAlign: 'center'}}>
+        <img src={phoneicon} alt="Phone" />
+      </div>
+      <p>If you don't want to use email you can alternatively just pick up the phone and feel free to chat with us at this number: (803) 111-1111</p> 
+      </div>
     </>
   );
 };

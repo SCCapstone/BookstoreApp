@@ -15,8 +15,10 @@ function AboutUs() {
         collectible books and maps. This website has been refurbished so that both employees and 
         customers can use this site. 
       </p> 
-      <img src={bookstorepic} alt="Book Dispensary" />
-      <p>Location to Visit Us: 710-C Gracern Rd, Columbia, SC 29210</p> 
+      <div style={{textAlign: 'center'}}>
+        <img src={bookstorepic} alt="Book Dispensary" />
+        <p>Location to Visit Us: 710-C Gracern Rd, Columbia, SC 29210</p> 
+      </div>
     </div>
   );
 }

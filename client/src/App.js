@@ -18,6 +18,7 @@ class App extends Component {
     //const { data } = this.state;
     const user = localStorage.getItem("token");
     return (
+      <div style={{background: '#D9D9D9', height: '99vh', width: '99vw'}}>
       <div className="App">
         <BrowserRouter>
           <NavBars user={user} />
@@ -32,6 +33,7 @@ class App extends Component {
             <Route path="/users" element={<AdminPage user={user} />} />
           </Routes>
         </BrowserRouter>
+      </div>
       </div>
     );
   }
