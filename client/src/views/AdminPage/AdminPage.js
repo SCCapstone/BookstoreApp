@@ -1,201 +1,79 @@
-import React, { useState, Fragment } from "react";
-import { nanoid } from "nanoid";
+import axios from "axios";
+import React, { Fragment } from "react";
 import "./AdminPage.css";
-import data from "./users.json";
 import ReadOnlyRow from "../../components/AdminPage/ReadOnlyRow";
-import EditableRow from "../../components/AdminPage/EditableRow";
 
-const AdminPage = ({ user }) => {
-  const [contacts, setContacts] = useState(data);
-  const [addFormData, setAddFormData] = useState({
-    fullName: "",
-    username: "",
-    password: "",
-    email: "",
-  });
-
-  const [editFormData, setEditFormData] = useState({
-    fullName: "",
-    username: "",
-    password: "",
-    email: "",
-  });
-
-  const [editContactId, setEditContactId] = useState(null);
-
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
+export default class AdminPage extends React.Component {
+  state = {
+    currentUser: "",
+    users: [],
   };
 
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
+  componentDidMount() {
+    const url = "/api/users";
+    axios.get(url).then((res) => {
+      const users = res.data;
+      this.setState({ currentUser: this.props.currentUser, users: users });
+    });
+  }
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...editFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setEditFormData(newFormData);
-  };
-
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-
-    const newContact = {
-      id: nanoid(),
-      fullName: addFormData.fullName,
-      username: addFormData.username,
-      password: addFormData.password,
-      email: addFormData.email,
-    };
-
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
-  };
-
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
-
-    const editedContact = {
-      id: editContactId,
-      fullName: editFormData.fullName,
-      username: editFormData.username,
-      password: editFormData.password,
-      email: editFormData.email,
-    };
-
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
-
-    newContacts[index] = editedContact;
-
-    setContacts(newContacts);
-    setEditContactId(null);
-  };
-
-  const handleEditClick = (event, contact) => {
-    event.preventDefault();
-    setEditContactId(contact.id);
-
-    const formValues = {
-      fullName: contact.fullName,
-      username: contact.username,
-      password: contact.password,
-      email: contact.email,
-    };
-
-    setEditFormData(formValues);
-  };
-
-  const handleCancelClick = () => {
-    setEditContactId(null);
-  };
-
-  const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
-
-    const index = contacts.findIndex((contact) => contact.id === contactId);
-
-    newContacts.splice(index, 1);
-
-    setContacts(newContacts);
-  };
+  deleteUser(user) {
+    const id = user._id;
+    console.log(id);
+    const url = "/api/users/" + id;
+    axios.delete(url).then((res) => {
+      console.log(res);
+      // this.setState({
+      //   users: this.state.users.slice(
+      //     this.state.users.indexOf((user) => {
+      //       return user._id === id;
+      //     }),
+      //     1
+      //   ),
+      // });
+      // FIX THIS
+      //window.location.reload();
+    });
+  }
 
   // functionality for ensuring unauthenticated users cannot view
-  const isLoggedIn = () => {
-    return user && user.length !== 0;
+  isLoggedIn = () => {
+    const currentUser = this.props.currentUser;
+    return currentUser && currentUser.length !== 0;
   };
 
-  const sendToLogin = () => {
+  sendToLogin = () => {
     window.location.href = "/login";
   };
 
-  return isLoggedIn() ? (
-    <div className="app-container">
-      <form onSubmit={handleEditFormSubmit}>
+  render() {
+    return this.isLoggedIn() ? (
+      <div className="app-container">
         <table>
           <thead>
             <tr>
               <th>Name</th>
-              <th>Username</th>
-              <th>Password</th>
+              <th>Id</th>
               <th>Email</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {contacts.map((contact) => (
+            {this.state.users.map((user) => (
               <Fragment>
-                {editContactId === contact.id ? (
-                  <EditableRow
-                    editFormData={editFormData}
-                    handleEditFormChange={handleEditFormChange}
-                    handleCancelClick={handleCancelClick}
-                  />
-                ) : (
-                  <ReadOnlyRow
-                    contact={contact}
-                    handleEditClick={handleEditClick}
-                    handleDeleteClick={handleDeleteClick}
-                  />
-                )}
+                <ReadOnlyRow contact={user} handleDelete={this.deleteUser} />
               </Fragment>
             ))}
           </tbody>
         </table>
-      </form>
-
-      <h2>Add a New User</h2>
-      <form onSubmit={handleAddFormSubmit}>
-        <input
-          type="text"
-          name="fullName"
-          required="required"
-          placeholder="Enter a name..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="username"
-          required="required"
-          placeholder="Enter an username..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="password"
-          required="required"
-          placeholder="Enter a password..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="email"
-          name="email"
-          required="required"
-          placeholder="Enter an email..."
-          onChange={handleAddFormChange}
-        />
-        <button type="submit">Add</button>
-      </form>
-    </div>
-  ) : (
-    (sendToLogin(),
-    (
-      <div>
-        <h1>Restricted to authenticated users only!</h1>
       </div>
-    ))
-  );
-};
-
-export default AdminPage;
+    ) : (
+      (this.sendToLogin(),
+      (
+        <div>
+          <h1>Restricted to authenticated users only!</h1>
+        </div>
+      ))
+    );
+  }
+}

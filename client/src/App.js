@@ -7,7 +7,7 @@ import SignUp from "./views/CreateAccount/SignUp";
 import NavBars from "./components/NavBars/NavBar";
 import TermsServices from "./views/TermsServices";
 import LoginForm from "./views/Login/loginform";
-import AdminPage from "./views/AdminPage/AdminPage2";
+import AdminPage from "./views/AdminPage/AdminPage";
 //import "./App.css";
 
 var React = require("react");

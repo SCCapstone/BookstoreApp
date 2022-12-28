@@ -24,7 +24,6 @@ const SignUp = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
       window.location = "/";
-      console.log(res.message);
     } catch (error) {
       console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {

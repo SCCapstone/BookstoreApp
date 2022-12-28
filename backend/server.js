@@ -20,7 +20,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 
 __dirname = path.resolve();
-if (true) {
+if (process.env.NODE_ENV === "production") {
   console.log(path.join(__dirname, "client/build"));
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", (req, res) => {
