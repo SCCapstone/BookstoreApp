@@ -18,22 +18,22 @@ class App extends Component {
     //const { data } = this.state;
     const user = localStorage.getItem("token");
     return (
-      <div style={{background: '#D9D9D9', height: '99vh', width: '99vw'}}>
-      <div className="App">
-        <BrowserRouter>
-          <NavBars user={user} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/browse" element={<Browse />} />
-            <Route path="/contactus" element={<ContactForm />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/termsservices" element={<TermsServices />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/users" element={<AdminPage user={user} />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <div style={{ background: "#B49A6773", height: "99vh", width: "99vw" }}>
+        <div className="App">
+          <BrowserRouter>
+            <NavBars user={user} />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/browse" element={<Browse />} />
+              <Route path="/contactus" element={<ContactForm />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/termsservices" element={<TermsServices />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/users" element={<AdminPage user={user} />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
       </div>
     );
   }
