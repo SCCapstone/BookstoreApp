@@ -10,7 +10,6 @@ import TermsServices from "./views/TermsServices";
 import LoginForm from "./views/Login/loginform";
 import AdminPage from "./views/AdminPage/AdminPage";
 import BookData from "./components/Books.json";
-//import "./App.css";
 
 var React = require("react");
 var Component = React.Component;
