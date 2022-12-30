@@ -3,7 +3,6 @@ const { User, validate } = require("../models/user");
 const bcrypt = require("bcryptjs");
 
 router.post("/", async (req, res) => {
-  console.log("Hello!");
   try {
     const { error } = validate(req.body);
     if (error)
@@ -22,6 +21,27 @@ router.post("/", async (req, res) => {
     res.status(201).send({ message: "User created successfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal server error!!!" });
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    User.find({}, function (err, users) {
+      res.send(users);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    // does not work, come back to this
+    res.send("Got a DELETE request at /user");
+  } catch (error) {
+    console.log(error);
   }
 });
 
