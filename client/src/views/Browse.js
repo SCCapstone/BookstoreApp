@@ -1,13 +1,14 @@
-import React from 'react';
+import React from "react";
+import "./View.css";
 
 function Browse() {
-    return (
-        <div className='browse'>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center',background: '#00120B', height: '6vh', width: '20vw'}}>
-                <h1 style={{ color: 'white' }}>Store</h1>
-            </div>
-        </div>
-    )
+  return (
+    <div className="browse">
+      <div className="page-title-container">
+        <h1 className="page-title-text">Store</h1>
+      </div>
+    </div>
+  );
 }
 
 export default Browse;

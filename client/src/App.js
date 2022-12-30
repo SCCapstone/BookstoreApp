@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./views/Home";
-import ContactForm from "./views/ContactUs";
+import Home from "./views/Home/Home";
+import ContactForm from "./views/ContactUs/ContactUs";
 import AboutUs from "./views/AboutUs";
 import Browse from "./views/Browse";
 import SignUp from "./views/CreateAccount/SignUp";
