@@ -8,6 +8,7 @@ import NavBars from "./components/NavBars/NavBar";
 import TermsServices from "./views/TermsServices";
 import LoginForm from "./views/Login/loginform";
 import AdminPage from "./views/AdminPage/AdminPage";
+import BookData from './components/Books.json'
 //import "./App.css";
 
 var React = require("react");
@@ -23,7 +24,7 @@ class App extends Component {
           <NavBars user={user} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/browse" element={<Browse />} />
+            <Route path="/browse" element={<Browse placeholder="Search for a Book..." data={BookData} />} />
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/signup" element={<SignUp />} />
