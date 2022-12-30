@@ -30,7 +30,9 @@ function Browse({ placeholder, data }) {
 
   return (
     <div className="browse">
-      <h1 style={{ color: "green" }}>Browse</h1>
+      <div className="page-title-container">
+        <h1 className="page-title-text">Browse</h1>
+      </div>
       <div className="searchInputs">
         <input
           type="text"

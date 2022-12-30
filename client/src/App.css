@@ -1,7 +1,12 @@
-* {
+/* * {
     text-align: center;
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
-    /*background-color: aqua;*/
+    /*background-color: aqua;
+  } */
+
+  Body {
+    background-color: #B49A6773;
+    margin: 0;
   }
