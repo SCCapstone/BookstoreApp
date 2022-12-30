@@ -29,7 +29,7 @@ class App extends Component {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/termsservices" element={<TermsServices />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/users" element={<AdminPage user={user} />} />
+            <Route path="/users" element={<AdminPage currentUser={user} />} />
           </Routes>
         </BrowserRouter>
       </div>
