@@ -14,12 +14,11 @@
 }
 
 .cover {
-  background-color: #b49a67;
   width: 30em;
-  height: 35em;
+  /* height: 35em; */
   position: relative;
   border-radius: 1em;
-  box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
+  /* box-shadow: 0 0.188em 1.55em rgb(156, 156, 156); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,8 +80,8 @@ input:focus[className=form-input] {
 
 
 .login-btn {
-  width: 40%;
-  height: 3em;
+  width: 100%;
+  height: 4em;
   background-color: #70161e;
   display: flex;
   justify-content: center;
@@ -90,6 +89,7 @@ input:focus[className=form-input] {
   transition: 0.5s;
   border-radius: 0.25em;
   cursor: pointer;
+  color: white;
 }
 
 .login-btn:hover {
@@ -107,4 +107,40 @@ input:focus[className=form-input] {
 
 .pass-btn {
   background-color: black;
+}
+
+.form-inputs {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+  color: white;
+  background-color: #529F95;
+  position: relative;
+  border-radius: 1em;
+  width: 13.5em;
+  height: 2.5em;
+}
+
+.horizontalBox {
+  flex: 1;
+  flex-direction: row;
+}
+
+.boxRow {
+  flex: 1;
+  flex-direction: row;
+}
+
+.forgotPass {
+  background-color: black;
+  color: white;
+  height: 5em;
+}
+
+.createNewAcct {
+  background-color: black;
+  color: white;
+  height: 5em;
 }

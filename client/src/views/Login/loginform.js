@@ -34,11 +34,10 @@ const SignUp = () => {
 
   return (
     <div className="cover login">
-      <h1>Login</h1>
+      <h3>Login</h3>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-inputs space">
-          <label htmlFor="email" className="form-label">
-            Email &nbsp; &nbsp; &nbsp; &nbsp;
+          <label htmlFor="emai" className="form-label">
           </label>
           <input
             type="email"
@@ -52,7 +51,6 @@ const SignUp = () => {
         </div>
         <div className="form-inputs space">
           <label htmlFor="password" className="form-label">
-            Password &nbsp;
           </label>
           <input
             type="password"
@@ -64,17 +62,33 @@ const SignUp = () => {
             onChange={handleChange}
           ></input>
         </div>
+        &nbsp;
         {error && <div>{error}</div>}
-        <button className="login-btn" type="submit">
-          Login
-        </button>
-        <span className="form-input-login">
+        
+        {/* <span className="form-input-login">
           {" "}
           &nbsp; Don't have an account? sign up
           <a href="/signup"> here</a>
-        </span>
+        </span> */}
+        &nbsp;
       </form>
+      <div className="buttonBox"> 
+        <button className="login-btn" type="submit">
+          Sign In
+        </button>
+        &nbsp;
+        <div className="boxRow">
+         &nbsp;
+          <button className="createNewAcct" type="submit">
+            Create A New Account
+          </button>
+          <button className="forgotPass" type="submit">
+            Forgot Password
+          </button>
+        </div>
+      </div>
     </div>
+   
   );
 };
 
