@@ -28,5 +28,8 @@
     "react-native-svg": "^13.6.0"
   },
   "homepage": "https://github.com/SCCapstone/BufferOverload#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
 }
