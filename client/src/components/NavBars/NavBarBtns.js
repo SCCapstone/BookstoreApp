@@ -6,7 +6,7 @@ export default function NavBarBtns({ isLoggedIn }) {
 
   if (isLoggedIn) {
     return (
-      <div>
+      <div className="button">
         <button onClick={handleLogout} class="button-solid signup">
           Logout
         </button>
