@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Login() {
+const Register = () => {
   return (
     <>
       <section class="">
@@ -8,9 +8,9 @@ export default function Login() {
           <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
             <div />
             <div class="w-full py-16 gap-2 ">
-                <div class="pb-4">
-                  <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
-                  Login
+              <div class="pb-4">
+                <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
+                  Sign up
                 </div>
               </div>
               <form class="justify-center">
@@ -19,7 +19,26 @@ export default function Login() {
                     type="text"
                     class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
                     id=""
-                    placeholder="Enter Username"
+                    onClick={"bg-red"}
+                    placeholder="First Name"
+                  />
+                </div>
+
+                <div class="mb-6">
+                  <input
+                    type="text"
+                    class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
+                    id=""
+                    placeholder="Last Name"
+                  />
+                </div>
+                
+                <div class="mb-6">
+                  <input
+                    type="text"
+                    class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
+                    id=""
+                    placeholder="Email Address"
                   />
                 </div>
 
@@ -28,11 +47,9 @@ export default function Login() {
                     type="password"
                     class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
                     id=""
-                    placeholder="Enter Password"
+                    placeholder="Password"
                   />
                 </div>
-
-
 
                 <div class="text-center lg:text-left grid pb-6">
                   <button
@@ -44,18 +61,12 @@ export default function Login() {
                 </div>
 
                 <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
+                    Already have an account? 
                   <a
-                    href="/create-account"
-                    class="text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
+                    href="/login"
+                    class="text-center text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-2 border-2"
                   >
-                    Register
-                  </a>
-
-                  <a
-                    href="/forgot-password"
-                    class="text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
-                  >
-                    Forgot password?
+                    Login
                   </a>
                 </div>
               </form>
@@ -66,3 +77,5 @@ export default function Login() {
     </>
   );
 };
+
+export default Register;

@@ -29,15 +29,14 @@ const Contactus = () => {
     <>
       <section class="">
         <div class="pb-4 h-full text-gray-800 max-w-[1500px]">
-          <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
-            <div />
-            <div class="w-full py-16 gap-2 ">
+          <div class="py-4">
+            <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
+              Contact us
+            </div>
+          </div>
+          <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-1 h-full g-6">
+            <div class="w-full gap-2 ">
               <form>
-                <div class="pb-4">
-                  <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
-                    Contact us
-                  </div>
-                </div>
                 <div className={`${styles.paragraph} max-w-[1500px]`}>
                   <h2>
                     Want to get in touch? Call us at the number below or send an
@@ -46,18 +45,17 @@ const Contactus = () => {
                   </h2>
                 </div>
                 <div className="gap-2">
-
                   <p className={`${styles.paragraph} max-w-[1500px]`}>
                     Too lazy to dial the number, feel free to chat with us
                     through email.
                   </p>
-                  <form ref={form} onSubmit={sendEmail}>
+                  <form ref={form} onSubmit={sendEmail} className="max-w-[500px]">
                     <div>
                       <label>Name: </label>
                       <input
                         type="text"
                         name="from_name"
-                        className="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded"
+                        className="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel focus:bg-white border border-solid border-black rounded"
                       />
                     </div>
                     <div>
@@ -65,7 +63,7 @@ const Contactus = () => {
                       <input
                         type="email"
                         name="from_email"
-                        className="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded"
+                        className="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel focus:bg-white border border-solid border-black rounded"
                       />
                     </div>
                     <p> </p>
@@ -73,7 +71,7 @@ const Contactus = () => {
                       <label>Message: </label>
                       <textarea
                         name="message"
-                        className="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded"
+                        className="form-control placeholder-black block w-full px-4 py-6 text-xl font-normal text-black bg-camel focus:bg-white border border-solid border-black rounded"
                       />
                     </div>
                     <div className="py-2">
@@ -86,13 +84,14 @@ const Contactus = () => {
                   </form>
                 </div>
                 <div className="phone-container">
-                  <h2 className={`${styles.heading3} max-w-[1500px]`}>Phone:</h2>
+                  <h2 className={`${styles.heading3} max-w-[1500px]`}>
+                    Phone:
+                  </h2>
                   <div className={`${styles.paragraph} max-w-[1500px]`}></div>
                   <p className="text-lg">
                     If you don't want to use email you can alternatively just
                     pick up the phone and feel free to chat with us at this
-                    number:
-                  (803) 111-1111
+                    number: (803) 111-1111
                   </p>
                 </div>
               </form>

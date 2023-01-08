@@ -8,6 +8,7 @@ import Aboutus from "../../views/Aboutus";
 import TOS from "../../views/TOS";
 import Contactus from "../../views/Contactus";
 import Browse from "../../views/Browse";
+import Register from "../../views/Register";
 
 const CompleteNavbar = () => {
 
@@ -25,6 +26,7 @@ const CompleteNavbar = () => {
             <Route path="/Terms_of_Service" element={<TOS />} />
             <Route path="/Contact_us" element={<Contactus />} />
             <Route path="/Browse" element={<Browse />} />
+            <Route path="/create-account" element={<Register />} />
           </Routes>
         </BrowserRouter>
       </div>
