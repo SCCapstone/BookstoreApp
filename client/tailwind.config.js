@@ -8,23 +8,20 @@ module.exports = {
         '2fr': 'minmax(0, 2fr)',
       },
       colors: {
-        primary: "#00040f",
-        primaryHalf: "#34b3e0",
-        secondary: "#00f6ff",
+
         dimWhite: "rgba(255, 255, 255, 0.7)",
         dimBlue: "rgba(9, 151, 124, 0.1)",
         lightBlue: "#4287EE",
-        lightlightBlue: "#00aaff",
-        boxColor: "rgb(255, 255, 255)",
-        hoverBox:"#DDDDDD",
         blue:"#0066ff",
-        "dark-purple": "#081A51",
-        "light-white": "rgba(255,255,255,0.17)",
         yellow : "#E4D00A",
         green : "#50C878",
         gray : "#818589",
         red : "#D22B2B",
-        test: "#96A3AC",
+        persian_plum : "#70161E",
+        polished_pine: "#529F95",
+        camel : "#B49A67",
+        dark_jungle_green : "#00120B",
+        gainsboro : "#D9D9D9",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
@@ -41,6 +38,5 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwind-scrollbar'),
   ],
 };

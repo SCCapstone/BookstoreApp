@@ -1,19 +1,17 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './App.css';
+import CompleteNavbar from './components/NavBar';
+import { BrowserRouter, Routes } from "react-router-dom";
 
-
-var React = require("react");
-var Component = React.Component;
-
-class App extends Component {
-  render() {
-    const user = localStorage.getItem("token");
-    return (
-      <div className="App">
-
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="bg-gainsboro h-screen">
+      <CompleteNavbar />
+      <BrowserRouter>
+          <Routes>
+          </Routes>
+        </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
