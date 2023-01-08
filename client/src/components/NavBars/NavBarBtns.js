@@ -15,10 +15,6 @@ export default function NavBarBtns({ isLoggedIn }) {
   } else {
     return (
       <div className="button">
-        <a href="/signup" class="button-solid signup">
-          Sign up
-        </a>
-
         <a href="/login" class="button-solid login">
           Login
         </a>
