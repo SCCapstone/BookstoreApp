@@ -9,12 +9,13 @@ import TOS from "../../views/TOS";
 import Contactus from "../../views/Contactus";
 import Browse from "../../views/Browse";
 import Register from "../../views/Register";
+import BooksPageGenerator from "../../views/BooksPageGenerator";
+import books from "../../views/Books";
 
 const CompleteNavbar = () => {
-
   return (
     <div className="pt-16 bg-gainsboro">
-      <NavBar sidebar={true}/>
+      <NavBar sidebar={true} />
       <div className="flex">
         <SideBar />
         <div className="px-16"></div>
@@ -27,6 +28,12 @@ const CompleteNavbar = () => {
             <Route path="/Contact_us" element={<Contactus />} />
             <Route path="/Browse" element={<Browse />} />
             <Route path="/create-account" element={<Register />} />
+            {books.map((book) => (
+              <Route
+                path={`${book.link}`}
+                element={<BooksPageGenerator book={book} />}
+              />
+            ))}
           </Routes>
         </BrowserRouter>
       </div>

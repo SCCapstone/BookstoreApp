@@ -1,6 +1,8 @@
-import React from "react";
+import { React } from "react";
 
 const Home = () => {
+
+
   return (
     <section class="">
       <div class="py-4">

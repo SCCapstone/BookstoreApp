@@ -1,5 +1,5 @@
-import './App.css';
-import CompleteNavbar from './components/NavBar';
+import "./App.css";
+import CompleteNavbar from "./components/NavBar";
 import { BrowserRouter, Routes } from "react-router-dom";
 
 function App() {
@@ -7,9 +7,8 @@ function App() {
     <div className="bg-gainsboro h-screen">
       <CompleteNavbar />
       <BrowserRouter>
-          <Routes>
-          </Routes>
-        </BrowserRouter>
+        <Routes></Routes>
+      </BrowserRouter>
     </div>
   );
 }
