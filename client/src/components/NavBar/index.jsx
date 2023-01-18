@@ -8,7 +8,7 @@ import Aboutus from "../../views/Aboutus";
 import TOS from "../../views/TOS";
 import Contactus from "../../views/Contactus";
 import Browse from "../../views/Browse";
-import Register from "../../views/Register";
+import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
 import books from "../../views/Books";
 
@@ -27,7 +27,7 @@ const CompleteNavbar = () => {
             <Route path="/Terms_of_Service" element={<TOS />} />
             <Route path="/Contact_us" element={<Contactus />} />
             <Route path="/Browse" element={<Browse />} />
-            <Route path="/create-account" element={<Register />} />
+            <Route path="/create-account" element={<Signup />} />
             {books.map((book) => (
               <Route
                 path={`${book.link}`}

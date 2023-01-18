@@ -1,7 +1,7 @@
 import  React  from "react";
 import axios from "axios";
 
-export default class Register extends React.Component {
+export default class Signup extends React.Component {
   state = {
     username: "",
     firstName: "",
@@ -57,6 +57,7 @@ export default class Register extends React.Component {
                   <div class="mb-6">
                     <input
                       type="text"
+                      data=""
                       class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
                       id=""
                       placeholder="Last Name"
@@ -66,6 +67,7 @@ export default class Register extends React.Component {
                   <div class="mb-6">
                     <input
                       type="text"
+                      data=""
                       class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
                       id=""
                       placeholder="Email Address"
@@ -75,6 +77,7 @@ export default class Register extends React.Component {
                   <div class="mb-6">
                     <input
                       type="password"
+                      data=""
                       class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
                       id=""
                       placeholder="Password"
