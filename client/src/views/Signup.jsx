@@ -57,7 +57,7 @@ export default class Signup extends React.Component {
                   <div class="mb-6">
                     <input
                       type="text"
-                      data=""
+                      data="lastName"
                       class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
                       id=""
                       placeholder="Last Name"
@@ -67,7 +67,7 @@ export default class Signup extends React.Component {
                   <div class="mb-6">
                     <input
                       type="text"
-                      data=""
+                      data="email"
                       class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
                       id=""
                       placeholder="Email Address"
@@ -77,7 +77,7 @@ export default class Signup extends React.Component {
                   <div class="mb-6">
                     <input
                       type="password"
-                      data=""
+                      data="password"
                       class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
                       id=""
                       placeholder="Password"
@@ -86,7 +86,7 @@ export default class Signup extends React.Component {
 
                   <div class="text-center lg:text-left grid pb-6">
                     <button
-                      type="button"
+                      type="submit"
                       class="inline-block px-10 py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
                     >
                       Login
