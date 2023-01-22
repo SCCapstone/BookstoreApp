@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const NavBar = ({ user  }) => {
   const navigate = useNavigate();
-  
+
   var loginOrLogout = () => {
     console.log("hello");
     if (user && user.length !== 0) {
@@ -11,6 +11,7 @@ const NavBar = ({ user  }) => {
       localStorage.removeItem("token");
       window.location.reload();
     } else {
+      console.log(user);
       console.log('we are logged out')
       navigate("/login");
     }
@@ -22,14 +23,14 @@ const NavBar = ({ user  }) => {
         <div class="container flex flex-wrap items-center justify-between mx-auto">
           <span className="flex gap-8">
             <a href="/" class="flex items-center cols-span-8">
-              <span class="self-center text-4xl font-semibold whitespace-nowrap dark:text-white">
+              <span className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white">
                 Book Store Website
               </span>
             </a>
           </span>
           <div class="flex md:order-2">
-            <button class="flex items-center" onClick={loginOrLogout()}>
-              <span class="text-white text-xl">{ (user && user.length !== 0) ? "Logout" : "Login" }</span>
+            <button class="flex items-center" onClick={loginOrLogout}>
+              <span className="text-white text-xl">{ (user && user.length !== 0) ? "Logout" : "Login" }</span>
             </button>
           </div>
         </div>
