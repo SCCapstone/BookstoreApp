@@ -14,8 +14,8 @@ const SideBar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <aside class="w-64 " aria-label="Sidebar">
-      <ul class=" ">
+    <aside className="w-64 " aria-label="Sidebar">
+      <ul>
         <div
           className={` ${
             open ? "" : "-translate-x-full "
@@ -34,13 +34,13 @@ const SideBar = () => {
               <li>
                 <a
                   href={option.link}
-                  class={`flex items-center bg-polished_pine py-4 p-2 border-x-4 border-solid border-black font-normal text-gray-900 text-xl dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                  className={`flex items-center bg-polished_pine py-4 p-2 border-x-4 border-solid border-black font-normal text-gray-900 text-xl dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
                     menu_options[menu_options.length - 1].name === option.name
                       ? "border-b-4 border-t-4"
                       : "border-t-4"
                   }`}
                 >
-                  <span class=" ">{option.name}</span>
+                  <span>{option.name}</span>
                 </a>
               </li>
             </div>

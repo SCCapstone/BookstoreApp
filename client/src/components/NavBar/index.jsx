@@ -13,13 +13,15 @@ import BooksPageGenerator from "../../views/BooksPageGenerator";
 import books from "../../views/Books";
 
 const CompleteNavbar = () => {
+  const user = localStorage.getItem("token");
+
   return (
     <div className="pt-16 bg-gainsboro">
-      <NavBar sidebar={true} />
       <div className="flex">
         <SideBar />
         <div className="px-16"></div>
         <BrowserRouter>
+          <NavBar user={user} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
