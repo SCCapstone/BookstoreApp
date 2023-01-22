@@ -6,7 +6,7 @@ import Home from "../../views/Home";
 import Login from "../../views/Login";
 import Aboutus from "../../views/Aboutus";
 import TOS from "../../views/TOS";
-import Contactus from "../../views/Contactus";
+import ContactUs from "../../views/ContactUs";
 import Browse from "../../views/Browse";
 import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
@@ -27,11 +27,11 @@ const CompleteNavbar = () => {
             {/* All users */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/About" element={<Aboutus />} />
-            <Route path="/Terms_of_Service" element={<TOS />} />
-            <Route path="/Contact_us" element={<Contactus />} />
-            <Route path="/Browse" element={<Browse />} />
-            <Route path="/create-account" element={<Signup />} />
+            <Route path="/about" element={<Aboutus />} />
+            <Route path="/terms_of_service" element={<TOS />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/browse" element={<Browse />} />
+            <Route path="/create_account" element={<Signup />} />
 
             {/* Admin */}
             <Route path="/users" element={<ValidatedUsers currentUser={user} />} />
