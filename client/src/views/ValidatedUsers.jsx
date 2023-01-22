@@ -22,9 +22,7 @@ export default class ValidatedUsers extends React.Component {
 
   async deleteUser(user) {
     const id = user._id;
-    console.log(id);
     const url = "/api/users/" + id;
-    console.log(url);
     await axios.delete(url).then(() => {
       window.location.reload();
     }).catch((error) => console.log("Error: ", error));
