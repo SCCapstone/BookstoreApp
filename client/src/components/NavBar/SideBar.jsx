@@ -6,9 +6,10 @@ const SideBar = () => {
   const menu_options = [
     {name: "Home", link: "/"},
     {name: "Browse", link: "/Browse"},
+    {name: "Validated Users", link: "/users"},
     {name: "About", link: "/About"},
     {name: "Contact us", link: "/Contact_us"},
-    {name: "Terms of Service", link: "/Terms_of_Service"},
+    {name: "Terms of Service", link: "/Terms_of_Service"}
   ];
 
   const [open, setOpen] = useState(true);
