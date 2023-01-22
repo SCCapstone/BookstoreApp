@@ -78,14 +78,14 @@ const Login = () => {
 
             <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
               <a
-                href="/create-account"
+                href="/create_account"
                 class="text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
                 Register
               </a>
 
               <a
-                href="/forgot-password"
+                href="/forgot_password"
                 class="text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
                 Forgot password?

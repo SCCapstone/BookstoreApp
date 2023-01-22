@@ -39,6 +39,7 @@ const SignUp = () => {
   return (
     <div class="pb-4 h-full text-gray-800 max-w-[1400px]">
       <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
+          <div />
         <div class="w-full py-16 gap-2 ">
           <div class="pb-4">
             <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">

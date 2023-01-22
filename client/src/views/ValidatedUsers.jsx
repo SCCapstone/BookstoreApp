@@ -38,25 +38,6 @@ export default class ValidatedUsers extends React.Component {
     window.location.href = "/login";
   };
 
-  showUser = ({ user }) => {
-    return (
-      <tr>
-        <th scope="row" class="px-6 py-4 font-medium text-black">
-          {user.firstName}
-          &nbsp;
-          {user.lastName}
-          {console.log(user)}
-        </th>
-        <td>{user._id}</td>
-        <td class="px-6 py-4">{user.email}</td>
-
-        {/* <td class="px-6 py-4"></td> */}
-
-        <td class="px-6 py-4 text-right">Delete</td>
-      </tr>
-    );
-  };
-
   render() {
     return this.isLoggedIn() ? (
       <div>
