@@ -1,6 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ user  }) => {
+  const navigate = useNavigate();
+  
+  var loginOrLogout = () => {
+    console.log("hello");
+    if (user && user.length !== 0) {
+      console.log('we are logged in')
+      localStorage.removeItem("token");
+      window.location.reload();
+    } else {
+      console.log('we are logged out')
+      navigate("/login");
+    }
+  };
+
   return (
     <div>
       <nav class="bg-persian_plum px-4 sm:px-6 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b-4 border-gray-200 dark:border-gray-600">
@@ -13,9 +28,9 @@ const NavBar = () => {
             </a>
           </span>
           <div class="flex md:order-2">
-            <a href="/login" class="flex items-center">
-              <span class="text-white text-xl">Login</span>
-            </a>
+            <button class="flex items-center" onClick={loginOrLogout()}>
+              <span class="text-white text-xl">{ (user && user.length !== 0) ? "Logout" : "Login" }</span>
+            </button>
           </div>
         </div>
       </nav>

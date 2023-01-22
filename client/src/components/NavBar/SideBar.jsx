@@ -14,8 +14,8 @@ const SideBar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <aside class="w-64 " aria-label="Sidebar">
-      <ul class=" ">
+    <aside className="w-64 " aria-label="Sidebar">
+      <ul>
         <div
           className={` ${
             open ? "" : "-translate-x-full "
@@ -40,7 +40,7 @@ const SideBar = () => {
                       : "border-t-4"
                   }`}
                 >
-                  <span class=" ">{option.name}</span>
+                  <span>{option.name}</span>
                 </a>
               </li>
             </div>
