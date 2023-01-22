@@ -100,7 +100,7 @@ export default class ValidatedUsers extends React.Component {
             </thead>
             <tbody>
               {this.state.users.map((user) => (
-                <UserRow contact={user} />
+                <UserRow contact={user} handleDelete={this.deleteUser}/>
               ))}
             </tbody>
           </table>
