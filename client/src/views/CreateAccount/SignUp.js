@@ -9,8 +9,9 @@ const SignUp = () => {
     lastName: "",
     email: "",
     password: "",
+    password2: "",
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState(" ");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -19,10 +20,46 @@ const SignUp = () => {
       ...data,
       [name]: value,
     });
+    // if (!data.firstName) {
+    //   setError({...error, firstName: "Please enter a first name"});
+    // }
+    // if (!data.lastName) {
+    //   setError({...error, lastName: "Please enter a last name"});
+    // }
+    // if (!data.email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(data.email)) {
+    //   setError({...error, email: "Please enter a valid email address"});
+    // }
+    // if (!data.password) {
+    //   setError({...error, password: "Please enter a password"});
+    // }
+    // if (data.password !== data.password2) {
+    //   setError({...error, password2: "make sure your password is the same"});
+    // }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let errors = {};
+    if (!data.firstName) {
+      errors.firstName = "Please enter a First Name";
+    }
+    if (!data.lastName) {
+      errors.lastName = "Please enter a Last Name";
+    }
+    if (!data.email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(data.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+    if (!data.password) {
+      errors.password = "Please enter a password";
+    }
+    if (data.password !== data.password2) {
+      errors.password2 = "Make sure your password is the same";
+    }
+    setError(errors);
+    if (Object.keys(errors).length > 0){
+      console.log("Error, do not submit");
+      return;
+    }
     try {
       const url = "/api/users";
       const res = await axios.post(url, data);
@@ -53,8 +90,8 @@ const SignUp = () => {
             maxlen="30"
             value={data.firstName}
             onChange={handleChange}
-          />
-          {/* {errors.firstname && <p>{errors.firstName}</p>} */}
+          ></input>
+          {error.firstName && <p>{error.firstName}</p>}
         </div>
 
         <div className="form-inputs space">
@@ -69,7 +106,7 @@ const SignUp = () => {
             value={data.lastName}
             onChange={handleChange}
           ></input>
-          {/* {errors.lastName && <p>{errors.lastName}</p>} */}
+          {error.lastName && <p>{error.lastName}</p>}
         </div>
 
         {/* <div className="form-inputs space">
@@ -100,7 +137,7 @@ const SignUp = () => {
             required
             onChange={handleChange}
           ></input>
-          {/* {errors.email && <p>{errors.email}</p>} */}
+          {error.email && <p>{error.email}</p>}
         </div>
         <div className="form-inputs space">
           <label htmlFor="password" className="form-label">
@@ -115,9 +152,9 @@ const SignUp = () => {
             required
             onChange={handleChange}
           ></input>
-          {/* {errors.password && <p>{errors.password}</p>} */}
+          {error.password && <p>{error.password}</p>}
         </div>
-        {/* <div className="form-inputs space">
+        <div className="form-inputs space">
           <label htmlFor="password2" className="form-label">
             Confirm Password &nbsp;
           </label>
@@ -130,8 +167,8 @@ const SignUp = () => {
             value={data.password2}
             onChange={handleChange}
           ></input>
-          {errors.password2 && <p>{errors.password2}</p>}
-        </div> */}
+          {error.password2 && <p>{error.password2}</p>}
+        </div>
         {error && <div>{error}</div>}
         <button className="form-input" type="submit">
           Create an Account
