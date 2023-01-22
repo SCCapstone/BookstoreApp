@@ -14,8 +14,6 @@ const SideBar = ({ user }) => {
 
   if (user && user.length !== 0) {
     menu_options = admin_menu_options;
-    console.log("login");
-    console.log(menu_options);
   } 
 
   // useRef(() => {
