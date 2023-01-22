@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Button from '@mui/material/Button';
 
 const Login = () => {
   const [data, setData] = useState({
@@ -67,29 +68,28 @@ const Login = () => {
 
 
             <div class="text-center lg:text-left grid pb-6">
-              <button
-                type="button"
-                class="inline-block px-10 py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
+              <Button
+                class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
                 onClick={login}
               >
                 Login
-              </button>
+              </Button>
             </div>
 
             <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
-              <a
+              <Button
                 href="/create-account"
                 class="text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
                 Register
-              </a>
+              </Button>
 
-              <a
+              <Button
                 href="/forgot-password"
                 class="text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
-                Forgot password?
-              </a>
+                Forgot Password?
+              </Button>
             </div>
           </form>
         </div>
