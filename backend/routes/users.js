@@ -37,9 +37,8 @@ router.get("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
-    // does not work, come back to this
-    res.send("Got a DELETE request at /user");
+    await User.deleteOne({ _id: id });
+    res.send("Got a DELETE request at /users");
   } catch (error) {
     console.log(error);
   }
