@@ -5,23 +5,22 @@ module.exports = {
   theme: {
     extend: {
       gridAutoColumns: {
-        '2fr': 'minmax(0, 2fr)',
+        "2fr": "minmax(0, 2fr)",
       },
       colors: {
-
         dimWhite: "rgba(255, 255, 255, 0.7)",
         dimBlue: "rgba(9, 151, 124, 0.1)",
         lightBlue: "#4287EE",
-        blue:"#0066ff",
-        yellow : "#E4D00A",
-        green : "#50C878",
-        gray : "#818589",
-        red : "#D22B2B",
-        persian_plum : "#70161E",
+        blue: "#0066ff",
+        yellow: "#E4D00A",
+        green: "#50C878",
+        gray: "#818589",
+        red: "#D22B2B",
+        persian_plum: "#70161E",
         polished_pine: "#529F95",
-        camel : "#B49A67",
-        dark_jungle_green : "#00120B",
-        gainsboro : "#D9D9D9",
+        camel: "#B49A67",
+        dark_jungle_green: "#00120B",
+        gainsboro: "#D9D9D9",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
@@ -37,6 +36,5 @@ module.exports = {
       xl: "1700px",
     },
   },
-  plugins: [
-  ],
+  plugins: [],
 };

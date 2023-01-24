@@ -5,14 +5,10 @@ const NavBar = ({ user  }) => {
   const navigate = useNavigate();
 
   var loginOrLogout = () => {
-    console.log("hello");
     if (user && user.length !== 0) {
-      console.log('we are logged in')
       localStorage.removeItem("token");
       window.location.reload();
     } else {
-      console.log(user);
-      console.log('we are logged out')
       navigate("/login");
     }
   };

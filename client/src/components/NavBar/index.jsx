@@ -19,7 +19,7 @@ const CompleteNavbar = () => {
   return (
     <div className="pt-16 bg-gainsboro">
       <div className="flex">
-        <SideBar />
+        <SideBar user={user}/>
         <div className="px-16"></div>
         <BrowserRouter>
           <NavBar user={user} />
