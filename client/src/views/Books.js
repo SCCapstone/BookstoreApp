@@ -9,6 +9,7 @@ const books = [
     stars: 3,
     price: "$12.99",
     qty: "40+",
+    sold:""
   },
   {
     name: "Go-To-Dinners",
@@ -20,6 +21,7 @@ const books = [
     stars: 3,
     price: "$12.99",
     qty: "40+",
+    sold:""
   },
   {
     name: "How Easy is That?",
@@ -31,6 +33,7 @@ const books = [
     stars: 3,
     price: "$12.99",
     qty: "40+",
+    sold:""
   },
   {
     name: "Jane Eyre",
@@ -42,6 +45,7 @@ const books = [
     stars: 3,
     price: "$12.99",
     qty: "40+",
+    sold:""
   },
 
   {
@@ -54,6 +58,7 @@ const books = [
     stars: 3.5,
     price: "$12.99",
     qty: "40+",
+    sold:""
   },
   {
     name: "Go-To-Dinners",
@@ -65,6 +70,7 @@ const books = [
     stars: 3,
     price: "$12.99",
     qty: "40+",
+    sold:""
   },
   {
     name: "How Easy is That?",
@@ -76,6 +82,7 @@ const books = [
     stars: 3,
     price: "$12.99",
     qty: "40+",
+    sold:""
   },
   {
     name: "Jane Eyre",
@@ -87,6 +94,7 @@ const books = [
     stars: 3,
     price: "$12.99",
     qty: "40+",
+    sold:""
   },
 ];
 
