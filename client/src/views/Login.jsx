@@ -56,12 +56,8 @@ const Login = () => {
       <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
         <div />
         <div class="w-full py-16 gap-2 ">
-          <div class="pb-4">
-            <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
-              Login
-            </div>
-          </div>
           <form class="justify-center space-y-4">
+            <div>Login</div>
             {/* <TextField
                 name="email"
                 value={data.email}
@@ -82,8 +78,11 @@ const Login = () => {
                 onChange={handleChange}
                 helperText=""
               /> */}
+              <div>
 
             <TextField label="Enter Email" color="primary" />
+            </div>
+            <div>
             <TextField
               type="password"
               name="password"
@@ -92,31 +91,27 @@ const Login = () => {
               error={false}
               onChange={handleChange}
               helperText=""
-              className="max-w-[50%]"
+              className="max-w-[200%]"
             />
+            </div>
 
-            <div class="text-center lg:text-left grid pb-6">
-              <Button
-                class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
-                onClick={login}
-              >
+            <div className="text-center border-2">
+              <Button onClick={login} lg={{padding: "14px 500px" }}>
                 Login
               </Button>
             </div>
 
             <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
-              <Button
-                href="/create-account"
-                class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
-              >
-                Register
+              <Button variant="contained" href="/create-account">
+                Create An Account
               </Button>
-
               <Button
+                type="submit"
+                variant="contained"
+                color="primary"
                 href="/forgot-password"
-                class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
-                Forgot Password?
+                Forgot Password
               </Button>
             </div>
           </form>
