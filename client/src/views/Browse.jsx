@@ -1,17 +1,26 @@
-import { React } from "react";
+import { useState } from "react";
 import { styles } from "../styles";
 import books from "./Books";
 
 const Browse = () => {
+
+  const [value, setValue] = useState('fruit');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    console.log(value)
+  };
+
   return (
     <section className="">
       <div class="py-4">
         <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
           Browse
         </div>
+
       </div>
       <div class="xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid max-w-[1158px]">
-        <p className={`${styles.paragraph} max-w-[1158px] relative`}>
+        <p className={`${styles.paragraph} max-w-[1158px] relative grid`}>
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
               aria-hidden="true"

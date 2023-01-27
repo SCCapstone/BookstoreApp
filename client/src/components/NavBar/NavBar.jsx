@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const NavBar = ({ user  }) => {
+const NavBar = ({ user }) => {
   const navigate = useNavigate();
 
   var loginOrLogout = () => {
@@ -12,6 +12,8 @@ const NavBar = ({ user  }) => {
       navigate("/login");
     }
   };
+
+
 
   return (
     <div>
@@ -26,7 +28,21 @@ const NavBar = ({ user  }) => {
           </span>
           <div class="flex md:order-2">
             <button class="flex items-center" onClick={loginOrLogout}>
-              <span className="text-white text-xl">{ (user && user.length !== 0) ? "Logout" : "Login" }</span>
+              <span className="text-white text-xl">
+                {user && user.length !== 0 ? "Logout" : "Login"}
+
+
+
+
+
+
+
+
+
+
+
+
+              </span>
             </button>
           </div>
         </div>
