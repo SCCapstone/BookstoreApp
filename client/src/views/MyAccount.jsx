@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from "react";
 import { Icon } from "react-icons"
 import EditProfile from "./EditProfile";
