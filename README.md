@@ -35,7 +35,7 @@ We will use a traditional web app model because the Heroku hosting platform will
 
 
 ## Testing
-In 492 we plan to write tests for our app.
+To test our app unit and behavioral tests have been implemented and ran. Unit tests are tests that check to see if the methods/functions are working properly. Behavioral tests are tests that check the UI implementation and checks to see if the app does what the user expects it to do.  
 
 ## Testing Technology
 
