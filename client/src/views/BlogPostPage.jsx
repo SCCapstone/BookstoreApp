@@ -1,3 +1,4 @@
+//Referenced code using the following tutorial for this part: https://www.youtube.com/watch?v=HuT5FXfmXJA&t=124s
 import { useState } from "react"
 import { useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
@@ -7,7 +8,7 @@ import { createComment, loadPost } from "../services/post-service"
 import { toast } from 'react-toastify'
 import { BASE_URL } from "../services/helper"
 import { isLoggedIn } from "../auth"
-const PostPage = () => {
+const BlogPostPage = () => {
 
     const { postId } = useParams()
     const [post, setPost] = useState(null)
@@ -29,12 +30,10 @@ const PostPage = () => {
     }, [])
 
     const printDate = (numbers) => {
-
         return new Date(numbers).toLocaleDateString()
     }
 
     const submitPost=()=>{
-
         if(!isLoggedIn()){
                 toast.error("Need to login first !!")
                 return
@@ -58,30 +57,17 @@ const PostPage = () => {
             console.log(error)
         })
     }
-
     return (
-
         <Base>
-
-
             <Container className="mt-4">
-
                 <Link to="/">Home</Link> / {post && (<Link to="" >  {post.title} </Link>)}
-
                 <Row>
-
-                    <Col md={{
-                        size: 12
-                    }}>
-
+                    <Col md={{size: 12}}>
                         <Card className="mt-3 ps-2 border-0 shadow-sm" >
-
-
                             {
                                 (post) && (
                                     <CardBody>
                                         <CardText> Posted By <b>{post.user.name}</b> on <b>{printDate(post.addedDate)} </b> </CardText>
-
                                         <CardText>
                                             <span className="text-muted">{post.category.categoryTitle}</span>
                                         </CardText>
@@ -90,7 +76,6 @@ const PostPage = () => {
                                             width: '100%',
                                             height: '1px',
                                             background: '#e2e2e2'
-
                                         }}></div>
 
                                         <CardText className="mt-3">
@@ -100,29 +85,21 @@ const PostPage = () => {
                                             <img className="img-fluid" src={BASE_URL + '/post/image/' + post.imageName} alt="" />
                                         </div>
                                         <CardText className="mt-5" dangerouslySetInnerHTML={{ __html: post.content }}>
-
                                         </CardText>
-
                                     </CardBody>
                                 )
                             }
-
                         </Card>
-
                     </Col>
                 </Row>
-
                 <Row className="my-4">
-
                     <Col md={
-
                         {
                             size: 9,
                             offset: 1
                         }
                     }>
                         <h3>Comments ( {post ? post.comments.length : 0} )</h3>
-
                         {
                             post && post.comments.map((c, index) => (
                                 <Card className="mt-4 border-0" key={index}>
@@ -134,31 +111,21 @@ const PostPage = () => {
                                 </Card>
                             ))
                         }
-
                         <Card className="mt-4 border-0" >
                             <CardBody>
-
                                 <Input
                                     type="textarea"
                                     placeholder="Enter comment here"
                                     value={comment.content}
                                     onChange={(event) => setComment({content:event.target.value})}
                                 />
-
                                 <Button  onClick={submitPost} className="mt-2" color="primary">Submit</Button>
                             </CardBody>
                         </Card>
-
                     </Col>
-
                 </Row>
-
             </Container>
-
-
         </Base>
-
     )
 }
-
-export default PostPage
+export default BlogPostPage

@@ -1,3 +1,4 @@
+//Referenced code using the following tutorial for this part: https://www.youtube.com/watch?v=HuT5FXfmXJA&t=124s
 import React from 'react'
 import { useEffect } from 'react'
 import { useContext } from 'react'
@@ -16,24 +17,18 @@ function CreatePost({ post = { id: -1, title: "This is default post title", cont
         setLogin(isLoggedIn())
     }, [])
     return (
-
-
         <Card className='border-0 shadow-sm mt-3'>
             <CardBody>
                 <h3>{post.title}</h3>
                 <CardText dangerouslySetInnerHTML={{ __html: post.content.substring(0, 70) + "...." }}>
-
                 </CardText>
-
                 <div>
                     <Link className='btn btn-secondary border-0' to={'/posts/' + post.postId}>Read More</Link>
                     {userContextData.user.login && (user && user.id === post.user.id ? <Button onClick={(event) => deletePost(post)} color='danger' className="ms-2">Delete</Button> : '')}
                     {userContextData.user.login && (user && user.id === post.user.id ? <Button tag={Link} to={`/user/update-blog/${post.postId}`} color='warning' className="ms-2">Update</Button> : '')}
-
                 </div>
             </CardBody>
         </Card>
-
     )
 }
 

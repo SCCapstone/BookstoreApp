@@ -1,3 +1,4 @@
+//Referenced code using the following tutorial for this part: https://www.youtube.com/watch?v=HuT5FXfmXJA&t=124s
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -12,25 +13,19 @@ import { Card, CardBody, Form, Input, Label, Button, Container } from "reactstra
 import JoditEditor from "jodit-react"
 import { useRef } from "react"
 function UpdateBlog() {
-
     const editor = useRef(null)
-
     const [categories, setCategories] = useState([])
-
     const { blogId } = useParams()
     const object = useContext(userContext)
     const navigate = useNavigate()
     const [post, setPost] = useState(null)
-
     useEffect(() => {
-
         loadAllCategories().then((data) => {
             console.log(data)
             setCategories(data)
         }).catch(error => {
             console.log(error)
         })
-
 
         //load the blog from database
         loadPost(blogId).then(data => {
@@ -50,18 +45,13 @@ function UpdateBlog() {
                 toast.error("This is not your post !!")
                 navigate("/")
             }
-
         }
-
     }, [post])
-
     const handleChange = (event, fieldName) => {
-
         setPost({
             ...post,
             [fieldName]: event.target.value
         })
-
     }
 
     const updatePost = (event) => {
@@ -76,16 +66,12 @@ function UpdateBlog() {
                 console.log(error);
                 toast.error("Error in upading post")
             })
-
     }
     const updateHtml = () => {
         return (
-
             <div className="wrapper">
-
                 <Card className="shadow-sm  border-0 mt-2">
                     <CardBody>
-
                         <h3>Update post from here !!</h3>
                         <Form onSubmit={updatePost} >
                             <div className="my-3">
@@ -100,34 +86,18 @@ function UpdateBlog() {
                                     onChange={(event) => handleChange(event, 'title')}
                                 />
                             </div>
-
                             <div className="my-3">
                                 <Label for="content" >Post Content</Label>
-                                {/* <Input
-                                type="textarea"
-                                id="content"
-                                placeholder="Enter here"
-                                className="rounded-0"
-                                style={{ height: '300px' }}
-                            /> */}
-
                                 <JoditEditor
                                     ref={editor}
                                     value={post.content}
                                     onChange={newContent => setPost({ ...post, content: newContent })}
                                 />
                             </div>
-
-                            {/* file field  */}
-
                             <div className="mt-3">
                                 <Label for="image">Select Post banner</Label>
                                 <Input id="image" type="file" onChange={''} />
                             </div>
-
-
-
-
                             <div className="my-3">
                                 <Label for="category" >Post Category</Label>
                                 <Input
@@ -137,59 +107,33 @@ function UpdateBlog() {
                                     className="rounded-0"
                                     name="categoryId"
                                     onChange={(event) => handleChange(event, 'categoryId')}
-
                                     value={post.categoryId}
-
-
                                 >
-
                                     <option disabled value={0} >--Select category--</option>
-
                                     {
-
                                         categories.map((category) => (
                                             <option value={category.categoryId} key={category.categoryId}>
                                                 {category.categoryTitle}
                                             </option>
                                         ))
-
                                     }
-
-
-
                                 </Input>
                             </div>
-
-
 
                             <Container className="text-center">
                                 <Button type="submit" className="rounded-0" color="primary">Update  Post</Button>
                                 <Button className="rounded-0 ms-2" color="danger">Reset Content</Button>
                             </Container>
-
-
                         </Form>
-
-
                     </CardBody>
-
                 </Card>
-
-
-
-
             </div>
         )
     }
-
-
     return (
         <Base>
             <Container>
-
                 {post && updateHtml()}
-
-
             </Container>
         </Base>
     )

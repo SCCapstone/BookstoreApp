@@ -1,3 +1,4 @@
+//Referenced code using the following tutorial for this part: https://www.youtube.com/watch?v=HuT5FXfmXJA&t=124s
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -7,9 +8,7 @@ import Post from './Post'
 import { toast } from 'react-toastify'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { deletePostService } from '../services/post-service'
-function NewFeed() {
-
-
+function Feed() {
     const [postContent, setPostContent] = useState({
         content: [],
         totalPages: '',
@@ -17,19 +16,14 @@ function NewFeed() {
         pageSize: '',
         lastPage: false,
         pageNumber: ''
-
     })
-
+    
     const [currentPage, setCurrentPage] = useState(0)
-
     useEffect(() => {
         console.log("loading posts")
         console.log(currentPage)
         changePage(currentPage)
-
     }, [currentPage])
-
-
     const changePage = (pageNumber = 0, pageSize = 5) => {
         if (pageNumber > postContent.pageNumber && postContent.lastPage) {
             return
@@ -46,28 +40,20 @@ function NewFeed() {
                 lastPage: data.lastPage,
                 pageNumber: data.pageNumber
             })
-
             console.log(data);
-
         }).catch(error => {
             toast.error("Error in loading posts")
-
         })
     }
-
-
 
     function deletePost(post) {
         //going to delete post
         console.log(post)
-
         deletePostService(post.postId).then(res => {
             console.log(res)
             toast.success("post is deleled..")
-
             let newPostContents = postContent.content.filter(p => p.postId != post.postId)
             setPostContent({ ...postContent, content: newPostContents })
-
         })
             .catch(error => {
                 console.log(error)
@@ -75,11 +61,9 @@ function NewFeed() {
             })
     }
 
-
     const changePageInfinite = () => {
         console.log("page chagned")
         setCurrentPage(currentPage + 1)
-
     }
 
     return (
@@ -88,10 +72,8 @@ function NewFeed() {
                 <Col md={
                     {
                         size: 12
-
                     }
                 }>
-
                     <h1>Blogs Count  ( {postContent?.totalElements} )</h1>
                     <InfiniteScroll
                         dataLength={postContent.content.length}
@@ -111,33 +93,10 @@ function NewFeed() {
                         }
 
                     </InfiniteScroll>
-                    {/* <Container className='mt-3'>
-                        <Pagination size='lg'>
-                            <PaginationItem onClick={() => changePage(postContent.pageNumber-1)} disabled={postContent.pageNumber == 0}>
-                                <PaginationLink previous>
-                                    Previous
-                                </PaginationLink>
-                            </PaginationItem>
-                            {
-                                [...Array(postContent.totalPages)].map((item, index) => (
-                                    <PaginationItem onClick={() => changePage(index)} active={index == postContent.pageNumber} key={index}>
-                                        <PaginationLink>
-                                            {index + 1}
-                                        </PaginationLink>
-                                    </PaginationItem>
-                                ))
-                            }
-                            <PaginationItem onClick={() => changePage(postContent.pageNumber+1)} disabled={postContent.lastPage}>
-                                <PaginationLink next>
-                                    Next
-                                </PaginationLink>
-                            </PaginationItem>
-                        </Pagination>
-                    </Container> */}
                 </Col>
             </Row>
         </div>
     )
 }
 
-export default NewFeed
+export default Feed
