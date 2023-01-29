@@ -1,11 +1,10 @@
 // User Database Functionality Testing
-// William Hobbs
 
 const users = require('./users');
 const db = require('../db');
 const { User } = require('../models/user');
 
-db(); // need a database connection
+// db(); // need a database connection
 
 const userData = {
     firstName: "Ina",
@@ -16,8 +15,11 @@ const userData = {
 
 // create a user
 describe("User model", () => {
-    it("create user successfully", async () => {
+    it("validate user successfully", async () => {
         const validUser = new User(userData);
-        const savedUser = validUser.save();
+        expect(validUser.firstName).toBe("Ina");
+        expect(validUser.lastName).toBe("Garten");
+        expect(validUser.email).toBe("barefootcontessa@foodnetwork.com");
+        expect(validUser.password).toBe("JEFFREY!");
     })
 });
