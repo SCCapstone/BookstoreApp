@@ -30,7 +30,7 @@ const BooksPageGenerator = ({ book }) => {
             <img src={book.image} alt="" className="row-span-2 border-2" />
           </div>
           <div className="pt-12 grid grid-auto-rows">
-            <ul className="text-bold text-xl">{book.price}</ul>
+            <ul className="text-bold text-xl">${book.price}</ul>
             <ReactStars
               count={5}
               value={book.stars}
