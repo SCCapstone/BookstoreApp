@@ -26,7 +26,9 @@ const Browse = () => {
     else if(value == 4){
       books_changed = books.sort(function(a, b){return a.price - b.price});
     }
-
+    else if(value == 5){
+      books_changed = books.sort(function(a, b){return b.price - a.price});
+    }
     else {
       books_changed = [];
     }
