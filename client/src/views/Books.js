@@ -10,6 +10,7 @@ const books = [
     price: "$12.99",
     qty: "40+",
     sold: "6",
+    date: "2006-08-25",
   },
   {
     name: "Go-To-Dinners",
@@ -22,6 +23,7 @@ const books = [
     price: "$12.99",
     qty: "40+",
     sold: "3",
+    date: "2020-03-23",
   },
   {
     name: "How Easy is That?",
@@ -34,6 +36,7 @@ const books = [
     price: "$12.99",
     qty: "40+",
     sold: "23",
+    date: "2022-04-11",
   },
   {
     name: "Jane Eyre",
@@ -46,6 +49,7 @@ const books = [
     price: "$12.99",
     qty: "40+",
     sold: "43",
+    date: "2016-06-01",
   },
 
   {
@@ -59,6 +63,7 @@ const books = [
     price: "$12.99",
     qty: "40+",
     sold: "12",
+    date: "2014-11-05",
   },
   {
     name: "Go-To-Dinners",
@@ -71,6 +76,7 @@ const books = [
     price: "$12.99",
     qty: "40+",
     sold: "12",
+    date: "2006-08-25",
   },
   {
     name: "How Easy is That?",
@@ -83,6 +89,7 @@ const books = [
     price: "$12.99",
     qty: "40+",
     sold: "56",
+    date: "2016-01-19",
   },
   {
     name: "Jane Eyre",
@@ -94,7 +101,8 @@ const books = [
     stars: 3,
     price: "$12.99",
     qty: "40+",
-    sold: "",
+    sold: "0",
+    date: "2010-10-26",
   },
 ];
 

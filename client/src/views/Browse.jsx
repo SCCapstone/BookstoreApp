@@ -3,12 +3,44 @@ import { styles } from "../styles";
 import books from "./Books";
 
 const Browse = () => {
-
-  const [value, setValue] = useState('fruit');
+  const [value, setValue] = useState("1");
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    console.log(value)
+    console.log(value);
+  };
+  
+
+  const sort = (books, value) => {
+    var books_changed = [];
+    if(value == 1) {
+      books_changed = books;
+      console.log(value)
+    }
+    else if(value == 2){
+      books_changed = books.sort(function(a, b){return b.sold - a.sold});
+    }
+
+    else {
+      books_changed = [];
+    }
+
+    return (
+      <div className="grid grid-cols-4 grid-flow-row gap-2">
+        {books_changed.map((book) => (
+          <div
+            key={book}
+            className="border-2 border-gainsboro hover:border-black"
+          >
+            <a href={`${book.link}`}>
+              <img src={book.image} alt="" className="row-span-2" />
+              <div class=" ">{book.name}</div>
+              <div class="felx items-end">by: {book.author}</div>
+            </a>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -17,7 +49,6 @@ const Browse = () => {
         <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
           Browse
         </div>
-
       </div>
       <div class="xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid max-w-[1158px]">
         <p className={`${styles.paragraph} max-w-[1158px] relative grid`}>
@@ -43,18 +74,24 @@ const Browse = () => {
             placeholder="Search Books"
           />
         </p>
+        <label for="cars">Sort by:</label>
+
+        <select
+          name="cars"
+          id="cars"
+          onChange={(e) => setValue(e.target.value)}
+        >
+          <option value="1">Relevant</option>
+          <option value="2">Best Selling</option>
+          <option value="3">New Arrivals</option>
+          <option value="4">Price: low to high</option>
+          <option value="5">Price: high to low</option>
+          <option value="6">Qty: low to high</option>
+          <option value="7">Qty: high to low</option>
+        </select>
+
         <hr className="pt-2" />
-        <div className="grid grid-cols-4 grid-flow-row gap-2">
-          {books.map((book) => (
-            <div key={book} className="border-2 border-gainsboro hover:border-black">
-              <a href={`${book.link}`}>
-                <img src={book.image} alt="" className="row-span-2" />
-                <div class=" ">{book.name}</div>
-                <div class="felx items-end">by: {book.author}</div>
-              </a>
-            </div>
-          ))}
-        </div>
+        <div>{sort(books, value)}</div>
       </div>
     </section>
   );
