@@ -2,6 +2,48 @@ import { useState } from "react";
 import { styles } from "../styles";
 import books from "./Books";
 
+
+
+const sort = (books, value) => {
+  var books_changed = [];
+  if(value == 1) {
+    books_changed = books;
+    console.log(value)
+  }
+  else if(value == 2){
+    books_changed = books.sort(function(a, b){return b.sold - a.sold});
+  }
+  else if(value == 3){
+    books_changed = books.sort(function(a, b){return new Date(b.date) - new Date(a.date)});
+  }
+  else if(value == 4){
+    books_changed = books.sort(function(a, b){return a.price - b.price});
+  }
+  else if(value == 5){
+    books_changed = books.sort(function(a, b){return b.price - a.price});
+  }
+  else {
+    books_changed = [];
+  }
+
+  return (
+    <div className="grid grid-cols-4 grid-flow-row gap-2">
+      {books_changed.map((book) => (
+        <div
+          key={book}
+          className="border-2 border-gainsboro hover:border-black"
+        >
+          <a href={`${book.link}`}>
+            <img src={book.image} alt="" className="row-span-2" />
+            <div class=" ">{book.name}</div>
+            <div class="felx items-end">by: {book.author}</div>
+          </a>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const Browse = () => {
   const [value, setValue] = useState("1");
 
@@ -11,45 +53,7 @@ const Browse = () => {
   };
   
 
-  const sort = (books, value) => {
-    var books_changed = [];
-    if(value == 1) {
-      books_changed = books;
-      console.log(value)
-    }
-    else if(value == 2){
-      books_changed = books.sort(function(a, b){return b.sold - a.sold});
-    }
-    else if(value == 3){
-      books_changed = books.sort(function(a, b){return new Date(b.date) - new Date(a.date)});
-    }
-    else if(value == 4){
-      books_changed = books.sort(function(a, b){return a.price - b.price});
-    }
-    else if(value == 5){
-      books_changed = books.sort(function(a, b){return b.price - a.price});
-    }
-    else {
-      books_changed = [];
-    }
 
-    return (
-      <div className="grid grid-cols-4 grid-flow-row gap-2">
-        {books_changed.map((book) => (
-          <div
-            key={book}
-            className="border-2 border-gainsboro hover:border-black"
-          >
-            <a href={`${book.link}`}>
-              <img src={book.image} alt="" className="row-span-2" />
-              <div class=" ">{book.name}</div>
-              <div class="felx items-end">by: {book.author}</div>
-            </a>
-          </div>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <section className="">
