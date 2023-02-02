@@ -20,7 +20,9 @@ const Browse = () => {
     else if(value == 2){
       books_changed = books.sort(function(a, b){return b.sold - a.sold});
     }
-
+    else if(value == 3){
+      books_changed = books.sort(function(a, b){return new Date(b.date) - new Date(a.date)});
+    }
     else {
       books_changed = [];
     }
