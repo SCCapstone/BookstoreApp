@@ -91,6 +91,7 @@ const Browse = () => {
         >
           <option value="1">Relevant</option>
           <option value="2">Best Selling</option>
+          <option value="3">New Arrivals</option>
           <option value="4">Price: low to high</option>
           <option value="5">Price: high to low</option>
           <option value="6">Qty: low to high</option>
