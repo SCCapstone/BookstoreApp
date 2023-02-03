@@ -1,10 +1,25 @@
-import  React, { useState } from "react";
+import React, { useState } from "react";
 import Calendar from 'react-calendar';
+
+const EventInfo = ({ event }) => {
+    return (
+        <div>
+            <h3>
+                {event.title}
+            </h3>
+            <p>
+                {event.start} - {event.end}
+            </p>
+        </div>
+    );
+};
 
 const EmployeeHomepage = () => { 
     const [date, setDate] = useState(new Date());
     const [events, setEvents] = useState([]);
-    const [showUsers, setShowUsers] = useState(false);
+    const [selectedEvent, setSelctedEvent] = useState(null);
+    // const [showUsers, setShowUsers] = useState(false);
+    // const [showBooks, setShowBooks] = useState(false);
 
     const handleEventSubmit = (event) => {
         event.preventDefault();
@@ -14,68 +29,108 @@ const EmployeeHomepage = () => {
             end: event.target.eventEnd.value,
         };
         setEvents([...events, newEvent]);
-    }
+    };
+    return (
 
-    return ( 
-    <div> 
+    <div className="max-w-screen-md mx-auto p-4"> 
         <h1 className="text-2xl font-medium mb-4 text-center">
             Welcome, Employee!
         </h1> 
         <h2 className="text-lg font-medium mb-4 text-center">
             Upcoming Meeting
         </h2>
-        <Calendar 
-            value={date}
-            onChange={setDate}
-        />
-            <ul className="list-disc pl-4">
+        <div className="flex flex-col">
+            <Calendar
+                className="border border-gray rounded-lg shadow-lg text-center hover"
+                value={date}
+                onChange={setDate}
+                tileClassName={({date, view}) => {
+                    const eventDates = events.map(event => new Date(event.start));
+                    if (eventDates.some(eventDate => eventDate.toDateString() == date.toDateString())) {
+                        return "bg-blue-500 text-white bordder border-gray"
+                    } else {
+                        return "border boder-gray"
+                    }
+                } }
+                tileContent={({date,view}) => {
+                    const event = events.find(event => new Date(event.start).toDateString() === date.toDateString());
+                    if (event) {
+                        return (
+                            <div
+                                onMouseOver={() => setSelctedEvent(event)}
+                                onMouseOut={()=> setSelctedEvent(null)}
+                            >
+                                Important Date
+                            </div>
+                        );
+                    } 
+                    else {
+                        return;
+                    }
+                }}
+            />
+            {selectedEvent && (
+                <EventInfo event={selectedEvent} />
+            )}
+            {/* <ul className="list-disc pl-4 hover">
                 {events.map((event, index) => (
                     <li key={index} className="mb-2">
                         {event.title} on {event.start}
                     </li>
                 ))}
-            </ul>
-            <form onSubmit={handleEventSubmit}>
-                <label>
+            </ul> */}
+        </div>
+            <form onSubmit={handleEventSubmit} className="mt-4">
+                <label className="block font-medium mb-2">
                     Title:
-                    <input type="text" name="eventTitle" />
                 </label>
-                <label>
+                <input 
+                    type="text" 
+                    name="eventTitle" 
+                    className="w-full p-2 border rounded"
+                />
+                <label className="block font medium mb-2 mt-4">
                     Start Time:
-                    <input type="datetime-local" name="eventStart" />
                 </label>
-                <label>
+                <input 
+                    type="datetime-local" 
+                    name="eventStart" 
+                    className="w-full p-2 border rounded"
+                />
+                <label className="block font medium mb-2 mt-4">
                     End Time:
-                    <input type="datetime-local" name="eventEnd" />
                 </label>
-                <button type="submit" className="text-black hover:bg-blue-600">
+                <input 
+                    type="datetime-local" 
+                    name="eventEnd" 
+                    className="w-full p-2 border rounded"
+                />
+                <button 
+                    type="submit" 
+                    className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center"
+                >
                     Add Event
                 </button>
             </form>
-            <div className="btext-black text-center p-4 rounded-lg flex flex-col">
-                <h3 className="underline cursor-pointer text-center" onClick={() => setShowUsers(!showUsers)}>
-                    Click here to see users
-                </h3>
-                    {showUsers && (
-                        <div className="flex-col flex-wrap">
-                            <div className="flex">
-                                <div className="underline w-1/2 text-left">username</div>
-                                <div className="underline w-1/2 text-left">pasword</div>
-                            </div>
-                            <div className="flex">
-                                <div className="w-1/2 text-left">john@snow.com</div>
-                                <div className="w-1/2 text-left">snoww1234@</div>
-                            </div>
-                            <div className="flex">
-                                <div className="w-1/2 text-left">Hello@world.com</div>
-                                <div className="w-1/2 text-left">worldhello1234!</div>
-                            </div>
-                            <div className="flex">
-                                <div className="w-1/2 text-left">Jake@statefarm.com</div>
-                                <div className="w-1/2 text-left">pasword15%</div>
-                            </div>
-                        </div>
-                    )}
+            <div className="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
+                {/* <h3 className="underline cursor-pointer text-center" onClick={() => setShowUsers(!showUsers)}>
+                    Click here to see user
+                </h3> */}
+                <a
+                    href="/users"
+                    class="underline cursor-pointer text-center bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black"
+                >
+                    Click here to see user
+                </a>
+                {/* <h3 className="underline cursor-pointer text-center" onClick={() => setShowBooks(!showBooks)}>
+                    Click here to order books
+                </h3> */}
+                <a
+                    href="/browse"
+                    class="underline cursor-pointer text-center bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black"
+                >
+                    Click here to order books
+                </a>
             </div>
     </div>
     );
