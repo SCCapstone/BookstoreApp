@@ -2,7 +2,8 @@
 
 # cypress stuff
 /client/cypress/videos
-/client/cypress/videos
+/client/cypress/screenshots
+/client/cypress/downloads
 
 # dependencies
 /node_modules
