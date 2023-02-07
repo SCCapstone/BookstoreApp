@@ -2,32 +2,41 @@ import { useState } from "react";
 import { styles } from "../styles";
 import books from "./Books";
 
-
+import * as React from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const sort = (books, value) => {
+  console.log(value);
   var books_changed = [];
-  if(value == 1) {
+  if (value == 1) {
     books_changed = books;
-    console.log(value)
-  }
-  else if(value == 2){
-    books_changed = books.sort(function(a, b){return b.sold - a.sold});
-  }
-  else if(value == 3){
-    books_changed = books.sort(function(a, b){return new Date(b.date) - new Date(a.date)});
-  }
-  else if(value == 4){
-    books_changed = books.sort(function(a, b){return a.price - b.price});
-  }
-  else if(value == 5){
-    books_changed = books.sort(function(a, b){return b.price - a.price});
-  }
-  else {
+    console.log(value);
+  } else if (value == 2) {
+    books_changed = books.sort(function (a, b) {
+      return b.sold - a.sold;
+    });
+  } else if (value == 3) {
+    books_changed = books.sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
+  } else if (value == 4) {
+    books_changed = books.sort(function (a, b) {
+      return a.price - b.price;
+    });
+  } else if (value == 5) {
+    books_changed = books.sort(function (a, b) {
+      return b.price - a.price;
+    });
+  } else {
     books_changed = [];
   }
 
   return (
-    <div className="grid grid-cols-4 grid-flow-row gap-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2">
       {books_changed.map((book) => (
         <div
           key={book}
@@ -51,9 +60,6 @@ const Browse = () => {
     setValue(event.target.value);
     console.log(value);
   };
-  
-
-
 
   return (
     <section className="">
@@ -63,7 +69,7 @@ const Browse = () => {
         </div>
       </div>
       <div class="xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid max-w-[1158px]">
-        <p className={`${styles.paragraph} max-w-[1158px] relative grid`}>
+        <p className={`${styles.paragraph} max-w-[1158px] relative grid gap-2`}>
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
               aria-hidden="true"
@@ -86,22 +92,24 @@ const Browse = () => {
             placeholder="Search Books"
           />
         </p>
-        <label for="cars">Sort by:</label>
 
-        <select
-          name="cars"
-          id="cars"
-          onChange={(e) => setValue(e.target.value)}
-        >
-          <option value="1">Relevant</option>
-          <option value="2">Best Selling</option>
-          <option value="3">New Arrivals</option>
-          <option value="4">Price: low to high</option>
-          <option value="5">Price: high to low</option>
-          <option value="6">Qty: low to high</option>
-          <option value="7">Qty: high to low</option>
-        </select>
-
+        <div className="border rounded">
+          <FormControl fullWidth className="bg-white w-[1100px]">
+            <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Sort by:"
+              onChange={(e) => setValue(e.target.value)}
+            >
+              <MenuItem value="1">Relevant</MenuItem>
+              <MenuItem value="2">Best Selling</MenuItem>
+              <MenuItem value="3">New Arrivals</MenuItem>
+              <MenuItem value="4">Price: low to high</MenuItem>
+              <MenuItem value="5">Price: high to low</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
         <hr className="pt-2" />
         <div>{sort(books, value)}</div>
       </div>
