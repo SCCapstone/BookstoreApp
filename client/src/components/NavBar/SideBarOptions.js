@@ -5,6 +5,7 @@ const admin_menu_options = [
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
   { name: "Terms of Service", link: "/terms_of_service" },
+  { name: "Employee Page", link: "/emp_page" },
 ];
 
 const unvalidated_menu_options = [
