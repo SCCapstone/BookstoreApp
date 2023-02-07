@@ -32,7 +32,7 @@ const EmployeeHomepage = () => {
     };
     return (
 
-    <div className="max-w-screen-md mx-auto p-4"> 
+    <div className="max-w-screen-md mx-auto p-4 text-center"> 
         <h1 className="text-2xl font-medium mb-4 text-center">
             Welcome, Employee!
         </h1> 
