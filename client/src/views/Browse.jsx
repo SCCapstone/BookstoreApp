@@ -45,6 +45,7 @@ const sort = (books, value) => {
             <img src={book.image} alt="" className="row-span-2" />
             <div class=" ">{book.name}</div>
             <div class="felx items-end">by: {book.author}</div>
+            <div> {book.price} </div>
           </a>
         </div>
       ))}
