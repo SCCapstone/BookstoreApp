@@ -12,6 +12,7 @@ import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
 import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
+import EmployeeHomepage from "../../views/EmployeeHomePage";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -35,6 +36,7 @@ const CompleteNavbar = () => {
 
             {/* Admin */}
             <Route path="/users" element={<ValidatedUsers currentUser={user} />} />
+            <Route path="/emp_page" element={<EmployeeHomepage currentUser={user} />} />
 
             {books.map((book) => (
               <Route
