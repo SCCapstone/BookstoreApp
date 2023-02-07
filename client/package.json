@@ -9,6 +9,8 @@
     "axios": "^1.2.3",
     "react": "^18.2.0",
     "react-animated-heart": "^0.0.7",
+    "react-big-calendar": "^1.5.2",
+    "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
     "react-heart": "^1.0.6",
     "react-icons": "^4.7.1",
