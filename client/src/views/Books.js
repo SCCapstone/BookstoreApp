@@ -58,7 +58,7 @@ const books = [
     image: require("./Books/stevejobs.png"),
     review:
       "SJ A genius book about an incredible mind, yadda yadda blah blah blah lots of gushing and awing because I like books.",
-    link: "/Walter Issacson/Steve Jobs",
+    link: "/Walter Issacson/Steve Jobs2",
     stars: 3.5,
     price: 12.99,
     qty: "40+",
@@ -71,7 +71,7 @@ const books = [
     image: require("./Books/gotodinners.png"),
     review:
       "GTD A genius book about an incredible mind, yadda yadda blah blah blah lots of gushing and awing because I like books.",
-    link: "/Ina Garten/Go-To-Dinners",
+    link: "/Ina Garten/Go-To-Dinners2",
     stars: 3,
     price: 12.99,
     qty: "40+",
@@ -84,7 +84,7 @@ const books = [
     image: require("./Books/howeasyisthat.png"),
     review:
       "HET A genius book about an incredible mind, yadda yadda blah blah blah lots of gushing and awing because I like books.",
-    link: "/Ina Garten/How Easy is That",
+    link: "/Ina Garten/How Easy is That2",
     stars: 3,
     price: 12.99,
     qty: "40+",
@@ -97,7 +97,7 @@ const books = [
     image: require("./Books/janeeyre.png"),
     review:
       "JE A genius book about an incredible mind, yadda yadda blah blah blah lots of gushing and awing because I like books.",
-    link: "/Charlotte Bronte/Jane Eyre",
+    link: "/Charlotte Bronte/Jane Eyre2",
     stars: 3,
     price: 1.99,
     qty: "40+",
