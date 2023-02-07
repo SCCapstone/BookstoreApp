@@ -34,16 +34,19 @@ In using Heroku as the method to deploy our bookstore web application, we will b
 We will use a traditional web app model because the Heroku hosting platform will easily handle the small load of server operations for our app.
 
 
+
+
 ## Testing
-In 492 we plan to write tests for our app.
+We have both unit and integration tests for our app.
 
 ## Testing Technology
+Our unit tests require Jest, which is one of our project dependencies and can be installed with `npm i`.
 
-In some cases you need to install test runners, etc. Explain how.
+Our end-to-end tests require Cypress, which requires a bit more setup. After installing in the `client` folder with `npm i`, you will need to run `npm run cypress:open` to configure the default web browser you wish to run the integration tests on. After that, close the browser, and you can run the tests with the instructions below.
 
 ## Running Tests
-
-Explain how to run the automated tests.
+The automated unit tests can be run with `cd backend && npm run test` from the home directory. The server and react pages need not be running to run the unit tests.
+The end-to-end tests run on Cypress and can be run after the server is running. In a terminal, run the server with `npm run build` and then `npm run start`. After that, open a new terminal, and run `npm run cypress:test` from the `client` folder.
 
 ## Authors
 
