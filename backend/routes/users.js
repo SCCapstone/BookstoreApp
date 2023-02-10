@@ -34,14 +34,34 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send({message: "User not found"});
+    } if (user.role === "admin") {
+      return res.status(400).send({message: "Cannot change role of an admin"});
+    }
+    const requester = await user.findOne({email:req.body.email});
+    if (!requester || requester.role !== "admin") {
+      return res.status(401).send({message: "Unauthorized access"});
+    }
+    user.role = req.body.role;
+    await user.save();
+    res.send({message: "User role updated"});
+  } catch (error) {
+    console.log(error);
+  }
+})
+
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
     if (!user) {
       return res.status(404).send({message: "User not found"});
-    }
-    if (user.role !== "admin") {
+    } if (user.role !== "admin") {
       return res.status(401).send({message: "Unauthorized operation"});
     }
     await User.deleteOne({ _id: id });
