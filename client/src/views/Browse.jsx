@@ -83,7 +83,6 @@ const sort = (books, selection) => {
 const Browse = () => {
   const [value, setValue] = useState("1");
 
-
   return (
     <section className="">
       <div class="py-4">
@@ -116,37 +115,29 @@ const Browse = () => {
           />
         </p>
       </div>
+      <div class="flex pb-2">
+        <select
+          className="rounded border bg-white py-2 grid max-w-[1158px] px-4 w-5/6"
+          onChange={(e) => setValue(e.target.value)}
+        >
+          <option selected disabled hidden>
+            Sort by:
+          </option>
+          <option value="Relavent">Relavent</option>
+          <option value="Best Selling">Best Selling</option>
+          <option value="New Arrivals">New Arrivals</option>
+          <option value="Price: low to high">Price: low to high</option>
+          <option value="Price: high to low">Price: high to low</option>
+        </select>
+
+        <select className="w-1/6 ... bg-white border ">
+          <option selected disabled hidden>
+            Genre
+          </option>
+        </select>
+      </div>
 
       <div>
-        <div className="grid flex ">
-          <select
-            className="rounded border bg-white py-2 grid max-w-[1158px] mb-3 w-5/6"
-            onChange={(e) => setValue(e.target.value)}
-          >
-            <option selected disabled hidden>
-              Sort by:
-            </option>
-            <option value="Relavent">Relavent</option>
-            <option value="Best Selling">Best Selling</option>
-            <option value="New Arrivals">New Arrivals</option>
-            <option value="Price: low to high">Price: low to high</option>
-            <option value="Price: high to low">Price: high to low</option>
-          </select>
-          <select
-            className="rounded border bg-white py-2 grid max-w-[1158px] mb-3 w-1/6"
-            // onChange={(e) => setValue(e.target.value)}
-          >
-            <option selected disabled hidden>
-              Genre
-            </option>
-            {/* <option value="Relavent">Relavent</option>
-            <option value="Best Selling">Best Selling</option>
-            <option value="New Arrivals">New Arrivals</option>
-            <option value="Price: low to high">Price: low to high</option>
-            <option value="Price: high to low">Price: high to low</option> */}
-          </select>
-        </div>
-
         <hr className="pt-2" />
         <div>{sort(books, value)}</div>
       </div>
