@@ -8,8 +8,22 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+
+const decimalNumber = (value) => {
+  value = value.toString();
+  value = value.slice((value.indexOf("."))+1, value.length);
+  return Number(value);  
+}
+
+const wholeNumber = value => {
+  value = value.toString();
+  value = value.slice(0, (value.indexOf(".")));
+  return Number(value);  
+}
+
 const sort = (books, value) => {
   console.log(value);
+  
   var books_changed = [];
   if (value == 1) {
     books_changed = books;
@@ -34,6 +48,7 @@ const sort = (books, value) => {
     books_changed = [];
   }
 
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1200px]">
       {books_changed.map((book) => (
@@ -43,12 +58,10 @@ const sort = (books, value) => {
         >
           <a href={`${book.link}`}>
             <img src={book.image} alt="" className="row-span-2" />
-            <div class=" ">{book.name}</div>
+            <div class="text-lg">{book.name}</div>
             <div class="felx items-end">by: {book.author}</div>
-            <div>
-              {" "}
-              {book.price} {book.link}{" "}
-            </div>
+            <div class="text-lg">${wholeNumber(book.price)}.<span className="text-sm">{decimalNumber(book.price)}</span></div>
+              
           </a>
         </div>
       ))}
