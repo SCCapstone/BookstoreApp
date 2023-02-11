@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Button from '@mui/material/Button';
+import { TextField } from "@mui/material";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -43,12 +45,11 @@ const Login = () => {
           </div>
           <form class="justify-center">
             <div class="mb-6">
-              <input
-                type="text"
+              <TextField
                 name="email"
                 value={data.email}
                 class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
-                placeholder="Enter Email"
+                label="Enter Email"
                 onChange={handleChange}
               />
             </div>
@@ -67,29 +68,28 @@ const Login = () => {
 
 
             <div class="text-center lg:text-left grid pb-6">
-              <button
-                type="button"
-                class="inline-block px-10 py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
+              <Button
+                class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
                 onClick={login}
               >
                 Login
-              </button>
+              </Button>
             </div>
 
             <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
-              <a
-                href="/create_account"
-                class="text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
+              <Button
+                href="/create-account"
+                class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
                 Register
-              </a>
+              </Button>
 
-              <a
-                href="/forgot_password"
-                class="text-slate-800 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
+              <Button
+                href="/forgot-password"
+                class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
-                Forgot password?
-              </a>
+                Forgot Password?
+              </Button>
             </div>
           </form>
         </div>
