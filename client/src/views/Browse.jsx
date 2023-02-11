@@ -68,10 +68,11 @@ const sort = (books, selection) => {
             <img src={book.image} alt="" className="row-span-2" />
             <div class="text-lg">{book.name}</div>
             <div class="felx items-end">by: {book.author}</div>
-            <div class="text-lg">
+            {/*<div class="text-lg">
               ${wholeNumber(book.price)}.
               <span className="text-sm">{decimalNumber(book.price)}</span>
-            </div>
+      </div>*/}
+            <div>${book.price}</div>
           </a>
         </div>
       ))}
@@ -82,9 +83,6 @@ const sort = (books, selection) => {
 const Browse = () => {
   const [value, setValue] = useState("1");
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
 
   return (
     <section className="">
@@ -93,7 +91,7 @@ const Browse = () => {
           Browse
         </div>
       </div>
-      <div class="xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid max-w-[1158px]">
+      <div class=" xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid">
         <p className={`${styles.paragraph} max-w-[1158px] relative grid gap-2`}>
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
@@ -120,19 +118,34 @@ const Browse = () => {
       </div>
 
       <div>
-        <select
-          className="rounded border bg-white xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid max-w-[1158px] mb-3"
-          onChange={(e) => setValue(e.target.value)}
-        >
-          <option selected disabled hidden>
-            Sort by:
-          </option>
-          <option value="Relavent">Relavent</option>
-          <option value="Best Selling">Best Selling</option>
-          <option value="New Arrivals">New Arrivals</option>
-          <option value="Price: low to high">Price: low to high</option>
-          <option value="Price: high to low">Price: high to low</option>
-        </select>
+        <div className="grid flex ">
+          <select
+            className="rounded border bg-white py-2 grid max-w-[1158px] mb-3 w-5/6"
+            onChange={(e) => setValue(e.target.value)}
+          >
+            <option selected disabled hidden>
+              Sort by:
+            </option>
+            <option value="Relavent">Relavent</option>
+            <option value="Best Selling">Best Selling</option>
+            <option value="New Arrivals">New Arrivals</option>
+            <option value="Price: low to high">Price: low to high</option>
+            <option value="Price: high to low">Price: high to low</option>
+          </select>
+          <select
+            className="rounded border bg-white py-2 grid max-w-[1158px] mb-3 w-1/6"
+            // onChange={(e) => setValue(e.target.value)}
+          >
+            <option selected disabled hidden>
+              Genre
+            </option>
+            {/* <option value="Relavent">Relavent</option>
+            <option value="Best Selling">Best Selling</option>
+            <option value="New Arrivals">New Arrivals</option>
+            <option value="Price: low to high">Price: low to high</option>
+            <option value="Price: high to low">Price: high to low</option> */}
+          </select>
+        </div>
 
         <hr className="pt-2" />
         <div>{sort(books, value)}</div>
