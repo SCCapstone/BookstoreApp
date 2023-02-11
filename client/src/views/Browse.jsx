@@ -9,9 +9,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const decimalNumber = (price) => {
-  price = price.toString();
-  price = price.slice(price.indexOf(".") + 1, price.length);
-  return Number(price);
+  var result = price - Math.floor(price) !== 0;
+  if (result) {
+    price = price.toString();
+    price = price.slice(price.indexOf(".") + 1, price.length);
+    return Number(price);
+  } else {
+    return;
+  }
 };
 
 const wholeNumber = (price) => {
@@ -21,30 +26,28 @@ const wholeNumber = (price) => {
 };
 
 const sort = (books, selection) => {
-
   var books_changed = [];
 
   switch (selection) {
-    case "1":
+    case "Relavent":
       books_changed = books;
       break;
-    case "2":
+    case "Best Selling":
       books_changed = books.sort(function (a, b) {
         return b.sold - a.sold;
       });
-      console.log("222fsdf");
       break;
-    case "3":
+    case "New Arrivals":
       books_changed = books.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
       break;
-    case "4":
+    case "Price: low to high":
       books_changed = books.sort(function (a, b) {
         return a.price - b.price;
       });
       break;
-    case "5":
+    case "Price: high to low":
       books_changed = books.sort(function (a, b) {
         return b.price - a.price;
       });
@@ -122,14 +125,13 @@ const Browse = () => {
           onChange={(e) => setValue(e.target.value)}
         >
           <option selected disabled hidden>
-            {" "}
             Sort by:
           </option>
-          <option value="1">Relavent</option>
-          <option value="2">Best Selling</option>
-          <option value="3">New Arrivals</option>
-          <option value="4">Price: low to high</option>
-          <option value="5">Price: high to low</option>
+          <option value="Relavent">Relavent</option>
+          <option value="Best Selling">Best Selling</option>
+          <option value="New Arrivals">New Arrivals</option>
+          <option value="Price: low to high">Price: low to high</option>
+          <option value="Price: high to low">Price: high to low</option>
         </select>
 
         <hr className="pt-2" />

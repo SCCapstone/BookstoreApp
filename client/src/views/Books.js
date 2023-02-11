@@ -7,7 +7,7 @@ const books = [
       "SJ A genius book about an incredible mind, yadda yadda blah blah blah lots of gushing and awing because I like books.",
     link: "/Walter Issacson/Steve Jobs",
     stars: 3,
-    price: 11.99,
+    price: 12.5,
     qty: "40+",
     genre: "",
     sold: "6",
