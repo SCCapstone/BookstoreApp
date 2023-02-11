@@ -45,7 +45,10 @@ const sort = (books, value) => {
             <img src={book.image} alt="" className="row-span-2" />
             <div class=" ">{book.name}</div>
             <div class="felx items-end">by: {book.author}</div>
-            <div> {book.price} {book.link} </div>
+            <div>
+              {" "}
+              {book.price} {book.link}{" "}
+            </div>
           </a>
         </div>
       ))}
@@ -60,6 +63,8 @@ const Browse = () => {
     setValue(event.target.value);
     console.log(value);
   };
+
+
 
   return (
     <section className="">
@@ -92,24 +97,21 @@ const Browse = () => {
             placeholder="Search Books"
           />
         </p>
+      </div>
 
-        <div className="border rounded">
-          <FormControl fullWidth className="bg-white w-[1100px]">
-            <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Sort by:"
-              onChange={(e) => setValue(e.target.value)}
-            >
-              <MenuItem value="1">Relevant</MenuItem>
-              <MenuItem value="2">Best Selling</MenuItem>
-              <MenuItem value="3">New Arrivals</MenuItem>
-              <MenuItem value="4">Price: low to high</MenuItem>
-              <MenuItem value="5">Price: high to low</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
+      <div>
+        <select
+          className="rounded border bg-white xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid max-w-[1158px] mb-3"
+          onChange={(e) => setValue(e.target.value)}
+        >
+          <option selected disabled hidden> Sort by:</option>
+          <option value="1">Relavent</option>
+          <option value="2">Best Selling</option>
+          <option value="3">New Arrivals</option>
+          <option value="4">Price: low to high</option>
+          <option value="5">Price: high to low</option>
+        </select>
+
         <hr className="pt-2" />
         <div>{sort(books, value)}</div>
       </div>

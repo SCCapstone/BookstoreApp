@@ -30,18 +30,6 @@ const NavBar = ({ user }) => {
             <button class="flex items-center" onClick={loginOrLogout}>
               <span className="text-white text-xl">
                 {user && user.length !== 0 ? "Logout" : "Login"}
-
-
-
-
-
-
-
-
-
-
-
-
               </span>
             </button>
           </div>
