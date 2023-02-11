@@ -24,7 +24,11 @@ const ContactUs = () => {
           })
         },
         (error) => {
-          console.log(error.text);
+          swal.fire({
+            icon: 'error',
+            title: 'Try Again Later',
+            text: error.text,
+          })
         }
       );
   };
