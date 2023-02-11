@@ -8,46 +8,53 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+const decimalNumber = (price) => {
+  price = price.toString();
+  price = price.slice(price.indexOf(".") + 1, price.length);
+  return Number(price);
+};
 
-const decimalNumber = (value) => {
-  value = value.toString();
-  value = value.slice((value.indexOf("."))+1, value.length);
-  return Number(value);  
-}
+const wholeNumber = (price) => {
+  price = price.toString();
+  price = price.slice(0, price.indexOf("."));
+  return Number(price);
+};
 
-const wholeNumber = value => {
-  value = value.toString();
-  value = value.slice(0, (value.indexOf(".")));
-  return Number(value);  
-}
+const sort = (books, selection) => {
+  console.log(selection);
 
-const sort = (books, value) => {
-  console.log(value);
-  
   var books_changed = [];
-  if (value == 1) {
-    books_changed = books;
-    console.log(value);
-  } else if (value == 2) {
-    books_changed = books.sort(function (a, b) {
-      return b.sold - a.sold;
-    });
-  } else if (value == 3) {
-    books_changed = books.sort(function (a, b) {
-      return new Date(b.date) - new Date(a.date);
-    });
-  } else if (value == 4) {
-    books_changed = books.sort(function (a, b) {
-      return a.price - b.price;
-    });
-  } else if (value == 5) {
-    books_changed = books.sort(function (a, b) {
-      return b.price - a.price;
-    });
-  } else {
-    books_changed = [];
-  }
 
+  switch (selection) {
+    default:
+      books_changed = books;
+      console.log(selection);
+      break;
+    case 1:
+      books_changed = books;
+      console.log(selection);
+      break;
+    case 2:
+      books_changed = books.sort(function (a, b) {
+        return b.sold - a.sold;
+      });
+      break;
+    case 3:
+      books_changed = books.sort(function (a, b) {
+        return new Date(b.date) - new Date(a.date);
+      });
+      break;
+    case 4:
+      books_changed = books.sort(function (a, b) {
+        return a.price - b.price;
+      });
+      break;
+    case 5:
+      books_changed = books.sort(function (a, b) {
+        return b.price - a.price;
+      });
+      break;
+  }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1200px]">
@@ -60,8 +67,10 @@ const sort = (books, value) => {
             <img src={book.image} alt="" className="row-span-2" />
             <div class="text-lg">{book.name}</div>
             <div class="felx items-end">by: {book.author}</div>
-            <div class="text-lg">${wholeNumber(book.price)}.<span className="text-sm">{decimalNumber(book.price)}</span></div>
-              
+            <div class="text-lg">
+              ${wholeNumber(book.price)}.
+              <span className="text-sm">{decimalNumber(book.price)}</span>
+            </div>
           </a>
         </div>
       ))}
@@ -74,10 +83,7 @@ const Browse = () => {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    console.log(value);
   };
-
-
 
   return (
     <section className="">
@@ -117,7 +123,10 @@ const Browse = () => {
           className="rounded border bg-white xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid max-w-[1158px] mb-3"
           onChange={(e) => setValue(e.target.value)}
         >
-          <option selected disabled hidden> Sort by:</option>
+          <option selected disabled hidden>
+            {" "}
+            Sort by:
+          </option>
           <option value="1">Relavent</option>
           <option value="2">Best Selling</option>
           <option value="3">New Arrivals</option>
