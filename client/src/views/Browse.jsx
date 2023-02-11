@@ -21,38 +21,36 @@ const wholeNumber = (price) => {
 };
 
 const sort = (books, selection) => {
-  console.log(selection);
 
   var books_changed = [];
 
   switch (selection) {
-    default:
+    case "1":
       books_changed = books;
-      console.log(selection);
       break;
-    case 1:
-      books_changed = books;
-      console.log(selection);
-      break;
-    case 2:
+    case "2":
       books_changed = books.sort(function (a, b) {
         return b.sold - a.sold;
       });
+      console.log("222fsdf");
       break;
-    case 3:
+    case "3":
       books_changed = books.sort(function (a, b) {
         return new Date(b.date) - new Date(a.date);
       });
       break;
-    case 4:
+    case "4":
       books_changed = books.sort(function (a, b) {
         return a.price - b.price;
       });
       break;
-    case 5:
+    case "5":
       books_changed = books.sort(function (a, b) {
         return b.price - a.price;
       });
+      break;
+    default:
+      books_changed = books;
       break;
   }
 
