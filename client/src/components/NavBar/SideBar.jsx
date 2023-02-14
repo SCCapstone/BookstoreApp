@@ -1,27 +1,16 @@
-import { React, useRef, useState } from "react";
+import { React, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import { admin_menu_options, unvalidated_menu_options } from "./SideBarOptions";
 
-
-
-
 const SideBar = ({ user }) => {
-
   let menu_options = unvalidated_menu_options;
 
   const [open, setOpen] = useState(true);
 
   if (user && user.length !== 0) {
     menu_options = admin_menu_options;
-  } 
-
-  // useRef(() => {
-  //   if (user && user.length !== 0) {
-  //     menu_options = admin_menu_options;
-  //     console.log("login");
-  //   } 
-  // }, []);
+  }
 
   return (
     <aside className="w-64 " aria-label="Sidebar">

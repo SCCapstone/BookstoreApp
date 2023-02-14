@@ -8,11 +8,9 @@ const ProfileIconDropdown = () => {
     <div>
       <button
         class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white"
-        onClick={() => {setState(!state); console.log("tss");}}
+        onClick={() => setState(!state)}
       >
-        <FaUser
-          className="w-8 h-8 mr-2 rounded-full"
-        />
+        <FaUser className="w-8 h-8 mr-2 rounded-full" />
         <svg
           class="w-4 h-4 mx-1.5"
           aria-hidden="true"
@@ -29,7 +27,9 @@ const ProfileIconDropdown = () => {
       </button>
       <div
         id="dropdownAvatarName"
-        class={`z-10 ${state && 'hidden'} bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+        class={` ${
+          state && "hidden"
+        } bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
       >
         <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
           <div class="font-medium ">Pro User</div>
