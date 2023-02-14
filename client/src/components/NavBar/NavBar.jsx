@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ProfileIconDropdown from "../ProfileIconDropdown";
 
-const NavBar = ({ user  }) => {
+const NavBar = ({ user }) => {
   const navigate = useNavigate();
 
   var loginOrLogout = () => {
@@ -24,10 +25,13 @@ const NavBar = ({ user  }) => {
               </span>
             </a>
           </span>
-          <div class="flex md:order-2">
+          <div class="flex md:order-2 columns-2 gap-4">
             <button class="flex items-center" onClick={loginOrLogout}>
-              <span className="text-white text-xl">{ (user && user.length !== 0) ? "Logout" : "Login" }</span>
+              <span className="text-white text-xl">
+                {user && user.length !== 0 ? "Logout" : "Login"}
+              </span>
             </button>
+            <div className="pt-1"> {ProfileIconDropdown()}</div>
           </div>
         </div>
       </nav>
