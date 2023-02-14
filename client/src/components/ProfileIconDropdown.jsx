@@ -28,8 +28,8 @@ const ProfileIconDropdown = () => {
       <div
         id="dropdownAvatarName"
         class={` ${
-          state && "translate-y-full"
-        }  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+          state && "hidden"
+        }  bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
       >
         <div class="px-4 py-3 text-sm text-gray-900 dark:text-black">
           <div class="font-medium ">Pro User</div>
