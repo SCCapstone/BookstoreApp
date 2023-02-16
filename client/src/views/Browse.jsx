@@ -123,7 +123,7 @@ const Browse = () => {
           <option selected disabled hidden>
             Sort by:
           </option>
-          <option value="Relavent">Relavent</option>
+          <option value="Relevant">Relevant</option>
           <option value="Best Selling">Best Selling</option>
           <option value="New Arrivals">New Arrivals</option>
           <option value="Price: low to high">Price: low to high</option>
