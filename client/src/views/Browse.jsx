@@ -58,7 +58,7 @@ const sort = (books, selection) => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1200px]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1150px]">
       {books_changed.map((book) => (
         <div
           key={book}
@@ -84,7 +84,7 @@ const Browse = () => {
   const [value, setValue] = useState("1");
 
   return (
-    <section className="">
+    <section className="sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1150px] xl:max-w-[1200px] max-w-[200px]">
       <div class="py-4">
         <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
           Browse
