@@ -32,8 +32,8 @@ const ProfileIconDropdown = () => {
         }  bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
       >
         <div class="px-4 py-3 text-sm text-gray-900 dark:text-black">
-          <div class="font-medium ">Pro User</div>
-          <div class="truncate">name@flowbite.com</div>
+          <div class="font-medium ">Rahul Bulusu</div>
+          <div class="truncate">rahul.bulusu@rb.com</div>
         </div>
         <ul
           class="py-2 text-sm text-gray-700 dark:text-gray-200"
