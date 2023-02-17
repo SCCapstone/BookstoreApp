@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Calendar from 'react-calendar';
 
-const EventInfo = ({ event }) => {
+const EventInfo = ({ event, deleteEvent }) => {
     return (
         <div>
             <h3>
@@ -10,6 +10,9 @@ const EventInfo = ({ event }) => {
             <p>
                 {event.start} - {event.end}
             </p>
+            <button className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center" onClick = {() => deleteEvent(event)}>
+                Delete Event
+            </button>
         </div>
     );
 };
@@ -30,6 +33,11 @@ const EmployeeHomepage = () => {
         };
         setEvents([...events, newEvent]);
     };
+
+    const handleEventDelete = (eventToDelete) => {
+        setEvents(events.filter(event => event !== eventToDelete));
+    }
+
     return (
 
     <div className="max-w-screen-md mx-auto p-4 text-center"> 
@@ -55,12 +63,29 @@ const EmployeeHomepage = () => {
                 tileContent={({date,view}) => {
                     const event = events.find(event => new Date(event.start).toDateString() === date.toDateString());
                     if (event) {
+                        const isSelected = selectedEvent && selectedEvent.start === event.start;
                         return (
                             <div
-                                onMouseOver={() => setSelctedEvent(event)}
-                                onMouseOut={()=> setSelctedEvent(null)}
+                                onClick={() => {
+                                    if (isSelected) {
+                                        setSelctedEvent(null);
+                                    } else {
+                                        setSelctedEvent(event)
+                                    }
+                                }}
+                                // onMouseOver={() => setSelctedEvent(event)}
+                                // onMouseOut={()=> setSelctedEvent(null)}
                             >
-                                Important Date
+                                <h3>
+                                    {event.title}
+                                </h3>
+                                {/* <p>
+                                    {event.start} - {event.end}
+                                </p> */}
+                                {/* <button>
+                                    Delete Event
+                                </button> */}
+                                {/* Important Date */}
                             </div>
                         );
                     } 
@@ -70,7 +95,7 @@ const EmployeeHomepage = () => {
                 }}
             />
             {selectedEvent && (
-                <EventInfo event={selectedEvent} />
+                <EventInfo event={selectedEvent} deleteEvent = {handleEventDelete}/>
             )}
             {/* <ul className="list-disc pl-4 hover">
                 {events.map((event, index) => (
