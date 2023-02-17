@@ -21,15 +21,18 @@ export default class ValidatedUsers extends React.Component {
   }
 
   async deleteUser(user) {
-    const currentUser = this.props.currentuser;
-    if (!currentUser || !currentUser.isAdmin) {
+    const currentUser = this.props.currentUser;
+    if (!currentUser || !currentUser.isadmin) {
       return
     }
     const id = user._id;
     const url = "/api/users/" + id;
-    await axios.delete(url).then(() => {
+    try {
+      await axios.delete(url);
       window.location.reload();
-    }).catch((error) => console.log("Error: ", error));
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   }
 
   // functionality for ensuring unauthenticated users cannot view
