@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Calendar from 'react-calendar';
+import axios from "axios";
+import { useNavigate } from "react-router-dom"
 
 const EventInfo = ({ event, deleteEvent }) => {
     return (
@@ -10,7 +12,8 @@ const EventInfo = ({ event, deleteEvent }) => {
             <p>
                 {event.start} - {event.end}
             </p>
-            <button className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center" onClick = {() => deleteEvent(event)}>
+            <button className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center" 
+                onClick = {() => deleteEvent(event)}>
                 Delete Event
             </button>
         </div>
@@ -34,9 +37,44 @@ const EmployeeHomepage = () => {
         setEvents([...events, newEvent]);
     };
 
+    // const handleEventSubmit = async (event) => {
+    //     event.preventDefault();
+    //     const newEvent = {
+    //       title: event.target.eventTitle.value,
+    //       start: event.target.eventStart.value,
+    //       end: event.target.eventEnd.value,
+    //     };
+    //     try {
+    //       // Send the new event to the server
+    //       const response = await axios.post("/api/events", newEvent);
+    //       // Add the new event to the events array
+    //       setEvents([...events, response.data]);
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   };
+
     const handleEventDelete = (eventToDelete) => {
         setEvents(events.filter(event => event !== eventToDelete));
-    }
+        if (selectedEvent && selectedEvent === eventToDelete) {
+            setSelctedEvent(null);
+        }
+    };
+
+    // const handleEventDelete = async (eventToDelete) => {
+    //     try {
+    //     // Send a DELETE request to the server to delete the event
+    //     await axios.delete(`/api/events/${eventToDelete.id}`);
+    //     // Remove the event from the events array
+    //     setEvents(events.filter((event) => event.id !== eventToDelete.id));
+    //     // Clear the selected event if it's the one being deleted
+    //     if (selectedEvent && selectedEvent.id === eventToDelete.id) {
+    //         setSelctedEvent(null);
+    //     }
+    //     } catch (error) {
+    //     console.error(error);
+    //     }
+    // };
 
     return (
 
