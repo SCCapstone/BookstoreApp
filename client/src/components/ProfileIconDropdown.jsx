@@ -41,7 +41,7 @@ const ProfileIconDropdown = () => {
         >
           <li>
             <a
-              href="#"
+              href="/"
               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               Dashboard
@@ -49,7 +49,7 @@ const ProfileIconDropdown = () => {
           </li>
           <li>
             <a
-              href="#"
+              href="/my_account"
               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               Settings
@@ -57,7 +57,7 @@ const ProfileIconDropdown = () => {
           </li>
           <li>
             <a
-              href="#"
+              href="/browse"
               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               Earnings
@@ -66,7 +66,7 @@ const ProfileIconDropdown = () => {
         </ul>
         <div class="py-2">
           <a
-            href="#"
+            href="/login"
             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
           >
             Sign out
