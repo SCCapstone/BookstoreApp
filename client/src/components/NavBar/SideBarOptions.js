@@ -1,6 +1,7 @@
 const admin_menu_options = [
   { name: "Home", link: "/" },
   { name: "Browse", link: "/browse" },
+  { name: "Forums", link: "/forums" },
   { name: "Validated Users", link: "/users" },
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
