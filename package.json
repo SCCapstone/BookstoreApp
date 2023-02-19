@@ -24,9 +24,13 @@
   "dependencies": {
     "@emailjs/browser": "^3.9.1",
     "concurrently": "^4.1.2",
+    "local-storage": "^2.0.0",
     "nodemon": "^2.0.20",
     "react-icons": "^4.6.0",
     "react-native-svg": "^13.6.0",
+    "react-redux": "^8.0.5",
+    "react-use-cart": "^1.13.0",
+    "redux": "^4.2.1",
     "tailwind-scrollbar": "^2.1.0"
   },
   "homepage": "https://github.com/SCCapstone/BufferOverload#readme",

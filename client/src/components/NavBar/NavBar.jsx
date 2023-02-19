@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { IoMdCart } from "react-icons/io";
 
 const NavBar = ({ user }) => {
   const navigate = useNavigate();
@@ -13,8 +14,6 @@ const NavBar = ({ user }) => {
     }
   };
 
-
-
   return (
     <div>
       <nav class="bg-persian_plum px-4 sm:px-6 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b-4 border-gray-200 dark:border-gray-600">
@@ -27,6 +26,17 @@ const NavBar = ({ user }) => {
             </a>
           </span>
           <div class="flex md:order-2">
+          <IoMdCart
+              onClick={() => navigate("/cart")}
+              className="icon"
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "20px",
+              }}
+              size="40px"
+              color="white"
+            ></IoMdCart>
             <button class="flex items-center" onClick={loginOrLogout}>
               <span className="text-white text-xl">
                 {user && user.length !== 0 ? "Logout" : "Login"}

@@ -82,6 +82,13 @@ const sort = (books, selection) => {
 
 const Browse = () => {
   const [value, setValue] = useState("1");
+  const book_instance = localStorage.getItem("Book");
+  console.log("book_instance" + book_instance);
+
+
+
+  console.log()
+
 
   return (
     <section className="sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1150px] xl:max-w-[1200px] max-w-[200px]">
