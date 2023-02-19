@@ -1,6 +1,16 @@
 import { React } from "react";
-import { styles } from "../styles";
 import forums from "./ForumsExample"
+
+function getUsername(userID) {
+    // from the UUID of the user, get their name
+    // if they can't find the user, like reddit, just say [deleted]
+    // going to have to talk to the backend and connect this to Mongo
+    if (false) {
+        // this is where the mongo talk is going to happen
+        // then, find firstName + Lastname and return it as String
+    }
+    return "[deleted]";
+};
 
 const Forums = () => {
     return(
@@ -18,9 +28,9 @@ const Forums = () => {
         <div className="grid grid-rows-4 grid-flow-col gap-2">
           {forums.map((forums) => (
             <div key={forums} className="border-2 border-gainsboro hover:border-black bg-camel">
-              <a href={`${forums.uuid}`}>
+              <a href={`${forums.link}`}>
                 <div class=" ">{forums.post}</div>
-                <div class="felx items-end">by: {forums.post}</div>
+                <div class="felx items-end">by: {getUsername(forums.uuid)}</div>
               </a>
             </div>
           ))}

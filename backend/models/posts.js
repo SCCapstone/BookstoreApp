@@ -2,14 +2,16 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const reply = {
-    uuid: String,
+    replyingUserID: String,
     post: String,
+    date: Date,
 }
 
 const postSchema = new mongoose.Schema({
-    uuid: { type: String, required: true },
+    postingUserID: { type: String, required: true },
     post: { type: String, required: true },
     date: { type: Date, required: true },
+    uuid: { type: String, required: true },
     replies: { type: [reply], required: false },
 });
 
