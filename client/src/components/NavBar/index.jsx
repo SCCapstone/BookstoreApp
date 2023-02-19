@@ -7,6 +7,7 @@ import Login from "../../views/Login";
 import Aboutus from "../../views/Aboutus";
 import TOS from "../../views/TOS";
 import ContactUs from "../../views/ContactUs";
+import Forums from "../../views/Forums";
 import Browse from "../../views/Browse";
 import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
@@ -35,6 +36,9 @@ const CompleteNavbar = () => {
 
             {/* Admin */}
             <Route path="/users" element={<ValidatedUsers currentUser={user} />} />
+
+            {/* Admin, Employee, and Customer */}
+            <Route path="/forums" element={<Forums currentUser={user} />} />
 
             {books.map((book) => (
               <Route
