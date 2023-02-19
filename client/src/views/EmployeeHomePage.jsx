@@ -90,16 +90,65 @@ const EmployeeHomepage = () => {
                 className="border border-gray rounded-lg shadow-lg text-center hover"
                 value={date}
                 onChange={setDate}
+                tileDisabled = {() => false}
                 tileClassName={({date, view}) => {
-                    const eventDates = events.map(event => new Date(event.start));
-                    if (eventDates.some(eventDate => eventDate.toDateString() == date.toDateString())) {
-                        return "bg-blue-500 text-white bordder border-gray"
+                    const eventDatesStart = events.map(event => new Date(event.start));
+                    const eventDatesEnd = events.map(event => new Date(event.end));
+                    const withinStartEnd = eventDatesStart.some((eventDatesStart, index) => {
+                        const eventDatesE = eventDatesEnd[index];
+                        return date >= eventDatesStart && date <= eventDatesE;
+                    });
+                    // if (eventDatesStart.some(eventDate => eventDate.toDateString() == date.toDateString())) {
+                    //     return "bg-blue-500 text-white border border-gray"
+                    // } if (eventDatesEnd.some(eventDate => eventDate.toDateString() == date.toDateString())) {
+                    //     return "bg-blue-500 text-white border border-gray"
+                    // } else {
+                    //     return "border boder-gray"
+                    // }
+                    const firstDay = eventDatesStart.some(eventDate => eventDate.toDateString() == date.toDateString());
+
+                    if (withinStartEnd || firstDay) {
+                        return "bg-blue-500 text-white border border-gray"
                     } else {
                         return "border boder-gray"
                     }
-                } }
+                }}
                 tileContent={({date,view}) => {
                     const event = events.find(event => new Date(event.start).toDateString() === date.toDateString());
+
+                    // const eventsThatStartOnDate = events.filter(
+                    //     event => new Date(event.start).toDateString() === date.toDateString()
+                    // );
+
+                    // const eventsThatSpanAcrossDate = events.filter(
+                    //     event => {
+                    //       const start = new Date(event.start);
+                    //       const end = new Date(event.end);
+                    //       return (
+                    //         start <= date &&
+                    //         end >= date &&
+                    //         start.toDateString() !== end.toDateString()
+                    //       );
+                    //     }
+                    // );
+
+                    // return (
+                    //     <div>
+                    //       {eventsThatStartOnDate.map(event => (
+                    //         <div key={event.id}>
+                    //           <span>{event.title}</span>
+                    //           <button onClick={() => handleEventDelete(event)}>Delete</button>
+                    //         </div>
+                    //       ))}
+                    //       {eventsThatSpanAcrossDate.map(event => (
+                    //         <div key={event.id}>
+                    //           <span>{event.title}</span>
+                    //           <button onClick={() => handleEventDelete(event)}>Delete</button>
+                    //         </div>
+                    //       ))}
+                    //     </div>
+                    //   );
+
                     if (event) {
                         const isSelected = selectedEvent && selectedEvent.start === event.start;
                         return (
@@ -117,31 +166,52 @@ const EmployeeHomepage = () => {
                                 <h3>
                                     {event.title}
                                 </h3>
-                                {/* <p>
-                                    {event.start} - {event.end}
-                                </p> */}
-                                {/* <button>
-                                    Delete Event
-                                </button> */}
-                                {/* Important Date */}
                             </div>
                         );
                     } 
                     else {
                         return;
                     }
+
+                    // if (eventsThatStartOnDate.length > 0 || eventsThatSpanAcrossDate.length > 0) {
+                    //     const isSelected =
+                    //       selectedEvent &&
+                    //       selectedEvent.start === eventsThatStartOnDate[0]?.start &&
+                    //       selectedEvent.end === eventsThatStartOnDate[0]?.end;
+                    
+                    //     return (
+                    //       <div
+                    //         onClick={() => {
+                    //           if (isSelected) {
+                    //             setSelctedEvent(null);
+                    //           } else {
+                    //             setSelctedEvent(eventsThatStartOnDate[0]);
+                    //           }
+                    //         }}
+                    //         className={`${
+                    //           isSelected ? 'bg-blue-500 text-white' : ''
+                    //         } border border-gray p-1 rounded`}
+                    //       >
+                    //         {eventsThatStartOnDate.length > 0 && (
+                    //         <p className="mb-1">
+                    //             {eventsThatStartOnDate[0].title}
+                    //         </p>
+                    //         )}
+                    //         {eventsThatSpanAcrossDate.length > 0 && (
+                    //         <p className="text-sm italic">
+                    //             {eventsThatSpanAcrossDate.map(event => event.title).join(', ')}
+                    //         </p>
+                    //         )}
+                    //       </div>
+                    //     );
+                    //   }
+                    // return null;
                 }}
             />
             {selectedEvent && (
                 <EventInfo event={selectedEvent} deleteEvent = {handleEventDelete}/>
             )}
-            {/* <ul className="list-disc pl-4 hover">
-                {events.map((event, index) => (
-                    <li key={index} className="mb-2">
-                        {event.title} on {event.start}
-                    </li>
-                ))}
-            </ul> */}
+           
         </div>
             <form onSubmit={handleEventSubmit} className="mt-4">
                 <label className="block font-medium mb-2">
