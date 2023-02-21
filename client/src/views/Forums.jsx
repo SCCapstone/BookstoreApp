@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { styles } from "../styles";
 import axios from "axios";
-import forums from "./ForumsExample";
 
 function getUsername(userID) {
     // from the UUID of the user, get their name
@@ -15,29 +14,25 @@ function getUsername(userID) {
 };
 
 export default class Forums extends React.Component {
-  const [data, setData] = useState({
-    message: "";
-  })
-
   state = {
     currentUser: "",
-    // some kind of "current forum" state
     currentForum: "",
-    forums: forums,
+    forums: [],
   };
 
   // this may be supposed to be async
   async getForumPosts() {
-    const url = "localhost:3001/api/forumsdata";
+    const url = "/api/forumsdata";
     axios.get(url).then((res) => {
       console.log("The data:", res.data);
       // const forums = res.data;
-      this.setState({ currentUser: this.props.currentUser });
+      this.setState({ currentUser: this.props.currentUser, forums: res.data });
     });
   };
 
+  // Form Change Method
   async postForumPost() {
-    const url = "localhost:3001/api/forumsdata";
+    const url = "/api/forumsdata";
     const text = this.state.currentForum;
     const uuid = "1234567890";
     const posterUUID = this.props.currentUser.firstName;
@@ -53,23 +48,27 @@ export default class Forums extends React.Component {
     }).catch((error) => console.log("Error with posting: ", error));
   }
 
+  // Form Change Method
   handleChange = (e) => {
     // console.log(e.target.value);
-    this.setState({currentForum: e.target.value}, this.handleSubmit);
-    // console.log(this.state);
+    this.setState({currentForum: e.target.value});
+    console.log(this.state);
     // BUG: This is only called when the state is changed,
     // so it's always one character behind whatever the user is posting.
   }
 
   componentDidMount = () => {
-    // this.getForumPosts();
+    this.getForumPosts();
   }
 
+  // Form Change Method
   isLoggedIn = () => {
     const currentUser = this.props.currentUser;
     return currentUser && currentUser.length !== 0;
   }
 
+
+  // Update this to vary based on user log in
   render() { return(
     <section className="">
       <div className="py-4">
@@ -77,12 +76,12 @@ export default class Forums extends React.Component {
           Forums
         </div>
       </div>
-      <form onSubmit={this.postForumPost}>
+      <form onSubmit={}>
             <div>
               <label>What book are you reading, and what would you like to share about it? </label>
               <textarea
                 name="message"
-                onChange={this.handleChange}
+                value={}
                 className="form-control placeholder-black block w-full px-4 py-6 text-xl font-normal text-black bg-camel focus:bg-white border border-solid border-black rounded"
               />
             </div>
