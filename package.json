@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "cd client && npm run cypress:test && cd backend && npm run test",
     "start": "node backend/server.js",
     "dev": "concurrently \"cd backend && node server.js\" \"cd client && npm start\"",
     "build": "cd client && npm run build",
@@ -22,11 +23,8 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.9.1",
-    "calendar": "^0.1.1",
     "concurrently": "^4.1.2",
     "nodemon": "^2.0.20",
-    "react": "^18.2.0",
-    "react-big-calendar": "^1.5.2",
     "react-icons": "^4.6.0",
     "react-native-svg": "^13.6.0",
     "tailwind-scrollbar": "^2.1.0"
@@ -34,6 +32,7 @@
   "homepage": "https://github.com/SCCapstone/BufferOverload#readme",
   "description": "",
   "devDependencies": {
+    "jest": "^29.4.1",
     "tailwindcss": "^3.2.4"
   }
 }
