@@ -6,10 +6,8 @@ const MyAccount = () => {
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
-        username: "",
         email: "",
         password: "",
-        phone: "",
       });
       const [error, setError] = useState("");
       const navigate = useNavigate();
@@ -79,21 +77,6 @@ const MyAccount = () => {
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                            Username
-                        </label>
-                        <input 
-                            type="text" 
-                            name="grid-username" 
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                            value={data.username}
-                            placeholder=" "
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                             Email
                         </label>
                         <input 
@@ -119,21 +102,6 @@ const MyAccount = () => {
                             placeholder="Change Your Password..."
                             onChange={handleChange}
                         />
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                            Phone Number
-                        </label>
-                        <input 
-                            type="phoneNumber" 
-                            name="grid-phoneNumber" 
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                            value={data.phone}
-                            placeholder="(803) 123-4567">
-                            onChange={handleChange}
-                        </input>
                     </div>
                 </div>
 

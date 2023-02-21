@@ -1,3 +1,4 @@
+/*
 import { React, useState } from "react";
 import { FaUser } from "react-icons/fa";
 
@@ -78,3 +79,4 @@ const ProfileIconDropdown = () => {
 };
 
 export default ProfileIconDropdown;
+*/

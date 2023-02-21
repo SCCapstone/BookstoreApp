@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ProfileIconDropdown from "../ProfileIconDropdown";
+//import ProfileIconDropdown from "../ProfileIconDropdown";
 
 const NavBar = ({ user }) => {
   const navigate = useNavigate();
@@ -31,7 +31,6 @@ const NavBar = ({ user }) => {
                 {user && user.length !== 0 ? "Logout" : "Login"}
               </span>
             </button>
-            <div> {ProfileIconDropdown()}</div>
           </div>
         </div>
       </nav>
