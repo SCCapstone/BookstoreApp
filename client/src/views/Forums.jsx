@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { styles } from "../styles";
 import axios from "axios";
+import forums from "./ForumsExample";
 
 function getUsername(userID) {
     // from the UUID of the user, get their name
@@ -13,16 +14,16 @@ function getUsername(userID) {
     return "[deleted]";
 };
 
-export default class Forums extends React.Component {
-  state = {
+const Forums = () => {
+  const [data, setData] =  useState({
     currentUser: "",
     currentForum: "",
-    forums: [],
-  };
+    forums: forums,
+  });
 
   // this may be supposed to be async
-  async getForumPosts() {
-    const url = "/api/forumsdata";
+  const getForumPosts = async() => {
+    const url = "localhost:3001/api/forumsdata";
     axios.get(url).then((res) => {
       console.log("The data:", res.data);
       // const forums = res.data;
@@ -31,8 +32,8 @@ export default class Forums extends React.Component {
   };
 
   // Form Change Method
-  async postForumPost() {
-    const url = "/api/forumsdata";
+  const postForumPost = async() => {
+    const url = "localhost:3001/api/forumsdata";
     const text = this.state.currentForum;
     const uuid = "1234567890";
     const posterUUID = this.props.currentUser.firstName;
@@ -49,7 +50,7 @@ export default class Forums extends React.Component {
   }
 
   // Form Change Method
-  handleChange = (e) => {
+  const handleChange = (e) => {
     // console.log(e.target.value);
     this.setState({currentForum: e.target.value});
     console.log(this.state);
@@ -57,31 +58,31 @@ export default class Forums extends React.Component {
     // so it's always one character behind whatever the user is posting.
   }
 
-  componentDidMount = () => {
+  const componentDidMount = () => {
     this.getForumPosts();
   }
 
   // Form Change Method
-  isLoggedIn = () => {
+  const isLoggedIn = () => {
     const currentUser = this.props.currentUser;
     return currentUser && currentUser.length !== 0;
   }
 
 
   // Update this to vary based on user log in
-  render() { return(
+  return(
     <section className="">
       <div className="py-4">
         <div className="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
           Forums
         </div>
       </div>
-      <form onSubmit={}>
+      <form>
             <div>
               <label>What book are you reading, and what would you like to share about it? </label>
               <textarea
                 name="message"
-                value={}
+                onChange={handleChange}
                 className="form-control placeholder-black block w-full px-4 py-6 text-xl font-normal text-black bg-camel focus:bg-white border border-solid border-black rounded"
               />
             </div>
@@ -96,7 +97,7 @@ export default class Forums extends React.Component {
       <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-1 h-full g-6">
         <div class="w-full gap-2 ">
         <div className="grid grid-rows-4 grid-flow-col gap-2">
-          {this.state.forums.map((forum) => (
+          {forums.map((forum) => (
             <div key={forum} className="border-2 border-gainsboro hover:border-black bg-camel">
               <a href={`${forum.link}`}>
                 <div class=" ">{forum.post}</div>
@@ -110,4 +111,5 @@ export default class Forums extends React.Component {
     </section>
     )
           }
-        }
+
+export default Forums;
