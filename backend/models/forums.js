@@ -7,7 +7,7 @@ const reply = {
     date: Date,
 }
 
-const postSchema = new mongoose.Schema({
+const forumSchema = new mongoose.Schema({
     postingUserID: { type: String, required: true },
     post: { type: String, required: true },
     date: { type: Date, required: true },
@@ -17,7 +17,7 @@ const postSchema = new mongoose.Schema({
 
 // replies will be a json object with name and reply so people can reply
 
-const Post = mongoose.model("post", postSchema);
+const Forum = mongoose.model("forums", forumSchema);
 
 const validate = (data) => {
     const schema = Joi.object({
@@ -28,4 +28,4 @@ const validate = (data) => {
     return schema.validate(data);
 };
 
-module.exports = { Post, validate };
+module.exports = { Forum, validate };
