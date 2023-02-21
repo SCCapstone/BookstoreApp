@@ -117,14 +117,14 @@ const Browse = () => {
             </svg>
           </div>
           <input
-            className="w-[1100px] py-2 pl-10 border rounded"
+            className="rounded border bg-white py-2 grid max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px] pl-10"
             placeholder="Search Books"
           />
         </p>
       </div>
       <div class="flex pb-2">
         <select
-          className="rounded border bg-white py-2 grid max-w-[1158px] px-4 w-5/6"
+          className="rounded border bg-white py-2 grid max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px]"
           onChange={(e) => setValue(e.target.value)}
         >
           <option selected disabled hidden>
@@ -137,11 +137,11 @@ const Browse = () => {
           <option value="Price: high to low">Price: high to low</option>
         </select>
 
-        <select className="w-1/6 ... bg-white border ">
+        {/* <select className="w-1/6 ... bg-white border ">
           <option selected disabled hidden>
             Genre
           </option>
-        </select>
+        </select> */}
       </div>
 
       <div>

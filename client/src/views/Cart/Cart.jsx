@@ -4,13 +4,36 @@ import { Button } from "@mui/material";
 
 function clear_cart(){
   localStorage.setItem("books_cart", JSON.stringify([]));
+  localStorage.setItem("booksCartNames", JSON.stringify({}));
   window.location.reload(false)
+}
+
+function addItem(book) {
+  var books_cart = JSON.parse(localStorage.getItem("books_cart"));
+  if (books_cart == null) {
+    books_cart = [];
+  }
+
+  var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+  if(booksCartNames == null) {
+    booksCartNames = [];
+  }
+  booksCartNames.push(book.name);
+
+  booksCartNames = booksCartNames.reduce(function (prev, cur) {
+    prev[cur] = (prev[cur] || 0) + 1;
+    return prev;
+  }, {});
+
+  books_cart.push(book);
+  localStorage.setItem("books_cart", JSON.stringify(books_cart));
+  localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
+  console.log(booksCartNames);
 }
 
 const Main_Cart = () => {
   var books_cart = JSON.parse(localStorage.getItem("books_cart"));
-  console.log(books_cart);
-  
+
 
   return (
     <div>

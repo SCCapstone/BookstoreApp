@@ -8,7 +8,7 @@ import ls from "local-storage";
 const BooksPageGenerator = ({ book }) => {
   const [quantity, setQuantity] = useState(0);
 
-  function addItem(book) {
+  function addItem(book, quantity = 1) {
     
 
     var books_cart = JSON.parse(localStorage.getItem('books_cart'));
@@ -18,8 +18,26 @@ const BooksPageGenerator = ({ book }) => {
 
     books_cart.push(book);
     localStorage.setItem("books_cart", JSON.stringify(books_cart));
-    console.log(books_cart);
+    // console.log(books_cart);
+
+    var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+    var bookNames = Object.keys(booksCartNames);
+
+    if(bookNames.includes(book.name) == false) {
+    booksCartNames[book.name] = 0;
+    // console.log(Object.keys(booksCartNames));
+    }
+
+
+    booksCartNames[book.name] = booksCartNames[book.name] + quantity;
+    console.log(booksCartNames);
+    localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
+
+
   }
+
+
+
 
   // Increase Quantity
   function add(quantity) {

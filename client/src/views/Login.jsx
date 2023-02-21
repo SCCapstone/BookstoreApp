@@ -45,11 +45,11 @@ const Login = () => {
           </div>
           <form class="justify-center">
             <div class="mb-6">
-              <TextField
+              <input
                 name="email"
                 value={data.email}
-                class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
-                label="Enter Email"
+                class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
+                placeholder="Enter Email Address"
                 onChange={handleChange}
               />
             </div>
@@ -78,7 +78,7 @@ const Login = () => {
 
             <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
               <Button
-                href="/create-account"
+                href="/create_account"
                 class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
                 Register

@@ -36,7 +36,7 @@ const NavBar = ({ user }) => {
               }}
               size="40px"
               color="white"
-            ></IoMdCart>
+            />
             <button class="flex items-center" onClick={loginOrLogout}>
               <span className="text-white text-xl">
                 {user && user.length !== 0 ? "Logout" : "Login"}
