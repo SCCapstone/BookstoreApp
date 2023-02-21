@@ -105,7 +105,7 @@ const MyAccount = () => {
                     </div>
                 </div>
 
-                <div class="text-center lg:text-left grid pb-6">
+                <div href="/updateProfile" class="text-center lg:text-left grid pb-6">
                     <button type="submit" class="inline-block px-10 py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded">
                         Update
                     </button>
