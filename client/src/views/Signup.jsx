@@ -8,6 +8,7 @@ const SignUp = () => {
     lastName: "",
     email: "",
     password: "",
+    role: "customer",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();

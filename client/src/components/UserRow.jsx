@@ -1,9 +1,10 @@
 import React from "react";
 
-const UserRow = ({ contact, handleEditClick, handleDelete, handleUserTypeChange }) => {
-  const handleChange = (event) => {
-    const newUserType = event.target.value;
-    handleUserTypeChange(contact, newUserType);
+const UserRow = ({ contact, handleEditClick, handleDelete }) => {
+
+  const handleChange = (e) => {
+    const newUserType = e.target.value;
+    handleEditClick(contact, newUserType);
   }
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -26,11 +27,11 @@ const UserRow = ({ contact, handleEditClick, handleDelete, handleUserTypeChange 
         </button>
       </td>
       <td>
-        <select onChange={handleChange} class="form-select block w-full">
-          <option>
+        <select value={contact.role} onChange={handleChange} class="form-select block w-full">
+          <option value="customer">
             customer
           </option>
-          <option>
+          <option value="admin">
             admin
           </option>
         </select>

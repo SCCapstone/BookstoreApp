@@ -21,14 +21,19 @@ export default class ValidatedUsers extends React.Component {
   }
 
   async deleteUser(user) {
-    const currentUser = this.props.currentUser;
-    if (!currentUser || !currentUser.isadmin) {
-      return
-    }
+    const id = user._id;
+    const url = "/api/users/" + id;
+    await axios.delete(url).then(() => {
+      window.location.reload();
+    }).catch((error) => console.log("Error: ", error));
+  }
+
+  async editUser(user, newRole) {
+    console.log(user, newRole);
     const id = user._id;
     const url = "/api/users/" + id;
     try {
-      await axios.delete(url);
+      await axios.put(url, { role: newRole });
       window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
@@ -123,7 +128,7 @@ export default class ValidatedUsers extends React.Component {
             </thead>
             <tbody>
               {this.state.users.map((user) => (
-                <UserRow contact={user} handleDelete={this.deleteUser}/>
+                <UserRow contact={user} handleDelete={this.deleteUser} handleEditClick={this.editUser}/>
               ))}
             </tbody>
           </table>
