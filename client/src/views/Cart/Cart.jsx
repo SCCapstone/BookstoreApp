@@ -53,38 +53,63 @@ const Main_Cart = () => {
         <Button onClick={() => clear_cart()}>Clear Cart</Button>
       </div>
       <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
-        {Object.keys(booksCartNames).map((bookName) => (
-          
-          // <div>
-          //   <div class="grid grid-cols-2 gap-2 p-5 bg-black">
-          //       <Grid item xs={4} className={`object-right w-2/4 bg-green`}>
-          //         <div class="min-w-[100px] max-w-[190px]">
-          //           <img
-          //             src={getBook(books, bookName).image}
-          //             alt=""
-          //             className="row-span-2 border-2 justify-right"
-          //           />
-          //         </div>
-          //       </Grid>
-          //     <div class="bg-red text-green-500 text-lg font-bold text-center rounded-lg w-fit mr-12">
-          //       <Grid item xs={12}>
-          //         <span class="text-center text-2xl px-16 ">
-          //           {getBook(books, bookName).name} by{" "}
-          //           {getBook(books, bookName).author}
-          //         </span>
-          //       </Grid>
-          //     </div>
-          //   </div>
+        {/* {Object.keys(booksCartNames).map((bookName) => ( */}
+          {/* <div>
+            <div class="grid grid-cols-2 gap-2 p-5 bg-black">
+                <Grid item xs={4} className={`object-right w-2/4 bg-green`}>
+                  <div class="min-w-[100px] max-w-[190px]">
+                    <img
+                      src={getBook(books, bookName).image}
+                      alt=""
+                      className="row-span-2 border-2 justify-right"
+                    />
+                  </div>
+                </Grid>
+              <div class="bg-red text-green-500 text-lg font-bold text-center rounded-lg w-fit mr-12">
+                <Grid item xs={12}>
+                  <span class="text-center text-2xl px-16 ">
+                    {getBook(books, bookName).name} by{" "}
+                    {getBook(books, bookName).author}
+                  </span>
+                </Grid>
+              </div>
+            </div>
 
-          //   <Grid container spacing={2}>
-          //     <ul className="row-span-6" />
-          //   </Grid>
-          // </div>
-          <div>
-
-
+            <Grid container spacing={2}>
+              <ul className="row-span-6" />
+            </Grid>
+          </div> */}
+          <div
+            className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
+          >
+            {Object.keys(booksCartNames).map((bookName) => (
+              <div
+                className={`flex-1 flex justify-start items-center flex-row m-3`}
+              >
+                <div class="min-w-[80px] max-w-[120px]">
+                  <img
+                    src={getBook(books, bookName).image}
+                    alt=""
+                    className="row-span-2 border-2 justify-right"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-poppins font-bold xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px]  ml-3">
+                    {getBook(books, bookName).name} by{" "}
+                    {getBook(books, bookName).author}
+                  </h3>
+                  <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px]  ml-3">
+                    Price: ${getBook(books, bookName).price}
+                  </h3>
+                  <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px]  ml-3">
+                    Quantity: {booksCartNames[bookName]}
+                  </h3>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+          
+        {/* ))} */}
       </div>
     </div>
   );
