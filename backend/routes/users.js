@@ -41,7 +41,25 @@ router.put("/:id", async (req, res) => {
     if (!user) {
       return res.status(404).send({message: "User not found"});
     }
-    user.role = req.body.role;
+    // any time where the user is different from the req.body, we want the req.body to prevail
+    if (req.body.firstName) {
+      user.firstName = req.body.firstName;
+    }
+    if (req.body.lastName) {
+      user.lastName = req.body.lastName;
+    }
+    if (req.body.email) {
+      user.email = req.body.email;
+    }
+    if (req.body.password) {
+      user.password = hashPassword(req.body.password);
+    }
+    if (req.body.role) {
+      user.role = req.body.role;
+    }
+    if (req.body.balance) {
+      user.balance = req.body.balance;
+    }
     await user.save();
     res.send({message: "User role updated"});
   } catch (error) {
