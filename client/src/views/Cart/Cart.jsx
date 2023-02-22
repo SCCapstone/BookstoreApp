@@ -43,40 +43,48 @@ function getBook(books, bookName) {
 }
 
 function round(value, decimals) {
-  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+  return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
 }
 
 function calculatePrice(books, booksCartNames) {
   let finalPrice = 0;
   var bookNames = Object.keys(booksCartNames);
-  console.log(bookNames.length)
   for (let i = 0; i < bookNames.length; ++i) {
-    finalPrice = finalPrice + booksCartNames[bookNames[i]]*(getBook(books, bookNames[i]).price) ;
-    // console.log(booksCartNames[bookNames[i]]);
+    finalPrice =
+      finalPrice +
+      booksCartNames[bookNames[i]] * getBook(books, bookNames[i]).price;
   }
-  // console.log(finalPrice);
 
-  return round(finalPrice,2);
+  return round(finalPrice, 2);
 }
 
-
-
-
 const Main_Cart = () => {
-  var books_cart = JSON.parse(localStorage.getItem("books_cart"));
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
-  var bookNames = Object.keys(booksCartNames);
-  const bookQuantities = Object.values(booksCartNames)
 
-  const [quantity, setQuantity] = useState(bookQuantities);
-  function add(quantity) {
-    setQuantity(quantity + 1);
+  const [quantity, setQuantity] = useState(booksCartNames);
+  function add(booksCartNames, bookName) {
+    console.log("adding");
+    booksCartNames[bookName] = booksCartNames[bookName] + 1;
+    setQuantity(booksCartNames);
+    localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
+    // window.location.reload();
   }
-  
-  function subtract(quantity) {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
+
+  function subtract(booksCartNames, bookName) {
+    console.log("subing");
+    if (quantity[bookName] > 0) {
+      booksCartNames[bookName] = booksCartNames[bookName] - 1;
+      setQuantity(booksCartNames);
+      localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
+      // window.location.reload();
     }
+  }
+
+  function setZero(booksCartNames, bookName) {
+    booksCartNames[bookName] = 0;
+    setQuantity(booksCartNames);
+    localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
+    window.location.reload();
   }
 
   // console.log(books_cart);
@@ -137,22 +145,29 @@ const Main_Cart = () => {
                 <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
                   Quantity: {booksCartNames[bookName]}
                   <div className="flex pb-2 pt-2">
-          <Chip
-            avatar={
-              <Avatar onClick={() => subtract(quantity)}>
-                <Remove />
-              </Avatar>
-            }
-            label={<p className="px-2 text-lg ">{quantity}</p>}
-            clickable
-            onDelete={() => add(quantity)}
-            deleteIcon={<Add />}
-          />
-          <button className="pl-4" onClick={() => setQuantity(0)}>
-            {" "}
-            Clear{" "}
-          </button>
-        </div>
+                    <Chip
+                      avatar={
+                        <Avatar
+                          onClick={() => subtract(booksCartNames, bookName)}
+                        >
+                          <Remove />
+                        </Avatar>
+                      }
+                      label={
+                        <p className="px-2 text-lg ">{quantity[bookName]}</p>
+                      }
+                      clickable
+                      onDelete={() => add(booksCartNames, bookName)}
+                      deleteIcon={<Add />}
+                    />
+                    <button
+                      className="pl-4"
+                      onClick={() => setZero(booksCartNames, bookName)}
+                    >
+                      {" "}
+                      Clear{" "}
+                    </button>
+                  </div>
                 </h3>
               </div>
             </div>
@@ -165,10 +180,8 @@ const Main_Cart = () => {
           <h4 className="font-poppins font-semibold xs:text-[30.89px] text-[25.89px] xs:leading-[43.16px] leading-[30.16px]">
             Total: ${calculatePrice(books, booksCartNames)}
           </h4>
-          <p className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
-          </p>
+          <p className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3"></p>
         </div>
-
       </div>
     </div>
   );
