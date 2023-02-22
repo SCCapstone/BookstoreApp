@@ -33,7 +33,7 @@ const BooksPageGenerator = ({ book }) => {
     console.log(booksCartNames);
   }
 
-  // Increase Quantity
+
   function add(quantity) {
     setQuantity(quantity + 1);
   }
