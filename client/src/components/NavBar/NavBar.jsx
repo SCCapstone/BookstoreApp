@@ -14,6 +14,8 @@ const NavBar = ({ user }) => {
     }
   };
 
+
+
   return (
     <div>
       <nav class="absolute bg-persian_plum px-4 sm:px-6 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b-4 border-gray-200 dark:border-gray-600">
