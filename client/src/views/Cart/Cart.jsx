@@ -4,6 +4,7 @@ import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 import books from "../Books";
+import { useNavigate } from "react-router-dom";
 
 function clear_cart() {
   localStorage.setItem("books_cart", JSON.stringify([]));
@@ -58,7 +59,20 @@ function calculatePrice(books, booksCartNames) {
   return round(finalPrice, 2);
 }
 
-const Main_Cart = () => {
+const MainCart = ({ currentUser }) => {
+  const navigate = useNavigate();
+
+  var puchaseBooks = (currentUser) => {
+    if (currentUser && currentUser.length !== 0) {
+      // localStorage.removeItem("token");
+      localStorage.setItem("books_cart", JSON.stringify([]));
+      localStorage.setItem("booksCartNames", JSON.stringify({}));
+      window.location.reload();
+    } else {
+      navigate("/login");
+    }
+  };
+
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
 
   const [quantity, setQuantity] = useState(booksCartNames);
@@ -175,16 +189,20 @@ const Main_Cart = () => {
         </div>
 
         <div
-          className={`flex-1 flex justify-start items-center flex-row m-3 bg-camel py-4 px-4 rounded`}
+          className={`flex-1 flex justify-start items-center flex-row m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
         >
           <h4 className="font-poppins font-semibold xs:text-[30.89px] text-[25.89px] xs:leading-[43.16px] leading-[30.16px]">
             Total: ${calculatePrice(books, booksCartNames)}
           </h4>
           <p className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3"></p>
+          <button class="bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-16"
+          onClick={()=>{puchaseBooks(currentUser)}}>
+            Check out
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Main_Cart;
+export default MainCart;
