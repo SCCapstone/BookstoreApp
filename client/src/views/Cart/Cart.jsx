@@ -47,13 +47,25 @@ function round(value, decimals) {
   return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
 }
 
+function getKeys(obj) {
+  var keys = [];
+  iterate(obj, function (oVal, oKey) { keys.push(oKey) });
+  return keys;
+}
+function iterate(iterable, callback) {
+  for (var key in iterable) {
+    if (key === 'length' || key === 'prototype' || !Object.prototype.hasOwnProperty.call(iterable, key)) continue;
+    callback(iterable[key], key, iterable);
+  }
+}
+
 function calculatePrice(books, booksCartNames) {
   let finalPrice = 0;
-  var bookNames = Object.keys(booksCartNames);
+  var bookNames = getKeys(booksCartNames);
   for (let i = 0; i < bookNames.length; ++i) {
     finalPrice =
-      finalPrice +
-      booksCartNames[bookNames[i]] * getBook(books, bookNames[i]).price;
+      finalPrice 
+      + booksCartNames[bookNames[i]] * getBook(books, bookNames[i]).price;
   }
 
   return round(finalPrice, 2);
@@ -106,6 +118,7 @@ const MainCart = ({ currentUser }) => {
     <div>
       <div>
         <Button onClick={() => clear_cart()}>Clear Cart</Button>
+
       </div>
       <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
         {/* {Object.keys(booksCartNames).map((bookName) => ( */}
@@ -137,7 +150,7 @@ const MainCart = ({ currentUser }) => {
         <div
           className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
         >
-          {Object.keys(booksCartNames).map((bookName) => (
+          {getKeys(booksCartNames).map((bookName) => (
             <div
               className={`flex-1 flex justify-start items-center flex-row m-3`}
             >
@@ -195,7 +208,7 @@ const MainCart = ({ currentUser }) => {
             Total: ${calculatePrice(books, booksCartNames)}
           </h4>
           <p className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3"></p>
-          <button class="bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-16"
+          <button class="bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
           onClick={()=>{puchaseBooks(currentUser)}}>
             Check out
           </button>

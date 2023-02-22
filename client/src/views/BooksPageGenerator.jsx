@@ -5,6 +5,19 @@ import { Grid, Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 
+
+function getKeys(obj) {
+  var keys = [];
+  iterate(obj, function (oVal, oKey) { keys.push(oKey) });
+  return keys;
+}
+function iterate(iterable, callback) {
+  for (var key in iterable) {
+    if (key === 'length' || key === 'prototype' || !Object.prototype.hasOwnProperty.call(iterable, key)) continue;
+    callback(iterable[key], key, iterable);
+  }
+}
+
 const BooksPageGenerator = ({ book }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -21,7 +34,7 @@ const BooksPageGenerator = ({ book }) => {
     // console.log(books_cart);
 
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
-    var bookNames = Object.keys(booksCartNames);
+    var bookNames = getKeys(booksCartNames);
 
     if (bookNames.includes(book.name) == false) {
       booksCartNames[book.name] = 0;
@@ -107,7 +120,7 @@ const BooksPageGenerator = ({ book }) => {
             onClick={() => addItem(book, quantity)}
           >
             Add to cart
-          </button>
+          </button> 
 
           {/* <button class="text-slate-800 font-semibold focus:text-black focus:bg-persian_plum rounded p-3 border-2 max-w-[150px]">
             Instant Purchase
