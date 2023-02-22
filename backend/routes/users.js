@@ -44,9 +44,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-export const updateProfile = tryCatch(async(req, res)=> {
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {new:true})
-  const { firstName, lastName, email, password } = updatedUser
-});
-
 module.exports = router;

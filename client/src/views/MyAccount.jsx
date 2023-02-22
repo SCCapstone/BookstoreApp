@@ -50,7 +50,7 @@ const MyAccount = () => {
                         </label>
                         <input
                             type="text"
-                            name="grid-first-name"
+                            name="firstName"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             value={data.firstName}
                             maxLength={30}
@@ -65,7 +65,7 @@ const MyAccount = () => {
                         </label>
                         <input
                             type="text"
-                            name="grid-last-name" 
+                            name="lastName" 
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   
                             value={data.lastName}
                             maxLength={30}
@@ -81,7 +81,7 @@ const MyAccount = () => {
                         </label>
                         <input 
                             type="text" 
-                            name="grid-email"
+                            name="email"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   
                             value={data.email}
                             placeholder=" "
@@ -96,7 +96,7 @@ const MyAccount = () => {
                         </label>
                         <input 
                             type="password"
-                            name="grid-password" 
+                            name="password" 
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                             value={data.password}
                             placeholder="Change Your Password..."
