@@ -2,6 +2,7 @@ const admin_menu_options = [
   { name: "Home", link: "/" },
   { name: "Browse", link: "/browse" },
   { name: "Validated Users", link: "/users" },
+  { name: "Add Book", link: "/add_book" },
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
   { name: "Terms of Service", link: "/terms_of_service" },

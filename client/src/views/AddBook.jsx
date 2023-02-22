@@ -1,12 +1,20 @@
 import { React, useState } from "react";
-import { Button, TextField, Grid } from "@mui/material";
+import axios from "axios";
+import { Button, Grid } from "@mui/material";
+import { Chip, Avatar } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import FormControl from "@mui/material/FormControl";
+import FilledInput from '@mui/material/FilledInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import { Remove, Add } from "@mui/icons-material"
 
-const AddBook = () => {
+const AddBook = (user) => {
     const [data, setData] = useState({
         title: "",
         author: "",
-        price: 0,
-        quantity: 0,
+        price: 1,
+        summary: "",
         });
         const [error, setError] = useState("");
 
@@ -18,13 +26,38 @@ const AddBook = () => {
         });
     };
 
+    const [stock, setStock] = useState(1);
+
+    function addStock(stock) {
+        setStock(stock + 1);
+    };
+    
+    function subtract(stock) {
+        if (stock > 0) {
+            setStock(stock - 1);
+        }
+    };
+
+    function clearStock() {
+        let q = 0
+        setData({
+            stock: q,
+        });
+    };
+
     const submit = async (e) => {
         e.preventDefault();
         try {
-            const url = "/api/auth";
-            // const { data: res } = await axios.post(url, data);
-            // localStorage.setItem("token", res.data);
-            // window.location = "/";
+            let inputData = data;
+            inputData.price = Number(data.price);
+            inputData.stock = stock;
+            inputData.stars = 0;
+            inputData.quantitySold = 0;
+            inputData.imageId = "This doesn't work if empty, fix later";
+            const url = "/api/books";
+            const { data: res } = await axios.post(url, inputData);
+            localStorage.setItem("token", res.data);
+            window.location = "/";
         } catch (error) {
             console.log(error);
             if (error.response?.status >= 400 && error.response.status <= 500) {
@@ -33,7 +66,19 @@ const AddBook = () => {
         }
     };
 
-    return (
+    const isLoggedIn = () => {
+        console.log('wassup');
+        const currentUser = user.currentUser;
+        console.log(currentUser && currentUser.length !== 0);
+        console.log(user);
+        return currentUser && currentUser.length !== 0;
+    };
+
+    const sendToLogin = () => {
+        window.location.href = "/login";
+    };
+
+    return isLoggedIn() ? (
     <Grid container spacing={2}>
         <Grid item xs={12} className="justify-center py-5">
             <span class="text-center px-16">Add Book</span>
@@ -41,47 +86,68 @@ const AddBook = () => {
         <Grid item xs={6}>
             
         </Grid>
-        <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
-            <form class="justify-center">
-                <div class="mb-6">
-                    <input
-                        type="text"
+        <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
+            <form>
+                <Grid item ms={12} class="pb-3">
+                    <TextField
+                        variant="filled"
+                        required
+                        label="Title"
+                        placeholder="Title"
                         name="title"
                         value={data.title}
-                        class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
-                        placeholder="Title"
                         onChange={handleChange}
                     />
-                </div>
-                <div class="mb-6">
-                    <input
-                        type="text"
-                        name="author"
-                        value={data.author}
-                        class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
-                        placeholder="Author"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div class="mb-6">
-                    <input
+                </Grid>
+                <TextField
+                    variant="filled"
+                    required
+                    label="Author"
+                    placeholder="Author"
+                    name="author"
+                    value={data.author}
+                    onChange={handleChange}
+                />
+                <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
+                    <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
+                    <FilledInput
+                        startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                        label="Price"
                         type="number"
                         name="price"
-                        value={data.price}
-                        class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
-                        placeholder="Price"
+                        data={data.price}
                         onChange={handleChange}
                     />
-                </div>
-                <div class="mb-6">
-                    <input
-                        type="number"
-                        name="quantity"
-                        value={data.quantity}
-                        class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
-                        placeholder="Quantity"
-                        onChange={handleChange}
+                </FormControl>
+                <TextField
+                    variant="filled"
+                    required
+                    label="Summary"
+                    placeholder="Summary"
+                    name="summary"
+                    value={data.summary}
+                    multiline
+                    rows={3}
+                    onChange={handleChange}
+                />
+                <div className="flex pb-2 pt-2">
+                    <Chip 
+                        avatar={
+                            <Avatar onClick={() => subtract(stock)}>
+                            <Remove />
+                            </Avatar>
+                        }
+                        label={
+                            <p className="px-2 text-lg ">{stock}</p>
+                        }
+                        clickable
+                        onDelete={() => addStock(stock)}
+                        deleteIcon={<Add />}
                     />
+                    <button className="pl-4" onClick={() => clearStock()}>
+                        {" "}
+                        Clear{" "}
+                    </button>
                 </div>
 
                 <div class="text-center lg:text-left grid pb-6">
@@ -92,25 +158,16 @@ const AddBook = () => {
                         SUBMIT
                     </Button>
                 </div>
-
-                <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
-                    <Button
-                        href="/create-account"
-                        class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
-                    >
-                        Register
-                    </Button>
-
-                    <Button
-                        href="/forgot-password"
-                        class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
-                    >
-                        Forgot Password?
-                    </Button>
-                </div>
             </form>
-        </div>
+        </Grid>
     </Grid>
+    ) : (
+        (sendToLogin(),
+      (
+        <div>
+          <h1>Restricted to authenticated users only!</h1>
+        </div>
+      ))
     );
 };
 

@@ -6,6 +6,7 @@ var cors = require("cors");
 const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const bookRoutes = require("./routes/books");
 const path = require("path");
 
 // database connection
@@ -18,6 +19,7 @@ app.use(cors());
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/books", bookRoutes);
 
 __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
