@@ -1,11 +1,10 @@
 import { CartProvider, useCart } from "react-use-cart";
 import { Button } from "@mui/material";
 
-
-function clear_cart(){
+function clear_cart() {
   localStorage.setItem("books_cart", JSON.stringify([]));
   localStorage.setItem("booksCartNames", JSON.stringify({}));
-  window.location.reload(false)
+  window.location.reload(false);
 }
 
 function addItem(book) {
@@ -15,7 +14,7 @@ function addItem(book) {
   }
 
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
-  if(booksCartNames == null) {
+  if (booksCartNames == null) {
     booksCartNames = [];
   }
   booksCartNames.push(book.name);
@@ -33,12 +32,14 @@ function addItem(book) {
 
 const Main_Cart = () => {
   var books_cart = JSON.parse(localStorage.getItem("books_cart"));
+  var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+  var bookNames = Object.keys(booksCartNames);
 
-
+  console.log(booksCartNames);
   return (
     <div>
       <div>
-        <Button onClick={() => (clear_cart())}>Clear Cart</Button>
+        <Button onClick={() => clear_cart()}>Clear Cart</Button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1150px]">
         {books_cart.map((book) => (
@@ -57,6 +58,12 @@ const Main_Cart = () => {
               <div>${book.price}</div>
             </a>
           </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1150px]">
+        {Object.keys(booksCartNames).map((bookName) => (
+          <div>{bookName}</div>
         ))}
       </div>
     </div>

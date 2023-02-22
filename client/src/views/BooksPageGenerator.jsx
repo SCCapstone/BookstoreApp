@@ -3,41 +3,35 @@ import ReactStars from "react-stars";
 import Heart from "react-heart";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
-import ls from "local-storage";
+import Popup from "reactjs-popup";
 
 const BooksPageGenerator = ({ book }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
-  function addItem(book, quantity = 1) {
-    
-
-    var books_cart = JSON.parse(localStorage.getItem('books_cart'));
-    if(books_cart == null){
-      books_cart = []
+  function addItem(book, quantity) {
+    var books_cart = JSON.parse(localStorage.getItem("books_cart"));
+    if (books_cart == null) {
+      books_cart = [];
+    }
+    for (let i = 0; i < quantity; i++) {
+      books_cart.push(book);
     }
 
-    books_cart.push(book);
     localStorage.setItem("books_cart", JSON.stringify(books_cart));
     // console.log(books_cart);
 
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
     var bookNames = Object.keys(booksCartNames);
 
-    if(bookNames.includes(book.name) == false) {
-    booksCartNames[book.name] = 0;
-    // console.log(Object.keys(booksCartNames));
+    if (bookNames.includes(book.name) == false) {
+      booksCartNames[book.name] = 0;
+      // console.log(Object.keys(booksCartNames));
     }
 
-
     booksCartNames[book.name] = booksCartNames[book.name] + quantity;
-    console.log(booksCartNames);
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
-
-
+    console.log(booksCartNames);
   }
-
-
-
 
   // Increase Quantity
   function add(quantity) {
@@ -109,15 +103,15 @@ const BooksPageGenerator = ({ book }) => {
 
         <div class="flex mb-6">
           <button
-            class="text-slate-800 font-semibold hover:text-black focus:text-black bg-polished_pine rounded p-3 border-2 mr-3 min-w-[138px] max-w-[150px]"
-            onClick={() => addItem(book)}
+            class="text-slate-800 font-semibold hover:text-black focus:text-black active:bg-green focus:bg-green bg-polished_pine rounded p-3 border-2 mr-3 min-w-[138px] max-w-[150px]"
+            onClick={() => addItem(book, quantity)}
           >
             Add to cart
           </button>
 
-          <button class="text-slate-800 font-semibold focus:text-black focus:bg-persian_plum rounded p-3 border-2 max-w-[150px]">
+          {/* <button class="text-slate-800 font-semibold focus:text-black focus:bg-persian_plum rounded p-3 border-2 max-w-[150px]">
             Instant Purchase
-          </button>
+          </button> */}
         </div>
         <ul className="row-span-6" />
       </Grid>
