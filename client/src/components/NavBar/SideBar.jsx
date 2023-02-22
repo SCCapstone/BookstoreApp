@@ -12,12 +12,9 @@ const SideBar = ({ user }) => {
 
   const [open, setOpen] = useState(true);
 
-  console.log("Sidebar user: ", user);
-
-  if (user && (user.role === "admin")) {
-    console.log(user);
+  if ((localStorage.userType === "admin")) {
     menu_options = admin_menu_options;
-  } else if (user && (user.role === "customer")) {
+  } else if (localStorage.userType === "customer") {
     menu_options = customer_menu_options;
   }
 
