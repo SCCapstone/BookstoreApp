@@ -1,10 +1,13 @@
 import { React } from "react";
 
-const Home = () => {
+{/* The Home Page is the welcome page of our bookstore where users can see the weekly news letter
+    to stay up to date with latest books and deals being available */}
 
+const Home = () => {
 
   return (
     <section class="">
+      {/* Welcome header and message for the users of this website */}
       <div class="py-4">
         <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 max-w-[1300px]">
           Welcome
@@ -17,6 +20,8 @@ const Home = () => {
               Welcome to the Book Store Website! If You Love Books, You'll Love
               Our Book Store!
             </h2>
+            {/* Weekly Newsletter which contains important information about when new books will 
+                be released, hottst deals and sales on books, and author signing days*/}
             <div className="bg-camel px-2 py-2 text-lg">
               <h2 className="text-xl font-bold">
                 November 27th, 2022 - Weekly Newsletter
