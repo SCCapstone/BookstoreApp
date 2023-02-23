@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { type: String, required: true, enum: ["admin", "customer"]},
   balance: { type: mongoose.Schema.Types.Decimal128, required: false },
+  
 });
 
 userSchema.methods.generateAuthToken = function () {

@@ -36,7 +36,7 @@ const BooksPageGenerator = ({ book }) => {
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
     var bookNames = getKeys(booksCartNames);
 
-    if (bookNames.includes(book.name) === false) {
+    if (bookNames.includes(book.name) !== null && !bookNames.includes(book.name)) {
       booksCartNames[book.name] = 0;
       // console.log(Object.keys(booksCartNames));
     }
