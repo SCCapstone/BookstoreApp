@@ -1,6 +1,7 @@
 import React from "react";
 
 const UserRow = ({ contact, handleEditClick, handleDelete }) => {
+  // console.log(contact)
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       <td class="px-6 py-4">

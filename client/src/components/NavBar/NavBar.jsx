@@ -25,19 +25,21 @@ const NavBar = ({ user }) => {
               </span>
             </a>
           </span>
-          <div class="flex md:order-2">
+          <div class="flex md:order-2 grid grid-cols-5">
           <IoMdCart
               onClick={() => navigate("/cart")}
-              className="icon"
+              className=""
               style={{
-                position: "absolute",
+                position: "",
                 top: "10px",
-                right: "20px",
+                right: "70px",
               }}
               size="40px"
               color="white"
             />
-            <button class="flex items-center" onClick={loginOrLogout}>
+            <div />
+            
+            <button class="" onClick={loginOrLogout}>
               <span className="text-white text-xl">
                 {user && user.length !== 0 ? "Logout" : "Login"}
               </span>

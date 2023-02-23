@@ -5,6 +5,7 @@ import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 import books from "../Books";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function clear_cart() {
   localStorage.setItem("books_cart", JSON.stringify([]));
@@ -81,10 +82,14 @@ function calculatePrice(books, booksCartNames) {
 const MainCart = ({ currentUser }) => {
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+  var token = localStorage.getItem("token");
+  var user = localStorage.getItem("user");
+  console.log(user);
 
   var puchaseBooks = (currentUser) => {
     if (currentUser && currentUser.length !== 0) {
       // localStorage.removeItem("token");
+
       localStorage.setItem("books_cart", JSON.stringify([]));
       localStorage.setItem("booksCartNames", JSON.stringify({}));
       window.location.reload();
@@ -124,12 +129,34 @@ const MainCart = ({ currentUser }) => {
     window.location.reload();
   }
 
+  function deleteItem(booksCartNames, bookName){
+    delete booksCartNames[bookName];
+    setQuantity(booksCartNames);
+    localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
+    window.location.reload();
+  }
+
+  // const login = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const url = "/api/auth";
+  //     const { data: res } = await axios.post(url, data);
+  //     localStorage.setItem("token", res.data);
+  //     window.location = "/";
+  //   } catch (error) {
+  //     console.log(error);
+  //     if (error.response?.status >= 400 && error.response.status <= 500) {
+  //       setError(error.response.data.message);
+  //     }
+  //   }
+  // };
+
   // console.log(books_cart);
   return (
     <div>
-      <div>
-        <Button onClick={() => clear_cart()}>Clear Cart</Button>
-      </div>
+      {/* {console.log(currentUser)}
+      {console.log(token)} */}
+
       <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
         {/* {Object.keys(booksCartNames).map((bookName) => ( */}
         {/* <div>
@@ -201,8 +228,13 @@ const MainCart = ({ currentUser }) => {
                       className="pl-4"
                       onClick={() => setZero(booksCartNames, bookName)}
                     >
-                      {" "}
-                      Clear{" "}
+                      Clear
+                    </button>
+                    <button
+                      className="pl-4"
+                      onClick={() => deleteItem(booksCartNames, bookName)}
+                    >
+                      Delete
                     </button>
                   </div>
                 </h3>
@@ -210,7 +242,9 @@ const MainCart = ({ currentUser }) => {
             </div>
           ))}
         </div>
-
+        <div className="ml-2">
+          <Button onClick={() => clear_cart()}>Clear Cart</Button>
+        </div>
         <div
           className={`grid grid-cols-3 flex-1 flex justify-start items-center  m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
         >
