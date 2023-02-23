@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-//import ProfileIconDropdown from "../ProfileIconDropdown";
+import ProfileIconDropdown from "../ProfileIconDropdown";
 
 const NavBar = ({ user }) => {
   const navigate = useNavigate();
