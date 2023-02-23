@@ -143,7 +143,7 @@ const EmployeeHomepage = () => {
                                     <span>{event.start} - {event.end}</span>
                                 </div>
                                 <div>
-                                    <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center">
+                                    <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center text-sm italic">
                                         Delete
                                     </button>
                                 </div>
@@ -158,7 +158,7 @@ const EmployeeHomepage = () => {
                                     <span>{event.start} - {event.end}</span>
                                 </div>
                                 <div>
-                                    <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center">
+                                    <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center text-sm italic">
                                         Delete
                                     </button>
                                 </div>
