@@ -1,7 +1,7 @@
 import { React, useRef, useState } from "react";
 import { IoMenuSharp } from "react-icons/io5";
 import { IconContext } from "react-icons";
-import { admin_menu_options, unvalidated_menu_options } from "./SideBarOptions";
+import { admin_menu_options, customer_menu_options, unvalidated_menu_options } from "./SideBarOptions";
 
 
 
@@ -12,9 +12,11 @@ const SideBar = ({ user }) => {
 
   const [open, setOpen] = useState(true);
 
-  if (user && user.length !== 0) {
+  if ((localStorage.userType === "admin")) {
     menu_options = admin_menu_options;
-  } 
+  } else if (localStorage.userType === "customer") {
+    menu_options = customer_menu_options;
+  }
 
   // useRef(() => {
   //   if (user && user.length !== 0) {
