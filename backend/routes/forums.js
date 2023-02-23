@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { Forum, validate } = require("../models/forums");
+const { Forum, validate } = require("../models/forum");
 
 router.post("/", async (req, res) => {
+  // console.log("are we hittin");
     try {
       const { error } = validate(req.body);
       if (error)
         return res.status(400).send({ message: error.details[0].message });
-  
       await new Forum(req.body).save();
       res.status(201).send({ message: "Forum created successfully" });
     } catch (error) {
@@ -23,6 +23,5 @@ router.get("/", async (req, res) => {
       console.log(error);
     }
 });
-  
 
 module.exports = router;

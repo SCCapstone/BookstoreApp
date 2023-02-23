@@ -13,6 +13,7 @@ import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
 import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
+import CreateForum from "../../views/CreateForum";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -39,6 +40,7 @@ const CompleteNavbar = () => {
 
             {/* Admin, Employee, and Customer */}
             <Route path="/forums" element={<Forums currentUser={user} />} />
+            <Route path="/createforums" element={<CreateForum />} />
 
             {books.map((book) => (
               <Route

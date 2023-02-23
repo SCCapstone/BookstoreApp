@@ -8,9 +8,8 @@ const reply = {
 }
 
 const forumSchema = new mongoose.Schema({
-    postingUserID: { type: String, required: true },
     post: { type: String, required: true },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
     uuid: { type: String, required: true },
     replies: { type: [reply], required: false },
 });

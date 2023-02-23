@@ -6,7 +6,7 @@ var cors = require("cors");
 const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
-const forumsRoutes = require("./routes/forumsdata");
+const forumsRoutes = require("./routes/forums");
 const path = require("path");
 const { application } = require("express");
 
@@ -20,7 +20,7 @@ app.use(cors());
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/forumsdata", forumsRoutes);
+app.use("/api/forums", forumsRoutes);
 
 __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
