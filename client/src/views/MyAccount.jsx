@@ -1,14 +1,18 @@
-import React, { useState }  from "react";
+import React, { useState, initialState }  from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 
-const MyAccount = () => {
-    const [data, setData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-      });
+const MyAccount = ({ currentUser }) => {
+    // using ID in localStorage, fetch data from Mongo and put it in the 
+    // password needs to be hashed
+
+    const getUserData = async() => {
+        const url = "/api/users/" + currentUser;
+        const res = await axios.get(url, data);
+        return res.data;
+    }
+
+    const [data, setData] = useState(getUserData);
       const [error, setError] = useState("");
       const navigate = useNavigate();
     
@@ -23,11 +27,15 @@ const MyAccount = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const url = "/api/users";
+            // redo this to use put commands instead of post
+          const url = "/api/users/" + currentUser;
+          // hash the new password here
+          if (data.password === "") {
+            delete data.password;
+          }
           console.log(data);
-          const res = await axios.post(url, data);
-          navigate("/");
-          console.log(res.message);
+          const res = await axios.put(url, data);
+          window.location.reload();
         } catch (error) {
           console.log(error);
           if (error.response?.status >= 400 && error.response.status <= 500) {
