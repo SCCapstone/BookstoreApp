@@ -85,7 +85,10 @@ const MainCart = ({ currentUser }) => {
     }
   };
 
-  var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+  var booksCartNames = {
+    "Steve Jobs": 22,
+    "Go-To-Dinners": 13
+};//JSON.parse(localStorage.getItem("booksCartNames"));
 
   const [quantity, setQuantity] = useState(booksCartNames);
   function add(booksCartNames, bookName) {
