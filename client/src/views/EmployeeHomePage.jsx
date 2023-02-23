@@ -114,64 +114,82 @@ const EmployeeHomepage = () => {
                     }
                 }}
                 tileContent={({date,view}) => {
-                    const event = events.find(event => new Date(event.start).toDateString() === date.toDateString());
+                    // const event = events.find(event => new Date(event.start).toDateString() === date.toDateString());
 
-                    // const eventsThatStartOnDate = events.filter(
-                    //     event => new Date(event.start).toDateString() === date.toDateString()
-                    // );
+                    const eventsThatStartOnDate = events.filter(
+                        event => new Date(event.start).toDateString() === date.toDateString()
+                    );
 
-                    // const eventsThatSpanAcrossDate = events.filter(
-                    //     event => {
-                    //       const start = new Date(event.start);
-                    //       const end = new Date(event.end);
-                    //       return (
-                    //         start <= date &&
-                    //         end >= date &&
-                    //         start.toDateString() !== end.toDateString()
-                    //       );
-                    //     }
-                    // );
+                    const eventsThatSpanAcrossDate = events.filter(
+                        event => {
+                          const start = new Date(event.start);
+                          const end = new Date(event.end);
+                          return (
+                            start <= date &&
+                            end >= date &&
+                            start.toDateString() !== end.toDateString()
+                          );
+                        }
+                    );
 
-                    // return (
-                    //     <div>
-                    //       {eventsThatStartOnDate.map(event => (
-                    //         <div key={event.id}>
-                    //           <span>{event.title}</span>
-                    //           <button onClick={() => handleEventDelete(event)}>Delete</button>
-                    //         </div>
-                    //       ))}
-                    //       {eventsThatSpanAcrossDate.map(event => (
-                    //         <div key={event.id}>
-                    //           <span>{event.title}</span>
-                    //           <button onClick={() => handleEventDelete(event)}>Delete</button>
-                    //         </div>
-                    //       ))}
-                    //     </div>
-                    //   );
-
-                    if (event) {
-                        const isSelected = selectedEvent && selectedEvent.start === event.start;
-                        return (
-                            <div
-                                onClick={() => {
-                                    if (isSelected) {
-                                        setSelctedEvent(null);
-                                    } else {
-                                        setSelctedEvent(event)
-                                    }
-                                }}
-                                // onMouseOver={() => setSelctedEvent(event)}
-                                // onMouseOut={()=> setSelctedEvent(null)}
-                            >
-                                <h3>
-                                    {event.title}
-                                </h3>
+                    return (
+                        <div>
+                          {eventsThatStartOnDate.map(event => (
+                            <div key={event.id}>
+                                <div>
+                                    <span>{event.title}</span>
+                                </div>
+                                <div>
+                                    <span>{event.start} - {event.end}</span>
+                                </div>
+                                <div>
+                                    <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center">
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
-                        );
-                    } 
-                    else {
-                        return;
-                    }
+                          ))}
+                          {eventsThatSpanAcrossDate.map(event => (
+                            <div key={event.id}>
+                                <div>
+                                    <span>{event.title}</span>
+                                </div>
+                                <div>
+                                    <span>{event.start} - {event.end}</span>
+                                </div>
+                                <div>
+                                    <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                          ))}
+                        </div>
+                      );
+
+                    // if (event) {
+                    //     const isSelected = selectedEvent && selectedEvent.start === event.start;
+                    //     return (
+                    //         <div
+                    //             onClick={() => {
+                    //                 if (isSelected) {
+                    //                     setSelctedEvent(null);
+                    //                 } else {
+                    //                     setSelctedEvent(event)
+                    //                 }
+                    //             }}
+                    //             // onMouseOver={() => setSelctedEvent(event)}
+                    //             // onMouseOut={()=> setSelctedEvent(null)}
+                    //         >
+                    //             <h3>
+                    //                 {event.title}
+                    //             </h3>
+                    //         </div>
+                    //     );
+                    // } 
+                    // else {
+                    //     return;
+                    // }
 
                     // if (eventsThatStartOnDate.length > 0 || eventsThatSpanAcrossDate.length > 0) {
                     //     const isSelected =
@@ -208,9 +226,9 @@ const EmployeeHomepage = () => {
                     // return null;
                 }}
             />
-            {selectedEvent && (
+            {/* {selectedEvent && (
                 <EventInfo event={selectedEvent} deleteEvent = {handleEventDelete}/>
-            )}
+            )} */}
            
         </div>
             <form onSubmit={handleEventSubmit} className="mt-4">
