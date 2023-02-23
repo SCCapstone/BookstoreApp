@@ -16,6 +16,7 @@
     "cypress": "^12.4.1",
     "react": "^18.2.0",
     "react-animated-heart": "^0.0.7",
+    "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
     "react-heart": "^1.0.6",
     "react-icons": "^4.7.1",

@@ -7,6 +7,8 @@ const NavBar = ({ user }) => {
   var loginOrLogout = () => {
     if (user && user.length !== 0) {
       localStorage.removeItem("token");
+      localStorage.removeItem("userType");
+      localStorage.removeItem("userID");
       window.location.reload();
     } else {
       navigate("/login");
