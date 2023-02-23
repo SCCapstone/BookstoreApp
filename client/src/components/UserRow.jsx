@@ -1,6 +1,11 @@
 import React from "react";
 
 const UserRow = ({ contact, handleEditClick, handleDelete }) => {
+
+  const handleChange = (e) => {
+    const newUserType = e.target.value;
+    handleEditClick(contact, newUserType);
+  }
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       <td class="px-6 py-4">
@@ -20,6 +25,16 @@ const UserRow = ({ contact, handleEditClick, handleDelete }) => {
         <button class="bg-persian_plum text-white ml-4 py-2 px-4" type="button" onClick={() => handleDelete(contact)}>
           Delete
         </button>
+      </td>
+      <td>
+        <select value={contact.role} onChange={handleChange} class="form-select block w-full">
+          <option value="customer">
+            customer
+          </option>
+          <option value="admin">
+            admin
+          </option>
+        </select>
       </td>
     </tr>
   );

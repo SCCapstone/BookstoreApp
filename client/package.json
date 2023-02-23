@@ -16,6 +16,7 @@
     "cypress": "^12.4.1",
     "react": "^18.2.0",
     "react-animated-heart": "^0.0.7",
+    "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
     "react-heart": "^1.0.6",
     "react-icons": "^4.7.1",
@@ -24,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-stars": "^2.2.5",
     "styled-components": "^5.3.6",
+    "sweetalert2": "^11.7.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

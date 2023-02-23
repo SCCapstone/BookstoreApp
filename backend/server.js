@@ -7,6 +7,7 @@ const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const forumsRoutes = require("./routes/forums");
+const bookRoutes = require("./routes/books");
 const path = require("path");
 const { application } = require("express");
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/forums", forumsRoutes);
+app.use("/api/books", bookRoutes);
 
 __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {

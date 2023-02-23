@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  role: { type: String, required: true, enum: ["admin", "customer"]},
+  balance: { type: mongoose.Schema.Types.Decimal128, required: false },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -26,6 +28,8 @@ const validate = (data) => {
     email: Joi.string().required().label("Email"),
     password: Joi.string().required().label("Password"),
     // password: passwordComplexity.required().label("Password")
+    role: Joi.string().required().valid("admin", "customer").label("Role"),
+    balance: Joi.number().required().label("Balance"),
   });
   return schema.validate(data);
 };
