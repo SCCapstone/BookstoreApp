@@ -12,6 +12,7 @@ import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
 import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
+import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 
 const CompleteNavbar = () => {
@@ -35,6 +36,7 @@ const CompleteNavbar = () => {
             <Route path="/create_account" element={<Signup />} />
 
             {/* Admin */}
+            <Route path="/add_book" element={<AddBook currentUser={user} />} />
             <Route path="/users" element={<ValidatedUsers currentUser={userType} />} />
             <Route path="/emp_page" element={<EmployeeHomepage currentUser={userType} />} />
 
