@@ -49,12 +49,19 @@ function round(value, decimals) {
 
 function getKeys(obj) {
   var keys = [];
-  iterate(obj, function (oVal, oKey) { keys.push(oKey) });
+  iterate(obj, function (oVal, oKey) {
+    keys.push(oKey);
+  });
   return keys;
 }
 function iterate(iterable, callback) {
   for (var key in iterable) {
-    if (key === 'length' || key === 'prototype' || !Object.prototype.hasOwnProperty.call(iterable, key)) continue;
+    if (
+      key === "length" ||
+      key === "prototype" ||
+      !Object.prototype.hasOwnProperty.call(iterable, key)
+    )
+      continue;
     callback(iterable[key], key, iterable);
   }
 }
@@ -64,8 +71,8 @@ function calculatePrice(books, booksCartNames) {
   var bookNames = getKeys(booksCartNames);
   for (let i = 0; i < bookNames.length; ++i) {
     finalPrice =
-      finalPrice 
-      + booksCartNames[bookNames[i]] * getBook(books, bookNames[i]).price;
+      finalPrice +
+      booksCartNames[bookNames[i]] * getBook(books, bookNames[i]).price;
   }
 
   return round(finalPrice, 2);
@@ -73,6 +80,7 @@ function calculatePrice(books, booksCartNames) {
 
 const MainCart = ({ currentUser }) => {
   const navigate = useNavigate();
+  var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
 
   var puchaseBooks = (currentUser) => {
     if (currentUser && currentUser.length !== 0) {
@@ -85,10 +93,10 @@ const MainCart = ({ currentUser }) => {
     }
   };
 
-  var booksCartNames = {
-    "Steve Jobs": 22,
-    "Go-To-Dinners": 13
-};//JSON.parse(localStorage.getItem("booksCartNames"));
+  //   {
+  //     "Steve Jobs": 22,
+  //     "Go-To-Dinners": 13
+  // };
 
   const [quantity, setQuantity] = useState(booksCartNames);
   function add(booksCartNames, bookName) {
@@ -96,7 +104,7 @@ const MainCart = ({ currentUser }) => {
     booksCartNames[bookName] = booksCartNames[bookName] + 1;
     setQuantity(booksCartNames);
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
-    // window.location.reload();
+    window.location.reload();
   }
 
   function subtract(booksCartNames, bookName) {
@@ -105,7 +113,7 @@ const MainCart = ({ currentUser }) => {
       booksCartNames[bookName] = booksCartNames[bookName] - 1;
       setQuantity(booksCartNames);
       localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
-      // window.location.reload();
+      window.location.reload();
     }
   }
 
@@ -121,7 +129,6 @@ const MainCart = ({ currentUser }) => {
     <div>
       <div>
         <Button onClick={() => clear_cart()}>Clear Cart</Button>
-
       </div>
       <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
         {/* {Object.keys(booksCartNames).map((bookName) => ( */}
@@ -205,14 +212,17 @@ const MainCart = ({ currentUser }) => {
         </div>
 
         <div
-          className={`flex-1 flex justify-start items-center flex-row m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
+          className={`grid grid-cols-3 flex-1 flex justify-start items-center  m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
         >
-          <h4 className="font-poppins font-semibold xs:text-[30.89px] text-[25.89px] xs:leading-[43.16px] leading-[30.16px]">
+          <h4 className="col-span-1 font-poppins font-semibold xs:text-[30.89px] text-[25.89px] xs:leading-[43.16px] leading-[30.16px]">
             Total: ${calculatePrice(books, booksCartNames)}
           </h4>
-          <p className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3"></p>
-          <button class="bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
-          onClick={()=>{puchaseBooks(currentUser)}}>
+          <button
+            class="col-span-2 bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
+            onClick={() => {
+              puchaseBooks(currentUser);
+            }}
+          >
             Check out
           </button>
         </div>
