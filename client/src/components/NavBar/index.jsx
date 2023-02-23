@@ -12,17 +12,18 @@ import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
 import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
+import EmployeeHomepage from "../../views/EmployeeHomePage";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
-
+  const userType = localStorage.getItem("userType");
   return (
     <div className="pt-16 bg-gainsboro">
       <div className="flex">
         <SideBar user={user}/>
         <div className="px-16"></div>
         <BrowserRouter>
-          <NavBar user={user} />
+          <NavBar user={user} userType={userType} />
           <Routes>
             {/* All users */}
             <Route path="/" element={<Home />} />
@@ -34,7 +35,8 @@ const CompleteNavbar = () => {
             <Route path="/create_account" element={<Signup />} />
 
             {/* Admin */}
-            <Route path="/users" element={<ValidatedUsers currentUser={user} />} />
+            <Route path="/users" element={<ValidatedUsers currentUser={userType} />} />
+            <Route path="/emp_page" element={<EmployeeHomepage currentUser={userType} />} />
 
             {books.map((book) => (
               <Route
