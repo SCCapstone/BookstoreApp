@@ -81,7 +81,7 @@ const Login = () => {
 
             <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
               <Button
-                href="/create-account"
+                href="/create_account"
                 class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
                 Register
