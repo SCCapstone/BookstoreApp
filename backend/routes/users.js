@@ -56,7 +56,9 @@ router.put("/:id", async (req, res) => {
       user.email = req.body.email;
     }
     if (req.body.password) {
-      user.password = hashPassword(req.body.password);
+      const salt = await bcrypt.genSalt(Number(process.env.SALT));
+      const hashPassword = await bcrypt.hash(req.body.password, salt);
+      user.password = hashPassword;
     }
     if (req.body.role) {
       user.role = req.body.role;
