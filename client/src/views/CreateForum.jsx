@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import swal from 'sweetalert2';
 
 const CreateForum = () => {
     const [data, setData] = useState({
@@ -29,6 +30,10 @@ const CreateForum = () => {
         }
         console.log(theForum);
         const res = await axios.post(url, theForum);
+        swal.fire({
+          icon: 'success',
+          title: 'Forum posted successfully'
+        })
     }
 
     return (
