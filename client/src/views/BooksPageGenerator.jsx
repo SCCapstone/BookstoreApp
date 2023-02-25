@@ -5,15 +5,21 @@ import { Grid, Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 
-
 function getKeys(obj) {
   var keys = [];
-  iterate(obj, function (oVal, oKey) { keys.push(oKey) });
+  iterate(obj, function (oVal, oKey) {
+    keys.push(oKey);
+  });
   return keys;
 }
 function iterate(iterable, callback) {
   for (var key in iterable) {
-    if (key === 'length' || key === 'prototype' || !Object.prototype.hasOwnProperty.call(iterable, key)) continue;
+    if (
+      key === "length" ||
+      key === "prototype" ||
+      !Object.prototype.hasOwnProperty.call(iterable, key)
+    )
+      continue;
     callback(iterable[key], key, iterable);
   }
 }
@@ -29,23 +35,24 @@ const BooksPageGenerator = ({ book }) => {
     for (let i = 0; i < quantity; i++) {
       books_cart.push(book);
     }
+    // console.log(books_cart);
 
     localStorage.setItem("books_cart", JSON.stringify(books_cart));
-    // console.log(books_cart);
 
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
     var bookNames = getKeys(booksCartNames);
 
-    if (bookNames.includes(book.name) !== null && !bookNames.includes(book.name)) {
-      booksCartNames[book.name] = 0;
-      // console.log(Object.keys(booksCartNames));
+    if (
+      bookNames.includes(book.title) !== null &&
+      !bookNames.includes(book.title)
+    ) {
+      booksCartNames[book.title] = 0;
     }
 
-    booksCartNames[book.name] = booksCartNames[book.name] + quantity;
+    booksCartNames[book.title] = booksCartNames[book.title] + quantity;
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
     console.log(booksCartNames);
   }
-
 
   function add(quantity) {
     setQuantity(quantity + 1);
@@ -63,12 +70,12 @@ const BooksPageGenerator = ({ book }) => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <span class="text-center text-3xl px-16">
-          {book.name} by {book.author}
+          {book.title} by {book.author}
         </span>
       </Grid>
       <Grid item xs={4} className={`text-right`}>
         <div class="min-w-[100px] max-w-[190px]">
-          <img src={book.image} alt="" className="row-span-2 border-2" />
+          <img src={book.imageId} alt="" className="row-span-2 border-2" />
         </div>
       </Grid>
       <Grid item xs={8}>
@@ -81,7 +88,7 @@ const BooksPageGenerator = ({ book }) => {
           color1={"#000"}
           color2={"#c2b542"}
         />
-        <ul>Quantity Available: {book.qty}</ul>
+        <ul>Quantity Available: {book.stock}+</ul>
         <ul className="flex">
           Add to Wishlist: &nbsp;
           <span className="py-1">
@@ -120,7 +127,7 @@ const BooksPageGenerator = ({ book }) => {
             onClick={() => addItem(book, quantity)}
           >
             Add to cart
-          </button> 
+          </button>
 
           {/* <button class="text-slate-800 font-semibold focus:text-black focus:bg-persian_plum rounded p-3 border-2 max-w-[150px]">
             Instant Purchase

@@ -34,7 +34,7 @@ const sort = (books, selection) => {
       break;
     case "Best Selling":
       books_changed = books.sort(function (a, b) {
-        return b.sold - a.sold;
+        return b.quantitySold - a.quantitySold;
       });
       break;
     case "New Arrivals":
@@ -65,8 +65,8 @@ const sort = (books, selection) => {
           className="border-2 border-gainsboro hover:border-black"
         >
           <a href={`${book.link}`}>
-            <img src={book.image} alt="" className="row-span-2" />
-            <div class="text-lg">{book.name}</div>
+            <img src={book.imageId} alt="" className="row-span-2" />
+            <div class="text-lg">{book.title}</div>
             <div class="felx items-end">by: {book.author}</div>
             {/*<div class="text-lg">
               ${wholeNumber(book.price)}.

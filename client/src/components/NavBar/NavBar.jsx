@@ -11,6 +11,7 @@ const NavBar = ({ user }) => {
       localStorage.removeItem("userType");
       localStorage.removeItem("userID");
       window.location.reload();
+      navigate("/");
     } else {
       navigate("/login");
     }

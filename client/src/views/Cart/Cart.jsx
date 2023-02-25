@@ -23,7 +23,7 @@ function addItem(book) {
   if (booksCartNames == null) {
     booksCartNames = [];
   }
-  booksCartNames.push(book.name);
+  booksCartNames.push(book.title);
 
   booksCartNames = booksCartNames.reduce(function (prev, cur) {
     prev[cur] = (prev[cur] || 0) + 1;
@@ -38,7 +38,7 @@ function addItem(book) {
 
 function getBook(books, bookName) {
   for (let i = 0; i < books.length; ++i) {
-    if (books[i].name == bookName) {
+    if (books[i].title == bookName) {
       return books[i];
     }
   }
@@ -129,61 +129,16 @@ const MainCart = ({ currentUser }) => {
     window.location.reload();
   }
 
-  function deleteItem(booksCartNames, bookName){
+  function deleteItem(booksCartNames, bookName) {
     delete booksCartNames[bookName];
     setQuantity(booksCartNames);
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
     window.location.reload();
   }
 
-  // const login = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const url = "/api/auth";
-  //     const { data: res } = await axios.post(url, data);
-  //     localStorage.setItem("token", res.data);
-  //     window.location = "/";
-  //   } catch (error) {
-  //     console.log(error);
-  //     if (error.response?.status >= 400 && error.response.status <= 500) {
-  //       setError(error.response.data.message);
-  //     }
-  //   }
-  // };
-
-  // console.log(books_cart);
   return (
     <div>
-      {/* {console.log(currentUser)}
-      {console.log(token)} */}
-
       <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
-        {/* {Object.keys(booksCartNames).map((bookName) => ( */}
-        {/* <div>
-            <div class="grid grid-cols-2 gap-2 p-5 bg-black">
-                <Grid item xs={4} className={`object-right w-2/4 bg-green`}>
-                  <div class="min-w-[100px] max-w-[190px]">
-                    <img
-                      src={getBook(books, bookName).image}
-                      alt=""
-                      className="row-span-2 border-2 justify-right"
-                    />
-                  </div>
-                </Grid>
-              <div class="bg-red text-green-500 text-lg font-bold text-center rounded-lg w-fit mr-12">
-                <Grid item xs={12}>
-                  <span class="text-center text-2xl px-16 ">
-                    {getBook(books, bookName).name} by{" "}
-                    {getBook(books, bookName).author}
-                  </span>
-                </Grid>
-              </div>
-            </div>
-
-            <Grid container spacing={2}>
-              <ul className="row-span-6" />
-            </Grid>
-          </div> */}
         <div
           className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
         >
@@ -193,14 +148,14 @@ const MainCart = ({ currentUser }) => {
             >
               <div class="min-w-[80px] max-w-[120px]">
                 <img
-                  src={getBook(books, bookName).image}
+                  src={getBook(books, bookName).imageId}
                   alt=""
                   className="row-span-2 border-2 justify-right"
                 />
               </div>
               <div>
                 <h3 className="font-poppins font-bold xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
-                  {getBook(books, bookName).name} by{" "}
+                  {getBook(books, bookName).title} by{" "}
                   {getBook(books, bookName).author}
                 </h3>
                 <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
