@@ -7,11 +7,13 @@ import Login from "../../views/Login";
 import Aboutus from "../../views/Aboutus";
 import TOS from "../../views/TOS";
 import ContactUs from "../../views/ContactUs";
+import Forums from "../../views/Forums";
 import Browse from "../../views/Browse";
 import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
 import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
+import CreateForum from "../../views/CreateForum";
 import MainCart from "../../views/Cart/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
@@ -41,6 +43,10 @@ const CompleteNavbar = () => {
             <Route path="/add_book" element={<AddBook currentUser={user} />} />
             <Route path="/users" element={<ValidatedUsers currentUser={userType} />} />
             <Route path="/emp_page" element={<EmployeeHomepage currentUser={userType} />} />
+
+            {/* Admin, Employee, and Customer */}
+            <Route path="/forums" element={<Forums currentUser={user} />} />
+            <Route path="/createforums" element={<CreateForum />} />
 
             {books.map((book) => (
               <Route
