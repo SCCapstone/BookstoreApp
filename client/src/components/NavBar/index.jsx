@@ -16,6 +16,7 @@ import ValidatedUsers from "../../views/ValidatedUsers";
 import CreateForum from "../../views/CreateForum";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
+import MyAccount from "../../views/MyAccount";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -37,6 +38,9 @@ const CompleteNavbar = () => {
             <Route path="/browse" element={<Browse />} />
             <Route path="/create_account" element={<Signup />} />
 
+            {/* Admin and Customer */}
+            <Route path="/my_account" element={<MyAccount currentUser={localStorage.getItem("userID")} />} />
+            
             {/* Admin */}
             <Route path="/add_book" element={<AddBook currentUser={user} />} />
             <Route path="/users" element={<ValidatedUsers currentUser={userType} />} />
