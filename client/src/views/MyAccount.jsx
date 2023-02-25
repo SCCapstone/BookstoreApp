@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom"
 
 const MyAccount = ({ currentUser }) => {
-    // using ID in localStorage, fetch data from Mongo and put it in the 
+    // using ID in localStorage, fetch data from Mongo and put it in the verified users page so that it can be connected to current user
     // password needs to be hashed
 
     const getUserData = async() => {
@@ -27,7 +27,7 @@ const MyAccount = ({ currentUser }) => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // redo this to use put commands instead of post
+        // temporary for right now but later redo this to use put commands instead of post
           const url = "/api/users/" + currentUser;
           // hash the new password here
           if (data.password === "") {
@@ -115,7 +115,7 @@ const MyAccount = ({ currentUser }) => {
 
                 <div href="/updateProfile" class="text-center lg:text-left grid pb-6">
                     <button type="submit" class="inline-block px-10 py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded">
-                        Update Info
+                        Update
                     </button>
                 </div>
             </form>
