@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <section class="">
       <div class="py-4">
-        <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 max-w-[1300px]">
+        <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 max-w-[1400px]">
           Welcome
         </div>
       </div>

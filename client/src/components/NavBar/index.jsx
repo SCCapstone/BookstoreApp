@@ -14,6 +14,7 @@ import BooksPageGenerator from "../../views/BooksPageGenerator";
 import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
 import CreateForum from "../../views/CreateForum";
+import MainCart from "../../views/Cart/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
@@ -37,6 +38,7 @@ const CompleteNavbar = () => {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/create_account" element={<Signup />} />
+            <Route path="/cart" element={<MainCart currentUser={localStorage.getItem("userID")}  />} />
 
             {/* Admin and Customer */}
             <Route path="/my_account" element={<MyAccount currentUser={localStorage.getItem("userID")} />} />

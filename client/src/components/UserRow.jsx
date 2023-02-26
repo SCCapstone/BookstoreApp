@@ -1,6 +1,7 @@
 import React from "react";
 
 const UserRow = ({ contact, handleEditClick, handleDelete }) => {
+  // console.log(contact)
 
   const handleChange = (e) => {
     const newUserType = e.target.value;

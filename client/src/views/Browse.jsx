@@ -34,7 +34,7 @@ const sort = (books, selection) => {
       break;
     case "Best Selling":
       books_changed = books.sort(function (a, b) {
-        return b.sold - a.sold;
+        return b.quantitySold - a.quantitySold;
       });
       break;
     case "New Arrivals":
@@ -65,8 +65,8 @@ const sort = (books, selection) => {
           className="border-2 border-gainsboro hover:border-black"
         >
           <a href={`${book.link}`}>
-            <img src={book.image} alt="" className="row-span-2" />
-            <div class="text-lg">{book.name}</div>
+            <img src={book.imageId} alt="" className="row-span-2" />
+            <div class="text-lg">{book.title}</div>
             <div class="felx items-end">by: {book.author}</div>
             {/*<div class="text-lg">
               ${wholeNumber(book.price)}.
@@ -81,7 +81,22 @@ const sort = (books, selection) => {
 };
 
 const Browse = () => {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("");
+
+  const book_instance = localStorage.getItem("Book");
+
+  function changeOption(option) {
+    setValue(option);
+    localStorage.setItem("option", option);
+  }
+
+  let prevOption = localStorage.getItem("option");
+  // if (prevOption) {
+  //   setValue(prevOption);
+  // }
+  // console.log(prevOption);
+  // console.log(prevOption);
+
 
   return (
     <section className="sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1150px] xl:max-w-[1200px] max-w-[200px]">
@@ -90,6 +105,7 @@ const Browse = () => {
           Browse
         </div>
       </div>
+
       <div class=" xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid">
         <p className={`${styles.paragraph} max-w-[1158px] relative grid gap-2`}>
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -110,15 +126,15 @@ const Browse = () => {
             </svg>
           </div>
           <input
-            className="w-[1100px] py-2 pl-10 border rounded"
+            className="rounded border bg-white py-2 grid max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px] pl-10"
             placeholder="Search Books"
           />
         </p>
       </div>
       <div class="flex pb-2">
         <select
-          className="rounded border bg-white py-2 grid max-w-[1158px] px-4 w-5/6"
-          onChange={(e) => setValue(e.target.value)}
+          className="rounded border bg-white py-2 grid max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px]"
+          onChange={(e) => changeOption(e.target.value)}
         >
           <option selected disabled hidden>
             Sort by:
@@ -130,11 +146,11 @@ const Browse = () => {
           <option value="Price: high to low">Price: high to low</option>
         </select>
 
-        <select className="w-1/6 ... bg-white border ">
+        {/* <select className="w-1/6 ... bg-white border ">
           <option selected disabled hidden>
             Genre
           </option>
-        </select>
+        </select> */}
       </div>
 
       <div>

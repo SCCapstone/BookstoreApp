@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { IoMdCart } from "react-icons/io";
 
 const NavBar = ({ user }) => {
   const navigate = useNavigate();
@@ -10,12 +11,11 @@ const NavBar = ({ user }) => {
       localStorage.removeItem("userType");
       localStorage.removeItem("userID");
       window.location.reload();
+      navigate("/");
     } else {
       navigate("/login");
     }
   };
-
-
 
   return (
     <div>
@@ -28,8 +28,21 @@ const NavBar = ({ user }) => {
               </span>
             </a>
           </span>
-          <div class="flex md:order-2">
-            <button class="flex items-center" onClick={loginOrLogout}>
+          <div class="flex md:order-2 grid grid-cols-5">
+          <IoMdCart
+              onClick={() => navigate("/cart")}
+              className=""
+              style={{
+                position: "",
+                top: "10px",
+                right: "70px",
+              }}
+              size="40px"
+              color="white"
+            />
+            <div />
+            
+            <button class="" onClick={loginOrLogout}>
               <span className="text-white text-xl">
                 {user && user.length !== 0 ? "Logout" : "Login"}
               </span>

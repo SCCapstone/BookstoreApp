@@ -48,11 +48,11 @@ const Login = () => {
           </div>
           <form class="justify-center">
             <div class="mb-6">
-              <TextField
+              <input
                 name="email"
                 value={data.email}
-                class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
-                label="Enter Email"
+                class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
+                placeholder="Enter Email Address"
                 onChange={handleChange}
               />
             </div>

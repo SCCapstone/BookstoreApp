@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.6",
+    "@mui/material": "^5.11.10",
     "@mui/styled-engine": "^5.11.0",
     "@mui/styled-engine-sc": "^5.11.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -24,6 +24,8 @@
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "react-stars": "^2.2.5",
+    "react-use-cart": "^1.13.0",
+    "reactjs-popup": "^2.0.5",
     "styled-components": "^5.3.6",
     "sweetalert2": "^11.7.1",
     "web-vitals": "^2.1.4"
