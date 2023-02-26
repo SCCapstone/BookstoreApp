@@ -43,6 +43,10 @@ const BooksPageGenerator = ({ book }) => {
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
     var bookNames = getKeys(booksCartNames);
 
+    if (booksCartNames == null) {
+      booksCartNames = [];
+    }
+
     if (
       bookNames.includes(book.title) !== null &&
       !bookNames.includes(book.title)
@@ -53,9 +57,9 @@ const BooksPageGenerator = ({ book }) => {
     booksCartNames[book.title] = booksCartNames[book.title] + quantity;
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
     swal.fire({
-      icon: 'success',
-      title: 'Book added to cart'
-    })
+      icon: "success",
+      title: "Book added to cart",
+    });
     console.log(booksCartNames);
   }
 
@@ -68,7 +72,6 @@ const BooksPageGenerator = ({ book }) => {
       setQuantity(quantity - 1);
     }
   }
-
 
   const [active, setActive] = useState(false);
 
