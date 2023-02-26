@@ -38,7 +38,7 @@ const CompleteNavbar = () => {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/create_account" element={<Signup />} />
-            <Route path="/cart" element={<MainCart currentUser={user} />} />
+            <Route path="/cart" element={<MainCart currentUser={localStorage.getItem("userID")}  />} />
 
             {/* Admin and Customer */}
             <Route path="/my_account" element={<MyAccount currentUser={localStorage.getItem("userID")} />} />

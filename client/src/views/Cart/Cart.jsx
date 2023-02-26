@@ -98,11 +98,6 @@ const MainCart = ({ currentUser }) => {
     }
   };
 
-  //   {
-  //     "Steve Jobs": 22,
-  //     "Go-To-Dinners": 13
-  // };
-
   const [quantity, setQuantity] = useState(booksCartNames);
   function add(booksCartNames, bookName) {
     console.log("adding");
@@ -135,6 +130,45 @@ const MainCart = ({ currentUser }) => {
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
     window.location.reload();
   }
+
+  const getUserData = async () => {
+    const url = "/api/users/" + currentUser;
+    const res = await axios.get(url, data);
+    return res.data;
+  };
+
+  const [data, setData] = useState(getUserData);
+  const [error, setError] = useState("");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+  console.log(currentUser);
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(data.balance);
+      // temporary for right now but later redo this to use put commands instead of post
+      const url = "/api/users/" + currentUser;
+      // hash the new password here
+      if (data.password === "") {
+        delete data.password;
+      }
+      console.log(data);
+      const res = await axios.put(url, data);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      if (error.response?.status >= 400 && error.response.status <= 500) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   return (
     <div>
