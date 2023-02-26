@@ -4,6 +4,7 @@ import Heart from "react-heart";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
+import swal from "sweetalert2";
 
 function getKeys(obj) {
   var keys = [];
@@ -51,6 +52,10 @@ const BooksPageGenerator = ({ book }) => {
 
     booksCartNames[book.title] = booksCartNames[book.title] + quantity;
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
+    swal.fire({
+      icon: 'success',
+      title: 'Book added to cart'
+    })
     console.log(booksCartNames);
   }
 
@@ -63,6 +68,7 @@ const BooksPageGenerator = ({ book }) => {
       setQuantity(quantity - 1);
     }
   }
+
 
   const [active, setActive] = useState(false);
 

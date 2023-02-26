@@ -105,9 +105,7 @@ const Browse = () => {
           Browse
         </div>
       </div>
-      <button onClick={() => {localStorage.removeItem("option")}}>
-        clear
-      </button>
+
       <div class=" xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid">
         <p className={`${styles.paragraph} max-w-[1158px] relative grid gap-2`}>
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

@@ -175,18 +175,33 @@ const MainCart = ({ currentUser }) => {
       }
     }
   }
+  var allUsers;
+  var currentBalance;
+  if (currentUser && currentUser.length !== 0) {
+    allUsers = ValidatedUsers(currentUser);
+    currentBalance = userData(allUsers, currentUser);
+  }
 
-
-  var allUsers = ValidatedUsers(currentUser);
-  const availbleBalance = userData(allUsers, currentUser);
-
-  var puchaseBooks = (currentUser, availbleBalance) => {
+  const availableBalance = () => {
     if (currentUser && currentUser.length !== 0) {
-      data.balance = availbleBalance - calculatePrice(books, booksCartNames);
-      localStorage.setItem("books_cart", JSON.stringify([]));
-      localStorage.setItem("booksCartNames", JSON.stringify({}));
-      handleChange()
-      window.location.reload();
+      var allUsers = ValidatedUsers(currentUser);
+      return userData(allUsers, currentUser);
+    }
+    return 0;
+  };
+
+  var puchaseBooks = (currentUser) => {
+    if (currentUser && currentUser.length !== 0) {
+      console.log(currentBalance);
+      if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
+        data.balance = currentBalance - calculatePrice(books, booksCartNames);
+        localStorage.setItem("books_cart", JSON.stringify([]));
+        localStorage.setItem("booksCartNames", JSON.stringify({}));
+        handleChange();
+      } else {
+        handleChange();
+        window.location.reload();
+      }
     } else {
       navigate("/login");
     }
@@ -196,7 +211,7 @@ const MainCart = ({ currentUser }) => {
     <div>
       <Grid item xs={12}>
         <span class="text-center text-3xl px-16 py-3">
-          Available balance: ${availbleBalance}
+          Available balance: ${availableBalance()}
         </span>
       </Grid>
       <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
@@ -271,7 +286,7 @@ const MainCart = ({ currentUser }) => {
           <button
             class="col-span-2 bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
             onClick={() => {
-              puchaseBooks(currentUser, availbleBalance);
+              puchaseBooks(currentUser);
             }}
             type="submit"
           >
