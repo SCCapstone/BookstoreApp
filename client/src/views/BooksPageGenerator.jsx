@@ -69,7 +69,7 @@ const BooksPageGenerator = ({ book }) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <span class="text-center text-3xl px-16">
+        <span class="text-center text-3xl px-16 py-3">
           {book.title} by {book.author}
         </span>
       </Grid>
