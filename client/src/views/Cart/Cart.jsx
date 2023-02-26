@@ -1,5 +1,5 @@
 import { CartProvider, useCart } from "react-use-cart";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
@@ -84,7 +84,6 @@ const MainCart = ({ currentUser }) => {
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
   var token = localStorage.getItem("token");
   var user = localStorage.getItem("user");
-  console.log(user);
 
   var puchaseBooks = (currentUser) => {
     if (currentUser && currentUser.length !== 0) {
@@ -146,13 +145,10 @@ const MainCart = ({ currentUser }) => {
       [name]: value,
     });
   };
-  console.log(currentUser);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(data.balance);
       // temporary for right now but later redo this to use put commands instead of post
       const url = "/api/users/" + currentUser;
       // hash the new password here
@@ -169,6 +165,34 @@ const MainCart = ({ currentUser }) => {
       }
     }
   };
+
+  function ValidatedUsers(props) {
+    const [currentUser, setCurrentUser] = useState("");
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+      async function getValidatedUsers() {
+        const url = "/api/users";
+        const res = await axios.get(url);
+        const users = res.data;
+        setCurrentUser(props.currentUser);
+        setUsers(users);
+      }
+      getValidatedUsers();
+    }, [props.currentUser]);
+    return users;
+  }
+  var allUsers = ValidatedUsers(currentUser);
+
+  function userData(users, currentUser){
+    for(let i = 0; i < users.length; ++i){
+      if(users[i]._id == currentUser){
+        console.log(users[i]);
+      }
+    }
+
+  }
+  userData(allUsers, currentUser);
 
   return (
     <div>
