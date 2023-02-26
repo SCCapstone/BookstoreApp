@@ -194,7 +194,12 @@ const MainCart = ({ currentUser }) => {
     if (currentUser && currentUser.length !== 0) {
       console.log(currentBalance);
       if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
-        data.balance = currentBalance - calculatePrice(books, booksCartNames);
+        if (currentBalance - calculatePrice(books, booksCartNames) === 0) {
+          data.balance = "0";
+        } else {
+          data.balance = currentBalance - calculatePrice(books, booksCartNames);
+        }
+        console.log(data.balance);
         localStorage.setItem("books_cart", JSON.stringify([]));
         localStorage.setItem("booksCartNames", JSON.stringify({}));
         handleChange();
