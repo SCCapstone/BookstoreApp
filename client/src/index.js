@@ -7,7 +7,17 @@ import { CartProvider } from "react-use-cart";
 import Main_Cart from "./views/Cart/Cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-localStorage.setItem('cartItems', JSON.stringify(0));
+
+const tmp = JSON.parse(localStorage.getItem('cartItems'));
+
+// if(tmp == null){localStorage.setItem('cartItems', JSON.stringify(0));}
+
+// tmp = JSON.parse(localStorage.getItem('books_cart'));
+// // if(tmp == null){localStorage.setItem("books_cart", JSON.stringify([]));}
+
+// tmp = JSON.parse(localStorage.getItem('booksCartNames'));
+// if(tmp == null){localStorage.setItem("booksCartNames", JSON.stringify([]));}
+
 root.render(
   <React.StrictMode>
     <App />

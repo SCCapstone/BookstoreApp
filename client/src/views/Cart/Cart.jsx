@@ -82,8 +82,18 @@ function calculatePrice(books, booksCartNames) {
 const MainCart = ({ currentUser }) => {
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+  console.log(booksCartNames);
+  localStorage.setItem("cartItemsQuantity", findQuantity(booksCartNames));
 
   const [quantity, setQuantity] = useState(booksCartNames);
+
+  function findQuantity(booksCartNames) {
+    let count = 0;
+    for (var key in booksCartNames) count = count + booksCartNames[key];
+    return count;
+  }
+
+
   function add(booksCartNames, bookName) {
     console.log("adding");
     booksCartNames[bookName] = booksCartNames[bookName] + 1;

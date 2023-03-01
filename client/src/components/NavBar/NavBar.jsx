@@ -12,13 +12,14 @@ const NavBar = ({ user }) => {
   const navigate = useNavigate();
   const [shoppingCartQuantity, setShoppingCartQuantity] = useState(0);
 
-  // useEffect(() => {
-  //   const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
-  //   // if (items) {
-  //   //   setShoppingCartQuantity(items);
-  //   // }
-  //   console.log(items);
-  // }, []);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
+    if (items) {
+      setShoppingCartQuantity(items);
+    }
+    console.log(items);
+  }, []);
 
   var loginOrLogout = () => {
     if (user && user.length !== 0) {

@@ -32,6 +32,8 @@ const BooksPageGenerator = ({ book }) => {
     var books_cart = JSON.parse(localStorage.getItem("books_cart"));
     if (books_cart == null) {
       books_cart = [];
+      localStorage.setItem("books_cart", JSON.stringify([]));
+      localStorage.setItem("booksCartNames", JSON.stringify({}));
     }
     for (let i = 0; i < quantity; i++) {
       books_cart.push(book);
@@ -60,6 +62,7 @@ const BooksPageGenerator = ({ book }) => {
       icon: "success",
       title: "Book added to cart",
     });
+    console.log(booksCartNames);
     console.log(booksCartNames);
   }
 
