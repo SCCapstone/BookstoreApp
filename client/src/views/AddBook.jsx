@@ -53,6 +53,7 @@ const AddBook = (user) => {
             inputData.stock = stock;
             inputData.stars = 0;
             inputData.quantitySold = 0;
+            inputData.date = '0-00-000';
             inputData.imageId = "This doesn't work if empty, fix later";
             const url = "/api/books";
             const { data: res } = await axios.post(url, inputData);

@@ -11,6 +11,7 @@ const bookSchema = new mongoose.Schema({
   summary: { type: String, required: true },
   imageId: { type: String, required: true },
   quantitySold: { type: String, required: false },
+  date: { type: String, required: true },
 });
 
 bookSchema.methods.generateAuthToken = function () {
@@ -56,6 +57,10 @@ const validate = (data) => {
       .required()
       .label("QuantitySold")
       .error(new Error("Quantity Sold is bad")),
+    date: Joi.string()
+      .required()
+      .label("Date")
+      .error(new Error("Date is bad")),
   });
   return schema.validate(data);
 };
