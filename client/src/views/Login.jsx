@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import Button from '@mui/material/Button';
 import { TextField } from "@mui/material";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Login = () => {
   const [data, setData] = useState({
@@ -9,6 +15,7 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +39,16 @@ const Login = () => {
       console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {
         setError(error.response.data.message);
+        setOpen(true);
       }
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
   
   return (
@@ -66,10 +81,11 @@ const Login = () => {
                 placeholder="Enter Password"
                 onChange={handleChange}
               />
-              {error &&
-                <div className = "text-red-500 text-sm">
-                  {error}
-                </div> }
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                  <Alert onClose={handleClose} severity="error">
+                    {error}
+                  </Alert>
+                </Snackbar>
             </div>
 
 
