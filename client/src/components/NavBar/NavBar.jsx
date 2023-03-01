@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, Link } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
 
@@ -6,19 +6,27 @@ import { ButtonGroup, Button, AddIcon, RemoveIcon } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 
+let val = 0;
 
+function cartChange() {
+  var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+  val = findQuantity(booksCartNames);
+}
 
-const NavBar = ({ user }) => {
+function findQuantity(booksCartNames) {
+  let count = 0;
+  for (var key in booksCartNames) count = count + booksCartNames[key];
+  return count;
+}
+
+const NavBar = ({ user, items }) => {
   const navigate = useNavigate();
   const [shoppingCartQuantity, setShoppingCartQuantity] = useState(0);
 
-
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
-    if (items) {
-      setShoppingCartQuantity(items);
+    if (val) {
+      setShoppingCartQuantity(val);
     }
-    console.log(items);
   }, []);
 
   var loginOrLogout = () => {
@@ -46,7 +54,7 @@ const NavBar = ({ user }) => {
           </span>
           <div class="flex md:order-2 grid grid-cols-5">
             <Badge
-              badgeContent={shoppingCartQuantity}
+              badgeContent={val}
               color="primary"
               className=""
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -76,4 +84,4 @@ const NavBar = ({ user }) => {
   );
 };
 
-export default NavBar;
+export { NavBar, cartChange };
