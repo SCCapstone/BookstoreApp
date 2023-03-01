@@ -66,6 +66,10 @@ const Login = () => {
                 placeholder="Enter Password"
                 onChange={handleChange}
               />
+              {error &&
+                <div className = "text-red-500 text-sm">
+                  {error}
+                </div> }
             </div>
 
 
