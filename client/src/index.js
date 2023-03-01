@@ -7,6 +7,7 @@ import { CartProvider } from "react-use-cart";
 import Main_Cart from "./views/Cart/Cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+localStorage.setItem('cartItems', JSON.stringify(0));
 root.render(
   <React.StrictMode>
     <App />
