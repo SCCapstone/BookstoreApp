@@ -4,8 +4,11 @@ import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 import books from "../Books";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { cartChange } from "../../components/NavBar/NavBar";
+
+cartChange();
 
 function clear_cart() {
   localStorage.setItem("books_cart", JSON.stringify([]));
@@ -33,7 +36,6 @@ function addItem(book) {
   books_cart.push(book);
   localStorage.setItem("books_cart", JSON.stringify(books_cart));
   localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
-  console.log(booksCartNames);
 }
 
 function getBook(books, bookName) {
@@ -82,10 +84,19 @@ function calculatePrice(books, booksCartNames) {
 const MainCart = ({ currentUser }) => {
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+  localStorage.setItem("cartItemsQuantity", findQuantity(booksCartNames));
 
   const [quantity, setQuantity] = useState(booksCartNames);
+
+  console.log(booksCartNames);
+
+  function findQuantity(booksCartNames) {
+    let count = 0;
+    for (var key in booksCartNames) count = count + booksCartNames[key];
+    return count;
+  }
+
   function add(booksCartNames, bookName) {
-    console.log("adding");
     booksCartNames[bookName] = booksCartNames[bookName] + 1;
     setQuantity(booksCartNames);
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
@@ -93,7 +104,6 @@ const MainCart = ({ currentUser }) => {
   }
 
   function subtract(booksCartNames, bookName) {
-    console.log("subing");
     if (quantity[bookName] > 0) {
       booksCartNames[bookName] = booksCartNames[bookName] - 1;
       setQuantity(booksCartNames);
@@ -139,11 +149,9 @@ const MainCart = ({ currentUser }) => {
       if (data.password === "") {
         delete data.password;
       }
-      console.log(data);
       const res = await axios.put(url, data);
       window.location.reload();
     } catch (error) {
-      console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {
         setError(error.response.data.message);
       }
@@ -170,7 +178,6 @@ const MainCart = ({ currentUser }) => {
   function userData(users, currentUser) {
     for (let i = 0; i < users.length; ++i) {
       if (users[i]._id === currentUser) {
-        console.log(users[i].balance.$numberDecimal);
         return users[i].balance.$numberDecimal;
       }
     }
@@ -192,14 +199,12 @@ const MainCart = ({ currentUser }) => {
 
   var puchaseBooks = (currentUser) => {
     if (currentUser && currentUser.length !== 0) {
-      console.log(currentBalance);
       if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
         if (currentBalance - calculatePrice(books, booksCartNames) === 0) {
           data.balance = "0";
         } else {
           data.balance = currentBalance - calculatePrice(books, booksCartNames);
         }
-        console.log(data.balance);
         localStorage.setItem("books_cart", JSON.stringify([]));
         localStorage.setItem("booksCartNames", JSON.stringify({}));
         handleChange();

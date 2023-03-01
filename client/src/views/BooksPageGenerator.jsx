@@ -5,6 +5,8 @@ import { Grid, Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 import swal from "sweetalert2";
+import { cartChange } from "../components/NavBar/NavBar";
+
 
 function getKeys(obj) {
   var keys = [];
@@ -32,6 +34,8 @@ const BooksPageGenerator = ({ book }) => {
     var books_cart = JSON.parse(localStorage.getItem("books_cart"));
     if (books_cart == null) {
       books_cart = [];
+      localStorage.setItem("books_cart", JSON.stringify([]));
+      localStorage.setItem("booksCartNames", JSON.stringify({}));
     }
     for (let i = 0; i < quantity; i++) {
       books_cart.push(book);
@@ -56,11 +60,12 @@ const BooksPageGenerator = ({ book }) => {
 
     booksCartNames[book.title] = booksCartNames[book.title] + quantity;
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
-    swal.fire({
-      icon: "success",
-      title: "Book added to cart",
-    });
-    console.log(booksCartNames);
+    // cartChange();
+    // swal.fire({
+    //   icon: "success",
+    //   title: "Book added to cart",
+    // });
+    window.location.reload(false);
   }
 
   function add(quantity) {

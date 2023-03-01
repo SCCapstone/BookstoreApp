@@ -1,5 +1,5 @@
 import { React } from "react";
-import NavBar from "./NavBar";
+import {NavBar} from "./NavBar";
 import SideBar from "./SideBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../../views/Home";
@@ -22,13 +22,18 @@ import MyAccount from "../../views/MyAccount";
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
+  const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
+  console.log(items);
+  
+
+
   return (
     <div className="pt-16 bg-gainsboro">
       <div className="flex">
         <SideBar user={user}/>
         <div className="px-16"></div>
         <BrowserRouter>
-          <NavBar user={user} userType={userType} />
+          <NavBar user={user} userType={userType} items={items} />
           <Routes>
             {/* All users */}
             <Route path="/" element={<Home />} />
