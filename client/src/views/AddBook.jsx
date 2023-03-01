@@ -15,6 +15,7 @@ const AddBook = (user) => {
         author: "",
         price: 1,
         summary: "",
+        imageId: "",
         });
         const [error, setError] = useState("");
 
@@ -50,11 +51,11 @@ const AddBook = (user) => {
         try {
             let inputData = data;
             inputData.price = Number(data.price);
-            inputData.stock = stock;
+            inputData.stock = 1000;
             inputData.stars = 0;
             inputData.quantitySold = 0;
-            inputData.date = '0-00-000';
-            inputData.imageId = "This doesn't work if empty, fix later";
+            // inputData.date = '0-00-000';
+            inputData.imageId = 'require(./Books/default.png)';
             const url = "/api/books";
             const { data: res } = await axios.post(url, inputData);
             localStorage.setItem("token", res.data);
@@ -107,6 +108,15 @@ const AddBook = (user) => {
                     placeholder="Author"
                     name="author"
                     value={data.author}
+                    onChange={handleChange}
+                />
+                 <TextField
+                    variant="filled"
+                    required
+                    label="imageId"
+                    placeholder="imageId"
+                    name="imageId"
+                    value={data.imageId}
                     onChange={handleChange}
                 />
                 <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
