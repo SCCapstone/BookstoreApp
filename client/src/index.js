@@ -10,13 +10,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const tmp = JSON.parse(localStorage.getItem('cartItems'));
 
-// if(tmp == null){localStorage.setItem('cartItems', JSON.stringify(0));}
-
-// tmp = JSON.parse(localStorage.getItem('books_cart'));
-// // if(tmp == null){localStorage.setItem("books_cart", JSON.stringify([]));}
-
-// tmp = JSON.parse(localStorage.getItem('booksCartNames'));
-// if(tmp == null){localStorage.setItem("booksCartNames", JSON.stringify([]));}
 
 root.render(
   <React.StrictMode>
