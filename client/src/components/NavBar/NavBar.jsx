@@ -5,7 +5,6 @@ import { IoMdCart } from "react-icons/io";
 import { ButtonGroup, Button, AddIcon, RemoveIcon } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
-
 import ProfileIcon from "../ProfileIcon";
 
 let val = 0;
@@ -80,7 +79,6 @@ const NavBar = ({ user, items }) => {
               </span>
             </button>
             <div className="pt-1"> {ProfileIcon()}</div>
-            <div> {ProfileIcon()}</div>
           </div>
         </div>
       </nav>
