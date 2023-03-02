@@ -79,6 +79,8 @@ const NavBar = ({ user, items }) => {
                 {user && user.length !== 0 ? "Logout" : "Login"}
               </span>
             </button>
+            <div className="pt-1"> {ProfileIcon()}</div>
+            <div> {ProfileIcon()}</div>
           </div>
         </div>
       </nav>
