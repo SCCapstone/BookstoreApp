@@ -81,7 +81,7 @@ const Login = () => {
                 placeholder="Enter Password"
                 onChange={handleChange}
               />
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
                   <Alert onClose={handleClose} severity="error">
                     {error}
                   </Alert>
