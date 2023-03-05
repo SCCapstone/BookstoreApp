@@ -1,4 +1,4 @@
-const router = express.Router();
+const router = require("express").Router();
 const { Event, validate } = require("../models/event");
 
 router.get('/events', async (req, res) => {
