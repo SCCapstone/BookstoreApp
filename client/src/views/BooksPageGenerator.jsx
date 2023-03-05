@@ -95,7 +95,7 @@ const BooksPageGenerator = ({ book }) => {
         </div>
       </Grid>
       <Grid item xs={8}>
-        <ul className="text-bold text-xl">{book.price}</ul>
+        <ul className="text-bold text-xl">${book.price}</ul>
         <ReactStars
           count={5}
           value={book.stars}
@@ -117,7 +117,7 @@ const BooksPageGenerator = ({ book }) => {
           </span>
         </ul>
         <u>
-          <a href="/">Check availability in stores near you</a>
+          {/* <a href="/">Check availability in stores near you</a> */}
         </u>
         <div className="flex pb-2 pt-2">
           <Chip
