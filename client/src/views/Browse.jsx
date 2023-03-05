@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { styles } from "../styles";
 import books from "./Books";
 
-import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import axios from "axios";
+import { React, useState, useEffect } from "react";
 
 const decimalNumber = (price) => {
   var result = price - Math.floor(price) !== 0;
@@ -81,6 +81,16 @@ const sort = (books, selection) => {
 };
 
 const Browse = () => {
+  const [books, setBooks] = useState([]);
+  const fetchBooks = () => {
+    return fetch("/api/books")
+      .then((response) => response.json())
+      .then((data) => setBooks(data));
+  };
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
   const [value, setValue] = useState("");
 
   const book_instance = localStorage.getItem("Book");
@@ -91,11 +101,6 @@ const Browse = () => {
   }
 
   let prevOption = localStorage.getItem("option");
-  // if (prevOption) {
-  //   setValue(prevOption);
-  // }
-  // console.log(prevOption);
-  // console.log(prevOption);
 
 
   return (

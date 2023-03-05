@@ -27,7 +27,6 @@ router.get("/", async (req, res) => {
     Book.find({}, function (err, books) {
       res.send(books);
     });
-    console.log(Book);
   } catch (error) {
     console.log(error);
   }
