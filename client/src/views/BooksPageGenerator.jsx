@@ -29,6 +29,7 @@ function iterate(iterable, callback) {
 
 const BooksPageGenerator = ({ book }) => {
   console.log(book)
+  console.log("this is working")
   const [quantity, setQuantity] = useState(1);
 
   function addItem(book, quantity) {
@@ -90,7 +91,7 @@ const BooksPageGenerator = ({ book }) => {
       </Grid>
       <Grid item xs={4} className={`text-right`}>
         <div class="min-w-[100px] max-w-[190px]">
-          <img src={book.imageId} alt="" className="row-span-2 border-2" />
+          <img src={'./default.jpg'} alt="" className="row-span-2 border-2" />
         </div>
       </Grid>
       <Grid item xs={8}>
@@ -131,7 +132,6 @@ const BooksPageGenerator = ({ book }) => {
             deleteIcon={<Add />}
           />
           <button className="pl-4" onClick={() => setQuantity(0)}>
-            {" "}
             Clear{" "}
           </button>
         </div>

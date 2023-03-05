@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState, useEffect } from "react";
 import {NavBar} from "./NavBar";
 import SideBar from "./SideBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -11,7 +11,7 @@ import Forums from "../../views/Forums";
 import Browse from "../../views/Browse";
 import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
-import books from "../../views/Books";
+// import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
 import CreateForum from "../../views/CreateForum";
 import MainCart from "../../views/Cart/Cart";
@@ -25,6 +25,15 @@ const CompleteNavbar = () => {
   const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
   console.log(items);
   
+  const [books, setBooks] = useState([]);
+  const fetchBooks = () => {
+    return fetch("/api/books")
+      .then((response) => response.json())
+      .then((data) => setBooks(data));
+  };
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
 
   return (
@@ -59,7 +68,7 @@ const CompleteNavbar = () => {
 
             {books.map((book) => (
               <Route
-                path={`${book.link}`}
+                path={`${book.title}`}
                 element={<BooksPageGenerator book={book} />}
               />
             ))}
