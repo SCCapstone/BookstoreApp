@@ -60,10 +60,13 @@ const sort = (books, selection) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1150px]">
       {books_changed.map((book) => (
+
         <div
           key={book}
           className="border-2 border-gainsboro hover:border-black"
         >
+          {console.log(book)}
+          {console.log(book.imageId)}
           <a href={`${book.link}`}>
             <img src={book.imageId} alt="" className="row-span-2" />
             <div class="text-lg">{book.title}</div>
