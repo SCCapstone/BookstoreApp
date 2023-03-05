@@ -34,25 +34,26 @@ const EmployeeHomepage = () => {
             start: event.target.eventStart.value,
             end: event.target.eventEnd.value,
         };
-        axios.post('/api/events', newEvent)
-        .then(response => {
-            setEvents([...events, response.data]);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        setEvents([...events, newEvent]);
+        // axios.post('/api/events', newEvent)
+        // .then(response => {
+        //     setEvents([...events, response.data]);
+        // })
+        // .catch(error => {
+        //     console.error(error);
+        // });
     };
 
-    const handleGetTodayEvents = () => {
-        axios.get('/api/events/today')
-          .then(response => {
-            setEvents(response.data);
-            setSelectedEvent(null);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      };
+    // const handleGetTodayEvents = () => {
+    //     axios.get('/api/events/today')
+    //       .then(response => {
+    //         setEvents(response.data);
+    //         setSelectedEvent(null);
+    //       })
+    //       .catch(error => {
+    //         console.error(error);
+    //       });
+    //   };
 
     // const handleEventSubmit = async (event) => {
     //     event.preventDefault();
@@ -71,17 +72,24 @@ const EmployeeHomepage = () => {
     //     }
     //   };
 
+//     const handleEventDelete = (eventToDelete) => {
+//         axios.delete(`/api/events/${eventToDelete.id}`)
+//     .then(response => {
+//     setEvents(events.filter(event => event.id !== eventToDelete.id));
+//     if (selectedEvent && selectedEvent.id === eventToDelete.id) {
+//       setSelectedEvent(null);
+//     }
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
+//         if (selectedEvent && selectedEvent === eventToDelete) {
+//             setSelectedEvent(null);
+//         }
+//     };
+
     const handleEventDelete = (eventToDelete) => {
-        axios.delete(`/api/events/${eventToDelete.id}`)
-    .then(response => {
-    setEvents(events.filter(event => event.id !== eventToDelete.id));
-    if (selectedEvent && selectedEvent.id === eventToDelete.id) {
-      setSelectedEvent(null);
-    }
-  })
-  .catch(error => {
-    console.error(error);
-  });
+        setEvents(events.filter(event => event !== eventToDelete));
         if (selectedEvent && selectedEvent === eventToDelete) {
             setSelectedEvent(null);
         }
@@ -283,7 +291,7 @@ const EmployeeHomepage = () => {
                     className="w-full p-2 border rounded"
                 />
                 <button 
-                    onClick={handleGetTodayEvents}
+                    // onClick={handleEventSubmit}
                     type="submit" 
                     className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center"
                 >
