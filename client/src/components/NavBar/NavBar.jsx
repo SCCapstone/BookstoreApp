@@ -2,6 +2,8 @@ import { React, useState, useEffect, Link } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
 
+import navbar_logo from "../NavBar/navbar_logo.jpg"
+
 import { ButtonGroup, Button, AddIcon, RemoveIcon } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
