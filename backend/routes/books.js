@@ -22,24 +22,25 @@ router.post("/", async (req, res) => {
   }
 });
 
-// router.get("/", async (req, res) => {
-//   try {
-//     Book.find({}, function (err, books) {
-//       res.send(books);
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+router.get("/", async (req, res) => {
+  try {
+    Book.find({}, function (err, books) {
+      res.send(books);
+    });
+    console.log(Book);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-// router.delete("/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     await Book.deleteOne({ _id: id });
-//     res.send("Got a DELETE request at /books");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Book.deleteOne({ _id: id });
+    res.send("Got a DELETE request at /books");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;
