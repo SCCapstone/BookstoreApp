@@ -35,6 +35,7 @@ const CompleteNavbar = () => {
     fetchBooks();
   }, []);
 
+  // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));  
 
   return (
     <div className="pt-16 bg-gainsboro">
