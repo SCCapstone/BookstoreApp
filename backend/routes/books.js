@@ -3,6 +3,7 @@ const { Book, validate } = require("../models/book");
 
 router.post("/", async (req, res) => {
   try {
+    console.log(req.body);
     const { error } = validate(req.body);
     if (error) {
       console.log(error);
@@ -22,15 +23,15 @@ router.post("/", async (req, res) => {
   }
 });
 
-// router.get("/", async (req, res) => {
-//   try {
-//     Book.find({}, function (err, books) {
-//       res.send(books);
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+router.get("/", async (req, res) => {
+  try {
+    Book.find({}, function (err, books) {
+      res.send(books);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // router.delete("/:id", async (req, res) => {
 //   try {

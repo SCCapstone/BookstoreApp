@@ -1,13 +1,14 @@
 import { React, useState } from "react";
 import axios from "axios";
 import { Button, Grid } from "@mui/material";
-import { Chip, Avatar } from "@mui/material";
+import { Chip, Avatar, Autocomplete } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import FormControl from "@mui/material/FormControl";
 import FilledInput from '@mui/material/FilledInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Remove, Add } from "@mui/icons-material"
+import { Remove, Add } from "@mui/icons-material";
+import swal from 'sweetalert2';
 
 const AddBook = (user) => {
     const [data, setData] = useState({
@@ -15,10 +16,38 @@ const AddBook = (user) => {
         author: "",
         price: 1,
         summary: "",
-        });
-        const [error, setError] = useState("");
+        genre: []
+    });
+    
+    const [error, setError] = useState("");
 
-        const handleChange = (e) => {
+    const potentialGenres = [
+        "Fantasy",
+        "Science Fiction",
+        "Action",
+        "Mystery",
+        "Horror",
+        "Thriller",
+        "Historical Fiction",
+        "Romance",
+        "Graphic Novel",
+        "Young Adult",
+        "Children",
+        "Biography",
+        "Cooking",
+        "Art",
+        "Self-Help",
+        "History",
+        "Travel",
+        "True Crime",
+        "Humor",
+        "Guides",
+        "Religion and Spirituality",
+        "Parenting",
+        "Science"
+    ];
+
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setData({
             ...data,
@@ -55,8 +84,16 @@ const AddBook = (user) => {
             inputData.quantitySold = 0;
             inputData.imageId = "This doesn't work if empty, fix later";
             const url = "/api/books";
-            const { data: res } = await axios.post(url, inputData);
-            localStorage.setItem("token", res.data);
+            console.log(inputData);
+            // const { data: res } = await axios.post(url, inputData).then(res => {
+            //     if (res.status = 200) {
+            //         swal.fire({
+            //             icon: "success",
+            //             title: "Successfully Added Book"
+            //         })
+            //     }
+            // });
+            // localStorage.setItem("token", res.data);
             window.location = "/";
         } catch (error) {
             console.log(error);
@@ -129,6 +166,19 @@ const AddBook = (user) => {
                     multiline
                     rows={3}
                     onChange={handleChange}
+                />
+                <Autocomplete
+                    multiple
+                    value={data.genre}
+                    options={potentialGenres}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            variant="filled"
+                            label="Genres"
+                            placeholder="Genres"
+                        />
+                    )}
                 />
                 <div className="flex pb-2 pt-2">
                     <Chip 
