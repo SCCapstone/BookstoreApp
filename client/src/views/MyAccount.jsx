@@ -49,32 +49,6 @@ const MyAccount = ({ currentUser }) => {
                 <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 max-w-[1300px]">
                     My Account Profile
                 </div>
-                <div className="row justify-content-around mt-5 user-info">
-                    <div className="col-12 col-md-3">
-                        <figure className='avatar avatar-profile'>
-                            <img 
-                            className="rounded-circle img-fluid" 
-                            src= ''
-                            alt= '' 
-                            />
-                        </figure>
-                    </div>
-                    
-                    <div className="col-12 col-md-5">
-                        <h4>Full Name:</h4>
-                        <p>{ data.firstName }{ data.lastName }</p>
-                        <h4>Email:</h4>
-                        <p>{ data.email }</p>
-
-                    </div>
-                </div>
-
-                <div class="text-center text-black text-3xl rounded py-3 max-w-[1300px]">
-                    <a href="#" id="edit_account" className="btn btn-primary btn-block my-1">
-                        Edit Account
-                    </a> 
-                </div> 
-
             <form class="w-full max-w-lg" onSubmit={handleSubmit}>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
