@@ -55,6 +55,15 @@ const AddBook = (user) => {
         });
     };
 
+    const addGenre = (e) => {
+        console.log(e.target);
+        const { value } = e.target;
+        setData({
+            ...data,
+            ["genre"]: value,
+        });
+    };
+
     const [stock, setStock] = useState(1);
 
     function addStock(stock) {
@@ -104,10 +113,10 @@ const AddBook = (user) => {
     };
 
     const isLoggedIn = () => {
-        console.log('wassup');
+        // console.log('wassup');
         const currentUser = user.currentUser;
-        console.log(currentUser && currentUser.length !== 0);
-        console.log(user);
+        // console.log(currentUser && currentUser.length !== 0);
+        // console.log(user);
         return currentUser && currentUser.length !== 0;
     };
 
@@ -169,7 +178,9 @@ const AddBook = (user) => {
                 />
                 <Autocomplete
                     multiple
+                    name="genre"
                     value={data.genre}
+                    onChange={addGenre}
                     options={potentialGenres}
                     renderInput={(params) => (
                         <TextField
