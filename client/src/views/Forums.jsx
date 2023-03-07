@@ -38,7 +38,7 @@ export default class Forums extends React.Component {
         </div>
         <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-1 h-full g-6">
           <div class="w-full gap-2 ">
-            <div className="grid grid-rows-4 grid-flow-col gap-2">
+            <div className="grid grid-flow-row gap-2">
               {this.state.forums.map((forum) => (
                 <div
                   key={forum}
