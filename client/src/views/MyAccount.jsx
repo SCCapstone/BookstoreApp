@@ -1,11 +1,8 @@
-import React, { useState, Component }  from "react";
+import React, { Component }  from "react";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom"
+import swal from 'sweetalert2';
 
-class MyAccount extends Component {
-    // using ID in localStorage, fetch data from Mongo and put it in the verified users page so that it can be connected to current user
-    // password needs to be hashed
-
+export default class MyAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,45 +18,59 @@ class MyAccount extends Component {
         console.log(this.props.currentUser);
         await axios.get(url).then(res => {
             const user = res.data;
+            user.password = "";
             this.setState((state) => ({
                 user: user 
             }));
             this.user = user;
             console.log(user);
-        })
+        });
         console.log(this.state.user);
         console.log(this.user);
     }
-
-    componentWillUnmount() {
-
-    }
     
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setData({
-    //         ...data,
-    //         [name]: value,
-    //     });
-    // };
+    handleChange = (e) => {
+        const { name, value } = e.target;
+        console.log(name);
+        console.log(value);
+        let tempUser = this.state.user;
+        tempUser[name] = value;
+        this.setState((state) => ({
+            user: tempUser
+        }));
+    };
     
-    async handleSubmit(e) {
+    handleSubmit = e => {
         e.preventDefault();
         try {
-        // temporary for right now but later redo this to use put commands instead of post
-          const url = "/api/users/" + this.state.user;
-          console.log(url);
-        //   // hash the new password here
-        //   if (data.password === "") {
-        //     delete data.password;
-        //   }
-        //   console.log(data);
-        //   const res = await axios.put(url, data);
-        //   window.location.reload();
+            // temporary for right now but later redo this to use put commands instead of post
+            const url = "/api/users/" + this.state.user._id;
+            console.log(url);
+
+            // hash the new password here
+            let tempUser = this.state.user;
+            if (tempUser.password === "") {
+                delete tempUser.password;
+            }
+
+            // axios call to update user
+            axios.put(url, tempUser).then(res => {
+                if (res.status === 200) {
+                    swal.fire({
+                        icon: 'success',
+                        title: 'Successfully Updated User'
+                    });    
+                }
+            });
+
         } catch (error) {
-          console.log(error);
-        //   if (error.response?.status >= 400 && error.response.status <= 500) {
-        //     setError(error.response.data.message);
+            // show error
+            console.log(error);
+            swal.fire({
+                icon: 'error',
+                title: 'Try Again Later',
+                text: error.text,
+            });
         }
     }
     
@@ -70,7 +81,7 @@ class MyAccount extends Component {
                         My Account Profile
                     </div>
                 
-                <form class="w-full max-w-lg" /*onSubmit={handleSubmit}*/>
+                <form class="w-full max-w-lg" onSubmit={this.handleSubmit}>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
@@ -81,9 +92,9 @@ class MyAccount extends Component {
                                 name="firstName"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 value={this.state.user.firstName}
-                                // maxLength={30}
-                                // placeholder=" "
-                                // onChange={handleChange}
+                                maxLength={30}
+                                placeholder=" "
+                                onChange={this.handleChange}
                             />
                             <p class="text-red-500 text-xs italic">Please fill out this field.</p>
                         </div>
@@ -96,9 +107,9 @@ class MyAccount extends Component {
                                 name="lastName" 
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   
                                 value={this.state.user.lastName}
-                                // maxLength={30}
-                                // placeholder=" "
-                                // onChange={handleChange}
+                                maxLength={30}
+                                placeholder=" "
+                                onChange={this.handleChange}
                             />
                         </div>
                     </div>
@@ -112,8 +123,8 @@ class MyAccount extends Component {
                                 name="email"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   
                                 value={this.state.user.email}
-                                // placeholder=" "
-                                // onChange={handleChange}
+                                placeholder=" "
+                                onChange={this.handleChange}
                             />
                         </div>
                     </div>
@@ -127,8 +138,8 @@ class MyAccount extends Component {
                                 name="password" 
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
                                 value={this.state.user.password}
-                                // placeholder="Change Your Password..."
-                                // onChange={state.}
+                                placeholder="Change Your Password..."
+                                onChange={this.handleChange}
                             />
                         </div>
                     </div>
@@ -143,5 +154,3 @@ class MyAccount extends Component {
         )
     }
 }
-
-export default MyAccount;
