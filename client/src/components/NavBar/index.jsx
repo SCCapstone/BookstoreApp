@@ -22,10 +22,7 @@ import MyAccount from "../../views/MyAccount";
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
-  const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
-  console.log(items);
-  
-
+  const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));  
 
   return (
     <div className="pt-16 bg-gainsboro">
