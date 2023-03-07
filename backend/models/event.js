@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken")
 const Joi = require("joi");
 
 const eventSchema = new mongoose.Schema({
@@ -6,6 +7,13 @@ const eventSchema = new mongoose.Schema({
   start: { type: Date, required: true },
   end: { type: Date, required: true },
 });
+
+eventSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
+      expiresIn: "7d",
+    });
+    return token;
+  };
 
 const Event = mongoose.model("events", eventSchema);
 
