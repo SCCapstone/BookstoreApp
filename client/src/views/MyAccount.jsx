@@ -9,7 +9,10 @@ class MyAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {}
+            user: {
+                firstName: 'chad',
+                lastName: ''
+            }
         };
     }
 
@@ -18,10 +21,18 @@ class MyAccount extends Component {
         console.log(this.props.currentUser);
         await axios.get(url).then(res => {
             const user = res.data;
-            this.setState({ user });
+            this.setState((state) => ({
+                user: user 
+            }));
+            this.user = user;
             console.log(user);
         })
         console.log(this.state.user);
+        console.log(this.user);
+    }
+
+    componentWillUnmount() {
+
     }
     
     // const handleChange = (e) => {
@@ -69,7 +80,7 @@ class MyAccount extends Component {
                                 type="text"
                                 name="firstName"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                // value={data.firstName}
+                                value={this.state.user.firstName}
                                 // maxLength={30}
                                 // placeholder=" "
                                 // onChange={handleChange}
@@ -84,7 +95,7 @@ class MyAccount extends Component {
                                 type="text"
                                 name="lastName" 
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   
-                                // value={data.lastName}
+                                value={this.state.user.lastName}
                                 // maxLength={30}
                                 // placeholder=" "
                                 // onChange={handleChange}
@@ -100,7 +111,7 @@ class MyAccount extends Component {
                                 type="text" 
                                 name="email"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"   
-                                // value={data.email}
+                                value={this.state.user.email}
                                 // placeholder=" "
                                 // onChange={handleChange}
                             />
@@ -115,7 +126,7 @@ class MyAccount extends Component {
                                 type="password"
                                 name="password" 
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                                // value={data.password}
+                                value={this.state.user.password}
                                 // placeholder="Change Your Password..."
                                 // onChange={state.}
                             />
