@@ -22,10 +22,7 @@ import MyAccount from "../../views/MyAccount";
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
-  const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
-  console.log(items);
-  
-
+  const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));  
 
   return (
     <div className="pt-16 bg-gainsboro">
@@ -46,7 +43,7 @@ const CompleteNavbar = () => {
             <Route path="/cart" element={<MainCart currentUser={localStorage.getItem("userID")}  />} />
 
             {/* Admin and Customer */}
-            <Route path="/my_account" element={<MyAccount currentUser={localStorage.getItem("userID")} />} />
+            <Route path="/my_account" element={<MyAccount currentUser={user} />} />
             
             {/* Admin */}
             <Route path="/add_book" element={<AddBook currentUser={user} />} />

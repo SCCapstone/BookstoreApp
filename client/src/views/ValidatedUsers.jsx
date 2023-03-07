@@ -12,6 +12,7 @@ export default class ValidatedUsers extends React.Component {
     const url = "/api/users";
     axios.get(url).then((res) => {
       const users = res.data;
+      console.log(this.currentUser);
       this.setState({ currentUser: this.props.currentUser, users: users });
     });
   }
