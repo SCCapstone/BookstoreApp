@@ -15,24 +15,19 @@ export default class MyAccount extends Component {
 
     async componentDidMount() {
         const url = "/api/users/" + this.props.currentUser;
-        console.log(this.props.currentUser);
+
         await axios.get(url).then(res => {
-            const user = res.data;
+            let user = res.data;
             user.password = "";
+
             this.setState((state) => ({
                 user: user 
             }));
-            this.user = user;
-            console.log(user);
         });
-        console.log(this.state.user);
-        console.log(this.user);
     }
     
     handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(name);
-        console.log(value);
         let tempUser = this.state.user;
         tempUser[name] = value;
         this.setState((state) => ({
@@ -45,7 +40,6 @@ export default class MyAccount extends Component {
         try {
             // temporary for right now but later redo this to use put commands instead of post
             const url = "/api/users/" + this.state.user._id;
-            console.log(url);
 
             // hash the new password here
             let tempUser = this.state.user;

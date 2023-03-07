@@ -12,7 +12,6 @@ export default class ValidatedUsers extends React.Component {
     const url = "/api/users";
     axios.get(url).then((res) => {
       const users = res.data;
-      console.log(this.currentUser);
       this.setState({ currentUser: this.props.currentUser, users: users });
     });
   }
@@ -30,7 +29,6 @@ export default class ValidatedUsers extends React.Component {
   }
 
   async editUser(user, newRole) {
-    console.log(user, newRole);
     const id = user._id;
     const url = "/api/users/" + id;
     try {
