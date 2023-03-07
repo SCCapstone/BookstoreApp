@@ -38,13 +38,30 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+
     const user = await User.findById(id);
     if (!user) {
-      return res.status(404).send({message: "User not found"});
+      return res.status(404).send({ message: "User not found" });
     }
+
     // any time where the user is different from the req.body, we want the req.body to prevail
     if (req.body.firstName) {
       user.firstName = req.body.firstName;
@@ -67,11 +84,11 @@ router.put("/:id", async (req, res) => {
       user.balance = req.body.balance;
     }
     await user.save();
-    res.send({message: "User role updated"});
+    res.send({ message: "User role updated" });
   } catch (error) {
     console.log(error);
   }
-})
+});
 
 router.delete("/:id", async (req, res) => {
   try {
