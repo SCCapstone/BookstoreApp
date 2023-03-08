@@ -1,90 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { styles } from "../styles";
 import defaultBooks from "./Books";
-
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-
-const decimalNumber = (price) => {
-  var result = price - Math.floor(price) !== 0;
-  if (result) {
-    price = price.toString();
-    price = price.slice(price.indexOf(".") + 1, price.length);
-    return Number(price);
-  } else {
-    return;
-  }
-};
-
-const wholeNumber = (price) => {
-  price = price.toString();
-  price = price.slice(0, price.indexOf("."));
-  return Number(price);
-};
-
-const sort = (books, selection) => {
-  var books_changed = [];
-
-  switch (selection) {
-    case "Relavent":
-      books_changed = books;
-      break;
-    case "Best Selling":
-      books_changed = books.sort(function (a, b) {
-        return b.quantitySold - a.quantitySold;
-      });
-      break;
-    case "New Arrivals":
-      books_changed = books.sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date);
-      });
-      break;
-    case "Price: low to high":
-      books_changed = books.sort(function (a, b) {
-        return a.price - b.price;
-      });
-      break;
-    case "Price: high to low":
-      books_changed = books.sort(function (a, b) {
-        return b.price - a.price;
-      });
-      break;
-    default:
-      books_changed = books;
-      break;
-  }
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1150px]">
-      {books_changed.map((book) => (
-        <div
-          key={book}
-          className="border-2 border-gainsboro hover:border-black"
-        >
-          <a href={`${book.link}`}>
-            <img src={book.imageId} alt="" className="row-span-2" />
-            <div class="text-lg">{book.title}</div>
-            <div class="felx items-end">by: {book.author}</div>
-            {/*<div class="text-lg">
-              ${wholeNumber(book.price)}.
-              <span className="text-sm">{decimalNumber(book.price)}</span>
-      </div>*/}
-            <div>${book.price}</div>
-          </a>
-        </div>
-      ))}
-    </div>
-  );
-};
+import sort from "../components/sort";
+import { Autocomplete, TextField } from "@mui/material";
 
 class Browse extends Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
+      book: null,
+      inputBook: null,
       value: "Relevant"
     };
   }
@@ -110,10 +36,12 @@ class Browse extends Component {
   }
   // const book_instance = localStorage.getItem("Book");
 
-  // function changeOption(option) {
-  //   setValue(option);
-  //   localStorage.setItem("option", option);
-  // }
+  changeOption(option) {
+    this.setState((state) => ({
+      value: option
+    }));
+    // localStorage.setItem("option", option);
+  }
 
   // let prevOption = localStorage.getItem("option");
   // if (prevOption) {
@@ -157,10 +85,39 @@ class Browse extends Component {
             />
           </p>
         </div> */}
+
+        <div class="flex pb-2">
+          <Autocomplete
+            className="rounded border bg-white py-2 max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px]"
+            value={this.state.book}
+            onChange={(event, newValue) => {
+              this.setState((state) => ({
+                  book: newValue
+              }));
+            }}
+            inputValue={this.state.inputBook}
+            onInputChange={(event, newInputValue) => {
+                this.setState((state) => ({
+                    inputBook: newInputValue
+                }));
+            }}
+            options={this.state.books}
+            getOptionLabel={(option) => option.title}
+            renderInput={(params) => (
+                <TextField
+                    {...params}
+                    variant="filled"
+                    label="Search"
+                    placeholder="Search Books"
+                />
+            )}
+          />
+        </div>
+
         <div class="flex pb-2">
           <select
             className="rounded border bg-white py-2 grid max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px]"
-            // onChange={(e) => changeOption(e.target.value)}
+            onChange={(e) => this.changeOption(e.target.value)}
           >
             <option selected disabled hidden>
               Sort by:
