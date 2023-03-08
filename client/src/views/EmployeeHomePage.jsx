@@ -1,28 +1,53 @@
-import React, { useState } from "react";
-import Calendar from 'react-calendar';
+import React, { useState, useEffect } from "react";
+import Calendar from "react-calendar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"
 
 const EmployeeHomepage = () => { 
     const [date, setDate] = useState(new Date());
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
-    // const [showUsers, setShowUsers] = useState(false);
-    // const [showBooks, setShowBooks] = useState(false);
+    
+    const fetchEvents = async () => {
+        try {
+          const response = await axios.get("/api/events");
+          if (Array.isArray(response.data)) {
+            setEvents(response.data);
+          }
+        } catch (error) {
+          console.log("Error: ", error);
+        }
+      };
 
-    const handleEventSubmit = (event) => {
+    useEffect(() => {
+        fetchEvents();
+    }, []);
+
+    const handleEventSubmit = async (event) => {
         event.preventDefault();
         const newEvent = {
-            title: event.target.eventTitle.value,
-            start: event.target.eventStart.value,
-            end: event.target.eventEnd.value,
+          title: event.target.eventTitle.value,
+          start: event.target.eventStart.value,
+          end: event.target.eventEnd.value,
         };
-        setEvents([...events, newEvent]);
-    };
-    const handleEventDelete = (eventToDelete) => {
-        setEvents(events.filter(event => event !== eventToDelete));
-        if (selectedEvent && selectedEvent === eventToDelete) {
-            setSelectedEvent(null);
+        try {
+          const response = await axios.post("/api/events", newEvent);
+          setEvents([...events, response.data]);
+        } catch (error) {
+          console.log("Error: ", error);
+        }
+      };
+
+      const handleEventDelete = async (eventToDelete) => {
+        try {
+            await axios.delete(`/api/events/${eventToDelete._id}`);
+            if (Array.isArray(events)) {
+                setEvents(events.filter((event) => event !== eventToDelete));
+            }
+            if (selectedEvent && selectedEvent === eventToDelete) {
+                setSelectedEvent(null);
+            }
+        } catch (error) {
+            console.log("Error: ", error);
         }
     };
 
@@ -41,22 +66,27 @@ const EmployeeHomepage = () => {
                 value={date}
                 onChange={setDate}
                 tileDisabled = {() => false}
-                tileClassName={({date, view}) => {
-                    const eventDatesStart = events.map(event => new Date(event.start));
-                    const eventDatesEnd = events.map(event => new Date(event.end));
-                    const withinStartEnd = eventDatesStart.some((eventDatesStart, index) => {
-                        const eventDatesE = eventDatesEnd[index];
-                        return date >= eventDatesStart && date <= eventDatesE;
-                    });
-
-                    const firstDay = eventDatesStart.some(eventDate => eventDate.toDateString() == date.toDateString());
-
-                    if (withinStartEnd || firstDay) {
-                        return "bg-blue-500 text-white border border-gray"
-                    } else {
-                        return "border boder-gray"
+                tileClassName={({ date, view }) => {
+                    if (!Array.isArray(events)) {
+                      return "";
                     }
-                }}
+                    const eventDatesStart = events.map((event) => new Date(event.start));
+                    const eventDatesEnd = events.map((event) => new Date(event.end));
+                    const withinStartEnd = eventDatesStart.some((eventDatesStart, index) => {
+                      const eventDatesE = eventDatesEnd[index];
+                      return date >= eventDatesStart && date <= eventDatesE;
+                    });
+                  
+                    const firstDay = eventDatesStart.some(
+                      (eventDate) => eventDate.toDateString() == date.toDateString()
+                    );
+                  
+                    if (withinStartEnd || firstDay) {
+                      return "bg-blue-500 text-white border border-gray";
+                    } else {
+                      return "border boder-gray";
+                    }
+                  }}
                 tileContent={({date,view}) => {
                     const eventsThatStartOnDate = events.filter(
                         event => new Date(event.start).toDateString() === date.toDateString()
