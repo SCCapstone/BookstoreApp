@@ -13,13 +13,6 @@ const bookSchema = new mongoose.Schema({
   quantitySold: { type: String, required: false },
 });
 
-bookSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-    expiresIn: "7d",
-  });
-  return token;
-};
-
 const Book = mongoose.model("book", bookSchema);
 
 const validate = (data) => {
