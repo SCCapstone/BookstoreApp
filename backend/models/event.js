@@ -8,13 +8,6 @@ const eventSchema = new mongoose.Schema({
   end: { type: Date, required: true },
 });
 
-eventSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-      expiresIn: "7d",
-    });
-    return token;
-  };
-
 const Event = mongoose.model("events", eventSchema);
 
 const validate = (data) => {
