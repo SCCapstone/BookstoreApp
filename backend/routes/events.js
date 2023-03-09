@@ -15,17 +15,32 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Route to delete an event
-router.delete('/events/:id', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const deletedEvent = await Event.findByIdAndDelete(req.params.id);
-    if (!deletedEvent) {
-      res.status(404).json({ message: 'Event not found' });
-      return;
-    }
-    res.json(deletedEvent);
+    Event.find({}, function (err, events) {
+      res.send(events);
+    });
   } catch (error) {
     console.log(error);
+  }
+});
+
+// Route to delete an event
+router.delete("/:id", async (req, res) => {
+  try {
+    Event.findByIdAndDelete(req.params.id, (err, deletedEvent) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      } else if (!deletedEvent) {
+        res.status(404).json({ message: "Event not found" });
+      } else {
+        res.json(deletedEvent);
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
