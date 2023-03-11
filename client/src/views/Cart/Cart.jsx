@@ -86,7 +86,7 @@ function calculatePrice(books, booksCartNames) {
 const MainCart = ({ currentUser }) => {
   // const [books, setBooks] = useState([]);
   // setBooks(localStorage.getItem("books"))
-  var books = JSON.parse(localStorage.getItem("books"));
+  const books = JSON.parse(localStorage.getItem("books"));
   
   console.log(books);
 

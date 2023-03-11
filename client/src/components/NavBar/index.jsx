@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import {NavBar} from "./NavBar";
+import { NavBar } from "./NavBar";
 import SideBar from "./SideBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../../views/Home";
@@ -22,9 +22,9 @@ import MyAccount from "../../views/MyAccount";
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
-  const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
+  const items = JSON.parse(localStorage.getItem("cartItemsQuantity"));
   console.log(items);
-  
+
   const [books, setBooks] = useState([]);
   const fetchBooks = () => {
     return fetch("/api/books")
@@ -34,16 +34,21 @@ const CompleteNavbar = () => {
   useEffect(() => {
     fetchBooks();
   }, []);
-  localStorage.setItem("books", JSON.stringify(books));
+  const saveLocalTodos = () => {
+    if (books.length !== 0) {
+      //this line is new
+      localStorage.setItem("books", JSON.stringify(books));
+    }
+  };
+  saveLocalTodos();
   console.log(books);
 
-
-  // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));  
+  // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
 
   return (
     <div className="pt-16 bg-gainsboro">
       <div className="flex">
-        <SideBar user={user}/>
+        <SideBar user={user} />
         <div className="px-16"></div>
         <BrowserRouter>
           <NavBar user={user} userType={userType} items={items} />
@@ -56,15 +61,31 @@ const CompleteNavbar = () => {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browse" element={<Browse />} />
             <Route path="/create_account" element={<Signup />} />
-            <Route path="/cart" element={<MainCart currentUser={localStorage.getItem("userID")}  />} />
+            <Route
+              path="/cart"
+              element={
+                <MainCart currentUser={localStorage.getItem("userID")} />
+              }
+            />
 
             {/* Admin and Customer */}
-            <Route path="/my_account" element={<MyAccount currentUser={localStorage.getItem("userID")} />} />
-            
+            <Route
+              path="/my_account"
+              element={
+                <MyAccount currentUser={localStorage.getItem("userID")} />
+              }
+            />
+
             {/* Admin */}
             <Route path="/add_book" element={<AddBook currentUser={user} />} />
-            <Route path="/users" element={<ValidatedUsers currentUser={userType} />} />
-            <Route path="/emp_page" element={<EmployeeHomepage currentUser={userType} />} />
+            <Route
+              path="/users"
+              element={<ValidatedUsers currentUser={userType} />}
+            />
+            <Route
+              path="/emp_page"
+              element={<EmployeeHomepage currentUser={userType} />}
+            />
 
             {/* Admin, Employee, and Customer */}
             <Route path="/forums" element={<Forums currentUser={user} />} />
