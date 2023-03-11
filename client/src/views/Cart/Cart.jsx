@@ -13,6 +13,7 @@ cartChange();
 function clear_cart() {
   localStorage.setItem("books_cart", JSON.stringify([]));
   localStorage.setItem("booksCartNames", JSON.stringify({}));
+
   window.location.reload(false);
 }
 
@@ -41,7 +42,7 @@ function addItem(book) {
 function getBook(books, bookName) {
   for (let i = 0; i < books.length; ++i) {
     if (books[i].title == bookName) {
-      console.log(books[i]);
+      // console.log(books[i]);
       return books[i];
     }
   }
@@ -83,23 +84,20 @@ function calculatePrice(books, booksCartNames) {
 }
 
 const MainCart = ({ currentUser }) => {
-  const [books, setBooks] = useState([]);
-  const fetchBooks = () => {
-    return fetch("/api/books")
-      .then((response) => response.json())
-      .then((data) => setBooks(data));
-  };
-  useEffect(() => {
-    fetchBooks();
-  }, []);
+  // const [books, setBooks] = useState([]);
+  // setBooks(localStorage.getItem("books"))
+  var books = JSON.parse(localStorage.getItem("books"));
+  
+  console.log(books);
 
+  // console.log(books)
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
   localStorage.setItem("cartItemsQuantity", findQuantity(booksCartNames));
 
   const [quantity, setQuantity] = useState(booksCartNames);
 
-  console.log(booksCartNames);
+  // console.log(booksCartNames);
 
   function findQuantity(booksCartNames) {
     let count = 0;

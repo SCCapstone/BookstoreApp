@@ -104,7 +104,7 @@ const BooksPageGenerator = ({ book }) => {
           color1={"#000"}
           color2={"#c2b542"}
         />
-        <ul>Quantity Available: {book.stock}+</ul>
+        <ul>Quantity Available: {book.stock}</ul>
         <ul className="flex">
           Add to Wishlist: &nbsp;
           <span className="py-1">

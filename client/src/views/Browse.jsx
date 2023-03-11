@@ -91,6 +91,8 @@ const Browse = () => {
   useEffect(() => {
     fetchBooks();
   }, []);
+  // localStorage.setItem("books", JSON.stringify(books));
+  console.log(books);
 
   const [value, setValue] = useState("");
 

@@ -34,6 +34,9 @@ const CompleteNavbar = () => {
   useEffect(() => {
     fetchBooks();
   }, []);
+  localStorage.setItem("books", JSON.stringify(books));
+  console.log(books);
+
 
   // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));  
 
