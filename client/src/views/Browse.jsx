@@ -8,6 +8,7 @@ import Select from "@mui/material/Select";
 import axios from "axios";
 import { React, useState, useEffect } from "react";
 
+
 const decimalNumber = (price) => {
   var result = price - Math.floor(price) !== 0;
   if (result) {
@@ -66,7 +67,7 @@ const sort = (books, selection) => {
           className="border-2 border-gainsboro hover:border-black"
         >
           <a href={`${book.title}`}>
-            <img src={require('./default.jpg')} alt="" className="row-span-2" />
+            <img src={book.imageId} alt="" className="row-span-2" />
             <div class="text-lg">{book.title}</div>
             <div class="felx items-end">by: {book.author}</div>
             {/*<div class="text-lg">

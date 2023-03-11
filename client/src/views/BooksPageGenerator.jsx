@@ -91,7 +91,7 @@ const BooksPageGenerator = ({ book }) => {
         <div className="grid grid-cols-2 ">
           <div className="px-16 py-8">
             <img
-              src={require("./default.jpg")}
+              src={book.imageId}
               alt=""
               className="row-span-2 border-2"
             />
