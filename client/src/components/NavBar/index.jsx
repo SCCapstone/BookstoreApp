@@ -23,7 +23,7 @@ const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
   const items = JSON.parse(localStorage.getItem("cartItemsQuantity"));
-  console.log(items);
+  // console.log(items);
 
   const [books, setBooks] = useState([]);
   const fetchBooks = () => {
@@ -41,7 +41,7 @@ const CompleteNavbar = () => {
     }
   };
   saveLocalTodos();
-  console.log(books);
+  // console.log(books);
 
   // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
 

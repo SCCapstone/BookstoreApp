@@ -11,6 +11,19 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { Remove, Add } from "@mui/icons-material";
 import swal from "sweetalert2";
 
+
+function getBase64() {
+    var file = "./Books/default.jpg";
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+ }
+
 class AddBook extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +76,7 @@ class AddBook extends Component {
 
   submit = (e) => {
     e.preventDefault();
+ 
     try {
       const url = "/api/books";
       console.log(this.state);
@@ -102,7 +116,7 @@ class AddBook extends Component {
     return this.isLoggedIn() ? (
       <Grid container spacing={2}>
         <Grid item xs={12} className="justify-center py-5">
-          <span class="text-center px-16">Add Book</span>
+          <span class="text-center px-16 py-16 text-lg">Add Book</span>
         </Grid>
         <Grid item xs={6}></Grid>
         <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
@@ -118,6 +132,7 @@ class AddBook extends Component {
                 onChange={this.handleChange}
               />
             </Grid>
+            <h2>Choose an image for the book *</h2>
             <FileBase64
               type="file"
               multiple={false}
