@@ -7,7 +7,6 @@ import Popup from "reactjs-popup";
 import swal from "sweetalert2";
 import { cartChange } from "../components/NavBar/NavBar";
 
-
 function getKeys(obj) {
   var keys = [];
   iterate(obj, function (oVal, oKey) {
@@ -28,8 +27,8 @@ function iterate(iterable, callback) {
 }
 
 const BooksPageGenerator = ({ book }) => {
-  console.log(book)
-  console.log("this is working")
+  console.log(book);
+  console.log("this is working");
   const [quantity, setQuantity] = useState(1);
 
   function addItem(book, quantity) {
@@ -83,75 +82,82 @@ const BooksPageGenerator = ({ book }) => {
   const [active, setActive] = useState(false);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <span class="text-center text-3xl px-16 py-3">
+    <section class="grid grid-cols-5 max-w-[1300px]">
+      <div />
+      <div className="py-4 col-span-3">
+        <div class="grid text-center text-black text-3xl py-3 max-w-[1300px]">
           {book.title} by {book.author}
-        </span>
-      </Grid>
-      <Grid item xs={4} className={`text-right`}>
-        <div class="min-w-[100px] max-w-[190px]">
-        {/* <div> */}
-          <img src={require('./default.jpg')} alt="" className="row-span-2 border-2" />
         </div>
-      </Grid>
-      <Grid item xs={8}>
-        <ul className="text-bold text-xl">${book.price}</ul>
-        <ReactStars
-          count={5}
-          value={book.stars}
-          size={24}
-          edit={false}
-          color1={"#000"}
-          color2={"#c2b542"}
-        />
-        <ul>Quantity Available: {book.stock}</ul>
-        <ul className="flex">
-          Add to Wishlist: &nbsp;
-          <span className="py-1">
-            <Heart
-              style={{ width: "20px" }}
-              isActive={active}
-              onClick={() => setActive(!active)}
-              activeColor={"#404252"}
+        <div className="grid grid-cols-2 ">
+          <div className="px-16 py-8">
+            <img
+              src={require("./default.jpg")}
+              alt=""
+              className="row-span-2 border-2"
             />
-          </span>
-        </ul>
-        <u>
-          {/* <a href="/">Check availability in stores near you</a> */}
-        </u>
-        <div className="flex pb-2 pt-2">
-          <Chip
-            avatar={
-              <Avatar onClick={() => subtract(quantity)}>
-                <Remove />
-              </Avatar>
-            }
-            label={<p className="px-2 text-lg ">{quantity}</p>}
-            clickable
-            onDelete={() => add(quantity)}
-            deleteIcon={<Add />}
-          />
-          <button className="pl-4" onClick={() => setQuantity(0)}>
-            Clear{" "}
-          </button>
-        </div>
+          </div>
+          <div className="pt-12 grid grid-auto-rows">
+            <ul className="text-bold text-xl">${book.price}</ul>
+            <ReactStars
+              count={5}
+              value={book.stars}
+              size={24}
+              edit={false}
+              color1={"#000"}
+              color2={"#c2b542"}
+            />
 
-        <div class="flex mb-6">
-          <button
-            class="text-slate-800 font-semibold hover:text-black focus:text-black active:bg-green focus:bg-green bg-polished_pine rounded p-3 border-2 mr-3 min-w-[138px] max-w-[150px]"
-            onClick={() => addItem(book, quantity)}
-          >
-            Add to cart
-          </button>
+            <ul>Quantity Available: {book.stock}</ul>
+            <ul className="flex">
+              Add to Wishlist: &nbsp;
+              <span className="py-1">
+                <Heart
+                  style={{ width: "20px" }}
+                  isActive={active}
+                  onClick={() => setActive(!active)}
+                  activeColor={"#404252"}
+                />
+              </span>
+            </ul>
+            <u>
+              <a href="/">Check availability in stores near you</a>
+            </u>
 
-          {/* <button class="text-slate-800 font-semibold focus:text-black focus:bg-persian_plum rounded p-3 border-2 max-w-[150px]">
+            <div className="flex pb-2 pt-2">
+              <Chip
+                avatar={
+                  <Avatar onClick={() => subtract(quantity)}>
+                    <Remove />
+                  </Avatar>
+                }
+                label={<p className="px-2 text-lg ">{quantity}</p>}
+                clickable
+                onDelete={() => add(quantity)}
+                deleteIcon={<Add />}
+              />
+              <button className="pl-4" onClick={() => setQuantity(0)}>
+                {" "}
+                Clear{" "}
+              </button>
+            </div>
+
+            <div class="flex mb-6">
+              <button
+                class="text-slate-800 font-semibold hover:text-black focus:text-black active:bg-green focus:bg-green bg-polished_pine rounded p-3 border-2 mr-3 min-w-[138px] max-w-[150px]"
+                onClick={() => addItem(book, quantity)}
+              >
+                Add to cart
+              </button>
+
+              {/* <button class="text-slate-800 font-semibold focus:text-black focus:bg-persian_plum rounded p-3 border-2 max-w-[150px]">
             Instant Purchase
           </button> */}
+            </div>
+            <ul className="row-span-6" />
+          </div>
         </div>
-        <ul className="row-span-6" />
-      </Grid>
-    </Grid>
+      </div>
+    </section>
   );
 };
 
