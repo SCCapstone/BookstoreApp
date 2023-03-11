@@ -14,6 +14,7 @@ const Home = () => {
           Welcome
         </div>
       </div>
+      {/* Our group's main custom logo for the bookstore website*/}
       <div class="pb-4 h-full text-gray-800">
         <div class="flex xl:justify-center lg:justify-between justify-center items-center h-full g-6">
           <div class="xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-8/12 w-8/12 py-2 grid grid-rows-5 gap-2">

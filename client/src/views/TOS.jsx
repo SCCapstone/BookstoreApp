@@ -1,6 +1,9 @@
 import React from "react";
 import { styles } from "../styles";
 
+{/* The Terms of Service Page is a dead-end page that displays the privacy policy and how to contact us with any user questions. */}
+
+{/* initializes long and short constant, fixed strings which make up the TOS*/}
 const longText =
   "Our site uses an order form for customers to request information, products, and services. We request visitor's contact information (name, address, and email address) and financial information (payment information to make purchases). Contact information from the order form is used to ship orders to customers. The customer's contact information is used to contact the visitor when necessary. Financial information that is collected is used to bill the customer for products and services.";
 const longText2 =
@@ -16,6 +19,7 @@ const point1 = "You can send an email to info@mybookdispensary.com";
 const point2 = "You can send a letter to the following postal address.";
 
 const TOS = () => {
+  {/* returns the long and short string texts to create the TOS page as displayed in paragraph style */}
   return (
     <section>
       <div class="py-4">
