@@ -5,7 +5,8 @@ import { IoMdCart } from "react-icons/io";
 import { ButtonGroup, Button, AddIcon, RemoveIcon } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
-import ProfileIcon from "../ProfileIcon";
+//import ProfileIcon from "../ProfileIcon";
+import AccountMenu from "../AccountMenu";
 
 let val = 0;
 
@@ -78,7 +79,7 @@ const NavBar = ({ user, items }) => {
                 {user && user.length !== 0 ? "Logout" : "Login"}
               </span>
             </button>
-            <div className="pt-1"> {ProfileIcon()}</div>
+            <div className="pt-1"> {AccountMenu()}</div>
           </div>
         </div>
       </nav>
