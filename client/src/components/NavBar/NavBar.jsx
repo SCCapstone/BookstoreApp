@@ -1,8 +1,35 @@
-import React from "react";
+import { React, useState, useEffect, Link } from "react";
 import { useNavigate } from "react-router-dom";
+import { IoMdCart } from "react-icons/io";
 
-const NavBar = ({ user }) => {
+import navbar_logo from "../NavBar/navbar_logo.jpg"
+
+import { ButtonGroup, Button, AddIcon, RemoveIcon } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge } from "@mui/material";
+
+let val = 0;
+
+function cartChange() {
+  var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+  val = findQuantity(booksCartNames);
+}
+
+function findQuantity(booksCartNames) {
+  let count = 0;
+  for (var key in booksCartNames) count = count + booksCartNames[key];
+  return count;
+}
+
+const NavBar = ({ user, items }) => {
   const navigate = useNavigate();
+  const [shoppingCartQuantity, setShoppingCartQuantity] = useState(0);
+
+  useEffect(() => {
+    if (val) {
+      setShoppingCartQuantity(val);
+    }
+  }, []);
 
   var loginOrLogout = () => {
     if (user && user.length !== 0) {
@@ -10,12 +37,11 @@ const NavBar = ({ user }) => {
       localStorage.removeItem("userType");
       localStorage.removeItem("userID");
       window.location.reload();
+      navigate("/");
     } else {
       navigate("/login");
     }
   };
-
-
 
   return (
     <div>
@@ -23,13 +49,34 @@ const NavBar = ({ user }) => {
         <div class="container flex flex-wrap items-center justify-between mx-auto">
           <span className="flex gap-8">
             <a href="/" class="flex items-center cols-span-8">
-              <span className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white">
-                Book Store Website
-              </span>
+              <img
+              src={navbar_logo}
+              alt="BookStore Logo"
+              className="row-span-3"
+            />
             </a>
           </span>
-          <div class="flex md:order-2">
-            <button class="flex items-center" onClick={loginOrLogout}>
+          <div class="flex md:order-2 grid grid-cols-5">
+            <Badge
+              badgeContent={val}
+              color="primary"
+              className=""
+              anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            >
+              <IoMdCart
+                onClick={() => navigate("/cart")}
+                className=""
+                style={{
+                  position: "",
+                  top: "10px",
+                  right: "70px",
+                }}
+                size="40px"
+                color="white"
+              />
+            </Badge>
+            <div />
+            <button class="" onClick={loginOrLogout}>
               <span className="text-white text-xl">
                 {user && user.length !== 0 ? "Logout" : "Login"}
               </span>
@@ -41,4 +88,4 @@ const NavBar = ({ user }) => {
   );
 };
 
-export default NavBar;
+export { NavBar, cartChange };

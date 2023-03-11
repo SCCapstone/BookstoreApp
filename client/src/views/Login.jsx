@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import Button from '@mui/material/Button';
 import { TextField } from "@mui/material";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const Login = () => {
   const [data, setData] = useState({
@@ -9,6 +15,7 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +39,16 @@ const Login = () => {
       console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {
         setError(error.response.data.message);
+        setOpen(true);
       }
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
   
   return (
@@ -48,11 +63,11 @@ const Login = () => {
           </div>
           <form class="justify-center">
             <div class="mb-6">
-              <TextField
+              <input
                 name="email"
                 value={data.email}
-                class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid rounded focus:bg-white"
-                label="Enter Email"
+                class="form-control placeholder-black block w-full px-4 py-2 text-xl font-normal text-black bg-camel border border-solid border-black rounded focus:bg-white"
+                placeholder="Enter Email Address"
                 onChange={handleChange}
               />
             </div>
@@ -66,6 +81,11 @@ const Login = () => {
                 placeholder="Enter Password"
                 onChange={handleChange}
               />
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
+                  <Alert onClose={handleClose} severity="error">
+                    {error}
+                  </Alert>
+                </Snackbar>
             </div>
 
 
@@ -81,7 +101,7 @@ const Login = () => {
 
             <div class="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
               <Button
-                href="/create-account"
+                href="/create_account"
                 class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
               >
                 Register

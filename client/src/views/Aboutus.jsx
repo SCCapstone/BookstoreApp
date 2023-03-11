@@ -3,6 +3,8 @@ import book_dispensary from "../assets/book_dispensary.jpg";
 import { styles } from "../styles";
 
 const Aboutus = () => {
+  var books_cart = JSON.parse(localStorage.getItem("books_cart"));
+  console.log(books_cart);
   return (
     <section>
       <div class="py-4">
