@@ -1,174 +1,239 @@
-import { React, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
+import FileBase64 from "react-file-base64";
 import axios from "axios";
 import { Button, Grid } from "@mui/material";
-import { Chip, Avatar } from "@mui/material";
-import TextField from '@mui/material/TextField';
+import { Chip, Avatar, Autocomplete } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
-import FilledInput from '@mui/material/FilledInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import { Remove, Add } from "@mui/icons-material"
+import FilledInput from "@mui/material/FilledInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import { Remove, Add } from "@mui/icons-material";
+import swal from "sweetalert2";
 
-const AddBook = (user) => {
-    const [data, setData] = useState({
-        title: "",
-        author: "",
-        price: 1,
-        summary: "",
-        });
-        const [error, setError] = useState("");
-
-        const handleChange = (e) => {
-        const { name, value } = e.target;
-        setData({
-            ...data,
-            [name]: value,
-        });
+class AddBook extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      author: "",
+      price: 1,
+      summary: "",
+      stars: 0,
+      quantitySold: 0,
+      imageId: "",
+      stock: 1,
+      genre: [],
+      inputGenres: "",
     };
+  }
 
-    const [stock, setStock] = useState(1);
+  potentialGenres = [
+    "Fantasy",
+    "Science Fiction",
+    "Action",
+    "Mystery",
+    "Horror",
+    "Thriller",
+    "Historical Fiction",
+    "Romance",
+    "Graphic Novel",
+    "Young Adult",
+    "Children",
+    "Biography",
+    "Cooking",
+    "Art",
+    "Self-Help",
+    "History",
+    "Travel",
+    "True Crime",
+    "Humor",
+    "Guides",
+    "Religion and Spirituality",
+    "Parenting",
+    "Science",
+  ];
 
-    function addStock(stock) {
-        setStock(stock + 1);
-    };
-    
-    function subtract(stock) {
-        if (stock > 0) {
-            setStock(stock - 1);
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState((state) => ({
+      [name]: value,
+    }));
+  };
+
+  submit = (e) => {
+    e.preventDefault();
+    try {
+      const url = "/api/books";
+      console.log(this.state);
+      let inputData = this.state;
+      delete inputData.inputGenres;
+      axios.post(url, inputData).then((res) => {
+        if (res.status === 200 || res.status === 201) {
+          swal.fire({
+            icon: "success",
+            title: "Successfully Added Book",
+          });
         }
-    };
+      });
+      // localStorage.setItem("token", res.data);
 
-    function clearStock() {
-        let q = 0
-        setData({
-            stock: q,
-        });
-    };
+      // TO-DO: SET LOCATION TO BROWSE - RECENTLY ADDED
+      // window.location = "/";
+    } catch (error) {
+      console.log(error);
+      if (error.response?.status >= 400 && error.response.status <= 500) {
+        // setError(error.response.data.message);
+        console.log(error.response.data.message);
+      }
+    }
+  };
 
-    const submit = async (e) => {
-        e.preventDefault();
-        try {
-            let inputData = data;
-            inputData.price = Number(data.price);
-            inputData.stock = stock;
-            inputData.stars = 0;
-            inputData.quantitySold = 0;
-            inputData.imageId = "./default.jpg";
-            const url = "/api/books";
-            const { data: res } = await axios.post(url, inputData);
-            localStorage.setItem("token", res.data);
-            window.location = "/";
-        } catch (error) {
-            console.log(error);
-            if (error.response?.status >= 400 && error.response.status <= 500) {
-            setError(error.response.data.message);
-            }
-        }
-    };
+  isLoggedIn = () => {
+    const currentUser = this.props.currentUser;
+    return currentUser && currentUser.length !== 0;
+  };
 
-    const isLoggedIn = () => {
-        // console.log('wassup');
-        const currentUser = user.currentUser;
-        // console.log(currentUser && currentUser.length !== 0);
-        // console.log(user);
-        return currentUser && currentUser.length !== 0;
-    };
+  sendToLogin = () => {
+    window.location.href = "/login";
+  };
 
-    const sendToLogin = () => {
-        window.location.href = "/login";
-    };
-
-    return isLoggedIn() ? (
-    <Grid container spacing={2}>
+  render() {
+    return this.isLoggedIn() ? (
+      <Grid container spacing={2}>
         <Grid item xs={12} className="justify-center py-5">
-            <span class="text-center px-16">Add Book</span>
+          <span class="text-center px-16">Add Book</span>
         </Grid>
-        <Grid item xs={6}>
-            
-        </Grid>
+        <Grid item xs={6}></Grid>
         <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
-            <form>
-                <Grid item ms={12} class="pb-3">
-                    <TextField
-                        variant="filled"
-                        required
-                        label="Title"
-                        placeholder="Title"
-                        name="title"
-                        value={data.title}
-                        onChange={handleChange}
-                    />
-                </Grid>
+          <form>
+            <Grid item ms={12} class="pb-3">
+              <TextField
+                variant="filled"
+                required
+                label="Title"
+                placeholder="Title"
+                name="title"
+                value={this.state.title}
+                onChange={this.handleChange}
+              />
+            </Grid>
+            <FileBase64
+              type="file"
+              multiple={false}
+              onDone={({ base64 }) => this.state.imageId = base64}
+            />
+            <TextField
+              variant="filled"
+              required
+              label="Author"
+              placeholder="Author"
+              name="author"
+              value={this.state.author}
+              onChange={this.handleChange}
+            />
+            <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
+              <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
+              <FilledInput
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                label="Price"
+                type="number"
+                name="price"
+                data={this.state.price}
+                onChange={this.handleChange}
+              />
+            </FormControl>
+            <TextField
+              variant="filled"
+              required
+              label="Summary"
+              placeholder="Summary"
+              name="summary"
+              value={this.state.summary}
+              multiline
+              rows={3}
+              onChange={this.handleChange}
+            />
+            <Autocomplete
+              multiple
+              name="genre"
+              value={this.state.genre}
+              onChange={(event, newValue) => {
+                this.setState((state) => ({
+                  genre: newValue,
+                }));
+              }}
+              inputValue={this.state.inputGenres}
+              onInputChange={(event, newInputValue) => {
+                this.setState((state) => ({
+                  inputGenres: newInputValue,
+                }));
+              }}
+              options={this.potentialGenres}
+              renderInput={(params) => (
                 <TextField
-                    variant="filled"
-                    required
-                    label="Author"
-                    placeholder="Author"
-                    name="author"
-                    value={data.author}
-                    onChange={handleChange}
+                  {...params}
+                  variant="filled"
+                  label="Genres"
+                  placeholder="Genres"
                 />
-                <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
-                    <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
-                    <FilledInput
-                        startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                        label="Price"
-                        type="number"
-                        name="price"
-                        data={data.price}
-                        onChange={handleChange}
-                    />
-                </FormControl>
-                <TextField
-                    variant="filled"
-                    required
-                    label="Summary"
-                    placeholder="Summary"
-                    name="summary"
-                    value={data.summary}
-                    multiline
-                    rows={3}
-                    onChange={handleChange}
-                />
-                <div className="flex pb-2 pt-2">
-                    <Chip 
-                        avatar={
-                            <Avatar onClick={() => subtract(stock)}>
-                            <Remove />
-                            </Avatar>
-                        }
-                        label={
-                            <p className="px-2 text-lg ">{stock}</p>
-                        }
-                        clickable
-                        onDelete={() => addStock(stock)}
-                        deleteIcon={<Add />}
-                    />
-                    <button className="pl-4" onClick={() => clearStock()}>
-                        {" "}
-                        Clear{" "}
-                    </button>
-                </div>
+              )}
+            />
+            <div className="flex pb-2 pt-2">
+              <Chip
+                avatar={
+                  <Avatar
+                    onClick={() =>
+                      this.handleChange({
+                        target: { name: "stock", value: this.state.stock - 1 },
+                      })
+                    }
+                  >
+                    <Remove />
+                  </Avatar>
+                }
+                label={<p className="px-2 text-lg ">{this.state.stock}</p>}
+                clickable
+                onDelete={() =>
+                  this.handleChange({
+                    target: { name: "stock", value: this.state.stock + 1 },
+                  })
+                }
+                deleteIcon={<Add />}
+              />
+              <button
+                className="pl-4"
+                onClick={() =>
+                  this.handleChange({ target: { name: "stock", value: 0 } })
+                }
+              >
+                {" "}
+                Clear{" "}
+              </button>
+            </div>
 
-                <div class="text-center lg:text-left grid pb-6">
-                    <Button
-                        class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
-                        onClick={submit}
-                    >
-                        SUBMIT
-                    </Button>
-                </div>
-            </form>
+            <div class="text-center lg:text-left grid pb-6">
+              <Button
+                class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
+                onClick={this.submit}
+              >
+                SUBMIT
+              </Button>
+            </div>
+          </form>
         </Grid>
-    </Grid>
+      </Grid>
     ) : (
-        (sendToLogin(),
+      (this.sendToLogin(),
       (
         <div>
           <h1>Restricted to authenticated users only!</h1>
         </div>
       ))
     );
-};
+  }
+}
 
 export default AddBook;

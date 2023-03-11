@@ -3,6 +3,7 @@ const { Book, validate } = require("../models/book");
 
 router.post("/", async (req, res) => {
   try {
+    req.body.dateAdded = new Date();
     const { error } = validate(req.body);
     if (error) {
       console.log(error);
