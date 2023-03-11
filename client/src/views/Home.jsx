@@ -1,5 +1,5 @@
 import { React } from "react";
-import bookstore_logo from "../assets/bookstore_logo.jpg";
+import bookstore_logo from "../assets/bookstore_logo.jpg"; //import custom bookstore logo
 
 {/* The Home Page is the welcome page of our bookstore where users can see the weekly news letter
     to stay up to date with latest books and deals being available */}

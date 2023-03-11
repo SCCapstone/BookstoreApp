@@ -1,3 +1,4 @@
+//imports from material UI for use in login feature 
 import React, { useState } from "react";
 import axios from "axios";
 import Button from '@mui/material/Button';
@@ -5,18 +6,26 @@ import { TextField } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
+{/* The Login Page is where users will login with their registered email and password.
+If a user does not have a login credential they will click on the register button to get navigated to a sign up/register page
+In the event that the user has forgotten their password, they will click the forgot password button to navigate them to update their password*/}
+
+//uses to alert and foward and render to the different page if correct
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+//store the email and password of a user
 const Login = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  //used for the error with the use state
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
 
+  //used to associate the email and password with a corresponding name and value
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -25,12 +34,12 @@ const Login = () => {
     });
   };
 
+  //login - in a try, catch method where the user credentials are associated with a token, the type of user (customer, employee, or admin), and an ID
   const login = async (e) => {
     e.preventDefault();
     try {
       const url = "/api/auth";
       const { data: res } = await axios.post(url, data);
-      // console.log(res.data.data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userType", res.data.userType);
       localStorage.setItem("userID", res.data.userID);
@@ -44,6 +53,7 @@ const Login = () => {
     }
   };
 
+  //once event happens click to re-route
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -52,6 +62,7 @@ const Login = () => {
   };
   
   return (
+    //login with email and password - displayed as a form, is stored in the mongoDB database, and gets a handle change method
     <div class="pb-4 h-full text-gray-800 max-w-[1400px]">
       <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
         <div />
@@ -89,7 +100,7 @@ const Login = () => {
             </div>
 
 
-
+            {/* buttons for users to press for login, register, and forgot password*/}
             <div class="text-center lg:text-left grid pb-6">
               <Button
                 class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
