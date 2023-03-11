@@ -91,7 +91,8 @@ const BooksPageGenerator = ({ book }) => {
       </Grid>
       <Grid item xs={4} className={`text-right`}>
         <div class="min-w-[100px] max-w-[190px]">
-          <img src={'./default.jpg'} alt="" className="row-span-2 border-2" />
+        {/* <div> */}
+          <img src={require('./default.jpg')} alt="" className="row-span-2 border-2" />
         </div>
       </Grid>
       <Grid item xs={8}>

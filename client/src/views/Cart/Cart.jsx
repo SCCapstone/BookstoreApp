@@ -244,7 +244,7 @@ const MainCart = ({ currentUser }) => {
               <div class="min-w-[80px] max-w-[120px]">
                 <img
                   // src={getBook(books, bookName).imageId}
-                  src={'./default.jpg'}
+                  src={require('../Books/default.jpg')}
                   alt=""
                   className="row-span-2 border-2 justify-right"
                 />
