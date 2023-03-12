@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import axios from "axios";
 
-const AddBook = (user) => {
+const BookFavorites = (user) => {
 };
 
-export default AddBook;
+export default BookFavorites;
