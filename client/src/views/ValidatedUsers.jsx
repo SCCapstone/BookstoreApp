@@ -29,7 +29,6 @@ export default class ValidatedUsers extends React.Component {
   }
 
   async editUser(user, newRole) {
-    console.log(user, newRole);
     const id = user._id;
     const url = "/api/users/" + id;
     try {

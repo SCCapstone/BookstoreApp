@@ -2,6 +2,8 @@ import { React, useState, useEffect, Link } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
 
+import navbar_logo from "../NavBar/navbar_logo.jpg"
+
 import { ButtonGroup, Button, AddIcon, RemoveIcon } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
@@ -48,9 +50,11 @@ const NavBar = ({ user, items }) => {
         <div class="container flex flex-wrap items-center justify-between mx-auto">
           <span className="flex gap-8">
             <a href="/" class="flex items-center cols-span-8">
-              <span className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white">
-                Book Store Website
-              </span>
+              <img
+              src={navbar_logo}
+              alt="BookStore Logo"
+              className="row-span-3"
+            />
             </a>
           </span>
           <div class="flex md:order-2 grid grid-cols-5">
