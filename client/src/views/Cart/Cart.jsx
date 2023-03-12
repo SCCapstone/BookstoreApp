@@ -185,7 +185,7 @@ const MainCart = ({ currentUser }) => {
   function userData(users, currentUser) {
     for (let i = 0; i < users.length; ++i) {
       if (users[i]._id === currentUser) {
-        return users[i].balance.$numberDecimal;
+        return round(users[i].balance.$numberDecimal, 2);
       }
     }
   }
@@ -196,10 +196,13 @@ const MainCart = ({ currentUser }) => {
     currentBalance = userData(allUsers, currentUser);
   }
 
+  const [userBalance, setUserBalance] = useState(0);
+
   const availableBalance = () => {
     if (currentUser && currentUser.length !== 0) {
       var allUsers = ValidatedUsers(currentUser);
-      return userData(allUsers, currentUser);
+      var tmp = userData(allUsers, currentUser);
+      return tmp;
     }
     return 0;
   };
@@ -210,7 +213,7 @@ const MainCart = ({ currentUser }) => {
         if (currentBalance - calculatePrice(books, booksCartNames) === 0) {
           data.balance = "0";
         } else {
-          data.balance = currentBalance - calculatePrice(books, booksCartNames);
+          data.balance = round(currentBalance - calculatePrice(books, booksCartNames),2);
         }
         localStorage.setItem("books_cart", JSON.stringify([]));
         localStorage.setItem("booksCartNames", JSON.stringify({}));
@@ -223,6 +226,7 @@ const MainCart = ({ currentUser }) => {
       navigate("/login");
     }
   };
+
 
   return (
     <div class="py-6">
