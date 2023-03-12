@@ -11,18 +11,35 @@ import Forums from "../../views/Forums";
 import Browse from "../../views/Browse";
 import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
-import books from "../../views/Books";
+import defaultBooks from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
 import CreateForum from "../../views/CreateForum";
 import MainCart from "../../views/Cart/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
+import axios from "axios";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
-  const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));  
+  const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
+
+  let booksLoaded = false;
+
+  async function getBooks() {
+    const url = "/api/books";
+    await axios.get(url).then(res => {
+      if (res.status === 200) {
+        booksLoaded = true;
+        return res.data;
+      } else {
+        return defaultBooks;
+      }
+    });
+  }
+
+  let books = getBooks();
 
   return (
     <div className="pt-16 bg-gainsboro">
@@ -54,9 +71,9 @@ const CompleteNavbar = () => {
             <Route path="/forums" element={<Forums currentUser={user} />} />
             <Route path="/createforums" element={<CreateForum />} />
 
-            {books.map((book) => (
+            {(booksLoaded ? books : defaultBooks).map((book) => (
               <Route
-                path={`${book.link}`}
+                path={`/${book.author}/${book.title}/`}
                 element={<BooksPageGenerator book={book} />}
               />
             ))}

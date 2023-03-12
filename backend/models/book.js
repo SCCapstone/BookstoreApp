@@ -11,6 +11,8 @@ const bookSchema = new mongoose.Schema({
   summary: { type: String, required: true },
   imageId: { type: String, required: true },
   quantitySold: { type: String, required: false },
+  genre: { type: Array, required: true },
+  dateAdded: { type: Date, required: false },
 });
 
 bookSchema.methods.generateAuthToken = function () {
@@ -27,35 +29,44 @@ const validate = (data) => {
     title: Joi.string()
       .required()
       .label("Title")
-      .error(new Error("Title is bad")),
+      .error(new Error("Title is invalid")),
     author: Joi.string()
       .required()
       .label("Author")
-      .error(new Error("Author is bad")),
+      .error(new Error("Author is invalid")),
     price: Joi.number()
       .required()
       .label("Price")
-      .error(new Error("Price is bad")),
+      .error(new Error("Price is invalid")),
     stock: Joi.number()
       .required()
       .label("Quantity")
-      .error(new Error("Stock is bad")),
+      .error(new Error("Stock is invalid")),
     stars: Joi.number()
       .required()
       .label("Stars")
-      .error(new Error("Stars is bad")),
+      .error(new Error("Stars is invalid")),
     summary: Joi.string()
       .required()
       .label("Summary")
-      .error(new Error("Summary is bad")),
+      .error(new Error("Summary is invalid")),
     imageId: Joi.string()
       .required()
       .label("ImageId")
-      .error(new Error("ImageId is bad")),
+      .error(new Error("ImageId is invalid")),
     quantitySold: Joi.number()
       .required()
       .label("QuantitySold")
-      .error(new Error("Quantity Sold is bad")),
+      .error(new Error("Quantity Sold is invalid")),
+    genre: Joi.array()
+      .items(Joi.string())
+      .required()
+      .label("Genre")
+      .error(new Error("Genre is invalid")),
+    dateAdded: Joi.date()
+      .required()
+      .label("Date Added")
+      .error(new Error("Date Added is invalid")),
   });
   return schema.validate(data);
 };
