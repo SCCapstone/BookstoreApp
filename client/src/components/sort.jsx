@@ -58,9 +58,7 @@ const sort = (books, selection) => {
             <img src={book.imageId} alt="" className="row-span-2" />
             <div class="text-lg">{book.title}</div>
             <div class="felx items-end">by: {book.author}</div>
-            <div class="text-lg">
-              <span className="text-sm">{decimalNumber(book.price)}</span>
-            </div>
+
             <div>${book.price}</div>
           </a>
         </div>
