@@ -1,46 +1,84 @@
-import { React, useState } from "react";
-import { FaUser } from "react-icons/fa";
-import MyAccount from "../views/MyAccount";
-import ValidatedUsers from "../views/ValidatedUsers";
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
-const ProfileIcon = () => {
-  const [state, setState] = useState(true);
+export default function ProfileIcon() {
+  const [anchorEl, setAnchorEl] = useState(true);
+  const open = Boolean(anchorEl);
+  
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <div>
-      <button
-        class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:mr-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white"
-        onClick={() => setState(!state)}
+    <React.Fragment>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+        <Tooltip title="Account settings">
+          <IconButton
+            onClick={() => setAnchorEl(!anchorEl)}
+            size="small"
+            sx={{ ml: 2 }}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar sx={{ width: 33, height: 33 }}>RB</Avatar>
+          </IconButton>
+        </Tooltip>
+      </Box>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right-center', vertical: 'top-center' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top-center' }}
       >
-        <FaUser className="w-8 h-8 mr-2 rounded-full" />
-        <svg
-          class="w-4 h-4 mx-1.5"
-          aria-hidden="true"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-      </button>
-      <div
-        id="dropdownAvatarName"
-        class={` ${
-          state && "hidden"
-        }  bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
-      >
-        <div class="px-4 py-3 text-sm text-gray-900 dark:text-black">
-          <div class="font-medium ">{ ValidatedUsers.user } </div>
-          <div class="truncate">{ }</div>
-        </div>
-        <ul
-          class="py-2 text-sm text-gray-700 dark:text-gray-200"
-          aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton"
-        >
+        <MenuItem onClick={handleClose}>
           <li>
+            <a
+              href="/my_account"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Profile
+            </a>
+          </li>
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleClose}>
+        <li>
             <a
               href="/"
               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -48,26 +86,18 @@ const ProfileIcon = () => {
               Dashboard
             </a>
           </li>
-          <li>
-            <a
-              href="/my_account"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Settings
-            </a>
-          </li>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
           <li>
             <a
               href="/cart"
               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
             >
-              Cart
+              Cart & Earnings
             </a>
           </li>
-        </ul>
-      </div>
-    </div>
+        </MenuItem>
+      </Menu>
+    </React.Fragment>
   );
 };
-
-export default ProfileIcon;
