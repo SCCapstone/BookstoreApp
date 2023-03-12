@@ -108,7 +108,7 @@ const BooksPageGenerator = ({ book }) => {
 
             <ul>Quantity Available: {book.stock}</ul>
             <ul className="flex">
-              <a href="/wish_list">
+              <a href="/favorites">
                 Add to Wishlist: &nbsp;
               </a>
               <span className="py-1">
