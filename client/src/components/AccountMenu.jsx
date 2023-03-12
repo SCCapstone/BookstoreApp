@@ -3,12 +3,9 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import MyAccount from '../views/MyAccount';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(true);
@@ -17,11 +14,10 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-        <Typography sx={{ minWidth: 100 }}>Profile</Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={() => setAnchorEl(!anchorEl)}
@@ -31,7 +27,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 33, height: 33 }}>RB</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -67,23 +63,39 @@ export default function AccountMenu() {
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: 'right-center', vertical: 'top-center' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top-center' }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+          <li>
+            <a
+              href="/my_account"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Profile
+            </a>
+          </li>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
+        <li>
+            <a
+              href="/"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Dashboard
+            </a>
+          </li>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <MyAccount fontSize="small" />
-          </ListItemIcon>
-          Settings
+          <li>
+            <a
+              href="/cart"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            >
+              Cart & Earnings
+            </a>
+          </li>
         </MenuItem>
       </Menu>
     </React.Fragment>
