@@ -1,6 +1,16 @@
 const router = require("express").Router();
 const { Book, validate } = require("../models/book");
 
+router.get("/", async (req, res) => {
+  try {
+    Book.find({}, function (err, books) {
+      res.send(books);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     req.body.dateAdded = new Date();
@@ -20,16 +30,6 @@ router.post("/", async (req, res) => {
     res.status(201).send({ message: "Book added successfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal server error!!!" });
-  }
-});
-
-router.get("/", async (req, res) => {
-  try {
-    Book.find({}, function (err, books) {
-      res.send(books);
-    });
-  } catch (error) {
-    console.log(error);
   }
 });
 

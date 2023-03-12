@@ -18,6 +18,7 @@ import MainCart from "../../views/Cart/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
+import axios from "axios";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -34,13 +35,13 @@ const CompleteNavbar = () => {
   useEffect(() => {
     fetchBooks();
   }, []);
-  const saveLocalTodos = () => {
+  const saveBooksToLocalStorage = () => {
     if (books.length !== 0) {
       //this line is new
       localStorage.setItem("books", JSON.stringify(books));
     }
   };
-  saveLocalTodos();
+  saveBooksToLocalStorage();
   // console.log(books);
 
   // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));

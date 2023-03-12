@@ -79,7 +79,6 @@ class AddBook extends Component {
  
     try {
       const url = "/api/books";
-      console.log(this.state);
       let inputData = this.state;
       delete inputData.inputGenres;
       axios.post(url, inputData).then((res) => {
