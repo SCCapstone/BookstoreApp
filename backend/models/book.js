@@ -21,9 +21,7 @@ bookSchema.methods.generateAuthToken = function () {
   });
   return token;
 };
-
 const Book = mongoose.model("book", bookSchema);
-
 const validate = (data) => {
   const schema = Joi.object({
     title: Joi.string()

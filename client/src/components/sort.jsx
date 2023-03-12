@@ -48,7 +48,7 @@ const sort = (books, selection) => {
     }
   
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-2 sm:max-w-[700px] min-w-[1100px] max-w-[1150px]">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-2 sm:max-w-[500px] md:max-w-[700px] lg:max-w-[1000px] max-w-[1150px]">
         {books_changed.map((book) => (
           <div
             key={book}

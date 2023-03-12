@@ -3,7 +3,7 @@ import { React, useState, useEffect } from "react";
 import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
-import books from "../Books";
+// import books from "../Books";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { cartChange } from "../../components/NavBar/NavBar";
@@ -13,6 +13,7 @@ cartChange();
 function clear_cart() {
   localStorage.setItem("books_cart", JSON.stringify([]));
   localStorage.setItem("booksCartNames", JSON.stringify({}));
+
   window.location.reload(false);
 }
 
@@ -41,6 +42,7 @@ function addItem(book) {
 function getBook(books, bookName) {
   for (let i = 0; i < books.length; ++i) {
     if (books[i].title == bookName) {
+      // console.log(books[i]);
       return books[i];
     }
   }
@@ -82,13 +84,18 @@ function calculatePrice(books, booksCartNames) {
 }
 
 const MainCart = ({ currentUser }) => {
+  // const [books, setBooks] = useState([]);
+  // setBooks(localStorage.getItem("books"))
+  const books = JSON.parse(localStorage.getItem("books"));
+
+  // console.log(books)
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
   localStorage.setItem("cartItemsQuantity", findQuantity(booksCartNames));
 
   const [quantity, setQuantity] = useState(booksCartNames);
 
-  console.log(booksCartNames);
+  // console.log(booksCartNames);
 
   function findQuantity(booksCartNames) {
     let count = 0;
@@ -218,9 +225,9 @@ const MainCart = ({ currentUser }) => {
   };
 
   return (
-    <div>
+    <div class="py-6">
       <Grid item xs={12}>
-        <span class="text-center text-3xl px-16 py-3">
+        <span class="text-center text-3xl px-16 py-6 mt-10">
           Available balance: ${availableBalance()}
         </span>
       </Grid>
