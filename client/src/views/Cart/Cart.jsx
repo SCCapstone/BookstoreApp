@@ -87,8 +87,6 @@ const MainCart = ({ currentUser }) => {
   // const [books, setBooks] = useState([]);
   // setBooks(localStorage.getItem("books"))
   const books = JSON.parse(localStorage.getItem("books"));
-  
-  console.log(books);
 
   // console.log(books)
   const navigate = useNavigate();
