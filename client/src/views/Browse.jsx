@@ -66,7 +66,7 @@ const sort = (books, selection) => {
           key={book}
           className="border-2 border-gainsboro hover:border-black"
         >
-          <a href={`${book.title}`}>
+          <a href={`/${book.author}/${book.title}/`}>
             <img src={book.imageId} alt="" className="row-span-2" />
             <div class="text-lg">{book.title}</div>
             <div class="felx items-end">by: {book.author}</div>

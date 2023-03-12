@@ -93,7 +93,7 @@ const CompleteNavbar = () => {
 
             {books.map((book) => (
               <Route
-                path={`${book.title}`}
+                path={`/${book.author}/${book.title}/`}
                 element={<BooksPageGenerator book={book} />}
               />
             ))}

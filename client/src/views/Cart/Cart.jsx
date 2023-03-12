@@ -227,9 +227,9 @@ const MainCart = ({ currentUser }) => {
   };
 
   return (
-    <div>
+    <div class="py-6">
       <Grid item xs={12}>
-        <span class="text-center text-3xl px-16 py-3">
+        <span class="text-center text-3xl px-16 py-6 mt-10">
           Available balance: ${availableBalance()}
         </span>
       </Grid>
