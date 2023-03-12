@@ -27,8 +27,7 @@ function iterate(iterable, callback) {
 }
 
 const BooksPageGenerator = ({ book }) => {
-  console.log(book);
-  console.log("this is working");
+
   const [quantity, setQuantity] = useState(1);
 
   function addItem(book, quantity) {
