@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const UserRow = ({ contact, handleEditClick, handleDelete }) => {
   // console.log(contact)
   const [balance, setBalance] = useState(contact.balance["$numberDecimal"]);
-  console.log(balance)
+  console.log(balance);
   const handleChange = (e) => {
     const newUserType = e.target.value;
     handleEditClick(contact, newUserType);
@@ -15,9 +15,9 @@ const UserRow = ({ contact, handleEditClick, handleDelete }) => {
           ? contact.fullName
           : contact.firstName + " " + contact.lastName}
       </td>
-      <td class="px-6 py-4">
+      {/* <td class="px-6 py-4">
         {contact.username ? contact.username : contact._id}
-      </td>
+      </td> */}
       <td class="px-6 py-4">{contact.email}</td>
       <td>
         {/* <button
@@ -47,10 +47,17 @@ const UserRow = ({ contact, handleEditClick, handleDelete }) => {
       <td>
         <input
           type="number"
-          value={balance}
-          className="text-black"
+          placeholder={balance}
+          className="text-black placeholder-black"
+          size="25"
         />
-        {/* ${balance["$numberDecimal"]} */}
+        <button
+          class="bg-persian_plum text-white ml-4 py-2 px-4"
+          type="button"
+          onClick={() => handleDelete(contact)}
+        >
+          Update
+        </button>
       </td>
     </tr>
   );
