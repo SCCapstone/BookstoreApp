@@ -1,13 +1,26 @@
 import React, { useState } from "react";
 
-const UserRow = ({ contact, handleEditClick, handleDelete }) => {
+const UserRow = ({
+  contact,
+  handleEditClick,
+  handleDelete,
+  handleEditBalance,
+}) => {
   // console.log(contact)
   const [balance, setBalance] = useState(contact.balance["$numberDecimal"]);
   console.log(balance);
+  const updateChange = (e) => {
+    setBalance(e.target.value);
+  };
   const handleChange = (e) => {
     const newUserType = e.target.value;
     handleEditClick(contact, newUserType);
   };
+  const handleUpdateBalance = (e) =>{
+    
+    handleEditBalance(contact, balance);
+    console.log("balance changed");
+  }
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       <td class="px-6 py-4">
@@ -44,17 +57,18 @@ const UserRow = ({ contact, handleEditClick, handleDelete }) => {
           <option value="admin">admin</option>
         </select>
       </td>
-      <td>
+      <td className="">
         <input
-          type="number"
+          type="balance"
           placeholder={balance}
-          className="text-black placeholder-black"
-          size="25"
+          value={balance}
+          className="text-black placeholder-black text-center w-24"
+          onChange={(e) => updateChange(e)}
         />
         <button
           class="bg-persian_plum text-white ml-4 py-2 px-4"
           type="button"
-          onClick={() => handleDelete(contact)}
+          onClick={() => handleUpdateBalance}
         >
           Update
         </button>

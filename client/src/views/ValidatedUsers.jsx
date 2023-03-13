@@ -39,6 +39,17 @@ export default class ValidatedUsers extends React.Component {
     }
   }
 
+  async editBalance(user, newBalance) {
+    const id = user._id;
+    const url = "/api/users/" + id;
+    try {
+      await axios.put(url, { balace:newBalance  });
+      window.location.reload();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
+
   // functionality for ensuring unauthenticated users cannot view
   isLoggedIn = () => {
     const currentUser = this.props.currentUser;
@@ -92,7 +103,7 @@ export default class ValidatedUsers extends React.Component {
             </thead>
             <tbody>
               {this.state.users.map((user) => (
-                <UserRow contact={user} handleDelete={this.deleteUser} handleEditClick={this.editUser}/>
+                <UserRow contact={user} handleDelete={this.deleteUser} handleEditClick={this.editUser} handleEditBalance={this.editBalance}/>
               ))}
             </tbody>
           </table>
