@@ -23,9 +23,12 @@ export default class ValidatedUsers extends React.Component {
   async deleteUser(user) {
     const id = user._id;
     const url = "/api/users/" + id;
-    await axios.delete(url).then(() => {
-      window.location.reload();
-    }).catch((error) => console.log("Error: ", error));
+    await axios
+      .delete(url)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => console.log("Error: ", error));
   }
 
   async editUser(user, newRole) {
@@ -43,8 +46,9 @@ export default class ValidatedUsers extends React.Component {
     const id = user._id;
     const url = "/api/users/" + id;
     try {
-      await axios.put(url, { balace:newBalance  });
-      window.location.reload();
+      console.log(newBalance);
+      await axios.put(url, { balance: 100 });
+      // window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -77,37 +81,30 @@ export default class ValidatedUsers extends React.Component {
                   </div>
                 </th> */}
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Email
-                   
-                  </div>
+                  <div class="flex items-center">Email</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Actions
-                   
-                  </div>
+                  <div class="flex items-center">Actions</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Role
-                   
-                  </div>
+                  <div class="flex items-center">Role</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Balance
-                  </div>
+                  <div class="flex items-center">Balance</div>
                 </th>
               </tr>
             </thead>
             <tbody>
               {this.state.users.map((user) => (
-                <UserRow contact={user} handleDelete={this.deleteUser} handleEditClick={this.editUser} handleEditBalance={this.editBalance}/>
+                <UserRow
+                  contact={user}
+                  handleDelete={this.deleteUser}
+                  handleEditClick={this.editUser}
+                  handleEditBalance={this.editBalance}
+                />
               ))}
             </tbody>
           </table>
-          
         </div>
       </div>
     ) : (

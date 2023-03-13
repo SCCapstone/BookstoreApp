@@ -8,7 +8,6 @@ const UserRow = ({
 }) => {
   // console.log(contact)
   const [balance, setBalance] = useState(contact.balance["$numberDecimal"]);
-  console.log(balance);
   const updateChange = (e) => {
     setBalance(e.target.value);
   };
@@ -16,11 +15,7 @@ const UserRow = ({
     const newUserType = e.target.value;
     handleEditClick(contact, newUserType);
   };
-  const handleUpdateBalance = (e) =>{
-    
-    handleEditBalance(contact, balance);
-    console.log("balance changed");
-  }
+
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       <td class="px-6 py-4">
@@ -68,7 +63,7 @@ const UserRow = ({
         <button
           class="bg-persian_plum text-white ml-4 py-2 px-4"
           type="button"
-          onClick={() => handleUpdateBalance}
+          onClick={() => handleEditBalance(contact, balance)}
         >
           Update
         </button>
