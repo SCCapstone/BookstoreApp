@@ -215,6 +215,22 @@ const MainCart = ({ currentUser }) => {
     return 0;
   };
 
+  function orderSetter() {
+    const userInfoVariable = userInfo(allUsers, currentUser);
+    // const valueMaintainer = [
+    //   userInfoVariable["$firstName"],
+    //   userInfoVariable["$lastName"],
+    //   userInfoVariable["$email"],
+    //   userInfoVariable["$role"],
+    //   booksCartNames
+    // ];
+    const valueMaintainer = userInfoVariable
+    console.log(valueMaintainer);
+    console.log(userInfoVariable);
+    return valueMaintainer;
+  }
+  orderSetter()
+
   var puchaseBooks = (currentUser) => {
     if (currentUser && currentUser.length !== 0) {
       if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
@@ -238,9 +254,6 @@ const MainCart = ({ currentUser }) => {
       navigate("/login");
     }
   };
-
-  console.log(userInfo(allUsers, currentUser));
-  console.log(booksCartNames);
 
   return (
     <div class="py-6">
