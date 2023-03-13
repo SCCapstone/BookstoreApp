@@ -240,6 +240,7 @@ const MainCart = ({ currentUser }) => {
   };
 
   console.log(userInfo(allUsers, currentUser));
+  console.log(booksCartNames);
 
   return (
     <div class="py-6">
