@@ -37,6 +37,16 @@ const UserRow = ({ contact, handleEditClick, handleDelete }) => {
           </option>
         </select>
       </td>
+      <td>
+        <select value={contact.role} onChange={handleChange} class="form-select block w-full">
+          <option value="customer">
+            customer
+          </option>
+          <option value="admin">
+            admin
+          </option>
+        </select>
+      </td>
     </tr>
   );
 };
