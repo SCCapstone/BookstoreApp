@@ -196,6 +196,14 @@ const MainCart = ({ currentUser }) => {
     currentBalance = userData(allUsers, currentUser);
   }
 
+  function userInfo(users, currentUser) {
+    for (let i = 0; i < users.length; ++i) {
+      if (users[i]._id === currentUser) {
+        return users[i];
+      }
+    }
+  }
+
   const [userBalance, setUserBalance] = useState(0);
 
   const availableBalance = () => {
@@ -213,8 +221,12 @@ const MainCart = ({ currentUser }) => {
         if (currentBalance - calculatePrice(books, booksCartNames) === 0) {
           data.balance = "0";
         } else {
-          data.balance = round(currentBalance - calculatePrice(books, booksCartNames),2);
+          data.balance = round(
+            currentBalance - calculatePrice(books, booksCartNames),
+            2
+          );
         }
+        console.log(userData(allUsers, currentUser));
         localStorage.setItem("books_cart", JSON.stringify([]));
         localStorage.setItem("booksCartNames", JSON.stringify({}));
         handleChange();
@@ -227,6 +239,7 @@ const MainCart = ({ currentUser }) => {
     }
   };
 
+  console.log(userInfo(allUsers, currentUser));
 
   return (
     <div class="py-6">
