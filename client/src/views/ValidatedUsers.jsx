@@ -46,8 +46,7 @@ export default class ValidatedUsers extends React.Component {
     const id = user._id;
     const url = "/api/users/" + id;
     try {
-      console.log(newBalance);
-      await axios.put(url, { balance: 100 });
+      await axios.put(url, { balance: newBalance });
       // window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
