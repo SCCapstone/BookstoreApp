@@ -8,6 +8,7 @@ const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const forumsRoutes = require("./routes/forums");
 const bookRoutes = require("./routes/books");
+const orderRoutes = require("./routes/orders");
 const path = require("path");
 const { application } = require("express");
 
@@ -15,7 +16,7 @@ const { application } = require("express");
 connection();
 
 // middlewares
-app.use(express.json({limit: '50mb'}));
+app.use(express.json({ limit: "50mb" }));
 app.use(cors());
 
 // routes
@@ -23,6 +24,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/forums", forumsRoutes);
 app.use("/api/books", bookRoutes);
+app.use("/api/orders", orderRoutes);
 
 __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
