@@ -23,9 +23,12 @@ export default class ValidatedUsers extends React.Component {
   async deleteUser(user) {
     const id = user._id;
     const url = "/api/users/" + id;
-    await axios.delete(url).then(() => {
-      window.location.reload();
-    }).catch((error) => console.log("Error: ", error));
+    await axios
+      .delete(url)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => console.log("Error: ", error));
   }
 
   async editUser(user, newRole) {
@@ -34,6 +37,17 @@ export default class ValidatedUsers extends React.Component {
     try {
       await axios.put(url, { role: newRole });
       window.location.reload();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
+
+  async editBalance(user, newBalance) {
+    const id = user._id;
+    const url = "/api/users/" + id;
+    try {
+      await axios.put(url, { balance: newBalance });
+      // window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -51,7 +65,7 @@ export default class ValidatedUsers extends React.Component {
 
   render() {
     return this.isLoggedIn() ? (
-      <div>
+      <div className="bg-gainsboro">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -59,79 +73,37 @@ export default class ValidatedUsers extends React.Component {
                 <th scope="col" class="px-6 py-3">
                   Name
                 </th>
-                <th scope="col" class="px-6 py-3">
+                {/* <th scope="col" class="px-6 py-3">
                   <div class="flex items-center">
                     Id
-                    <a href="#">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="w-3 h-3 ml-1"
-                        aria-hidden="true"
-                        fill="currentColor"
-                        viewBox="0 0 320 512"
-                      >
-                        <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" />
-                      </svg>
-                    </a>
+
                   </div>
+                </th> */}
+                <th scope="col" class="px-6 py-3">
+                  <div class="flex items-center">Email</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Email
-                    <a href="#">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="w-3 h-3 ml-1"
-                        aria-hidden="true"
-                        fill="currentColor"
-                        viewBox="0 0 320 512"
-                      >
-                        <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" />
-                      </svg>
-                    </a>
-                  </div>
+                  <div class="flex items-center">Actions</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Actions
-                    <a href="#">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="w-3 h-3 ml-1"
-                        aria-hidden="true"
-                        fill="currentColor"
-                        viewBox="0 0 320 512"
-                      >
-                        <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" />
-                      </svg>
-                    </a>
-                  </div>
+                  <div class="flex items-center">Role</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Role
-                    <a href="#">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="w-3 h-3 ml-1"
-                        aria-hidden="true"
-                        fill="currentColor"
-                        viewBox="0 0 320 512"
-                      >
-                        <path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z" />
-                      </svg>
-                    </a>
-                  </div>
+                  <div class="flex items-center">Balance</div>
                 </th>
               </tr>
             </thead>
             <tbody>
               {this.state.users.map((user) => (
-                <UserRow contact={user} handleDelete={this.deleteUser} handleEditClick={this.editUser}/>
+                <UserRow
+                  contact={user}
+                  handleDelete={this.deleteUser}
+                  handleEditClick={this.editUser}
+                  handleEditBalance={this.editBalance}
+                />
               ))}
             </tbody>
           </table>
-          
         </div>
       </div>
     ) : (
