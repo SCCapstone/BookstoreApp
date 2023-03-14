@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 
+const reviewSchema = new mongoose.Schema({
+  user: { type: String, required: true },
+  post: { type: String, required: true }, 
+  date: { type: String, required: true}
+})
+
 const bookSchema = new mongoose.Schema({
   title: { type: String, required: true },
   author: { type: String, required: true },
@@ -11,6 +17,7 @@ const bookSchema = new mongoose.Schema({
   summary: { type: String, required: true },
   imageId: { type: String, required: true },
   quantitySold: { type: String, required: false },
+  reviews: { type: [reviewSchema], required: false}
 });
 
 bookSchema.methods.generateAuthToken = function () {

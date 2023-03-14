@@ -67,4 +67,6 @@ const CompleteNavbar = () => {
   );
 };
 
+ // books.map is the key -- here's where you map the /reviews to the book.
+
 export default CompleteNavbar;
