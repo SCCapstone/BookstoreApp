@@ -33,6 +33,28 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const book = await Book.findById(id);
+    // we only need to be able to put in new reviews
+    // we don't need to be able (necessarily, though it would be nice)
+    // to edit all that other junk
+    if (!book) {
+      return res.status(404).send({ message: "Book not found" });
+
+    }
+    if (req.body.reviews) {
+      book.reviews = book.reviews.concat(req.body.reviews);
+      console.log(book.reviews);
+    }
+    await book.save();
+    res.send({ message: "Book review added" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
