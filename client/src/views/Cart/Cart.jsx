@@ -168,20 +168,6 @@ const MainCart = ({ currentUser }) => {
     }
   };
 
-  const handleSubmitOrder = async (e) => {
-    e.preventDefault();
-    try {
-      const url = "/api/orders";
-      axios.post(url, orderSetter()).then((res) => {
-        console.log(res.status);
-      });
-    } catch (error) {
-      if (error.response?.status >= 400 && error.response.status <= 500) {
-        setError(error.response.data.message);
-      }
-    }
-  };
-
   function ValidatedUsers(props) {
     const [currentUser, setCurrentUser] = useState("");
     const [users, setUsers] = useState([]);
@@ -221,6 +207,22 @@ const MainCart = ({ currentUser }) => {
     }
   }
 
+  const handleSubmitOrder = async (e) => {
+    if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
+      e.preventDefault();
+      try {
+        const url = "/api/orders";
+        axios.post(url, orderSetter()).then((res) => {
+          console.log(res.status);
+        });
+      } catch (error) {
+        if (error.response?.status >= 400 && error.response.status <= 500) {
+          setError(error.response.data.message);
+        }
+      }
+    }
+  };
+
   const [userBalance, setUserBalance] = useState(0);
 
   const availableBalance = () => {
@@ -239,14 +241,13 @@ const MainCart = ({ currentUser }) => {
         user["firstName"] = allUsers[i].firstName;
         user["lastName"] = allUsers[i].lastName;
         user["email"] = allUsers[i].email;
-        user["newBalance"] = round(allUsers[i].balance.$numberDecimal, 2);
         user["role"] = allUsers[i].role;
       }
     }
     user["order"] = booksCartNames;
     user["orderPrice"] = calculatePrice(books, booksCartNames);
     user["orderDate"] = new Date().toLocaleString();
-    user["orderStatus"] = "In-Progress";
+    user["orderStatus"] = "In-Progress"
     console.log(user);
     return user;
   }

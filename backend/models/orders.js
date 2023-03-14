@@ -5,7 +5,6 @@ const orderSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
-  newBalance: { type: Number, required: true },
   role: { type: String, required: true },
   order: { type: Object, required: true },
   orderPrice: { type: Number, required: true },
@@ -29,10 +28,6 @@ const validate = (data) => {
       .required()
       .label("email")
       .error(new Error("email is invalid")),
-    newBalance: Joi.number()
-      .required()
-      .label("balance")
-      .error(new Error("balance is invalid")),
     role: Joi.string()
       .required()
       .label("role")
