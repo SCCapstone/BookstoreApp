@@ -7,7 +7,7 @@ import Login from "../../views/Login";
 import Aboutus from "../../views/Aboutus";
 import TOS from "../../views/TOS";
 import ContactUs from "../../views/ContactUs";
-import Forums from "../../views/Forums";
+import Reviews from "../../views/ReviewsPageGenerator";
 import Browse from "../../views/Browse";
 import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
@@ -18,7 +18,6 @@ import MainCart from "../../views/Cart/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
-import axios from "axios";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -89,14 +88,19 @@ const CompleteNavbar = () => {
             />
 
             {/* Admin, Employee, and Customer */}
-            <Route path="/forums" element={<Forums currentUser={user} />} />
-            <Route path="/createforums" element={<CreateForum />} />
+            <Route path="/createforums" element={<CreateForum user={localStorage.getItem("userID")}/>} />
 
+            {/* Mapped Routes */}
             {books.map((book) => (
               <Route
                 path={`/${book.author}/${book.title}/`}
                 element={<BooksPageGenerator book={book} />}
               />
+            ))}
+
+            {books.map((book) => (
+              <Route path = {`/${book.author}/${book.title}/reviews`}
+              element={<Reviews book={book}/>} />
             ))}
           </Routes>
         </BrowserRouter>
@@ -104,5 +108,7 @@ const CompleteNavbar = () => {
     </div>
   );
 };
+
+ // books.map is the key -- here's where you map the /reviews to the book.
 
 export default CompleteNavbar;

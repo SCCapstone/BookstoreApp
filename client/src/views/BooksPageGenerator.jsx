@@ -119,7 +119,7 @@ const BooksPageGenerator = ({ book }) => {
               </span>
             </ul>
             <u>
-              <a href="/">Check availability in stores near you</a>
+              <a href={`reviews`}>View Reviews of the Book here!</a>
             </u>
 
             <div className="flex pb-2 pt-2">
