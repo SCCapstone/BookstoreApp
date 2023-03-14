@@ -7,21 +7,22 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import axios from 'axios';
-export default class ProfileIcon extends Component() {
+export default class ProfileIcon extends Component {
 
-  const [anchorEl, setAnchorEl] = useState(true);
-  const open = Boolean(anchorEl);
+  // const [anchorEl, setAnchorEl] = useState(true);
+  // const open = Boolean(anchorEl);
   
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   constructor(props) {
     super(props);
     this.state = {
         user: {},
         anchorEl: true,
-        open: anchorEl,
+        open: true,
+        setAchorEl: null
     };
   };
 
@@ -45,23 +46,27 @@ export default class ProfileIcon extends Component() {
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
               <Tooltip title="Account settings">
                 <IconButton
-                  onClick={() => setAnchorEl(!anchorEl)}
+                  onClick={() =>  { 
+                    this.setState((state) => ({
+                    anchorEl: !this.state.anchorEl
+                  }));
+                  }}
                   size="small"
                   sx={{ ml: 2 }}
-                  aria-controls={open ? 'account-menu' : undefined}
+                  aria-controls={this.state.open ? 'account-menu' : undefined}
                   aria-haspopup="true"
-                  aria-expanded={open ? 'true' : undefined}
+                  aria-expanded={this.state.open ? 'true' : undefined}
                 >
                   <Avatar sx={{ width: 33, height: 33 }}>{this.state.user.firstName}</Avatar>
                 </IconButton>
               </Tooltip>
             </Box>
             <Menu
-              anchorEl={anchorEl}
+              anchorEl={this.state.anchorEl}
               id="account-menu"
-              open={open}
-              onClose={handleClose}
-              onClick={handleClose}
+              open={this.state.open}
+              onClose={this.state.setAchorEl}
+              onClick={this.state.setAchorEl}
               PaperProps={{
                 elevation: 0,
                 sx: {
@@ -91,7 +96,7 @@ export default class ProfileIcon extends Component() {
               transformOrigin={{ horizontal: 'right-center', vertical: 'top-center' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'top-center' }}
             >
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={this.state.setAchorEl}>
                 <li>
                   <a
                     href="/my_account"
@@ -102,7 +107,7 @@ export default class ProfileIcon extends Component() {
                 </li>
               </MenuItem>
               <Divider />
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={this.state.setAchorEl}>
               <li>
                   <a
                     href="/"
@@ -112,7 +117,7 @@ export default class ProfileIcon extends Component() {
                   </a>
                 </li>
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={this.state.setAchorEl}>
                 <li>
                   <a
                     href="/cart"
@@ -122,7 +127,7 @@ export default class ProfileIcon extends Component() {
                   </a>
                 </li>
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={this.state.setAchorEl}>
                 <li>
                   <a
                     href="/favorites"
