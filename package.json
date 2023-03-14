@@ -26,6 +26,8 @@
     "concurrently": "^4.1.2",
     "local-storage": "^2.0.0",
     "nodemon": "^2.0.20",
+    "react-currency-input-field": "^3.6.10",
+    "react-file-base64": "^1.0.3",
     "react-icons": "^4.6.0",
     "react-native-svg": "^13.6.0",
     "react-redux": "^8.0.5",
