@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Calendar from 'react-calendar';
 import axios from "axios";
+import swal from 'sweetalert2';
 
 const EmployeeHomepage = () => { 
     const [date, setDate] = useState(new Date());
@@ -29,8 +30,16 @@ const EmployeeHomepage = () => {
         try {
             const response = await axios.post("/api/events", newEvent);
             setEvents([...events, response.data]);
+            swal.fire({
+                icon: "success",
+                title: 'Successfully added the event',
+            });
         } catch (error) {
             console.log("Error: ", error);
+            swal.fire({
+                icon: "Error",
+                title: "There is an error",
+            });
         }
     };
 
@@ -43,8 +52,16 @@ const EmployeeHomepage = () => {
             if (selectedEvent && selectedEvent === eventToDelete) {
                 setSelectedEvent(null);
             }
+            swal.fire({
+                icon: "success",
+                title: 'Successfully deleted the event',
+            });
         } catch (error) {
             console.log("Error: ", error);
+            swal.fire({
+                icon: "Error",
+                title: "There is an error",
+            });
         }
     };
 
