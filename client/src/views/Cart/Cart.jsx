@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { cartChange } from "../../components/NavBar/NavBar";
+import swal from "sweetalert2";
 
 cartChange();
 
@@ -55,6 +56,7 @@ function round(value, decimals) {
 function getKeys(obj) {
   var keys = [];
   iterate(obj, function (oVal, oKey) {
+    // window.location.reload();
     keys.push(oKey);
   });
   return keys;
@@ -63,6 +65,7 @@ function iterate(iterable, callback) {
   for (var key in iterable) {
     if (
       key === "length" ||
+      // window.location.reload();
       key === "prototype" ||
       !Object.prototype.hasOwnProperty.call(iterable, key)
     )
@@ -163,6 +166,23 @@ const MainCart = ({ currentUser }) => {
         setError(error.response.data.message);
       }
     }
+
+    var tn = {};
+    tn["order"] = "order";
+    e.preventDefault();
+    try {
+      const url = "/api/orders/";
+      const res = await axios.put(url, tn);
+
+      axios.post(url, tn).then((res) => {
+        console.log(res.status);
+      });
+    } catch (error) {
+      if (error.response?.status >= 400 && error.response.status <= 500) {
+        setError(error.response.data.message);
+      }
+    }
+
   };
 
   function ValidatedUsers(props) {
@@ -216,22 +236,27 @@ const MainCart = ({ currentUser }) => {
   };
 
   function orderSetter() {
-    const userInfoVariable = userInfo(allUsers, currentUser);
-    // const valueMaintainer = [
-    //   userInfoVariable["$firstName"],
-    //   userInfoVariable["$lastName"],
-    //   userInfoVariable["$email"],
-    //   userInfoVariable["$role"],
-    //   booksCartNames
-    // ];
-    const valueMaintainer = userInfoVariable
-    console.log(valueMaintainer);
-    console.log(userInfoVariable);
-    return valueMaintainer;
+    var user = {};
+    for (let i = 0; i < allUsers.length; ++i) {
+      if (allUsers[i]._id === currentUser) {
+        user["firstName"] = allUsers[i].firstName;
+        user["lastName"] = allUsers[i].lastName;
+        user["email"] = allUsers[i].email;
+        user["balance"] = allUsers[i].balance;
+        user["role"] = allUsers[i].role;
+      }
+    }
+    user["cart"] = booksCartNames;
+    user["orderPrice"] = calculatePrice(books, booksCartNames);
+    user["orderDate"] = new Date().toLocaleString();
+    user["orderStatus"] = "In-Progress";
+    console.log(user);
+    return user;
   }
-  orderSetter()
+
 
   var puchaseBooks = (currentUser) => {
+
     if (currentUser && currentUser.length !== 0) {
       if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
         if (currentBalance - calculatePrice(books, booksCartNames) === 0) {
@@ -242,6 +267,7 @@ const MainCart = ({ currentUser }) => {
             2
           );
         }
+        orderSetter();
         console.log(userData(allUsers, currentUser));
         localStorage.setItem("books_cart", JSON.stringify([]));
         localStorage.setItem("booksCartNames", JSON.stringify({}));
