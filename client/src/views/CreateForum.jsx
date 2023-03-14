@@ -30,7 +30,7 @@ const CreateForum = (user) => {
             date: Date().toString(),
         }};
         console.log(theReview);
-        const res = await axios.put(url, theReview);
+        await axios.put(url, theReview);
         swal.fire({
           icon: 'success',
           title: 'Forum posted successfully'

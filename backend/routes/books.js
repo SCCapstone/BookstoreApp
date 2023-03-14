@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Book, validate } = require("../models/book");
+const { Book, validate, validateReview } = require("../models/book");
 
 router.get("/", async (req, res) => {
   try {
@@ -42,13 +42,15 @@ router.put("/:id", async (req, res) => {
     // to edit all that other junk
     if (!book) {
       return res.status(404).send({ message: "Book not found" });
-
     }
     if (req.body.review) {
-      book.reviews = book.reviews.push(req.body.review);
-      console.log(book.reviews);
-    } else {
-      book.reviews = req.body;
+      const { error } = validateReview(req.body.review);
+      if (error) {
+        console.log(error);
+        return res.status(400).send({ message: error.details[0].message });
+      }
+
+      book.reviews.push(req.body.review);
     }
     await book.save();
     res.send({ message: "Book review added" });
