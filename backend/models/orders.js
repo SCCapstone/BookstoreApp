@@ -7,10 +7,10 @@ const orderSchema = new mongoose.Schema({
     email: { type: String, required: true },
     balance:  { type: Number, required: true },
     role: { type: String, required: true },
-    // order:  { type: Object, required: true },
-    // orderPrice: { type: Number, required: true },
-    // orderDate: { type: String, required: true },
-    // orderStatus: { type: String, required: true },
+    order:  { type: Object, required: true },
+    orderPrice: { type: Number, required: true },
+    orderDate: { type: String, required: true },
+    orderStatus: { type: String, required: true },
 });
 
 
@@ -23,10 +23,10 @@ const validate = (data) => {
         email: Joi.string().required().label("email").error(new Error("email is invalid")),
         balance:  Joi.number().required().label("balance").error(new Error("balance is invalid")),
         role: Joi.string().required().label("role").error(new Error("role is invalid")),
-        // order:  Joi.object().required().label("order").error(new Error("order is invalid")),
-        // orderPrice: Joi.number().required().label("orderPrice").error(new Error("orderPrice is invalid")),
-        // orderDate: Joi.string().required().label("orderDate").error(new Error("orderDate is invalid")),
-        // orderStatus: Joi.string().required().label("orderStatus").error(new Error("orderStatus is invalid")),
+        order:  Joi.object().required().label("order").error(new Error("order is invalid")),
+        orderPrice: Joi.number().required().label("orderPrice").error(new Error("orderPrice is invalid")),
+        orderDate: Joi.string().required().label("orderDate").error(new Error("orderDate is invalid")),
+        orderStatus: Joi.string().required().label("orderStatus").error(new Error("orderStatus is invalid")),
     });
     return schema.validate(data);
 };

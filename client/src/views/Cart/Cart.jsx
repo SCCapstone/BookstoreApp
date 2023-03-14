@@ -243,10 +243,10 @@ const MainCart = ({ currentUser }) => {
         user["role"] = allUsers[i].role;
       }
     }
-    // user["order"] = booksCartNames;
-    // user["orderPrice"] = calculatePrice(books, booksCartNames);
-    // user["orderDate"] = new Date().toLocaleString();
-    // user["orderStatus"] = "In-Progress";
+    user["order"] = booksCartNames;
+    user["orderPrice"] = calculatePrice(books, booksCartNames);
+    user["orderDate"] = new Date().toLocaleString();
+    user["orderStatus"] = "In-Progress";
     console.log(user);
     return user;
   }
