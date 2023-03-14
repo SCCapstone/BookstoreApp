@@ -44,9 +44,11 @@ router.put("/:id", async (req, res) => {
       return res.status(404).send({ message: "Book not found" });
 
     }
-    if (req.body.reviews) {
-      book.reviews = book.reviews.concat(req.body.reviews);
+    if (req.body.review) {
+      book.reviews = book.reviews.push(req.body.review);
       console.log(book.reviews);
+    } else {
+      book.reviews = req.body;
     }
     await book.save();
     res.send({ message: "Book review added" });

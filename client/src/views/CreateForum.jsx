@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import swal from 'sweetalert2';
 
-const CreateForum = () => {
+const CreateForum = (user) => {
     const [data, setData] = useState({
         message: "",
         name: "",
@@ -20,16 +20,17 @@ const CreateForum = () => {
   // Form Change Method
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const url = "/api/forums";
+        // hard code this for one book first to see if it works
+        const url = "/api/books/6410c9929cc43ded2c83bf9f/";
         const text = data.message;
         const uuid = data.name;
-        const theForum = {
+        const theReview = {review: {
+            user: uuid,
             post: text,
             date: Date().toString(),
-            uuid: uuid,
-        }
-        console.log(theForum);
-        const res = await axios.post(url, theForum);
+        }};
+        console.log(theReview);
+        const res = await axios.put(url, theReview);
         swal.fire({
           icon: 'success',
           title: 'Forum posted successfully'
