@@ -166,15 +166,13 @@ const MainCart = ({ currentUser }) => {
         setError(error.response.data.message);
       }
     }
+  };
 
-    var tn = {};
-    tn["order"] = "order";
+  const handleSubmit2 = async (e) => {
     e.preventDefault();
     try {
-      const url = "/api/orders/";
-      const res = await axios.put(url, tn);
-
-      axios.post(url, tn).then((res) => {
+      const url = "/api/orders";
+      axios.post(url, {"order":"tn"}).then((res) => {
         console.log(res.status);
       });
     } catch (error) {
@@ -182,7 +180,6 @@ const MainCart = ({ currentUser }) => {
         setError(error.response.data.message);
       }
     }
-
   };
 
   function ValidatedUsers(props) {
@@ -254,9 +251,7 @@ const MainCart = ({ currentUser }) => {
     return user;
   }
 
-
   var puchaseBooks = (currentUser) => {
-
     if (currentUser && currentUser.length !== 0) {
       if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
         if (currentBalance - calculatePrice(books, booksCartNames) === 0) {
@@ -367,6 +362,9 @@ const MainCart = ({ currentUser }) => {
             Check out
           </button>
         </form>
+        <button className="bg-black text-white" onClick={handleSubmit2}>
+          tmp
+        </button>
       </div>
     </div>
   );
