@@ -172,7 +172,7 @@ const MainCart = ({ currentUser }) => {
     e.preventDefault();
     try {
       const url = "/api/orders";
-      axios.post(url, {"order":"tn"}).then((res) => {
+      axios.post(url, orderSetter()).then((res) => {
         console.log(res.status);
       });
     } catch (error) {
@@ -239,14 +239,14 @@ const MainCart = ({ currentUser }) => {
         user["firstName"] = allUsers[i].firstName;
         user["lastName"] = allUsers[i].lastName;
         user["email"] = allUsers[i].email;
-        user["balance"] = allUsers[i].balance;
+        user["balance"] = round(allUsers[i].balance.$numberDecimal, 2);
         user["role"] = allUsers[i].role;
       }
     }
-    user["cart"] = booksCartNames;
-    user["orderPrice"] = calculatePrice(books, booksCartNames);
-    user["orderDate"] = new Date().toLocaleString();
-    user["orderStatus"] = "In-Progress";
+    // user["order"] = booksCartNames;
+    // user["orderPrice"] = calculatePrice(books, booksCartNames);
+    // user["orderDate"] = new Date().toLocaleString();
+    // user["orderStatus"] = "In-Progress";
     console.log(user);
     return user;
   }

@@ -3,9 +3,10 @@ const { Order, validate } = require("../models/orders");
 
 router.post("/", async (req, res) => {
   // console.log("are we hittin");
+  // console.log(req);
     try {
       const { error } = validate(req.body);
-      console.log(req);
+      // console.log(req);
       // console.log(req.body);
       if (error)
         return res.status(400).send({ message: error.details[0].message });
