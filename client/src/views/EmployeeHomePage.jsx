@@ -90,7 +90,7 @@ const EmployeeHomepage = () => {
                     const firstDay = eventDatesStart.some(eventDate => eventDate.toDateString() === date.toDateString());
 
                     if (withinStartEnd || firstDay) {
-                        return "bg-blue-500 text-white border border-gray"
+                        return "font-bold border border-gray"
                     } else {
                         return "border boder-gray"
                     }
