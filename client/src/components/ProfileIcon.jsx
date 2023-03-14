@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -22,7 +22,6 @@ export default class ProfileIcon extends Component {
         user: {},
         anchorEl: true,
         open: true,
-        setAchorEl: null
     };
   };
 
@@ -39,6 +38,12 @@ export default class ProfileIcon extends Component {
       });
   }
 
+  setAnchorEl(anchorEl) {
+    this.setState((state) => ({
+      anchorEl: anchorEl
+    }));
+  }
+
   render() {
       return (
         <div class="py-4">
@@ -46,11 +51,7 @@ export default class ProfileIcon extends Component {
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
               <Tooltip title="Account settings">
                 <IconButton
-                  onClick={() =>  { 
-                    this.setState((state) => ({
-                    anchorEl: !this.state.anchorEl
-                  }));
-                  }}
+                  onClick={this.setAnchorEl(!this.state.anchorEl)}
                   size="small"
                   sx={{ ml: 2 }}
                   aria-controls={this.state.open ? 'account-menu' : undefined}
@@ -65,8 +66,8 @@ export default class ProfileIcon extends Component {
               anchorEl={this.state.anchorEl}
               id="account-menu"
               open={this.state.open}
-              onClose={this.state.setAchorEl}
-              onClick={this.state.setAchorEl}
+              onClose={this.setAnchorEl(true)}
+              onClick={this.setAnchorEl(false)}
               PaperProps={{
                 elevation: 0,
                 sx: {
@@ -96,7 +97,7 @@ export default class ProfileIcon extends Component {
               transformOrigin={{ horizontal: 'right-center', vertical: 'top-center' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'top-center' }}
             >
-              <MenuItem onClick={this.state.setAchorEl}>
+              <MenuItem onClick={this.setAnchorEl(false)}>
                 <li>
                   <a
                     href="/my_account"
@@ -107,7 +108,7 @@ export default class ProfileIcon extends Component {
                 </li>
               </MenuItem>
               <Divider />
-              <MenuItem onClick={this.state.setAchorEl}>
+              <MenuItem onClick={this.setAnchorEl(false)}>
               <li>
                   <a
                     href="/"
@@ -117,7 +118,7 @@ export default class ProfileIcon extends Component {
                   </a>
                 </li>
               </MenuItem>
-              <MenuItem onClick={this.state.setAchorEl}>
+              <MenuItem onClick={this.setAnchorEl(false)}>
                 <li>
                   <a
                     href="/cart"
@@ -127,7 +128,7 @@ export default class ProfileIcon extends Component {
                   </a>
                 </li>
               </MenuItem>
-              <MenuItem onClick={this.state.setAchorEl}>
+              <MenuItem onClick={this.setAnchorEl(false)}>
                 <li>
                   <a
                     href="/favorites"
