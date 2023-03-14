@@ -19,6 +19,7 @@ import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
 import axios from "axios";
+import Orders from "../../views/Orders";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -87,6 +88,10 @@ const CompleteNavbar = () => {
               path="/emp_page"
               element={<EmployeeHomepage currentUser={userType} />}
             />
+            <Route
+            path="/orders"
+            element={<Orders currentUser={userType} />} />
+
 
             {/* Admin, Employee, and Customer */}
             <Route path="/forums" element={<Forums currentUser={user} />} />
