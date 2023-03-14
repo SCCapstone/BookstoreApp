@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from 'react-calendar';
 import axios from "axios";
-import { useNavigate } from "react-router-dom"
 
 const EmployeeHomepage = () => { 
     const [date, setDate] = useState(new Date());
@@ -71,7 +70,7 @@ const EmployeeHomepage = () => {
                         const eventDatesE = eventDatesEnd[index];
                         return date >= eventDatesStart && date <= eventDatesE;
                     });
-                    const firstDay = eventDatesStart.some(eventDate => eventDate.toDateString() == date.toDateString());
+                    const firstDay = eventDatesStart.some(eventDate => eventDate.toDateString() === date.toDateString());
 
                     if (withinStartEnd || firstDay) {
                         return "bg-blue-500 text-white border border-gray"
