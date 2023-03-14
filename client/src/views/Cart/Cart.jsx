@@ -168,7 +168,7 @@ const MainCart = ({ currentUser }) => {
     }
   };
 
-  const handleSubmit2 = async (e) => {
+  const handleSubmitOrder = async (e) => {
     e.preventDefault();
     try {
       const url = "/api/orders";
@@ -239,7 +239,7 @@ const MainCart = ({ currentUser }) => {
         user["firstName"] = allUsers[i].firstName;
         user["lastName"] = allUsers[i].lastName;
         user["email"] = allUsers[i].email;
-        user["balance"] = round(allUsers[i].balance.$numberDecimal, 2);
+        user["newBalance"] = round(allUsers[i].balance.$numberDecimal, 2);
         user["role"] = allUsers[i].role;
       }
     }
@@ -347,7 +347,10 @@ const MainCart = ({ currentUser }) => {
         </div>
         <form
           className={`grid grid-cols-3 flex-1 flex justify-start items-center  m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
-          onSubmit={handleSubmit}
+          onSubmit={(e) => {
+            handleSubmit(e);
+            handleSubmitOrder(e);
+          }}
         >
           <h4 className="col-span-1 font-poppins font-semibold xs:text-[30.89px] text-[25.89px] xs:leading-[43.16px] leading-[30.16px]">
             Total: ${calculatePrice(books, booksCartNames)}
@@ -362,9 +365,6 @@ const MainCart = ({ currentUser }) => {
             Check out
           </button>
         </form>
-        <button className="bg-black text-white" onClick={handleSubmit2}>
-          tmp
-        </button>
       </div>
     </div>
   );
