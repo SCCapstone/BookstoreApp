@@ -58,7 +58,7 @@ export default class ProfileIcon extends Component {
                   aria-haspopup="true"
                   aria-expanded={this.state.open ? 'true' : undefined}
                 >
-                  <Avatar sx={{ width: 33, height: 33 }}>{this.state.user.firstName}</Avatar>
+                  <Avatar sx={{ width: 33, height: 33 }}>{this.state.user.firstName[0]+this.state.user.lastName[1]}</Avatar>
                 </IconButton>
               </Tooltip>
             </Box>
