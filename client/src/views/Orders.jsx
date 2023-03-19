@@ -16,18 +16,26 @@ export default class Orders extends React.Component {
     });
   }
 
+  async editOrder(order, orderStatus) {
+    const id = order._id;
+    const url = "/api/order/" + id;
+    try {
+      await axios.put(url, { orderStatus: orderStatus });
+      window.location.reload();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
+
   componentDidMount() {
     this.getOrders();
   }
-
-  // functionality for ensuring unauthenticated orders cannot view
 
   sendToLogin = () => {
     window.location.href = "/login";
   };
 
   render() {
-    
     return (
       <div className="bg-gainsboro">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -52,13 +60,9 @@ export default class Orders extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {/* {this.state.orders.map((user) => (
-                <OrdersRow
-                  contact={user}
-                  handleDelete={this.deleteUser}
-
-                />
-              ))} */}
+              {this.state.orders.map((order) => (
+                <OrdersRow order={order} handleUpdate={this.editOrder} />
+              ))}
             </tbody>
           </table>
         </div>

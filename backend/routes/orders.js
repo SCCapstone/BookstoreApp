@@ -27,4 +27,18 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).send({ message: "Order not found" });
+    }
+    order.orderStatus = req.body.orderStatus;
+    res.send("Updated order status!");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
