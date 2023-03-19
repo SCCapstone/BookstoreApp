@@ -79,6 +79,17 @@ const BooksPageGenerator = ({ book }) => {
 
   const [active, setActive] = useState(false);
 
+  function addOrRemoveFromWishlist() {
+    if (active) { // deleting from wishlist
+
+    } else { // adding to wishlist
+      // I think that I will need to call whether it is already in favorites 
+      // inside of a hook. This may require making this file into a React component
+      // so I can call axios inside of an async function upon the component mounting.
+    }
+    setActive(!active);
+  }
+
   return (
     <section class="grid grid-cols-5 max-w-[1300px]">
       <div />
@@ -112,7 +123,7 @@ const BooksPageGenerator = ({ book }) => {
                 <Heart
                   style={{ width: "20px" }}
                   isActive={active}
-                  onClick={() => setActive(!active)}
+                  onClick={() => addOrRemoveFromWishlist()}
                   activeColor={"#404252"}
                 />
               </span>

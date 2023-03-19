@@ -11,6 +11,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:ids", async (req, res) => {
+  const { ids } = req.params;
+  try {
+    Book.find(
+      {
+        _id: {
+          $in: ids,
+        },
+      },
+      function (err, books) {
+        res.send(books);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     req.body.dateAdded = new Date();

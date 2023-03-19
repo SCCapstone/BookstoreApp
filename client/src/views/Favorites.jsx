@@ -5,6 +5,7 @@ export default class Favorites extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            favoritesIds: [],
             favorites: []
         };
     };
@@ -14,16 +15,27 @@ export default class Favorites extends Component {
 
         await axios.get(url).then(res => {
             const user = res.data;
-            let favorites = [];
+            let favoritesIds = [];
 
             if (user.favorites && user.favorites > 0) {
-                favorites = user.favorites;
+                favoritesIds = user.favorites;
             }
 
             this.setState((state) => ({
-                favorites: favorites
+                favoritesIds: favoritesIds
             }));
         });
+
+        if (this.anyFavorites()) return;
+
+        const bookUrl = "/api/books/" + this.state.favoritesIds;
+        await axios.get(bookUrl).then(res => {
+            const favoriteBooks = res.data;
+            
+            this.setState((state) => ({
+                favorites: favoriteBooks
+            }));
+        })
     };
 
     getBook(bookName) {

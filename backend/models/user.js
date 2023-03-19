@@ -8,9 +8,9 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  role: { type: String, required: true, enum: ["admin", "customer"]},
+  role: { type: String, required: true, enum: ["admin", "customer"] },
   balance: { type: mongoose.Schema.Types.Decimal128, required: false },
-  
+  favorites: { type: Array, required: false },
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -31,6 +31,11 @@ const validate = (data) => {
     // password: passwordComplexity.required().label("Password")
     role: Joi.string().required().valid("admin", "customer").label("Role"),
     balance: Joi.number().required().label("Balance"),
+    favorites: Joi.array()
+      .items(Joi.string().guid())
+      .required()
+      .label("Favorites")
+      .error(new Error("Favorites is invalid")),
   });
   return schema.validate(data);
 };
