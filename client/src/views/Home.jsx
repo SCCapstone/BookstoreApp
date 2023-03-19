@@ -22,7 +22,7 @@ const Home = () => {
               Welcome to Bugsy's Barn Books! If You Love Books, You'll Love Our
               Book Store! This website is adopted by the Book Dispensary.
             </h2>
-            <EditBlogList /> {/* Add this line */}
+            <EditBlogList />
           </div>
         </div>
       </div>
