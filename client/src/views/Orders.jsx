@@ -11,10 +11,6 @@ function userInfo(currentUser) {
 }
 
 export default class Orders extends React.Component {
-  state = {
-    currentUser: "",
-    users: [],
-  };
 
   async getValidatedUsers() {
     const url = "/api/users";
@@ -28,7 +24,8 @@ export default class Orders extends React.Component {
     this.getValidatedUsers();
   }
 
-  async deleteUser(user) {  // deleteOrder
+  async deleteUser(user) {
+    // deleteOrder
     const id = user._id;
     const url = "/api/users/" + id;
     await axios
@@ -39,7 +36,8 @@ export default class Orders extends React.Component {
       .catch((error) => console.log("Error: ", error));
   }
 
-  async editUser(user, newRole) {   // completeOrder
+  async editUser(user, newRole) {
+    // completeOrder
     const id = user._id;
     const url = "/api/users/" + id;
     try {
