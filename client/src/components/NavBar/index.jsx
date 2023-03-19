@@ -14,11 +14,11 @@ import BooksPageGenerator from "../../views/BooksPageGenerator";
 // import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
 import CreateForum from "../../views/CreateForum";
-import MainCart from "../../views/Cart/Cart";
+import MainCart from "../../views/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
-import axios from "axios";
+import Favorites from "../../views/Favorites";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -74,6 +74,12 @@ const CompleteNavbar = () => {
               path="/my_account"
               element={
                 <MyAccount currentUser={localStorage.getItem("userID")} />
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <Favorites currentUser={localStorage.getItem("userID")} />
               }
             />
 

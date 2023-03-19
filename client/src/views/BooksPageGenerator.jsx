@@ -1,11 +1,10 @@
 import { React, useState } from "react";
 import ReactStars from "react-stars";
 import Heart from "react-heart";
-import { Grid, Chip, Avatar } from "@mui/material";
+import { Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 import swal from "sweetalert2";
-import { cartChange } from "../components/NavBar/NavBar";
 
 function getKeys(obj) {
   var keys = [];

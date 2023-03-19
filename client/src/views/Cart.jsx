@@ -1,12 +1,10 @@
-import { CartProvider, useCart } from "react-use-cart";
 import { React, useState, useEffect } from "react";
 import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
-// import books from "../Books";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { cartChange } from "../../components/NavBar/NavBar";
+import { cartChange } from "../components/NavBar/NavBar";
 
 cartChange();
 
@@ -84,18 +82,13 @@ function calculatePrice(books, booksCartNames) {
 }
 
 const MainCart = ({ currentUser }) => {
-  // const [books, setBooks] = useState([]);
-  // setBooks(localStorage.getItem("books"))
   const books = JSON.parse(localStorage.getItem("books"));
 
-  // console.log(books)
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
   localStorage.setItem("cartItemsQuantity", findQuantity(booksCartNames));
 
   const [quantity, setQuantity] = useState(booksCartNames);
-
-  // console.log(booksCartNames);
 
   function findQuantity(booksCartNames) {
     let count = 0;
@@ -156,7 +149,7 @@ const MainCart = ({ currentUser }) => {
       if (data.password === "") {
         delete data.password;
       }
-      const res = await axios.put(url, data);
+      await axios.put(url, data);
       window.location.reload();
     } catch (error) {
       if (error.response?.status >= 400 && error.response.status <= 500) {

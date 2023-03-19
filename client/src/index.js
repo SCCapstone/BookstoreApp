@@ -4,12 +4,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CartProvider } from "react-use-cart";
-import Main_Cart from "./views/Cart/Cart";
+import Main_Cart from "./views/Cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const tmp = JSON.parse(localStorage.getItem('cartItems'));
-
+const tmp = JSON.parse(localStorage.getItem("cartItems"));
 
 root.render(
   <React.StrictMode>

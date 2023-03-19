@@ -76,6 +76,11 @@ const NavBar = ({ user, items }) => {
               />
             </Badge>
             <div />
+            <div>
+            <a href="/favorites" class="button-solid signup">
+              Favorites
+            </a>
+            </div>
             <button class="" onClick={loginOrLogout}>
               <span className="text-white text-xl">
                 {user && user.length !== 0 ? "Logout" : "Login"}
