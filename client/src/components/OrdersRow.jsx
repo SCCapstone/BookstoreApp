@@ -4,8 +4,7 @@ const showOrder = ({ order }) => {
   console.log(order);
   return Object.keys(order).map((key, i) => (
     <p key={i}>
-      <span>{key}</span> x
-      <span> {order[key]}</span>
+      <span>{key}</span> x<span> {order[key]}</span>
     </p>
   ));
 };
@@ -14,8 +13,9 @@ const OrdersRow = ({ order, handleUpdate, handleDelete }) => {
   // console.log(order);
   var currentOrder = order.order;
   const handleChange = (e) => {
-    const newUserType = e.target.value;
-    handleUpdate(order, newUserType);
+    const newOrderType = e.target.value;
+    console.log(newOrderType);
+    handleUpdate(order, newOrderType);
   };
 
   // console.log(currentOrder);
