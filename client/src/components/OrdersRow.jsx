@@ -1,44 +1,47 @@
 import React from "react";
 
-const UserRow = ({ contact, handleEditClick, handleDelete }) => {
-  // console.log(contact)
+const showOrder = ({ order }) => {
+  console.log(order);
+  return Object.keys(order).map((key, i) => (
+    <p key={i}>
+      <span>{key}</span> x
+      <span> {order[key]}</span>
+    </p>
+  ));
+};
 
+const OrdersRow = ({ order, handleUpdate, handleDelete }) => {
+  // console.log(order);
+  var currentOrder = order.order;
   const handleChange = (e) => {
     const newUserType = e.target.value;
-    handleEditClick(contact, newUserType);
-  }
+    handleUpdate(order, newUserType);
+  };
+
+  // console.log(currentOrder);
+
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-      <td class="px-6 py-4">
-        {contact.fullName
-          ? contact.fullName
-          : contact.firstName + " " + contact.lastName}
-      </td>
-      <td class="px-6 py-4">{contact.username ? contact.username : contact._id}</td>
-      <td class="px-6 py-4">{contact.email}</td>
+      <td class="px-6 py-4">{order.firstName + " " + order.lastName}</td>
+
+      <td class="px-6 py-4">{order.email}</td>
+      <td class="px-6 py-4">{showOrder(order)}</td>
+
+      <td class="px-6 py-4">${order.orderPrice}</td>
+      {/* <td class="px-6 py-4">{order.orderStatus}</td> */}
+
       <td>
-        {/* <button
-          type="button"
-          onClick={(event) => handleEditClick(event, contact)}
+        <select
+          value={order.orderStatus}
+          onChange={handleChange}
+          class="form-select block w-full"
         >
-          Edit
-        </button> */}
-        <button class="bg-persian_plum text-white ml-4 py-2 px-4" type="button" onClick={() => handleDelete(contact)}>
-          Delete
-        </button>
-      </td>
-      <td>
-        <select value={contact.role} onChange={handleChange} class="form-select block w-full">
-          <option value="customer">
-            customer
-          </option>
-          <option value="admin">
-            admin
-          </option>
+          <option value="In-Progress">In-Progress</option>
+          <option value="Fulfilled">Fulfilled</option>
         </select>
       </td>
     </tr>
   );
 };
 
-export default UserRow;
+export default OrdersRow;

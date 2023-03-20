@@ -2,108 +2,71 @@ import axios from "axios";
 import React, { Fragment } from "react";
 import OrdersRow from "../components/OrdersRow";
 
-function userInfo(currentUser) {
-  console.log(currentUser);
-  if (currentUser === "customer") {
-    return 0;
-  }
-  return 1;
-}
-
 export default class Orders extends React.Component {
   state = {
-    currentUser: "",
-    users: [],
+    orders: [],
   };
 
-  async getValidatedUsers() {
-    const url = "/api/users";
+  async getOrders() {
+    const url = "/api/orders";
     axios.get(url).then((res) => {
-      const users = res.data;
-      this.setState({ currentUser: this.props.currentUser, users: users });
+      const orders = res.data;
+      console.log(orders);
+      this.setState({ orders: orders });
     });
   }
 
-  componentDidMount() {
-    this.getValidatedUsers();
-  }
-
-  async deleteUser(user) {  // deleteOrder
-    const id = user._id;
-    const url = "/api/users/" + id;
-    await axios
-      .delete(url)
-      .then(() => {
-        window.location.reload();
-      })
-      .catch((error) => console.log("Error: ", error));
-  }
-
-  async editUser(user, newRole) {   // completeOrder
-    const id = user._id;
-    const url = "/api/users/" + id;
+  async editOrder(order, orderStatus) {
+    const id = order._id;
+    const url = "/api/order/" + id;
     try {
-      await axios.put(url, { role: newRole });
+      await axios.put(url, { orderStatus: orderStatus });
       window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
     }
   }
 
-  // functionality for ensuring unauthenticated users cannot view
-  isLoggedIn = () => {
-    const currentUser = this.props.currentUser;
-    let userLevel = userInfo(this.state.currentUser);
-    return currentUser && currentUser.length !== 0 && userLevel;
-  };
+  componentDidMount() {
+    this.getOrders();
+  }
 
-  sendToHome = () => {
-    window.location.href = "/";
+  sendToLogin = () => {
+    window.location.href = "/login";
   };
 
   render() {
-    return this.isLoggedIn() ? (
-      <div>
+    return (
+      <div className="bg-gainsboro">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" class="px-6 py-3">
-                  Name
+                  Customer Name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">Id</div>
+                  <div class="flex items-center">Customer Email</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">Email</div>
+                  <div class="flex items-center">Order</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">Actions</div>
+                  <div class="flex items-center">Price</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">Role</div>
+                  <div class="flex items-center">Status</div>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {this.state.users.map((user) => (
-                <OrdersRow
-                  contact={user}
-                  handleDelete={this.deleteUser}
-                  handleEditClick={this.editUser}
-                />
+              {this.state.orders.map((order) => (
+                <OrdersRow order={order} handleUpdate={this.editOrder} />
               ))}
             </tbody>
           </table>
         </div>
       </div>
-    ) : (
-      (this.sendToHome(),
-      (
-        <div>
-          <h1>Restricted to authenticated users only!</h1>
-        </div>
-      ))
     );
   }
 }
