@@ -14,7 +14,7 @@ const OrdersRow = ({ order, handleUpdate, handleDelete }) => {
   var currentOrder = order.order;
   const handleChange = (e) => {
     const newOrderType = e.target.value;
-    order.order = newOrderType;
+    order.orderStatus = newOrderType;
     handleUpdate(order, newOrderType);
   };
 

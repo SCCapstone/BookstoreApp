@@ -21,7 +21,7 @@ export default class Orders extends React.Component {
     const url = "/api/orders/" + id;
     try {
       console.log(orderStatus);
-      await axios.put(url, { orderStatus: orderStatus });
+      await axios.put(url, order);
       // window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
