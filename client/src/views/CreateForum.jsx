@@ -30,7 +30,7 @@ export default class CreateForum extends Component {
       axios.get(url).then(res => {
         if (res.status === 200) {
           let books = res.data;
-          console.log(books);
+          // console.log(books);
 
           this.setState((state) => ({
               books: books 
@@ -43,7 +43,7 @@ export default class CreateForum extends Component {
       axios.get(userURL).then(res => {
         if (res.status === 200) {
           let user = res.data;
-          console.log(user);
+          // console.log(user);
           this.setState((state) => ({
             user: user
           }));
