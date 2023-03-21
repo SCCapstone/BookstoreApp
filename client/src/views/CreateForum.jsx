@@ -62,21 +62,20 @@ export default class CreateForum extends Component {
     handleSubmit = async(e) => {
         e.preventDefault();
         // hard code this for one book first to see if it works
-        const url = "/api/books/" + this.state.book.id;
+        const url = "/api/books/" + this.state.book._id;
         const text = this.state.message;
-        const uuid = this.state.user.firstName;
+        const uuid = this.state.user.firstName + " " + this.state.user.lastName;
         const theReview = {review: {
             user: uuid,
             post: text,
             date: Date().toString(),
         }};
-        console.log(theReview);
+        // console.log(theReview);
         const res = await axios.put(url, theReview);
-        console.log(res.data);
+        // console.log(res.data);
         swal.fire({
           icon: 'success',
-          title: "Hi",
-          text: res
+          title: "Review posted successfully"
         })
     }
 
