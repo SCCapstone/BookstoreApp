@@ -9,13 +9,6 @@ import Tooltip from '@mui/material/Tooltip';
 import axios from 'axios';
 export default class ProfileIcon extends Component {
 
-  // const [anchorEl, setAnchorEl] = useState(true);
-  // const open = Boolean(anchorEl);
-  
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-
   constructor(props) {
     super(props);
     this.state = {
