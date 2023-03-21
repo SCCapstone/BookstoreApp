@@ -3,6 +3,7 @@ import axios from "axios";
 
 const EditBlogList = () => {
   const [blogPosts, setBlogPosts] = useState([]);
+  const rBlogPosts = [...blogPosts].reverse();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -19,8 +20,8 @@ const EditBlogList = () => {
   }, []);
 
   return (
-    <div>
-      {blogPosts.map((post, index) => (
+    <div> 
+      {rBlogPosts.map((post, index) => (
         <div key={post._id}>
           <div className="bg-camel px-2 py-2 text-lg mb-4">
             <h2 className="text-xl font-bold">{post.title}</h2>
