@@ -32,18 +32,6 @@ const NavBar = ({ user, items }) => {
     }
   }, []);
 
-  var loginOrLogout = () => {
-    if (user && user.length !== 0) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("userType");
-      localStorage.removeItem("userID");
-      window.location.reload();
-      navigate("/");
-    } else {
-      navigate("/login");
-    }
-  };
-
   return (
     <div>
       <nav class="bg-persian_plum px-4 sm:px-6 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b-4 border-gray-200 dark:border-gray-600">
@@ -77,11 +65,6 @@ const NavBar = ({ user, items }) => {
               />
             </Badge>
             <div />
-            <button class="" onClick={loginOrLogout}>
-              <span className="text-white text-xl">
-                {user && user.length !== 0 ? "Logout" : "Login"}
-              </span>
-            </button>
             <ProfileIcon currentUser={user} />
           </div>
         </div>

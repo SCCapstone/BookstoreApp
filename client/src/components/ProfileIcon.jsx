@@ -37,7 +37,21 @@ export default class ProfileIcon extends Component {
     }));
   };
 
-  isLoggedIn = () => {
+  login () {
+    window.location.href = "/login";
+    console.log("login");
+  };
+
+  logout () {
+    localStorage.removeItem("token");
+      localStorage.removeItem("userType");
+      localStorage.removeItem("userID");
+      window.location.reload();
+      window.location.href = "/";
+      console.log("logout");
+  };
+  
+  isLoggedIn () {
     const currentUser = this.props.currentUser;
     return currentUser && currentUser.length !== 0;
   };
@@ -136,16 +150,24 @@ export default class ProfileIcon extends Component {
                     </a>
                   </li>
                 </MenuItem>
+                <MenuItem onClick={this.setAnchorEl(false)}>
+                  <li>
+                    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      Logout
+                    </span>
+                  </li>
+                </MenuItem>
               </Menu>
             </React.Fragment>
           </div>
         ): (
-          (this.sendToLogin(),
-          (
           <div>
-            <h1>Restricted to authenticated users only!</h1>
+            <button class="">
+              <a className="text-white text-xl" href="/login">
+                Login
+              </a> 
+            </button>
           </div>
-          ))
         );
     };
 };
