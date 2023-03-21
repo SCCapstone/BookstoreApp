@@ -1,63 +1,126 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import swal from 'sweetalert2';
+import { Autocomplete, TextField } from "@mui/material";
 
-const CreateForum = (user) => {
-    const [data, setData] = useState({
+export default class CreateForum extends Component {
+    constructor(props) {
+      super(props);
+      // this.handleChange = this.handleChange.bind(this);
+      this.state = {
         message: "",
-        name: "",
+        user: {},
+        book: null,
+        inputBook: null,
+        books: [],
+      };
+    }
+    // [data, setData] = useState({
+    //     message: "",
+    //     name: "",
+    //     book: null,
+    //     books: [],
+    //   });
+
+    // const [error, setError] = useState("");
+
+    async componentDidMount() {
+      const url = "/api/books";
+
+      await axios.get(url).then(res => {
+        if (res.status === 200) {
+          let books = res.data;
+          console.log(books);
+
+          this.setState((state) => ({
+              books: books 
+          }));
+        }
       });
 
-    const [error, setError] = useState("");
+      const userURL = "/api/users" + localStorage.getItem("userID");
+      
+      await axios.get(userURL).then(res => {
+        if (res.status === 200) {
+          let user = res.data;
+          console.log(user);
+          this.setState((state) => ({
+            user: user
+          }));
+        }
+      });
+    }
 
-    const handleChange = (e) => {
+    handleChange = (e) => {
         const { name, value } = e.target;
-        setData({
-        ...data,
-        [name]: value,
-        });
+        this.setState((state => ({
+          ...state,
+          [name]: value,
+        })));
     }
   // Form Change Method
-    const handleSubmit = async(e) => {
+    handleSubmit = async(e) => {
         e.preventDefault();
         // hard code this for one book first to see if it works
-        const url = "/api/books/6410c9929cc43ded2c83bf9f/";
-        const text = data.message;
-        const uuid = data.name;
+        const url = "/api/books/" + this.state.book.id;
+        const text = this.state.message;
+        const uuid = this.state.user.firstName;
         const theReview = {review: {
             user: uuid,
             post: text,
             date: Date().toString(),
         }};
         console.log(theReview);
-        await axios.put(url, theReview);
+        const res = await axios.put(url, theReview);
+        console.log(res.data);
         swal.fire({
           icon: 'success',
-          title: 'Forum posted successfully'
+          title: "Hi",
+          text: res
         })
     }
 
-    return (
+    render () { return (
     <section className="">
     <div className="py-4">
       <div className="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
         Post a Forum
       </div>
+    <Autocomplete
+      className="rounded border bg-white py-2 max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px]"
+      onChange={(event, newValue) => {
+        this.setState((state) => ({
+            book: newValue
+        }));
+        }}
+        inputValue={this.state.inputBook}
+        onInputChange={(event, newInputValue) => {
+            this.setState((state) => ({
+                inputBook: newInputValue
+            }));
+        }}
+        options={this.state.books}
+        getOptionLabel={(option) => option.title}
+        groupBy={(option) => option.genre[0] }
+        filterOptions={this.filterOptions}
+        renderInput={(params) => (
+            <TextField
+                {...params}
+                variant="filled"
+                label="Select"
+                placeholder="Select Book"
+            />
+        )}
+    />
     </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
             <div>
-              <label>What book are you reading, and what would you like to share about it? </label>
+
+              <label>What would you like to share about this book? </label>
               <textarea
                 name="message"
-                value={data.message}
-                onChange={handleChange}
-                className="form-control placeholder-black block w-full px-4 py-6 text-xl font-normal text-black bg-camel focus:bg-white border border-solid border-black rounded"
-              />
-              <label>Name </label>
-              <textarea
-                name="name"
-                value={data.name}
-                onChange={handleChange}
+                value={this.state.message}
+                onChange={this.handleChange}
                 className="form-control placeholder-black block w-full px-4 py-6 text-xl font-normal text-black bg-camel focus:bg-white border border-solid border-black rounded"
               />
             </div>
@@ -71,6 +134,5 @@ const CreateForum = (user) => {
         </form>
         </section>
     )
+    }
 }
-
-export default CreateForum;
