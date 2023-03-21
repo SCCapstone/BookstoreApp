@@ -24,10 +24,10 @@ export default class CreateForum extends Component {
 
     // const [error, setError] = useState("");
 
-    async componentDidMount() {
+    componentDidMount() {
       const url = "/api/books";
 
-      await axios.get(url).then(res => {
+      axios.get(url).then(res => {
         if (res.status === 200) {
           let books = res.data;
           console.log(books);
@@ -38,9 +38,9 @@ export default class CreateForum extends Component {
         }
       });
 
-      const userURL = "/api/users" + localStorage.getItem("userID");
+      const userURL = "/api/users/" + localStorage.getItem("userID");
       
-      await axios.get(userURL).then(res => {
+      axios.get(userURL).then(res => {
         if (res.status === 200) {
           let user = res.data;
           console.log(user);
