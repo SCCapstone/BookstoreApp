@@ -4,6 +4,7 @@ import bookstore_logo from "../assets/bookstore_logo.jpg"; //import custom books
 {/* The Home Page is the welcome page of our bookstore where users can see the weekly news letter
     to stay up to date with latest books and deals being available */}
 
+//const class which can only be modified through code
 const Home = () => {
 
   return (
@@ -18,14 +19,14 @@ const Home = () => {
       <div class="pb-4 h-full text-gray-800">
         <div class="flex xl:justify-center lg:justify-between justify-center items-center h-full g-6">
           <div class="xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-8/12 w-8/12 py-2 grid grid-rows-5 gap-2">
-          <img
-            src={bookstore_logo}
-            alt="BookStore Logo"
-            className="row-span-3"
-          />
+            <img
+              src={bookstore_logo}
+              alt="BookStore Logo"
+              className="row-span-4 max-w-[400px]"
+            />
             <h2 className="text-2xl">
-              Welcome to Bugsy's Barn Books! If You Love Books, You'll Love
-              Our Book Store! This website is adopted by the Book Dispensary.
+              Welcome to Bugsy's Barn Books! If You Love Books, You'll Love Our
+              Book Store! This website is adopted by the Book Dispensary.
             </h2>
             {/* Weekly Newsletter which contains important information about when new books will 
                 be released, hottst deals and sales on books, and author signing days*/}

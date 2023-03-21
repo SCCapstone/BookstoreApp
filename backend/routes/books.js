@@ -1,8 +1,19 @@
 const router = require("express").Router();
 const { Book, validate } = require("../models/book");
 
+router.get("/", async (req, res) => {
+  try {
+    Book.find({}, function (err, books) {
+      res.send(books);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
+    req.body.dateAdded = new Date();
     const { error } = validate(req.body);
     if (error) {
       console.log(error);
@@ -22,24 +33,14 @@ router.post("/", async (req, res) => {
   }
 });
 
-// router.get("/", async (req, res) => {
-//   try {
-//     Book.find({}, function (err, books) {
-//       res.send(books);
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
-// router.delete("/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     await Book.deleteOne({ _id: id });
-//     res.send("Got a DELETE request at /books");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Book.deleteOne({ _id: id });
+    res.send("Got a DELETE request at /books");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;

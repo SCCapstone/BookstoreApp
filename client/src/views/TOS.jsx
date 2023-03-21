@@ -18,6 +18,7 @@ const shortText2 = "Columbia, SC 29210";
 const point1 = "You can send an email to info@mybookdispensary.com";
 const point2 = "You can send a letter to the following postal address.";
 
+//const page which can only be modified through the code
 const TOS = () => {
   // returns the long and short string texts to create the TOS page as displayed in paragraph style
   return (
