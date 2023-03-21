@@ -11,7 +11,7 @@ export default class Orders extends React.Component {
     const url = "/api/orders";
     axios.get(url).then((res) => {
       const orders = res.data;
-      console.log(orders);
+      // console.log(orders);
       this.setState({ orders: orders });
     });
   }
@@ -20,9 +20,9 @@ export default class Orders extends React.Component {
     const id = order._id;
     const url = "/api/orders/" + id;
     try {
-      console.log(orderStatus);
+      // console.log(orderStatus);
       await axios.put(url, order);
-      // window.location.reload();
+      window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
     }

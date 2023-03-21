@@ -1,7 +1,7 @@
 import React from "react";
 
 const showOrder = ({ order }) => {
-  console.log(order);
+  // console.log(order);
   return Object.keys(order).map((key, i) => (
     <p key={i}>
       <span>{key}</span> x<span> {order[key]}</span>

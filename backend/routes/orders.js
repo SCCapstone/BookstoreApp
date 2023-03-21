@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  console.log("We're hittin!");
+  // console.log("We're hittin!");
   try {
     const { id } = req.params;
     const order = await Order.findById(id);
