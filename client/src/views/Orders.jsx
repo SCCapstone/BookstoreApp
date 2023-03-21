@@ -44,6 +44,9 @@ export default class Orders extends React.Component {
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" class="px-6 py-3">
+                  Order Time
+                </th>
+                <th scope="col" class="px-6 py-3">
                   Customer Name
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -62,7 +65,7 @@ export default class Orders extends React.Component {
             </thead>
             <tbody>
               {this.state.orders.map((order) => (
-                <OrdersRow order={order} handleUpdate={this.editOrder} />
+                <OrdersRow order={order} handleUpdate={this.editOrder}/>
               ))}
             </tbody>
           </table>

@@ -22,6 +22,8 @@ const OrdersRow = ({ order, handleUpdate, handleDelete }) => {
 
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <td class="px-6 py-4">{order.orderDate}</td>
+
       <td class="px-6 py-4">{order.firstName + " " + order.lastName}</td>
 
       <td class="px-6 py-4">{order.email}</td>
