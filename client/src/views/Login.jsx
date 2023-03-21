@@ -10,22 +10,25 @@ import MuiAlert from '@mui/material/Alert';
 If a user does not have a login credential they will click on the register button to get navigated to a sign up/register page
 In the event that the user has forgotten their password, they will click the forgot password button to navigate them to update their password*/}
 
-//uses to alert and foward and render to the different page if correct
+//const function which is used to alert and foward and render to the different page if correct
+//@params props - properties, ref - reference  
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-//store the email and password of a user
+//store the email and password of a user as a string in data
+//email and password are set initially as empty strings
 const Login = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  //used for the error with the use state
+  //used for the error with the use state and also for opening which is initially set as false
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
 
-  //used to associate the email and password with a corresponding name and value
+  //const function used to associate the email and password with a corresponding name and value and stores it into data, also is used to handle change for once logged in
+  //@params: name and value
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -35,16 +38,19 @@ const Login = () => {
   };
 
   //login - in a try, catch method where the user credentials are associated with a token, the type of user (customer, employee, or admin), and an ID
+  //const function for logging in 
   const login = async (e) => {
     e.preventDefault();
     try {
+      //storing user data for authentication - stored in local storage and utilizes the token, userType (customer, employee, or admin), and userID
       const url = "/api/auth";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userType", res.data.userType);
       localStorage.setItem("userID", res.data.userID);
+      //set initially to the home 
       window.location = "/";
-    } catch (error) {
+    } catch (error) { //error status message
       console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {
         setError(error.response.data.message);
@@ -62,7 +68,7 @@ const Login = () => {
   };
   
   return (
-    //login with email and password - displayed as a form, is stored in the mongoDB database, and gets a handle change method
+    //display login page with email and password - displayed as a form, is stored in the mongoDB database, and gets a handle change method
     <div class="pb-4 h-full text-gray-800 max-w-[1400px]">
       <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
         <div />
