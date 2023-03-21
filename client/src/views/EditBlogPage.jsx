@@ -7,6 +7,7 @@ const EditBlogpage = () => {
   const [blogPost, setBlogPost] = useState("");
   const [blogTitle, setBlogTitle] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const rBlogPosts = [...blogPosts].reverse();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -88,7 +89,7 @@ const EditBlogpage = () => {
           Post
         </button>
       </form>
-      {blogPosts.map((post, index) => (
+      {rBlogPosts.map((post, index) => (
         <div key={post._id}>
           <div className="bg-camel px-2 py-2 text-lg mb-4">
             <h2 className="text-xl font-bold">{post.title}</h2>
