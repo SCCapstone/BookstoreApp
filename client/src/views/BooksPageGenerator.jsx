@@ -81,8 +81,9 @@ const BooksPageGenerator = ({ book }) => {
 
   function addOrRemoveFromWishlist() {
     if (active) { // deleting from wishlist
-
+      console.log("we are deleting from wishlist");
     } else { // adding to wishlist
+      console.log("we are adding to wishlist");
       // I think that I will need to call whether it is already in favorites 
       // inside of a hook. This may require making this file into a React component
       // so I can call axios inside of an async function upon the component mounting.
