@@ -1,6 +1,7 @@
 import  React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import swal from 'sweetalert2';
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -27,6 +28,14 @@ const SignUp = () => {
     try {
       const url = "/api/users";
       console.log(data);
+      const compexP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+      if(!compexP.test(data.password)) {
+        swal.fire({
+          icon: "Error",
+          title: "Password must be at least 8 characters and include a combination of letters, numbers, and special characters!'",
+        });
+        throw Error("Password must be at least 8 characters and include a combination of letters, numbers, and special characters!");
+      }
       const res = await axios.post(url, data);
       navigate("/login");
       console.log(res.message);
