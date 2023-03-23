@@ -37,13 +37,13 @@ const CompleteNavbar = () => {
   useEffect(() => {
     fetchBooks();
   }, []);
-  const saveBooksToLocalStorage = () => {
-    if (books.length !== 0) {
-      //this line is new
-      // localStorage.setItem("books", JSON.stringify(books));
-    }
-  };
-  saveBooksToLocalStorage();
+  // const saveBooksToLocalStorage = () => {
+  //   if (books.length !== 0) {
+  //     //this line is new
+  //     localStorage.setItem("booksFromTheDatabase", JSON.stringify(books));
+  //   }
+  // };
+  // saveBooksToLocalStorage();
   // console.log(books);
 
   // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
