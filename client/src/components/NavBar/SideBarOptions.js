@@ -3,6 +3,7 @@ const admin_menu_options = [
   { name: "Browse", link: "/browse" },
   { name: "Forums", link: "/forums" },
   { name: "Post a Forum", link: "/createForums" },
+  { name: "Orders", link: "/orders" },
   { name: "Validated Users", link: "/users" },
   { name: "Add Book", link: "/add_book" },
   { name: "About", link: "/about" },
