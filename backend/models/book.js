@@ -87,7 +87,6 @@ const validate = (data) => {
       .error(new Error("Quantity Sold is invalid")),
     reviews: Joi.array()
       .items(reviewSchema)
-      .required()
       .label("Reviews")
       .error(new Error("Reviews invalid")),
     genre: Joi.array()
