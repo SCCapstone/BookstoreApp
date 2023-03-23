@@ -10,6 +10,7 @@ const admin_menu_options = [
   { name: "Terms of Service", link: "/terms_of_service" },
   { name: "Employee Page", link: "/emp_page" },
   { name: "Account Settings", link: "/my_account" },
+  { name: "Edit Blog Page", link: "/edit_blog" },
 ];
 
 const customer_menu_options = [

@@ -10,6 +10,7 @@ const forumsRoutes = require("./routes/forums");
 const bookRoutes = require("./routes/books");
 const orderRoutes = require("./routes/orders");
 const eventRoutes = require("./routes/events");
+const blogRoutes = require("./routes/blogs");
 const path = require("path");
 const { application } = require("express");
 
@@ -27,6 +28,7 @@ app.use("/api/forums", forumsRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/blogs", blogRoutes);
 
 __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
