@@ -28,8 +28,20 @@ export default class Orders extends React.Component {
     }
   }
 
+
+  async FileAtURL(url) {
+    const fileName = url.split("/api/orders";
+    const aTag = document.createElement("a");
+    aTag.href = url;
+    aTag.setAttribute("download", fileName);
+    document.body.appendChild (aTag);
+    aTag.click();
+    aTag.remove();
+    };
+
   componentDidMount() {
     this.getOrders();
+    this.FileAtURL();
   }
 
   sendToLogin = () => {
@@ -65,7 +77,7 @@ export default class Orders extends React.Component {
             </thead>
             <tbody>
               {this.state.orders.map((order) => (
-                <OrdersRow order={order} handleUpdate={this.editOrder}/>
+                <OrdersRow order={order} handleUpdate={this.editOrder} />
               ))}
             </tbody>
           </table>
