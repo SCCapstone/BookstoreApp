@@ -67,134 +67,140 @@ const EmployeeHomepage = () => {
 
     return (
 
-    <div className="max-w-screen-md mx-auto p-4 text-center"> 
-        <h1 className="text-2xl font-medium mb-4 text-center">
-            Welcome, Employee!
-        </h1> 
-        <h2 className="text-lg font-medium mb-4 text-center">
-            Upcoming Meeting
-        </h2>
-        <div className="flex flex-col">
-            <Calendar
-                className="border border-gray rounded-lg shadow-lg text-center hover"
-                value={date}
-                onChange={setDate}
-                tileDisabled = {() => false}
-                tileClassName={({date, view}) => {
-                    const eventDatesStart = events.map(event => new Date(event.start));
-                    const eventDatesEnd = events.map(event => new Date(event.end));
-                    const withinStartEnd = eventDatesStart.some((eventDatesStart, index) => {
-                        const eventDatesE = eventDatesEnd[index];
-                        return date >= eventDatesStart && date <= eventDatesE;
-                    });
-                    const firstDay = eventDatesStart.some(eventDate => eventDate.toDateString() === date.toDateString());
+        <div className="max-w-screen-md mx-auto p-4 text-center"> 
+            <h1 className="text-2xl font-medium mb-4 text-center">
+                Welcome, Employee!
+            </h1> 
+            <h2 className="text-lg font-medium mb-4 text-center">
+                Upcoming Meeting
+            </h2>
+            <div className="flex flex-col">
+                <Calendar
+                    className="border border-gray rounded-lg shadow-lg text-center hover"
+                    value={date}
+                    onChange={setDate}
+                    tileDisabled = {() => false}
+                    tileClassName={({date, view}) => {
+                        const eventDatesStart = events.map(event => new Date(event.start));
+                        const eventDatesEnd = events.map(event => new Date(event.end));
+                        const withinStartEnd = eventDatesStart.some((eventDatesStart, index) => {
+                            const eventDatesE = eventDatesEnd[index];
+                            return date >= eventDatesStart && date <= eventDatesE;
+                        });
+                        const firstDay = eventDatesStart.some(eventDate => eventDate.toDateString() === date.toDateString());
 
-                    if (withinStartEnd || firstDay) {
-                        return "font-bold border border-gray"
-                    } else {
-                        return "border boder-gray"
-                    }
-                }}
-                tileContent={({date,view}) => {
-                    const eventsThatStartOnDate = events.filter(
-                        event => new Date(event.start).toDateString() === date.toDateString()
-                    );
-                    const eventsThatSpanAcrossDate = events.filter(
-                        event => {
-                          const start = new Date(event.start);
-                          const end = new Date(event.end);
-                          return (
-                            start <= date &&
-                            end >= date &&
-                            start.toDateString() !== end.toDateString()
-                          );
+                        if (withinStartEnd || firstDay) {
+                            return "font-bold border border-gray"
+                        } else {
+                            return "border boder-gray"
                         }
-                    );
-                    return (
-                        <div>
-                          {eventsThatStartOnDate.map(event => (
-                            <div key={event.id}>
-                                <div>
-                                    <span>{event.title}</span>
+                    }}
+                    tileContent={({date,view}) => {
+                        const eventsThatStartOnDate = events.filter(
+                            event => new Date(event.start).toDateString() === date.toDateString()
+                        );
+                        const eventsThatSpanAcrossDate = events.filter(
+                            event => {
+                            const start = new Date(event.start);
+                            const end = new Date(event.end);
+                            return (
+                                start <= date &&
+                                end >= date &&
+                                start.toDateString() !== end.toDateString()
+                            );
+                            }
+                        );
+                        return (
+                            <div>
+                            {eventsThatStartOnDate.map(event => (
+                                <div key={event.id}>
+                                    <div>
+                                        <span>{event.title}</span>
+                                    </div>
+                                    <div>
+                                        <span>{event.start} - {event.end}</span>
+                                    </div>
+                                    <div>
+                                        <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center text-sm italic">
+                                            Delete
+                                        </button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span>{event.start} - {event.end}</span>
+                            ))}
+                            {eventsThatSpanAcrossDate.map(event => (
+                                <div key={event.id}>
+                                    <div>
+                                        <span>{event.title}</span>
+                                    </div>
+                                    <div>
+                                        <span>{event.start} - {event.end}</span>
+                                    </div>
+                                    <div>
+                                        <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center text-sm italic">
+                                            Delete
+                                        </button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center text-sm italic">
-                                        Delete
-                                    </button>
-                                </div>
+                            ))}
                             </div>
-                          ))}
-                          {eventsThatSpanAcrossDate.map(event => (
-                            <div key={event.id}>
-                                <div>
-                                    <span>{event.title}</span>
-                                </div>
-                                <div>
-                                    <span>{event.start} - {event.end}</span>
-                                </div>
-                                <div>
-                                    <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center text-sm italic">
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                          ))}
-                        </div>
-                      );
+                        );
 
-                }}
-            />
-        </div>
-            <form onSubmit={handleEventSubmit} className="mt-4">
-                <label className="block font-medium mb-2">
-                    Title:
-                </label>
-                <input 
-                    type="text" 
-                    name="eventTitle" 
-                    className="w-full p-2 border rounded"
+                    }}
                 />
-                <label className="block font medium mb-2 mt-4">
-                    Start Time:
-                </label>
-                <input 
-                    type="datetime-local" 
-                    name="eventStart" 
-                    className="w-full p-2 border rounded"
-                />
-                <label className="block font medium mb-2 mt-4">
-                    End Time:
-                </label>
-                <input 
-                    type="datetime-local" 
-                    name="eventEnd" 
-                    className="w-full p-2 border rounded"
-                />
-                <button 
-                    type="submit" 
-                    className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center"
-                >
-                    Add Event
-                </button>
-            </form>
-            <div className="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
-                <a
-                    href="/users"
-                    class="underline cursor-pointer text-center bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black"
-                >
-                    Click here to see user
-                </a>
-                <a
-                    href="/browse"
-                    class="underline cursor-pointer text-center bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black"
-                >
-                    Click here to order books
-                </a>
             </div>
-    </div>
+                <form onSubmit={handleEventSubmit} className="mt-4">
+                    <label className="block font-medium mb-2">
+                        Title:
+                    </label>
+                    <input 
+                        type="text" 
+                        name="eventTitle" 
+                        className="w-full p-2 border rounded"
+                    />
+                    <label className="block font medium mb-2 mt-4">
+                        Start Time:
+                    </label>
+                    <input 
+                        type="datetime-local" 
+                        name="eventStart" 
+                        className="w-full p-2 border rounded"
+                    />
+                    <label className="block font medium mb-2 mt-4">
+                        End Time:
+                    </label>
+                    <input 
+                        type="datetime-local" 
+                        name="eventEnd" 
+                        className="w-full p-2 border rounded"
+                    />
+                    <button 
+                        type="submit" 
+                        className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center"
+                    >
+                        Add Event
+                    </button>
+                </form>
+                <div className="flex justify-between items-center mb-6 grid grid-cols-2 gap-2">
+                    <a
+                        href="/users"
+                        class="underline cursor-pointer text-center bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black"
+                    >
+                        Click here to see user
+                    </a>
+                    <a
+                        href="/browse"
+                        class="underline cursor-pointer text-center bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black"
+                    >
+                        Click here to order books
+                    </a>
+                    <a
+                        href="/edit_blog"
+                        class="underline cursor-pointer text-center bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black"
+                    >
+                        Click here to edit blog post
+                    </a>
+                </div>
+        </div>
     );
 };
 
