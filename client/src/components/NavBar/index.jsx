@@ -18,6 +18,8 @@ import MainCart from "../../views/Cart/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
+import axios from "axios";
+import EditBlogpage from "../../views/EditBlogPage";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -37,7 +39,7 @@ const CompleteNavbar = () => {
   const saveBooksToLocalStorage = () => {
     if (books.length !== 0) {
       //this line is new
-      localStorage.setItem("books", JSON.stringify(books));
+      // localStorage.setItem("books", JSON.stringify(books));
     }
   };
   saveBooksToLocalStorage();
@@ -85,6 +87,10 @@ const CompleteNavbar = () => {
             <Route
               path="/emp_page"
               element={<EmployeeHomepage currentUser={userType} />}
+            />
+            <Route
+              path="/edit_blog"
+              element={<EditBlogpage currentUser={userType} />}
             />
 
             {/* Admin, Employee, and Customer */}
