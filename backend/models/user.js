@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  // password: passwordComplexity().required().label("Password"),
   role: { type: String, required: true, enum: ["admin", "customer"]},
   balance: { type: mongoose.Schema.Types.Decimal128, required: false },
   
@@ -28,7 +29,7 @@ const validate = (data) => {
     lastName: Joi.string().required().label("Last Name"),
     email: Joi.string().required().label("Email"),
     password: Joi.string().required().label("Password"),
-    // password: passwordComplexity.required().label("Password")
+    // password: passwordComplexity.required().label("Password").error(new Error("Password is invalid")),
     role: Joi.string().required().valid("admin", "customer").label("Role"),
     balance: Joi.number().required().label("Balance"),
   });
