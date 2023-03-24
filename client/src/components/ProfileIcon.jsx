@@ -19,7 +19,9 @@ export default class ProfileIcon extends Component {
   };
 
   async componentDidMount() {
-      const url = "/api/users/" + this.props.currentUser;
+    //const url = localStorage.getToken("userID")  
+    //const url = "/api/users/" + this.props.currentUser;
+    const url = "/api/users/" + localStorage.getToken("userID");
 
       await axios.get(url).then(res => {
           let user = res.data;
@@ -43,7 +45,7 @@ export default class ProfileIcon extends Component {
   };
 
   logout () {
-    localStorage.removeItem("token");
+      localStorage.removeItem("token");
       localStorage.removeItem("userType");
       localStorage.removeItem("userID");
       window.location.reload();
