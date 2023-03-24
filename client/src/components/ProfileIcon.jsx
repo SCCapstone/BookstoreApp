@@ -19,7 +19,6 @@ export default class ProfileIcon extends Component {
   };
 
   async componentDidMount() {
-    //const url = localStorage.getToken("userID")  
     //const url = "/api/users/" + this.props.currentUser;
     const url = "/api/users/" + localStorage.getToken("userID");
 
@@ -123,16 +122,6 @@ export default class ProfileIcon extends Component {
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={this.setAnchorEl(false)}>
-                <li>
-                    <a
-                      href="/"
-                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Dashboard
-                    </a>
-                  </li>
-                </MenuItem>
-                <MenuItem onClick={this.setAnchorEl(false)}>
                   <li>
                     <a
                       href="/cart"
@@ -142,6 +131,7 @@ export default class ProfileIcon extends Component {
                     </a>
                   </li>
                 </MenuItem>
+                <Divider />
                 <MenuItem onClick={this.setAnchorEl(false)}>
                   <li>
                     <a
@@ -152,11 +142,15 @@ export default class ProfileIcon extends Component {
                     </a>
                   </li>
                 </MenuItem>
+                <Divider />
                 <MenuItem onClick={this.setAnchorEl(false)}>
                   <li>
-                    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <a
+                      href="/"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
                       Logout
-                    </span>
+                    </a>
                   </li>
                 </MenuItem>
               </Menu>
