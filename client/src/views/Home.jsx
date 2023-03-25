@@ -1,12 +1,15 @@
 import { React } from "react";
 import bookstore_logo from "../assets/bookstore_logo.jpg";
 
+{/* The Home Page is the starting page of the app where users are welcomed to our bookstore app and can see the latest offers/deals as well as the weekly news letter which gets updated by employees and admin */}
+
 //const class which can only be modified through code
 const Home = () => {
 
   return (
     <section class="">
       <div class="py-4">
+        {/*Welcome block*/}
         <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 max-w-[1400px]">
           Welcome
         </div>
@@ -19,6 +22,7 @@ const Home = () => {
               alt="BookStore Logo"
               className="row-span-4 max-w-[400px]"
             />
+            {/*hard-coded welcome statement for the bookstore and hard coded weekly newsletter and deals which can be updated through the code by employees and admin*/}
             <h2 className="text-2xl">
               Welcome to Bugsy's Barn Books! If You Love Books, You'll Love Our
               Book Store! This website is adopted by the Book Dispensary.
