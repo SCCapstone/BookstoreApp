@@ -8,9 +8,10 @@ import Main_Cart from "./views/Cart/Cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+//used to parse through each item in the JSON file and stores it in local storage for the books in the cart
 const tmp = JSON.parse(localStorage.getItem('cartItems'));
 
-
+//used to render to different pages
 root.render(
   <React.StrictMode>
     <App />
