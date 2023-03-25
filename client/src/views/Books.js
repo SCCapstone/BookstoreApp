@@ -1,3 +1,6 @@
+//const array which contains all the books in the inventory 
+//each book is designated by the title, author (first and last name), imageId (png picture from the Books folder), a little summanry about the book, the quality of the book through the stars, the price, stock, genre, how many copies of the book have been sold so far, and the date
+//all of these are hard-coded initially for each book in the inventory
 const books = [
   {
     title: "Steve Jobs",
