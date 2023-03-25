@@ -1,3 +1,4 @@
+//built in for any react app for testing the interface of the app for react, rendering and linking components and views
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
