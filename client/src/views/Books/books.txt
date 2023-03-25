@@ -1,0 +1,1 @@
+the books folder contains all the pictures of the books that we have in the inventory for our bookstore.
