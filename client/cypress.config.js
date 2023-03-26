@@ -1,3 +1,4 @@
+//configuration of cypress which is what we use for our testing
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
