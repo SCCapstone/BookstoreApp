@@ -1,3 +1,4 @@
+/*used tailwind for our css and based our colors and alignment from our design on Figma*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
