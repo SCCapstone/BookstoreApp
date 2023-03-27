@@ -27,7 +27,6 @@ function iterate(iterable, callback) {
 }
 
 const BooksPageGenerator = ({ book }) => {
-
   const [quantity, setQuantity] = useState(1);
 
   function addItem(book, quantity) {
@@ -40,7 +39,6 @@ const BooksPageGenerator = ({ book }) => {
     for (let i = 0; i < quantity; i++) {
       books_cart.push(book);
     }
-    // console.log(books_cart);
 
     localStorage.setItem("books_cart", JSON.stringify(books_cart));
 
@@ -60,11 +58,6 @@ const BooksPageGenerator = ({ book }) => {
 
     booksCartNames[book.title] = booksCartNames[book.title] + quantity;
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
-    // cartChange();
-    // swal.fire({
-    //   icon: "success",
-    //   title: "Book added to cart",
-    // });
     window.location.reload(false);
   }
 
@@ -89,11 +82,7 @@ const BooksPageGenerator = ({ book }) => {
         </div>
         <div className="grid grid-cols-2 ">
           <div className="px-16 py-8">
-            <img
-              src={book.imageId}
-              alt=""
-              className="row-span-2 border-2"
-            />
+            <img src={book.imageId} alt="" className="row-span-2 border-2" />
           </div>
           <div className="pt-12 grid grid-auto-rows">
             <ul className="text-bold text-xl">${book.price}</ul>
@@ -135,8 +124,7 @@ const BooksPageGenerator = ({ book }) => {
                 deleteIcon={<Add />}
               />
               <button className="pl-4" onClick={() => setQuantity(0)}>
-                {" "}
-                Clear{" "}
+                Clear
               </button>
             </div>
 
@@ -147,10 +135,6 @@ const BooksPageGenerator = ({ book }) => {
               >
                 Add to cart
               </button>
-
-              {/* <button class="text-slate-800 font-semibold focus:text-black focus:bg-persian_plum rounded p-3 border-2 max-w-[150px]">
-            Instant Purchase
-          </button> */}
             </div>
             <ul className="row-span-6" />
           </div>
@@ -161,16 +145,3 @@ const BooksPageGenerator = ({ book }) => {
 };
 
 export default BooksPageGenerator;
-
-/*
- 
-    {
-    name: "How Easy is That?",
-    author: "Ina Garten",
-    image: require("./Books/howeasyisthat.png"),
-    review:
-      "HET A genius book about an incredible mind, yadda yadda blah blah blah lots of gushing and awing because I like books.",
-    link: "/Ina Garten/How Easy is That",
-    },
-  
-*/
