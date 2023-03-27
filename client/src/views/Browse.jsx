@@ -9,7 +9,9 @@ class Browse extends Component {
     super(props);
     this.state = {
       books: [],
-      value: "Relevant"
+      book: null,
+      inputBook: null,
+      value: "Relevant",
     };
   }
 
@@ -22,7 +24,7 @@ class Browse extends Component {
         console.log(books);
 
         this.setState((state) => ({
-            books: books 
+            books: books
         }));
       } else {
         this.setState((state) => ({
@@ -31,7 +33,34 @@ class Browse extends Component {
         console.log(defaultBooks);
       }
     });
+    // let books = JSON.parse(localStorage.getItem("booksFromTheDatabase"));
+    // this.setState((state) => ({
+    //   books: books,
+    // }));
   }
+
+  changeOption(option) {
+    this.setState((state) => ({
+      value: option,
+    }));
+  }
+
+  filterOptions = (options, state) => {
+    let newOptions = [];
+    options.forEach((element) => {
+      const baseTitle = element.title.replace(",", "").toLowerCase();
+      const baseAuthor = element.author.replace(",", "").toLowerCase();
+      const baseGenre = element.genre[0].replace(",", "").toLowerCase();
+      const baseInput = state.inputValue.toLowerCase();
+      if (
+        baseTitle.includes(baseInput) ||
+        baseAuthor.includes(baseInput) ||
+        baseGenre.includes(baseInput)
+      )
+        newOptions.push(element);
+    });
+    return newOptions;
+  };
 
   render() {
     return (
@@ -69,6 +98,6 @@ class Browse extends Component {
       </section>
     );
   }
-};
+}
 
 export default Browse;
