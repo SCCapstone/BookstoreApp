@@ -94,7 +94,6 @@ const MainCart = ({ currentUser }) => {
     //   .then(console.log(response));
     const url = "/api/books/";
     const res = await axios.get(url, data);
-    console.log(res.data);
     setBooks(res.data);
     return res.data;
   };
@@ -239,6 +238,7 @@ const MainCart = ({ currentUser }) => {
 
   fetchBooks();
 
+  console.log(books);
   return (
     <div>
       <Grid item xs={12}>
