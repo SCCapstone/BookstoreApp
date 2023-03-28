@@ -43,6 +43,8 @@ function getBook(books, bookName) {
   // console.log(bookName);
   for (let i = 0; i < books.length; ++i) {
     if (books[i].title == bookName) {
+      console.log(books);
+      console.log(bookName);
       return books[i];
     }
   }
@@ -85,14 +87,21 @@ function calculatePrice(books, booksCartNames) {
 
 const MainCart = ({ currentUser }) => {
   const [books, setBooks] = useState([]);
-  const fetchBooks = () => {
-    return fetch("/api/books")
-      .then((response) => response.json())
-      .then((data) => setBooks(data));
+  const fetchBooks = async () => {
+    // return fetch("/api/books")
+    //   .then((response) => response.json())
+    //   .then((data) => setBooks(data))
+    //   .then(console.log(response));
+    const url = "/api/books/";
+    const res = await axios.get(url, data);
+    console.log(res.data);
+    setBooks(res.data);
+    return res.data;
   };
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
-  fetchBooks();
-  console.log(books);
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
   localStorage.setItem("cartItemsQuantity", findQuantity(booksCartNames));
@@ -229,7 +238,6 @@ const MainCart = ({ currentUser }) => {
   };
 
   fetchBooks();
-  console.log(books);
 
   return (
     <div>
