@@ -19,8 +19,7 @@ export default class ProfileIcon extends Component {
   };
 
   async componentDidMount() {
-    //const url = "/api/users/" + this.props.currentUser;
-    const url = "/api/users/" + localStorage.getToken("userID");
+    const url = "/api/users/" + this.props.currentUser;
 
       await axios.get(url).then(res => {
           let user = res.data;

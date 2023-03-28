@@ -53,7 +53,7 @@ const CompleteNavbar = () => {
         <SideBar user={user} />
         <div className="px-16"></div>
         <BrowserRouter>
-          <NavBar user={user} userType={userType} items={items} />
+          <NavBar user={localStorage.getItem("userID")} userType={userType} items={items} />
           <Routes>
             {/* All users */}
             <Route path="/" element={<Home />} />
