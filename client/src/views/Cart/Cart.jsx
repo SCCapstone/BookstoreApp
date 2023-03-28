@@ -3,7 +3,7 @@ import { React, useState, useEffect } from "react";
 import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
-import books from "../Books";
+// import books from "../Books";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { cartChange } from "../../components/NavBar/NavBar";
@@ -39,6 +39,8 @@ function addItem(book) {
 }
 
 function getBook(books, bookName) {
+  // console.log(books);
+  // console.log(bookName);
   for (let i = 0; i < books.length; ++i) {
     if (books[i].title == bookName) {
       return books[i];
@@ -82,13 +84,22 @@ function calculatePrice(books, booksCartNames) {
 }
 
 const MainCart = ({ currentUser }) => {
+  const [books, setBooks] = useState([]);
+  const fetchBooks = () => {
+    return fetch("/api/books")
+      .then((response) => response.json())
+      .then((data) => setBooks(data));
+  };
+
+  fetchBooks();
+  console.log(books);
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
   localStorage.setItem("cartItemsQuantity", findQuantity(booksCartNames));
 
   const [quantity, setQuantity] = useState(booksCartNames);
 
-  console.log(booksCartNames);
+  // console.log(booksCartNames);
 
   function findQuantity(booksCartNames) {
     let count = 0;
@@ -216,6 +227,9 @@ const MainCart = ({ currentUser }) => {
       navigate("/login");
     }
   };
+
+  fetchBooks();
+  console.log(books);
 
   return (
     <div>
