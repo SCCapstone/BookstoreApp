@@ -83,6 +83,16 @@ router.put("/:id", async (req, res) => {
     if (req.body.balance) {
       user.balance = req.body.balance;
     }
+    if (req.body.favorites) {
+      const index = user.favorites.indexOf(req.body.favorites);
+
+      if (index > -1) {
+        user.favorites.splice(index, 1);
+      } else {
+        user.favorites.push_back(req.body.favorites);
+      }
+    }
+    console.log(user);
     await user.save();
     res.send({ message: "User role updated" });
   } catch (error) {

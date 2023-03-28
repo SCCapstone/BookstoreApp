@@ -5,6 +5,7 @@ import { Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 import swal from "sweetalert2";
+import axios from "axios";
 
 function getKeys(obj) {
   var keys = [];
@@ -25,7 +26,7 @@ function iterate(iterable, callback) {
   }
 }
 
-const BooksPageGenerator = ({ book }) => {
+const BooksPageGenerator = ({ book, user }) => {
 
   const [quantity, setQuantity] = useState(1);
 
@@ -80,7 +81,26 @@ const BooksPageGenerator = ({ book }) => {
   const [active, setActive] = useState(false);
 
   function addOrRemoveFromWishlist() {
+    // don't do anything if not logged-in
+    if (!user || user.length === 0) return;
+
+    const url = "/api/users/" +  user;
+    const tempUser = {
+      favorites: book._id
+    }
+
+    console.log(url);
+    console.log(tempUser);
     if (active) { // deleting from wishlist
+      axios.put(url, tempUser).then(res => {
+        if (res.status === 200) {
+            swal.fire({
+                icon: 'success',
+                title: 'Successfully Updated User'
+            });    
+        }
+    });
+
       console.log("we are deleting from wishlist");
     } else { // adding to wishlist
       console.log("we are adding to wishlist");
