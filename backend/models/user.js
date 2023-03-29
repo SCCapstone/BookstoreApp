@@ -24,16 +24,30 @@ userSchema.methods.generateAuthToken = function () {
 const User = mongoose.model("user", userSchema);
 
 const validate = (data) => {
+  const complexityOptions = {
+    min: 8,
+    max: 30,
+    lowerCase: 1,
+    upperCase: 1,
+    numeric: 1,
+    symbol: 1,
+  };
+  const passwordComplexitySchema = passwordComplexity(complexityOptions)
+    .required()
+    .label("Password")
+    .message(
+      "Password should be 8-30 characters long and should contain at least one lowercase letter, one uppercase letter, one number, and one special character."
+    );
   const schema = Joi.object({
     firstName: Joi.string().required().label("First Name"),
     lastName: Joi.string().required().label("Last Name"),
     email: Joi.string().required().label("Email"),
-    password: Joi.string().required().label("Password"),
-    // password: passwordComplexity.required().label("Password").error(new Error("Password is invalid")),
+    password: passwordComplexitySchema,
     role: Joi.string().required().valid("admin", "customer").label("Role"),
     balance: Joi.number().required().label("Balance"),
   });
   return schema.validate(data);
+
 };
 
 module.exports = { User, validate };

@@ -2,6 +2,7 @@ import  React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import swal from 'sweetalert2';
+import zxcvbn from "zxcvbn";
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -25,17 +26,16 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+    const passwordStrength = zxcvbn(data.password);
+    if (passwordStrength.score < 3) {
+      swal.fire({
+        icon: "error",
+        title: "Password is not strong enough!",
+        text: passwordStrength.feedback.warning,
+      });
+      return;
+    } try {
       const url = "/api/users";
-      console.log(data);
-      const compexP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-      if(!compexP.test(data.password)) {
-        swal.fire({
-          icon: "Error",
-          title: "Password must be at least 8 characters and include a combination of letters, numbers, and special characters!'",
-        });
-        throw Error("Password must be at least 8 characters and include a combination of letters, numbers, and special characters!");
-      }
       const res = await axios.post(url, data);
       navigate("/login");
       console.log(res.message);
