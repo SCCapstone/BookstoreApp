@@ -67,7 +67,7 @@ export default function ProfileIcon(currentUser) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 33, height: 33 }}>{userInitials()}</Avatar>
+            <Avatar sx={{ width: 40, height: 40 }}>{userInitials()}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -103,8 +103,8 @@ export default function ProfileIcon(currentUser) {
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right-center', vertical: 'top-center' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'top-center' }}
+        transformOrigin={{ horizontal: 'center', vertical: 'center' }}
+        anchorOrigin={{ horizontal: 'center', vertical: 'left-center' }}
       >
         <MenuItem onClick={handleClose}>
           <li>
