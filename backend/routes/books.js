@@ -13,12 +13,12 @@ router.get("/", async (req, res) => {
 
 router.get("/:ids", async (req, res) => {
   const { ids } = req.params;
-  console.log(ids);
+  splitIds = ids.split(",");
   try {
     Book.find(
       {
         _id: {
-          $in: ids,
+          $in: splitIds,
         },
       },
       function (err, books) {
