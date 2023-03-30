@@ -46,13 +46,14 @@ class MainCart extends Component {
     if (!currentUser && currentUser.length !== 0 ) {
       const userURL = "/api/users/" + localStorage.getItem("userID");
 
-      axios.get(userURL).then((res) => {
+      await axios.get(userURL).then((res) => {
         if (res.status === 200) {
           let user = res.data;
           console.log(user);
           this.setState((state) => ({
             user: user,
           }));
+          console.log(this.state.user);
         }
       });
     }
