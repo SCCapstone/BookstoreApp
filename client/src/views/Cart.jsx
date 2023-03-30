@@ -4,7 +4,7 @@ import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { cartChange } from "../../components/NavBar/NavBar";
+import { cartChange } from "../components/NavBar/NavBar";
 import swal from "sweetalert2";
 
 cartChange();

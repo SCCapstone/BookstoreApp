@@ -20,14 +20,14 @@ export default class Favorites extends Component {
 
         await axios.get(url).then(res => {
             const user = res.data;
-            let favoritesIds = [];
+            let favIds = [];
             console.log(user);
             if (user.favorites && user.favorites.length > 0) {
-                favoritesIds = user.favorites;
+                favIds = user.favorites;
             }
-            console.log(favoritesIds);
-            this.setState((state) => ({
-                favoritesIds: favoritesIds
+            console.log(favIds);
+            this.setState({ favoritesIds: [] }, () => this.setState({
+                favoritesIds: favIds
             }));
             console.log(this.state.favoritesIds);
             this.getFavorites();
