@@ -7,6 +7,7 @@ import navbar_logo from "../NavBar/navbar_logo.jpg"
 import { ButtonGroup, Button, AddIcon, RemoveIcon } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
+import ProfileIcon from "../ProfileIcon";
 
 let val = 0;
 
@@ -30,18 +31,6 @@ const NavBar = ({ user, items }) => {
       setShoppingCartQuantity(val);
     }
   }, []);
-
-  var loginOrLogout = () => {
-    if (user && user.length !== 0) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("userType");
-      localStorage.removeItem("userID");
-      window.location.reload();
-      navigate("/");
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <div>
@@ -76,11 +65,7 @@ const NavBar = ({ user, items }) => {
               />
             </Badge>
             <div />
-            <button class="" onClick={loginOrLogout}>
-              <span className="text-white text-xl">
-                {user && user.length !== 0 ? "Logout" : "Login"}
-              </span>
-            </button>
+            <ProfileIcon currentUser={user} />
           </div>
         </div>
       </nav>
