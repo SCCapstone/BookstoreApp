@@ -26,22 +26,23 @@ export default class Favorites extends Component {
                 favIds = user.favorites;
             }
             console.log(favIds);
-            this.setState({ favoritesIds: [] }, () => this.setState({
-                favoritesIds: favIds
-            }));
+            // this.setState({ favoritesIds: [] }, () => this.setState({
+            //     favoritesIds: favIds
+            // }));
+
             console.log(this.state.favoritesIds);
-            this.getFavorites();
+            this.getFavorites(favIds);
         }).catch(function error(e) {
             console.log(e);
         });
     };
 
-    async getFavorites() {
-        console.log("hello");
-        if (!this.state.favoritesIds || this.state.favoritesIds.length === 0) return;
+    async getFavorites(favIds) {
+        console.log(favIds);
+        if (!favIds || favIds.length === 0) return;
         console.log("hello part 2");
 
-        const bookUrl = "/api/books/" + this.state.favoritesIds;
+        const bookUrl = "/api/books/" + favIds;
         console.log(bookUrl);
         await axios.get(bookUrl).then(res => {
             let favoriteBooks = res.data;
