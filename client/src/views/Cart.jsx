@@ -4,7 +4,8 @@ import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { cartChange } from "../components/NavBar/NavBar";
+import { cartChange } from "../../components/NavBar/NavBar";
+import swal from "sweetalert2";
 
 cartChange();
 
@@ -53,6 +54,7 @@ function round(value, decimals) {
 function getKeys(obj) {
   var keys = [];
   iterate(obj, function (oVal, oKey) {
+    // window.location.reload();
     keys.push(oKey);
   });
   return keys;
@@ -61,6 +63,7 @@ function iterate(iterable, callback) {
   for (var key in iterable) {
     if (
       key === "length" ||
+      // window.location.reload();
       key === "prototype" ||
       !Object.prototype.hasOwnProperty.call(iterable, key)
     )
@@ -189,6 +192,30 @@ const MainCart = ({ currentUser }) => {
     currentBalance = userData(allUsers, currentUser);
   }
 
+  function userInfo(users, currentUser) {
+    for (let i = 0; i < users.length; ++i) {
+      if (users[i]._id === currentUser) {
+        return users[i];
+      }
+    }
+  }
+
+  const handleSubmitOrder = async (e) => {
+    if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
+      e.preventDefault();
+      try {
+        const url = "/api/orders";
+        axios.post(url, orderSetter()).then((res) => {
+          console.log(res.status);
+        });
+      } catch (error) {
+        if (error.response?.status >= 400 && error.response.status <= 500) {
+          setError(error.response.data.message);
+        }
+      }
+    }
+  };
+
   const [userBalance, setUserBalance] = useState(0);
 
   const availableBalance = () => {
@@ -200,14 +227,37 @@ const MainCart = ({ currentUser }) => {
     return 0;
   };
 
+  function orderSetter() {
+    var user = {};
+    for (let i = 0; i < allUsers.length; ++i) {
+      if (allUsers[i]._id === currentUser) {
+        user["firstName"] = allUsers[i].firstName;
+        user["lastName"] = allUsers[i].lastName;
+        user["email"] = allUsers[i].email;
+        user["role"] = allUsers[i].role;
+      }
+    }
+    user["order"] = booksCartNames;
+    user["orderPrice"] = calculatePrice(books, booksCartNames);
+    user["orderDate"] = new Date().toLocaleString();
+    user["orderStatus"] = "In-Progress"
+    console.log(user);
+    return user;
+  }
+
   var puchaseBooks = (currentUser) => {
     if (currentUser && currentUser.length !== 0) {
       if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
         if (currentBalance - calculatePrice(books, booksCartNames) === 0) {
           data.balance = "0";
         } else {
-          data.balance = round(currentBalance - calculatePrice(books, booksCartNames),2);
+          data.balance = round(
+            currentBalance - calculatePrice(books, booksCartNames),
+            2
+          );
         }
+        orderSetter();
+        console.log(userData(allUsers, currentUser));
         localStorage.setItem("books_cart", JSON.stringify([]));
         localStorage.setItem("booksCartNames", JSON.stringify({}));
         handleChange();
@@ -219,7 +269,6 @@ const MainCart = ({ currentUser }) => {
       navigate("/login");
     }
   };
-
 
   return (
     <div class="py-6">
@@ -292,7 +341,10 @@ const MainCart = ({ currentUser }) => {
         </div>
         <form
           className={`grid grid-cols-3 flex-1 flex justify-start items-center  m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
-          onSubmit={handleSubmit}
+          onSubmit={(e) => {
+            handleSubmit(e);
+            handleSubmitOrder(e);
+          }}
         >
           <h4 className="col-span-1 font-poppins font-semibold xs:text-[30.89px] text-[25.89px] xs:leading-[43.16px] leading-[30.16px]">
             Total: ${calculatePrice(books, booksCartNames)}

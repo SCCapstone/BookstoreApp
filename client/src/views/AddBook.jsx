@@ -11,18 +11,17 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { Remove, Add } from "@mui/icons-material";
 import swal from "sweetalert2";
 
-
 function getBase64() {
-    var file = "./Books/default.jpg";
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      console.log(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
- }
+  var file = "./Books/default.jpg";
+  var reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
+    console.log(reader.result);
+  };
+  reader.onerror = function (error) {
+    console.log("Error: ", error);
+  };
+}
 
 class AddBook extends Component {
   constructor(props) {
@@ -76,7 +75,7 @@ class AddBook extends Component {
 
   submit = (e) => {
     e.preventDefault();
- 
+
     try {
       const url = "/api/books";
       let inputData = this.state;
@@ -135,7 +134,7 @@ class AddBook extends Component {
             <FileBase64
               type="file"
               multiple={false}
-              onDone={({ base64 }) => this.state.imageId = base64}
+              onDone={({ base64 }) => (this.state.imageId = base64)}
             />
             <TextField
               variant="filled"

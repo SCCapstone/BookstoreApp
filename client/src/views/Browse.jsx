@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import defaultBooks from "./Books";
 import sort from "../components/sort";
-import { Autocomplete, TextField } from "@mui/material";
+import BookSelector from "../components/BookSelector";
 
 class Browse extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class Browse extends Component {
       books: [],
       book: null,
       inputBook: null,
-      value: "Relevant"
+      value: "Relevant",
     };
   }
 
@@ -24,7 +24,7 @@ class Browse extends Component {
         console.log(books);
 
         this.setState((state) => ({
-            books: books 
+            books: books
         }));
       } else {
         this.setState((state) => ({
@@ -33,11 +33,15 @@ class Browse extends Component {
         console.log(defaultBooks);
       }
     });
+    // let books = JSON.parse(localStorage.getItem("booksFromTheDatabase"));
+    // this.setState((state) => ({
+    //   books: books,
+    // }));
   }
 
   changeOption(option) {
     this.setState((state) => ({
-      value: option
+      value: option,
     }));
   }
 
@@ -46,11 +50,13 @@ class Browse extends Component {
     options.forEach((element) => {
       const baseTitle = element.title.replace(",", "").toLowerCase();
       const baseAuthor = element.author.replace(",", "").toLowerCase();
-      const baseGenre = element.genre[0].replace(",","").toLowerCase();
+      const baseGenre = element.genre[0].replace(",", "").toLowerCase();
       const baseInput = state.inputValue.toLowerCase();
-      if (baseTitle.includes(baseInput) ||
-          baseAuthor.includes(baseInput) ||
-          baseGenre.includes(baseInput))
+      if (
+        baseTitle.includes(baseInput) ||
+        baseAuthor.includes(baseInput) ||
+        baseGenre.includes(baseInput)
+      )
         newOptions.push(element);
     });
     return newOptions;
@@ -66,34 +72,7 @@ class Browse extends Component {
         </div>
 
         <div class="flex pb-2">
-          <Autocomplete
-            className="rounded border bg-white py-2 max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px]"
-            value={this.state.book}
-            onChange={(event, newValue) => {
-              window.location = `/${newValue.author}/${newValue.title}`;
-              this.setState((state) => ({
-                  book: newValue
-              }));
-            }}
-            inputValue={this.state.inputBook}
-            onInputChange={(event, newInputValue) => {
-                this.setState((state) => ({
-                    inputBook: newInputValue
-                }));
-            }}
-            options={this.state.books}
-            getOptionLabel={(option) => option.title}
-            groupBy={(option) => option.genre[0] }
-            filterOptions={this.filterOptions}
-            renderInput={(params) => (
-                <TextField
-                    {...params}
-                    variant="filled"
-                    label="Search"
-                    placeholder="Search Books"
-                />
-            )}
-          />
+          <BookSelector books={ this.state.books } />
         </div>
 
         <div class="flex pb-2">
@@ -119,6 +98,6 @@ class Browse extends Component {
       </section>
     );
   }
-};
+}
 
 export default Browse;

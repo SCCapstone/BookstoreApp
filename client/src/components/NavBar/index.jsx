@@ -7,7 +7,7 @@ import Login from "../../views/Login";
 import Aboutus from "../../views/Aboutus";
 import TOS from "../../views/TOS";
 import ContactUs from "../../views/ContactUs";
-import Forums from "../../views/Forums";
+import Reviews from "../../views/ReviewsPageGenerator";
 import Browse from "../../views/Browse";
 import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
@@ -19,6 +19,8 @@ import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
 import Favorites from "../../views/Favorites";
+import Orders from "../../views/Orders";
+import EditBlogpage from "../../views/EditBlogPage";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -35,13 +37,13 @@ const CompleteNavbar = () => {
   useEffect(() => {
     fetchBooks();
   }, []);
-  const saveBooksToLocalStorage = () => {
-    if (books.length !== 0) {
-      //this line is new
-      localStorage.setItem("books", JSON.stringify(books));
-    }
-  };
-  saveBooksToLocalStorage();
+  // const saveBooksToLocalStorage = () => {
+  //   if (books.length !== 0) {
+  //     //this line is new
+  //     localStorage.setItem("booksFromTheDatabase", JSON.stringify(books));
+  //   }
+  // };
+  // saveBooksToLocalStorage();
   // console.log(books);
 
   // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
@@ -52,7 +54,7 @@ const CompleteNavbar = () => {
         <SideBar user={user} />
         <div className="px-16"></div>
         <BrowserRouter>
-          <NavBar user={user} userType={userType} items={items} />
+          <NavBar user={localStorage.getItem("userID")} userType={userType} items={items} />
           <Routes>
             {/* All users */}
             <Route path="/" element={<Home />} />
@@ -93,16 +95,27 @@ const CompleteNavbar = () => {
               path="/emp_page"
               element={<EmployeeHomepage currentUser={userType} />}
             />
+            <Route path="/orders" element={<Orders currentUser={userType} />} />
+
+            <Route
+              path="/edit_blog"
+              element={<EditBlogpage currentUser={userType} />}
+            />
 
             {/* Admin, Employee, and Customer */}
-            <Route path="/forums" element={<Forums currentUser={user} />} />
-            <Route path="/createforums" element={<CreateForum />} />
+            <Route path="/createforums" element={<CreateForum user={localStorage.getItem("userID")}/>} />
 
+            {/* Mapped Routes */}
             {books.map((book) => (
               <Route
                 path={`/${book.author}/${book.title}/`}
                 element={<BooksPageGenerator book={book} user={localStorage.getItem("userID")} />}
               />
+            ))}
+
+            {books.map((book) => (
+              <Route path = {`/${book.author}/${book.title}/reviews`}
+              element={<Reviews book={book}/>} />
             ))}
           </Routes>
         </BrowserRouter>
@@ -110,5 +123,7 @@ const CompleteNavbar = () => {
     </div>
   );
 };
+
+ // books.map is the key -- here's where you map the /reviews to the book.
 
 export default CompleteNavbar;
