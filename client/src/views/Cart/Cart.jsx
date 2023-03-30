@@ -41,22 +41,23 @@ class MainCart extends Component {
       }));
     });
 
-    const currentUser = this.props.currentUser;
+    const currentUser = localStorage.getItem("userID");
+    console.log(currentUser);
 
-    if (!currentUser && currentUser.length !== 0 ) {
-      const userURL = "/api/users/" + localStorage.getItem("userID");
+    // if (!currentUser && currentUser.length !== 0 ) {
+    //   const userURL = "/api/users/" + localStorage.getItem("userID");
 
-      await axios.get(userURL).then((res) => {
-        if (res.status === 200) {
-          let user = res.data;
-          console.log(user);
-          this.setState((state) => ({
-            user: user,
-          }));
-          console.log(this.state.user);
-        }
-      });
-    }
+    //   await axios.get(userURL).then(async (res) => {
+    //     if (res.status === 200) {
+    //       let user = res.data;
+    //       console.log(user);
+    //       await this.setState((state) => ({
+    //         user: user,
+    //       }));
+    //       console.log(this.state.user);
+    //     }
+    //   });
+    // }
 
     // setting books cart
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
@@ -74,7 +75,9 @@ class MainCart extends Component {
     }));
   };
 
-  availableBalance = () => {};
+  availableBalance = () => {
+    // console.log(this.state.user);
+  };
 
   render() {
     this.updateIteration();
@@ -82,7 +85,7 @@ class MainCart extends Component {
       <div class="py-6 bg-gainsboro">
         <Grid item xs={12}>
           <span class="text-center text-3xl px-16 py-6 mt-10">
-            Available balance: ${/* {availableBalance()} */}
+            Available balance: ${this.availableBalance()}
           </span>
         </Grid>
         <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
