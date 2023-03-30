@@ -86,20 +86,29 @@ function calculatePrice(books, booksCartNames) {
 }
 
 const MainCart = ({ currentUser }) => {
-  const [books, setBooks] = useState([]);
+  var books = [];
+  var tempBooksState = [];
   const fetchBooks = async () => {
     // return fetch("/api/books")
     //   .then((response) => response.json())
     //   .then((data) => setBooks(data))
     //   .then(console.log(response));
-    const url = "/api/books/";
-    const res = await axios.get(url, data);
-    setBooks(res.data);
-    return res.data;
+    // const url = "/api/books/";
+    // const res = await axios.get(url, data);
+    // return res.data;
+
+    const res = await fetch("http://127.0.0.1:5500/fff") ;
+  const result = await res.json();
+  const miro = result;
+  console.log(miro);
   };
-  useEffect(() => {
-    fetchBooks();
-  }, []);
+  tempBooksState = fetchBooks();
+
+  tempBooksState.then((value) => {
+    books = value
+
+  });
+
 
   const navigate = useNavigate();
   var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
@@ -236,9 +245,6 @@ const MainCart = ({ currentUser }) => {
     }
   };
 
-  fetchBooks();
-
-  console.log(books);
   return (
     <div>
       <Grid item xs={12}>
