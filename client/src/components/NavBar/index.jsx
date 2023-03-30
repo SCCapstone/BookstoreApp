@@ -54,14 +54,14 @@ const CompleteNavbar = () => {
   //   clear_cart();
   //   console.log("Cart Initialized");
   // }
-  const saveBooksToLocalStorage = () => {
-    if (books.length !== 0) {
-      //this line is new
-      localStorage.setItem("booksFromTheDatabase", JSON.stringify(books));
-    }
-  };
-  saveBooksToLocalStorage();
-  console.log(books);
+  // const saveBooksToLocalStorage = () => {
+  //   if (books.length !== 0) {
+  //     //this line is new
+  //     localStorage.setItem("booksFromTheDatabase", JSON.stringify(books));
+  //   }
+  // };
+  // saveBooksToLocalStorage();
+  // console.log(books);
 
   // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
 
