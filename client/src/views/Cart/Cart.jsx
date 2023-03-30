@@ -1,6 +1,6 @@
 import { CartProvider, useCart } from "react-use-cart";
 import { React, useState, useEffect, Component } from "react";
-import { Remove, Add } from "@mui/icons-material";
+import { Remove, Add, Javascript } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 
@@ -24,7 +24,8 @@ class MainCart extends Component {
     super(props);
     this.state = {
       books: [],
-      
+      booksCartNames: [],
+      booksCart: [],
       book: null,
       inputBook: null,
       value: "Relevant",
@@ -43,9 +44,24 @@ class MainCart extends Component {
       }));
     });
 
+    // setting books cart
+    var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+    var booksCart = JSON.parse(localStorage.getItem("books_cart"));
+    this.setState((state) => ({
+      booksCartNames: booksCartNames,
+      booksCart: booksCart,
+    }));
+    console.log(this.state);
   }
 
+  updateIteration = () => {
+    this.setState((state) => ({
+      booksCartNames: JSON.parse(localStorage.getItem("booksCartNames")),
+    }));
+  };
+
   render() {
+    this.updateIteration();
     return (
       <div class="py-6 bg-gainsboro">
         <Grid item xs={12}>
