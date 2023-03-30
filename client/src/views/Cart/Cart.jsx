@@ -26,9 +26,7 @@ class MainCart extends Component {
       books: [],
       booksCartNames: [],
       booksCart: [],
-      book: null,
-      inputBook: null,
-      value: "Relevant",
+      test: "test",
     };
   }
 
@@ -37,8 +35,7 @@ class MainCart extends Component {
 
     await axios.get(url).then((res) => {
       let books = res.data;
-      console.log(books);
-
+      // console.log(books);
       this.setState((state) => ({
         books: books,
       }));
@@ -69,10 +66,12 @@ class MainCart extends Component {
             Available balance: ${/* {availableBalance()} */}
           </span>
         </Grid>
+        {this.state.test}
         <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
           <div
             className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
           >
+            Hello{" "}
             {
               // getKeys(booksCartNames).map((bookName) => (
               //   <div
