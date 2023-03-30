@@ -103,8 +103,8 @@ export default function ProfileIcon(currentUser) {
             },
           },
         }}
-        transformOrigin={{ horizontal: 'center', vertical: 'center' }}
-        anchorOrigin={{ horizontal: 'center', vertical: 'left-center' }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem onClick={handleClose}>
           <li>
