@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:ids", async (req, res) => {
   const { ids } = req.params;
+  console.log(ids);
   try {
     Book.find(
       {

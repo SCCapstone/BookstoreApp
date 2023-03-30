@@ -56,7 +56,6 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-
     const user = await User.findById(id);
     if (!user) {
       return res.status(404).send({ message: "User not found" });
@@ -84,15 +83,16 @@ router.put("/:id", async (req, res) => {
       user.balance = req.body.balance;
     }
     if (req.body.favorites) {
+      if (!Array.isArray(user.favorites)) {
+        user.favorites = [];
+      }
       const index = user.favorites.indexOf(req.body.favorites);
-
       if (index > -1) {
         user.favorites.splice(index, 1);
       } else {
-        user.favorites.push_back(req.body.favorites);
+        user.favorites.push(req.body.favorites);
       }
     }
-    console.log(user);
     await user.save();
     res.send({ message: "User role updated" });
   } catch (error) {

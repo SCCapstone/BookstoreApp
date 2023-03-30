@@ -12,6 +12,7 @@ export default class Favorites extends Component {
     };
 
     async componentDidMount() {
+        console.log("Hello");
         this.setState((state) => ({
             favorites: books
         }));
@@ -20,22 +21,31 @@ export default class Favorites extends Component {
         await axios.get(url).then(res => {
             const user = res.data;
             let favoritesIds = [];
-
-            if (user.favorites && user.favorites > 0) {
+            console.log(user);
+            if (user.favorites && user.favorites.length > 0) {
                 favoritesIds = user.favorites;
             }
             console.log(favoritesIds);
             this.setState((state) => ({
                 favoritesIds: favoritesIds
             }));
+            console.log(this.state.favoritesIds);
+            this.getFavorites();
+        }).catch(function error(e) {
+            console.log(e);
         });
+    };
 
+    async getFavorites() {
+        console.log("hello");
         if (!this.state.favoritesIds || this.state.favoritesIds.length === 0) return;
+        console.log("hello part 2");
 
         const bookUrl = "/api/books/" + this.state.favoritesIds;
+        console.log(bookUrl);
         await axios.get(bookUrl).then(res => {
             let favoriteBooks = res.data;
-            
+            console.log(favoriteBooks);
             if (!res.data || res.data.length === 0) {
                 favoriteBooks = books;
             }
@@ -44,15 +54,15 @@ export default class Favorites extends Component {
             this.setState((state) => ({
                 favorites: favoriteBooks
             }));
-        })
-    };
+        });
+    }
 
     getBook(bookName) {
-        console.log(bookName);
+        // console.log(bookName);
         for (let i = 0; i < this.state.favorites.length; ++i) {
             if (this.state.favorites[i].title === bookName) {
                 // console.log(books[i]);
-                console.log(this.state.favorites[i]);
+                // console.log(this.state.favorites[i]);
                 return this.state.favorites[i];
             }
         }
