@@ -37,7 +37,7 @@ class MainCart extends Component {
     const url = "/api/books";
     await axios.get(url).then((res) => {
       let books = res.data;
-      // console.log(books);
+      console.log(books);
       this.setState((state) => ({
         books: books,
       }));
@@ -72,7 +72,7 @@ class MainCart extends Component {
     this.setState((state) => ({
       booksCartNames: booksCartNames,
     }));
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   updateIteration = () => {
@@ -81,6 +81,7 @@ class MainCart extends Component {
     }));
   };
 
+  // getting user balance
   availableBalance = () => {
     try {
       if (this.state.user && this.state.user !== 0) {
@@ -94,7 +95,24 @@ class MainCart extends Component {
     // console.log(this.state.user);
   };
 
-  getKeys = () => {};
+  getKeys = () => {
+    let booksSource = [];
+
+    for (let i = 0; i < this.state.books.length; ++i) {
+      for (let book in this.state.booksCartNames) {
+        if (book === this.state.books[i].title) {
+          // console.log(book);
+          booksSource.push([
+            this.state.books[i],
+            this.state.booksCartNames[book],
+          ]);
+        }
+        // console.log(book);
+      }
+    }
+    console.log(booksSource);
+    return this.state.books;
+  };
 
   render() {
     // this.updateIteration();
@@ -109,65 +127,64 @@ class MainCart extends Component {
           <div
             className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
           >
-            {
-              // getKeys(booksCartNames).map((bookName) => (
-              //   <div
-              //     className={`flex-1 flex justify-start items-center flex-row m-3`}
-              //   >
-              //     <div class="min-w-[80px] max-w-[120px]">
-              //       <img
-              //         // src={getBook(books, bookName).imageId}
-              //         alt=""
-              //         className="row-span-2 border-2 justify-right"
-              //       />
-              //     </div>
-              //     <div>
-              //       <h3 className="font-poppins font-bold xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
-              //         {/* {getBook(books, bookName).title} by{" "}
-              //       {getBook(books, bookName).author} */}
-              //       </h3>
-              //       <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
-              //         Price: ${/* {getBook(books, bookName).price} */}
-              //       </h3>
-              //       <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
-              //         Quantity:
-              //         {/* {booksCartNames[bookName]} */}
-              //         <div className="flex pb-2 pt-2">
-              //           <Chip
-              //             avatar={
-              //               <Avatar
-              //               // onClick={() => subtract(booksCartNames, bookName)}
-              //               >
-              //                 <Remove />
-              //               </Avatar>
-              //             }
-              //             label={
-              //               <p className="px-2 text-lg ">
-              //                 {/* {quantity[bookName]} */}
-              //               </p>
-              //             }
-              //             clickable
-              //             // onDelete={() => add(booksCartNames, bookName)}
-              //             deleteIcon={<Add />}
-              //           />
-              //           <button
-              //             className="pl-4"
-              //             // onClick={() => setZero(booksCartNames, bookName)}
-              //           >
-              //             Clear
-              //           </button>
-              //           <button
-              //             className="pl-4"
-              //             // onClick={() => deleteItem(booksCartNames, bookName)}
-              //           >
-              //             Delete
-              //           </button>
-              //         </div>
-              //       </h3>
-              //     </div>
-              //   </div>
-              // ))
-            }
+            {this.getKeys().map((book) => (
+              <div
+                className={`flex-1 flex justify-start items-center flex-row m-3`}
+              >
+                <div class="min-w-[80px] max-w-[120px]">
+                  <img
+                    // src={getBook(books, bookName).imageId}
+                    src={book.imageId}
+                    alt=""
+                    className="row-span-2 border-2 justify-right"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-poppins font-bold xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
+                    {/* {getBook(books, bookName).title} by{" "}
+                    {getBook(books, bookName).author} */}
+                  </h3>
+                  <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
+                    Price: ${/* {getBook(books, bookName).price} */}
+                  </h3>
+                  <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
+                    Quantity:
+                    {/* {booksCartNames[bookName]} */}
+                    <div className="flex pb-2 pt-2">
+                      <Chip
+                        avatar={
+                          <Avatar
+                          // onClick={() => subtract(booksCartNames, bookName)}
+                          >
+                            <Remove />
+                          </Avatar>
+                        }
+                        label={
+                          <p className="px-2 text-lg ">
+                            {/* {quantity[bookName]} */}
+                          </p>
+                        }
+                        clickable
+                        // onDelete={() => add(booksCartNames, bookName)}
+                        deleteIcon={<Add />}
+                      />
+                      <button
+                        className="pl-4"
+                        // onClick={() => setZero(booksCartNames, bookName)}
+                      >
+                        Clear
+                      </button>
+                      <button
+                        className="pl-4"
+                        // onClick={() => deleteItem(booksCartNames, bookName)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </h3>
+                </div>
+              </div>
+            ))}
           </div>
           <div className="ml-2">
             {/* <Button onClick={() => clear_cart()}>Clear Cart</Button> */}
