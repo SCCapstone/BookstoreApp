@@ -18,7 +18,9 @@ function clear_cart() {
 
   window.location.reload(false);
 }
-
+function round(value, decimals) {
+  return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+}
 class MainCart extends Component {
   constructor(props) {
     super(props);
@@ -31,8 +33,8 @@ class MainCart extends Component {
   }
 
   async componentDidMount() {
+    // get the books
     const url = "/api/books";
-
     await axios.get(url).then((res) => {
       let books = res.data;
       // console.log(books);
@@ -41,29 +43,29 @@ class MainCart extends Component {
       }));
     });
 
-
-
+    // user login
     try {
       const currentUser = localStorage.getItem("userID");
-      console.log(currentUser);
-      if (!currentUser && currentUser.length !== 0 ) {
+      // console.log(currentUser);
+      if (currentUser && currentUser != null) {
         const userURL = "/api/users/" + localStorage.getItem("userID");
-  
+
         await axios.get(userURL).then(async (res) => {
           if (res.status === 200) {
             let user = res.data;
-            console.log(user);
+            // console.log(user);
             await this.setState((state) => ({
               user: user,
             }));
-            console.log(this.state.user);
+            // console.log(this.state.user);
           }
         });
+      } else {
+        console.log("USER NEED TO LOGIN");
       }
     } catch (error) {
       console.log("USER NEED TO LOGIN");
     }
-    
 
     // setting books cart
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
@@ -80,8 +82,19 @@ class MainCart extends Component {
   };
 
   availableBalance = () => {
-    console.log(Object.values(this.state.booksCartNames));
+    try {
+      if (this.state.user && this.state.user !== 0) {
+        return round(this.state.user.balance.$numberDecimal, 2);
+      } else {
+        return 0;
+      }
+    } catch {
+      return 0;
+    }
+    // console.log(this.state.user);
   };
+
+  getKeys = () => {};
 
   render() {
     // this.updateIteration();
