@@ -1,7 +1,6 @@
 import React from "react";
 
 const showOrder = ({ order }) => {
-  // console.log(order);
   return Object.keys(order).map((key, i) => (
     <p key={i}>
       <span>{key}</span> x<span> {order[key]}</span>
@@ -10,7 +9,6 @@ const showOrder = ({ order }) => {
 };
 
 const OrdersRow = ({ order, handleUpdate, handleDelete }) => {
-  // console.log(order);
   var currentOrder = order.order;
   const handleChange = (e) => {
     const newOrderType = e.target.value;
@@ -18,7 +16,6 @@ const OrdersRow = ({ order, handleUpdate, handleDelete }) => {
     handleUpdate(order, newOrderType);
   };
 
-  // console.log(currentOrder);
 
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">

@@ -17,7 +17,6 @@ export default class Favorites extends Component {
         await axios.get(url).then(res => {
             const user = res.data;
             let favIds = [];
-            console.log(user);
             if (user.favorites && user.favorites.length > 0) {
                 favIds = user.favorites;
             }
@@ -28,20 +27,15 @@ export default class Favorites extends Component {
     };
 
     async getFavorites(favIds) {
-        console.log(favIds);
         if (!favIds || favIds.length === 0) return;
-        console.log("hello part 2");
 
         const bookUrl = "/api/books/" + favIds;
-        console.log(bookUrl);
         await axios.get(bookUrl).then(res => {
             let favoriteBooks = res.data;
-            console.log(favoriteBooks);
             if (!res.data || res.data.length === 0) {
                 favoriteBooks = books;
             }
 
-            console.log(this.favoriteBooks);
             this.setState((state) => ({
                 favorites: favoriteBooks
             }));
@@ -49,11 +43,8 @@ export default class Favorites extends Component {
     }
 
     getBook(bookName) {
-        // console.log(bookName);
         for (let i = 0; i < this.state.favorites.length; ++i) {
             if (this.state.favorites[i].title === bookName) {
-                // console.log(books[i]);
-                // console.log(this.state.favorites[i]);
                 return this.state.favorites[i];
             }
         }
@@ -80,7 +71,6 @@ export default class Favorites extends Component {
     }
 
     favoriteTitles() {
-        console.log(this.state.favorites);
         return this.state.favorites.map(x => x.title);
     }
 
@@ -96,29 +86,32 @@ export default class Favorites extends Component {
                     className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
                     >
                     {this.favoriteTitles().map((bookName) => (
-                        <div
-                        className={`flex-1 flex justify-start items-center flex-row m-3`}
+                        <div className="border-2 border-gainsboro hover:border-black">
+                        <a 
+                            href={`/${this.getBook(bookName).author}/${this.getBook(bookName).title}/`} 
+                            className={`flex-1 flex justify-start items-center flex-row m-3`}
                         >
-                        <div class="min-w-[80px] max-w-[120px]">
-                            <img
-                            src={this.getBook(bookName).imageId}
-                            alt=""
-                            className="row-span-2 border-2 justify-right"
-                            />
-                        </div>
-                        <div>
-                            <h3 className="font-poppins font-bold xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
-                            {this.getBook(bookName).title} by{" "}
-                            {this.getBook(bookName).author}
-                            </h3>
-                        </div>
+                            <div class="min-w-[80px] max-w-[120px]">
+                                <img
+                                src={this.getBook(bookName).imageId}
+                                alt=""
+                                className="row-span-2 border-2 justify-right"
+                                />
+                            </div>
+                            <div>
+                                <h3 className="font-poppins font-bold xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
+                                {this.getBook(bookName).title} by{" "}
+                                {this.getBook(bookName).author}
+                                </h3>
+                            </div>
+                        </a>
                         </div>
                     ))}
                     </div>
                 </div>
             </div>
         ) : <div>
-            You have no favorites!
+            You have no books on your wishlist!
         </div>;
     }
 }

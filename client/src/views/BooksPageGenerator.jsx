@@ -78,10 +78,7 @@ const BooksPageGenerator = ({ book, user }) => {
     const url = "/api/users/" +  user;
     axios.get(url).then((response) => {
       const userFavs =  response.data.favorites;
-      console.log(userFavs);
-      console.log(book._id);
       const isActive = userFavs.includes(book._id);
-      console.log(isActive);
       setActive(isActive);
     });
   }, []);
@@ -95,10 +92,7 @@ const BooksPageGenerator = ({ book, user }) => {
       favorites: book._id
     }
 
-    console.log(url);
-    console.log(tempUser);
     if (active) { // deleting from wishlist
-      console.log("we are activating");
       axios.put(url, tempUser).then(res => {
         if (res.status === 200) {
             swal.fire({
@@ -107,10 +101,8 @@ const BooksPageGenerator = ({ book, user }) => {
             });    
         }
       });
-      console.log("we are deleting from wishlist");
     } else { // adding to wishlist
       axios.put(url, tempUser).then(res => {
-        console.log("Hello");
         if (res.status === 200) {
             swal.fire({
                 icon: 'success',
@@ -118,7 +110,6 @@ const BooksPageGenerator = ({ book, user }) => {
             });    
         }
       });
-      console.log("we are adding to wishlist");
     }
     setActive(!active);
   }

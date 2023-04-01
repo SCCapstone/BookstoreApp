@@ -31,7 +31,6 @@ router.put("/:id", async (req, res) => {
       return res.status(404).send({ message: "Order not found" });
     }
     order.orderStatus = req.body.orderStatus;
-    console.log(req.body.orderStatus)
     await order.save();
     res.send("Updated order status!");
   } catch (error) {
