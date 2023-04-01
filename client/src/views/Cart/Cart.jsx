@@ -41,30 +41,34 @@ class MainCart extends Component {
       }));
     });
 
-    const currentUser = localStorage.getItem("userID");
-    console.log(currentUser);
 
-    // if (!currentUser && currentUser.length !== 0 ) {
-    //   const userURL = "/api/users/" + localStorage.getItem("userID");
 
-    //   await axios.get(userURL).then(async (res) => {
-    //     if (res.status === 200) {
-    //       let user = res.data;
-    //       console.log(user);
-    //       await this.setState((state) => ({
-    //         user: user,
-    //       }));
-    //       console.log(this.state.user);
-    //     }
-    //   });
-    // }
+    try {
+      const currentUser = localStorage.getItem("userID");
+      console.log(currentUser);
+      if (!currentUser && currentUser.length !== 0 ) {
+        const userURL = "/api/users/" + localStorage.getItem("userID");
+  
+        await axios.get(userURL).then(async (res) => {
+          if (res.status === 200) {
+            let user = res.data;
+            console.log(user);
+            await this.setState((state) => ({
+              user: user,
+            }));
+            console.log(this.state.user);
+          }
+        });
+      }
+    } catch (error) {
+      console.log("USER NEED TO LOGIN");
+    }
+    
 
     // setting books cart
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
-    var booksCart = JSON.parse(localStorage.getItem("books_cart"));
     this.setState((state) => ({
       booksCartNames: booksCartNames,
-      booksCart: booksCart,
     }));
     console.log(this.state);
   }
@@ -76,11 +80,11 @@ class MainCart extends Component {
   };
 
   availableBalance = () => {
-    // console.log(this.state.user);
+    console.log(Object.values(this.state.booksCartNames));
   };
 
   render() {
-    this.updateIteration();
+    // this.updateIteration();
     return (
       <div class="py-6 bg-gainsboro">
         <Grid item xs={12}>
