@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import ReactStars from "react-stars";
 import Heart from "react-heart";
 import { Chip, Avatar } from "@mui/material";
@@ -74,6 +74,18 @@ const BooksPageGenerator = ({ book, user }) => {
 
   const [active, setActive] = useState(false);
 
+  React.useEffect(() => {
+    const url = "/api/users/" +  user;
+    axios.get(url).then((response) => {
+      const userFavs =  response.data.favorites;
+      console.log(userFavs);
+      console.log(book._id);
+      const isActive = userFavs.includes(book._id);
+      console.log(isActive);
+      setActive(isActive);
+    });
+  }, []);
+
   function addOrRemoveFromWishlist() {
     // don't do anything if not logged-in
     if (!user || user.length === 0) return;
@@ -141,7 +153,7 @@ const BooksPageGenerator = ({ book, user }) => {
                   style={{ width: "20px" }}
                   isActive={active}
                   onClick={() => addOrRemoveFromWishlist()}
-                  activeColor={"#404252"}
+                  activeColor={"#70161E"}
                 />
               </span>
             </ul>

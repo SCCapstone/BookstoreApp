@@ -12,10 +12,6 @@ export default class Favorites extends Component {
     };
 
     async componentDidMount() {
-        console.log("Hello");
-        this.setState((state) => ({
-            favorites: books
-        }));
         const url = "/api/users/" + this.props.currentUser;
 
         await axios.get(url).then(res => {
@@ -25,12 +21,6 @@ export default class Favorites extends Component {
             if (user.favorites && user.favorites.length > 0) {
                 favIds = user.favorites;
             }
-            console.log(favIds);
-            // this.setState({ favoritesIds: [] }, () => this.setState({
-            //     favoritesIds: favIds
-            // }));
-
-            console.log(this.state.favoritesIds);
             this.getFavorites(favIds);
         }).catch(function error(e) {
             console.log(e);
