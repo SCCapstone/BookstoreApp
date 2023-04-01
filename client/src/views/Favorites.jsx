@@ -81,6 +81,11 @@ export default class Favorites extends Component {
     render() {
         return this.anyFavorites() ? (
             <div class="py-6">
+                <div class="py-4">
+                    <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
+                    Wishlist
+                    </div>
+                </div>
                 <div className="grid grid-cols-1 grid-flow-row min-w-[1100px] max-w-screen">
                     <div
                     className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
