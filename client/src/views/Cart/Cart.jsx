@@ -95,40 +95,80 @@ class MainCart extends Component {
   };
 
   purchaseBooks = () => {
-    if (this.state.currentUser && this.state.currentUser !== 0) {
-      if (this.availableBalance() - this.calculatePrice() >= 0) {
-        if (this.availableBalance() - this.calculatePrice() === 0) {
-          var tmpUser = this.state.user;
-          tmpUser.balance = 0;
-          this.setState((state) => ({
-            user: tmpUser,
-          }));
-          console.log(tmpUser);
-        } else {
-          var tmpUser = this.state.user;
-          console.log(tmpUser);
-          tmpUser.balance = round(
-            this.availableBalance() - this.calculatePrice(),
-            2
-          );
-          console.log(tmpUser);
-          this.setState((state) => ({
-            user: tmpUser,
-          }));
-        }
-        return true;
-      } else {
-        swal.fire({
-          icon: "error",
-          title: "Not enough balance",
-          text: "please add more to the balance",
-        });
-        return false;
-      }
-    } else {
+
+    // Is user logged in?
+    if(!this.state.currentUser && this.state.currentUser === 0){
       console.log("USER NEED TO LOGIN");
+      return false;
     }
-    return false;
+
+    var updatedBalance = this.availableBalance() - this.calculatePrice();
+
+    if(updatedBalance < 0){
+      swal.fire({
+        icon: "error",
+        title: "Not enough balance",
+        text: "please add more to the balance",
+      });
+      return false;
+    }
+
+    if(updatedBalance === 0) {
+      var tmpUser = this.state.user;
+      tmpUser.balance = 0;
+      this.setState((state) => ({
+        user: tmpUser,
+      }));
+      console.log(tmpUser);
+    }else {
+
+      var tmpUser = this.state.user;
+      console.log(tmpUser);
+      tmpUser.balance = round(
+        this.availableBalance() - this.calculatePrice(),
+        2
+      );
+      console.log(tmpUser);
+      this.setState((state) => ({
+        user: tmpUser,
+      }));
+    }
+    return true;
+
+    // if (this.state.currentUser && this.state.currentUser !== 0) {
+    //   if (this.availableBalance() - this.calculatePrice() >= 0) {
+    //     if (this.availableBalance() - this.calculatePrice() === 0) {
+    //       var tmpUser = this.state.user;
+    //       tmpUser.balance = 0;
+    //       this.setState((state) => ({
+    //         user: tmpUser,
+    //       }));
+    //       console.log(tmpUser);
+    //     } else {
+    //       var tmpUser = this.state.user;
+    //       console.log(tmpUser);
+    //       tmpUser.balance = round(
+    //         this.availableBalance() - this.calculatePrice(),
+    //         2
+    //       );
+    //       console.log(tmpUser);
+    //       this.setState((state) => ({
+    //         user: tmpUser,
+    //       }));
+    //     }
+    //     return true;
+    //   } else {
+    //     swal.fire({
+    //       icon: "error",
+    //       title: "Not enough balance",
+    //       text: "please add more to the balance",
+    //     });
+    //     return false;
+    //   }
+    // } else {
+    //   console.log("USER NEED TO LOGIN");
+    // }
+    // return false;
   };
 
   async handleSubmit(e) {
