@@ -28,6 +28,10 @@ export default class Orders extends React.Component {
     }
   }
 
+  async deletOrder(order){
+    
+  }
+
   componentDidMount() {
     this.getOrders();
   }

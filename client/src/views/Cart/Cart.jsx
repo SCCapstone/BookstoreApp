@@ -95,74 +95,96 @@ class MainCart extends Component {
   };
 
   purchaseBooks = () => {
-    if (this.state.user && this.state.user !== 0) {
+    if (this.state.currentUser && this.state.currentUser !== 0) {
       if (this.availableBalance() - this.calculatePrice() >= 0) {
         if (this.availableBalance() - this.calculatePrice() === 0) {
           var tmpUser = this.state.user;
-          tmpUser.balance = "0";
+          tmpUser.balance = 0;
           this.setState((state) => ({
             user: tmpUser,
           }));
           console.log(tmpUser);
         } else {
           var tmpUser = this.state.user;
+          console.log(tmpUser);
           tmpUser.balance = round(
             this.availableBalance() - this.calculatePrice(),
             2
           );
+          console.log(tmpUser);
           this.setState((state) => ({
             user: tmpUser,
           }));
         }
+        return true;
       } else {
-        console.log("USER NEED TO LOGIN");
-        // window.location.reload();
+        swal.fire({
+          icon: "error",
+          title: "Not enough balance",
+          text: "please add more to the balance",
+        });
+        return false;
       }
     } else {
       console.log("USER NEED TO LOGIN");
     }
+    return false;
   };
 
   async handleSubmit(e) {
     e.preventDefault();
-    this.purchaseBooks();
-    console.log(this.state.user);
 
-    var user = {};
+    var purchase = this.purchaseBooks();
+    if (this.state.currentUser && this.state.currentUser !== 0) {
+      var user = {};
 
-    user["firstName"] = this.state.user.firstName;
-    user["lastName"] = this.state.user.lastName;
-    user["email"] = this.state.user.email;
-    user["role"] = this.state.user.role;
+      user["firstName"] = this.state.user.firstName;
+      user["lastName"] = this.state.user.lastName;
+      user["email"] = this.state.user.email;
+      user["role"] = this.state.user.role;
 
-    user["order"] = this.state.booksCartNames;
-    user["orderPrice"] = this.calculatePrice();
-    user["orderDate"] = new Date().toLocaleString();
-    user["orderStatus"] = "In-Progress";
-    console.log(user);
+      user["order"] = this.state.booksCartNames;
+      user["orderPrice"] = this.calculatePrice();
+      user["orderDate"] = new Date().toLocaleString();
+      user["orderStatus"] = "In-Progress";
+      console.log(user);
 
-    e.preventDefault();
-    try {
-      const url = "/api/orders";
-      axios.post(url, user).then((res) => {
-        console.log(res.status);
+      e.preventDefault();
+
+      if (purchase) {
+        try {
+          const url = "/api/orders";
+          axios.post(url, user).then((res) => {
+            console.log(res.status);
+          });
+        } catch (error) {
+          if (error.response?.status >= 400 && error.response.status <= 500) {
+            console.log(error.response.data.message);
+          }
+        }
+        this.clearCart();
+      }
+
+      try {
+        const url = "/api/users/" + this.state.currentUser;
+        const usr = { balance: this.state.user.balance };
+        const res = await axios.put(url, usr);
+      } catch (error) {
+        if (error.response?.status >= 400 && error.response.status <= 500) {
+          console.log(error.response.data.message);
+        }
+      }
+      if (purchase) {
+        window.location.reload();
+      }
+    } else {
+      swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "User need to login!",
+        footer: "<a href='/login'>Login</a>",
       });
-    } catch (error) {
-      if (error.response?.status >= 400 && error.response.status <= 500) {
-        console.log(error.response.data.message);
-      }
     }
-    this.clearCart();
-
-    try {
-      const url = "/api/users/" + this.state.currentUser;
-      const res = await axios.put(url, this.state.user);
-    } catch (error) {
-      if (error.response?.status >= 400 && error.response.status <= 500) {
-        console.log(error.response.data.message);
-      }
-    }
-    window.location.reload();
   }
 
   updateIteration = () => {
