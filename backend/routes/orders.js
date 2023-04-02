@@ -27,6 +27,7 @@ router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const order = await Order.findById(id);
+
     if (!order) {
       return res.status(404).send({ message: "Order not found" });
     }

@@ -38,7 +38,7 @@ class MainCart extends Component {
     const url = "/api/books";
     await axios.get(url).then((res) => {
       let books = res.data;
-      console.log(books);
+      // console.log(books);
       this.setState((state) => ({
         books: books,
       }));
@@ -94,36 +94,75 @@ class MainCart extends Component {
     return user;
   };
 
-  async handleSubmitOrder(e) {
-    if (this.availableBalance() - this.calculatePrice() >= 0) {
-      e.preventDefault();
-      try {
-        const url = "/api/orders";
-        axios.post(url, this.orderSetter()).then((res) => {
-          console.log(res.status);
-        });
-      } catch (error) {
-        if (error.response?.status >= 400 && error.response.status <= 500) {
-          console.log(error.response.data.message);
+  purchaseBooks = () => {
+    if (this.state.user && this.state.user !== 0) {
+      if (this.availableBalance() - this.calculatePrice() >= 0) {
+        if (this.availableBalance() - this.calculatePrice() === 0) {
+          var tmpUser = this.state.user;
+          tmpUser.balance = "0";
+          this.setState((state) => ({
+            user: tmpUser,
+          }));
+          console.log(tmpUser);
+        } else {
+          var tmpUser = this.state.user;
+          tmpUser.balance = round(
+            this.availableBalance() - this.calculatePrice(),
+            2
+          );
+          this.setState((state) => ({
+            user: tmpUser,
+          }));
         }
+      } else {
+        console.log("USER NEED TO LOGIN");
+        // window.location.reload();
       }
+    } else {
+      console.log("USER NEED TO LOGIN");
     }
-  }
+  };
 
   async handleSubmit(e) {
     e.preventDefault();
+    this.purchaseBooks();
+    console.log(this.state.user);
+
+    var user = {};
+
+    user["firstName"] = this.state.user.firstName;
+    user["lastName"] = this.state.user.lastName;
+    user["email"] = this.state.user.email;
+    user["role"] = this.state.user.role;
+
+    user["order"] = this.state.booksCartNames;
+    user["orderPrice"] = this.calculatePrice();
+    user["orderDate"] = new Date().toLocaleString();
+    user["orderStatus"] = "In-Progress";
+    console.log(user);
+
+    e.preventDefault();
     try {
-      const url = "/api/users/" + this.state.currentUser;
-      if (this.state.user.password === "") {
-        delete this.state.user.password;
-      }
-      const res = await axios.put(url, this.state.user);
-      // window.location.reload();
+      const url = "/api/orders";
+      axios.post(url, user).then((res) => {
+        console.log(res.status);
+      });
     } catch (error) {
       if (error.response?.status >= 400 && error.response.status <= 500) {
         console.log(error.response.data.message);
       }
     }
+    this.clearCart();
+
+    try {
+      const url = "/api/users/" + this.state.currentUser;
+      const res = await axios.put(url, this.state.user);
+    } catch (error) {
+      if (error.response?.status >= 400 && error.response.status <= 500) {
+        console.log(error.response.data.message);
+      }
+    }
+    window.location.reload();
   }
 
   updateIteration = () => {
@@ -161,37 +200,6 @@ class MainCart extends Component {
     return booksSource;
   };
 
-  purchaseBooks = () => {
-    if (this.state.user && this.state.user !== 0) {
-      if (this.availableBalance() - this.calculatePrice() >= 0) {
-        if (this.availableBalance() - this.calculatePrice() === 0) {
-          var tmpUser = this.state.user;
-          tmpUser.balance = "0";
-          this.setState((state) => ({
-            user: tmpUser,
-          }));
-          console.log(tmpUser);
-        } else {
-          var tmpUser = this.state.user;
-          tmpUser.balance = round(
-            this.availableBalance() - this.calculatePrice(),
-            2
-          );
-          this.setState((state) => ({
-            user: tmpUser,
-          }));
-        }
-        this.orderSetter();
-        console.log(this.availableBalance());
-        this.clearCart();
-      } else {
-        window.location.reload();
-      }
-    } else {
-      window.location.href = "/";
-    }
-  };
-
   setQtyValue = ([book, value]) => {
     // console.log([book, value]);
     if (this.checkCartUpdate([book, value])) {
@@ -227,7 +235,7 @@ class MainCart extends Component {
     localStorage.setItem("books_cart", JSON.stringify([]));
     localStorage.setItem("booksCartNames", JSON.stringify({}));
 
-    window.location.reload(false);
+    // window.location.reload(false);
     this.setState((state) => ({
       booksCartNames: [],
     }));
@@ -243,7 +251,6 @@ class MainCart extends Component {
         }
       }
     }
-    console.log(total);
     return round(total, 2);
   };
 
@@ -320,7 +327,6 @@ class MainCart extends Component {
             className={`grid grid-cols-3 flex-1 flex justify-start items-center  m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
             onSubmit={(e) => {
               this.handleSubmit(e);
-              this.handleSubmitOrder(e);
             }}
           >
             <h4 className="col-span-1 font-poppins font-semibold xs:text-[30.89px] text-[25.89px] xs:leading-[43.16px] leading-[30.16px]">
@@ -328,9 +334,6 @@ class MainCart extends Component {
             </h4>
             <button
               class="col-span-2 bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
-              onClick={() => {
-                this.purchaseBooks();
-              }}
               type="submit"
             >
               Check out

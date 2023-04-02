@@ -54,12 +54,10 @@ router.get("/:id", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  console.log("we're hittin");
   try {
     const { id } = req.params;
 
     const user = await User.findById(id);
-    console.log(user);
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
