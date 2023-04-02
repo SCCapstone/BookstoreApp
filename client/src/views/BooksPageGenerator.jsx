@@ -27,7 +27,6 @@ function iterate(iterable, callback) {
 }
 
 const BooksPageGenerator = ({ book, user }) => {
-
   const [quantity, setQuantity] = useState(0);
 
   function addItem(book, quantity) {
@@ -64,6 +63,9 @@ const BooksPageGenerator = ({ book, user }) => {
 
   function add(qty) {
     var books = JSON.parse(localStorage.getItem("booksCartNames"));
+    if (books == null) {
+      books = {};
+    }
     if (
       book.stock - books[book.title] > qty ||
       (!books[book.title] && book.stock - quantity > 0)
@@ -86,9 +88,9 @@ const BooksPageGenerator = ({ book, user }) => {
   const [active, setActive] = useState(false);
 
   React.useEffect(() => {
-    const url = "/api/users/" +  user;
+    const url = "/api/users/" + user;
     axios.get(url).then((response) => {
-      const userFavs =  response.data.favorites;
+      const userFavs = response.data.favorites;
       const isActive = userFavs.includes(book._id);
       setActive(isActive);
     });
@@ -98,27 +100,29 @@ const BooksPageGenerator = ({ book, user }) => {
     // don't do anything if not logged-in
     if (!user || user.length === 0) return;
 
-    const url = "/api/users/" +  user;
+    const url = "/api/users/" + user;
     const tempUser = {
-      favorites: book._id
-    }
+      favorites: book._id,
+    };
 
-    if (active) { // deleting from wishlist
-      axios.put(url, tempUser).then(res => {
+    if (active) {
+      // deleting from wishlist
+      axios.put(url, tempUser).then((res) => {
         if (res.status === 200) {
-            swal.fire({
-                icon: 'success',
-                title: 'Successfully Removed from wishlist'
-            });    
+          swal.fire({
+            icon: "success",
+            title: "Successfully Removed from wishlist",
+          });
         }
       });
-    } else { // adding to wishlist
-      axios.put(url, tempUser).then(res => {
+    } else {
+      // adding to wishlist
+      axios.put(url, tempUser).then((res) => {
         if (res.status === 200) {
-            swal.fire({
-                icon: 'success',
-                title: 'Successfully Added to Wishlist'
-            });    
+          swal.fire({
+            icon: "success",
+            title: "Successfully Added to Wishlist",
+          });
         }
       });
     }
