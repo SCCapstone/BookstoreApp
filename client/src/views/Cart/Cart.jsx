@@ -110,7 +110,7 @@ class MainCart extends Component {
         // console.log(book);
       }
     }
-    console.log(booksSource);
+    // console.log(booksSource);
     return booksSource;
     // return this.state.books;
   };
@@ -139,6 +139,37 @@ class MainCart extends Component {
   //     navigate("/login");
   //   }
   // };
+
+  setQtyValue = ([book, value]) => {
+    // console.log([book, value]);
+    if (this.checkCartUpdate([book, value])) {
+      var tmp = this.state.booksCartNames;
+      tmp[book.title] = value;
+      console.log(tmp);
+      localStorage.setItem("booksCartNames", JSON.stringify(tmp));
+      this.setState((state) => ({
+        booksCartNames: tmp,
+      }));
+    }
+  };
+
+  checkCartUpdate = ([book, value]) => {
+    if (book.stock >= value && value >= 0) {
+      return true;
+    }
+    return false;
+  };
+
+  removeBookItem = (book) => {
+    console.log(book);
+    var tmp = this.state.booksCartNames;
+    delete tmp[book.title];
+    console.log(tmp);
+    localStorage.setItem("booksCartNames", JSON.stringify(tmp));
+    this.setState((state) => ({
+      booksCartNames: tmp,
+    }));
+  };
 
   render() {
     // this.updateIteration();
@@ -178,29 +209,25 @@ class MainCart extends Component {
                       <Chip
                         avatar={
                           <Avatar
-                          // onClick={() => subtract(booksCartNames, bookName)}
+                            onClick={() => this.setQtyValue([book, qty - 1])}
                           >
                             <Remove />
                           </Avatar>
                         }
-                        label={
-                          <p className="px-2 text-lg ">
-                            {/* {quantity[bookName]} */}
-                          </p>
-                        }
+                        label={<p className="px-2 text-lg ">{qty}</p>}
                         clickable
-                        // onDelete={() => add(booksCartNames, bookName)}
+                        onDelete={() => this.setQtyValue([book, qty + 1])}
                         deleteIcon={<Add />}
                       />
                       <button
                         className="pl-4"
-                        // onClick={() => setZero(booksCartNames, bookName)}
+                        onClick={() => this.setQtyValue([book, 0])}
                       >
                         Clear
                       </button>
                       <button
                         className="pl-4"
-                        // onClick={() => deleteItem(booksCartNames, bookName)}
+                        onClick={() => this.removeBookItem(book)}
                       >
                         Delete
                       </button>
