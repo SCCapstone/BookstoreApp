@@ -24,8 +24,7 @@ const Home = () => {
             />
             {/*hard-coded welcome statement for the bookstore and hard coded weekly newsletter and deals which can be updated through the code by employees and admin*/}
             <h2 className="text-2xl">
-              Welcome to Bugsy's Barn Books! If You Love Books, You'll Love Our
-              Book Store! This website is adopted by the Book Dispensary.
+              Welcome to Bugsy's Barn Books! If You Love Books, You'll Love Our Book Store!
             </h2>
             <div className="bg-camel px-2 py-2 text-lg">
               <h2 className="text-xl font-bold">
