@@ -19,8 +19,7 @@ const Home = () => {
               className="row-span-4 max-w-[400px]"
             />
             <h2 className="text-2xl">
-              Welcome to Bugsy's Barn Books! If You Love Books, You'll Love Our
-              Book Store! This website is adopted by the Book Dispensary.
+              Welcome to Bugsy's Barn Books! If You Love Books, You'll Love Our Book Store!
             </h2>
             <EditBlogList />
           </div>
