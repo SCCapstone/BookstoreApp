@@ -1,14 +1,20 @@
+//imports
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { styles } from "../styles";
 import swal from 'sweetalert2';
 
+/*contact us form where users can email or call us for any questions or thoughts. Users can fill out a form for the 
+email with the their name, email, or message or we have also added the phone number to the view as well.*/
+//the contact us form which uses a react hook for rendering (useRef)
 const ContactUs = () => {
   const form = useRef();
 
+  //for the email component of contact us
   const sendEmail = (e) => {
     e.preventDefault();
 
+    //sends the current form
     emailjs
       .sendForm(
         "service_ddw3f6r",
@@ -17,6 +23,7 @@ const ContactUs = () => {
         "MEck6kXn4BPEa6daF"
       )
       .then(
+        //sends a good swal if the email form got send successfully 
         (result) => {
           swal.fire({
             icon: 'success',
@@ -24,6 +31,7 @@ const ContactUs = () => {
           })
         },
         (error) => {
+          //sends a bad swal if it fails or has an error
           swal.fire({
             icon: 'error',
             title: 'Try Again Later',
@@ -33,6 +41,8 @@ const ContactUs = () => {
       );
   };
 
+  //Contact Us form which has a message for the users on ways to contact: fill out the email form or call using the phone number.
+  //The form that users will fill includes the name of the user, user email, and the message. 
   return (
     <div class="pb-4 h-full text-gray-800 max-w-[1500px]">
       <div class="py-4">
@@ -88,6 +98,7 @@ const ContactUs = () => {
                 </div>
               </form>
             </div>
+            {/* The phone number is a hard-coded phone number */}
             <div className="phone-container">
               <h2 className={`${styles.heading3} max-w-[1500px]`}>
                 Phone:
