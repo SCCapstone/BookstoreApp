@@ -5,6 +5,8 @@ import { TextField } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import swal from "sweetalert2";
+import emailjs from "@emailjs/browser";
+import { v4 as uuidv4 } from 'uuid';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -67,7 +69,20 @@ const Login = () => {
         const url = `/api/users/email/${email}`;
         console.log(url);
         axios.get(url).then((res) => {
-          // SEND EMAIL HERE
+          res.data.updatePasswordToken = uuidv4();
+          const putURL = '/api/users/' + res.data._id;
+          axios.put(putURL, res.data).then(
+            emailjs.send(
+              "serviceID",
+              "templateID",
+              {
+                link: "http://bookstore-app.herokuapp.com/forgot/" + res.data.updatePasswordToken;
+              },
+              "password/key for email js"
+            ).then(
+              // navigate them back to the home page
+            )
+          )
         }).catch((error) => {
           if (error.response.status === 404) {
             swal.fire(
