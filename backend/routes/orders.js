@@ -35,11 +35,28 @@ router.put("/:id", async (req, res) => {
       order.orderStatus = req.body.orderStatus;
     }
     await order.save();
+
+    
+    res.send("Updated order status!");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
     if (req.body.delete == "DELETE") {
       await Order.deleteOne({ _id: id });
     }
-    
-    res.send("Updated order status!");
+    // if (!user) {
+    //   return res.status(404).send({message: "User not found"});
+    // } if (user.role !== "admin") {
+    //   return res.status(401).send({message: "Unauthorized operation"});
+    // }
+    await Order.deleteOne({ _id: id });
+    res.send("Got a DELETE request at /users");
   } catch (error) {
     console.log(error);
   }

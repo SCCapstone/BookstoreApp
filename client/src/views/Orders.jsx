@@ -34,7 +34,7 @@ export default class Orders extends React.Component {
     try {
       // console.log(orderStatus);
       var tmpOrder = { delete: "DELETE" };
-      await axios.put(url, tmpOrder);
+      await axios.delete(url, tmpOrder);
       window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
