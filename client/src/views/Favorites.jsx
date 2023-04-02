@@ -115,7 +115,7 @@ export default class Favorites extends Component {
                     </div>
                 </div>
             </div>
-        ) : <div>
+        ) : <div className="mt-10">
             You have no books on your wishlist!
         </div>;
     }
