@@ -21,6 +21,7 @@ import MyAccount from "../../views/MyAccount";
 import Favorites from "../../views/Favorites";
 import Orders from "../../views/Orders";
 import EditBlogpage from "../../views/EditBlogPage";
+import VerifyEmail from "../../views/VerifyEmail";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -29,13 +30,22 @@ const CompleteNavbar = () => {
   // console.log(items);
 
   const [books, setBooks] = useState([]);
+  const [users, setUsers] = useState([]);
   const fetchBooks = () => {
     return fetch("/api/books")
       .then((response) => response.json())
       .then((data) => setBooks(data));
   };
+
+  const fetchUsers = () => {
+    return fetch("/api/users")
+      .then((response) => response.json())
+      .then((data) => setUsers(data));
+  }
+
   useEffect(() => {
     fetchBooks();
+    fetchUsers();
   }, []);
   // const saveBooksToLocalStorage = () => {
   //   if (books.length !== 0) {
@@ -112,11 +122,18 @@ const CompleteNavbar = () => {
                 element={<BooksPageGenerator book={book} user={localStorage.getItem("userID")} />}
               />
             ))}
-
+            {/* Mapped Route for Reviews */}
             {books.map((book) => (
               <Route path = {`/${book.author}/${book.title}/reviews`}
               element={<Reviews book={book}/>} />
             ))}
+
+            {/* Mapped Route for Validating Emails */}
+            {users.map((user) => (
+              <Route path = {`/validate/${user.verifyEmailToken}`}
+              element={<VerifyEmail user={user}/>} />
+            ))}
+            
           </Routes>
         </BrowserRouter>
       </div>
@@ -124,6 +141,6 @@ const CompleteNavbar = () => {
   );
 };
 
- // books.map is the key -- here's where you map the /reviews to the book.
+// books.map is the key -- here's where you map the /reviews to the book.
 
 export default CompleteNavbar;
