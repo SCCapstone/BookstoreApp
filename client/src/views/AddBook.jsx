@@ -34,7 +34,7 @@ class AddBook extends Component {
       stars: 0,
       quantitySold: 0,
       imageId: "",
-      stock: 999,
+      stock: 9,
       genre: [],
       inputGenres: "",
     };
