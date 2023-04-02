@@ -38,7 +38,7 @@ class MainCart extends Component {
     const url = "/api/books";
     await axios.get(url).then((res) => {
       let books = res.data;
-      // console.log(books);
+      console.log(books);
       this.setState((state) => ({
         books: books,
       }));

@@ -28,8 +28,17 @@ export default class Orders extends React.Component {
     }
   }
 
-  async deletOrder(order){
-    
+  async deletOrder(order) {
+    const id = order._id;
+    const url = "/api/orders/" + id;
+    try {
+      // console.log(orderStatus);
+      var tmpOrder = { delete: "DELETE" };
+      await axios.put(url, tmpOrder);
+      window.location.reload();
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   }
 
   componentDidMount() {
@@ -69,7 +78,11 @@ export default class Orders extends React.Component {
             </thead>
             <tbody>
               {this.state.orders.map((order) => (
-                <OrdersRow order={order} handleUpdate={this.editOrder} />
+                <OrdersRow
+                  order={order}
+                  handleUpdate={this.editOrder}
+                  handleDelete={this.deletOrder}
+                />
               ))}
             </tbody>
           </table>

@@ -31,8 +31,14 @@ router.put("/:id", async (req, res) => {
     if (!order) {
       return res.status(404).send({ message: "Order not found" });
     }
-    order.orderStatus = req.body.orderStatus;
+    if (req.body.orderStatus) {
+      order.orderStatus = req.body.orderStatus;
+    }
     await order.save();
+    if (req.body.delete == "DELETE") {
+      await Order.deleteOne({ _id: id });
+    }
+    
     res.send("Updated order status!");
   } catch (error) {
     console.log(error);
