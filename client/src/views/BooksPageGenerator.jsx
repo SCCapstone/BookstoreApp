@@ -27,7 +27,7 @@ function iterate(iterable, callback) {
 }
 
 const BooksPageGenerator = ({ book }) => {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
 
   function addItem(book, quantity) {
     var books_cart = JSON.parse(localStorage.getItem("books_cart"));
@@ -61,14 +61,25 @@ const BooksPageGenerator = ({ book }) => {
     window.location.reload(false);
   }
 
-  function add(quantity) {
-    setQuantity(quantity + 1);
+  function add(qty) {
+    var books = JSON.parse(localStorage.getItem("booksCartNames"));
+    if (
+      book.stock - books[book.title] > qty ||
+      (!books[book.title] && book.stock - quantity > 0)
+    ) {
+      setQuantity(qty + 1);
+    }
   }
 
   function subtract(quantity) {
     if (quantity > 0) {
       setQuantity(quantity - 1);
     }
+  }
+
+  function countBookQuantity() {
+    var books = JSON.parse(localStorage.getItem("booksCartNames"));
+    return book.stock - books[book.title];
   }
 
   const [active, setActive] = useState(false);
@@ -108,7 +119,9 @@ const BooksPageGenerator = ({ book }) => {
               </span>
             </ul>
             <u>
-              <a href={`/${book.author}/${book.title}/reviews`}>View Reviews of the Book here!</a>
+              <a href={`/${book.author}/${book.title}/reviews`}>
+                View Reviews of the Book here!
+              </a>
             </u>
 
             <div className="flex pb-2 pt-2">
