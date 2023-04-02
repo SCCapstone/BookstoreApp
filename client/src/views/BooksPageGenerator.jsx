@@ -1,11 +1,11 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import ReactStars from "react-stars";
 import Heart from "react-heart";
-import { Grid, Chip, Avatar } from "@mui/material";
+import { Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 import swal from "sweetalert2";
-import { cartChange } from "../components/NavBar/NavBar";
+import axios from "axios";
 
 function getKeys(obj) {
   var keys = [];
@@ -26,7 +26,8 @@ function iterate(iterable, callback) {
   }
 }
 
-const BooksPageGenerator = ({ book }) => {
+const BooksPageGenerator = ({ book, user }) => {
+
   const [quantity, setQuantity] = useState(0);
 
   function addItem(book, quantity) {
@@ -84,6 +85,46 @@ const BooksPageGenerator = ({ book }) => {
 
   const [active, setActive] = useState(false);
 
+  React.useEffect(() => {
+    const url = "/api/users/" +  user;
+    axios.get(url).then((response) => {
+      const userFavs =  response.data.favorites;
+      const isActive = userFavs.includes(book._id);
+      setActive(isActive);
+    });
+  }, []);
+
+  function addOrRemoveFromWishlist() {
+    // don't do anything if not logged-in
+    if (!user || user.length === 0) return;
+
+    const url = "/api/users/" +  user;
+    const tempUser = {
+      favorites: book._id
+    }
+
+    if (active) { // deleting from wishlist
+      axios.put(url, tempUser).then(res => {
+        if (res.status === 200) {
+            swal.fire({
+                icon: 'success',
+                title: 'Successfully Removed from wishlist'
+            });    
+        }
+      });
+    } else { // adding to wishlist
+      axios.put(url, tempUser).then(res => {
+        if (res.status === 200) {
+            swal.fire({
+                icon: 'success',
+                title: 'Successfully Added to Wishlist'
+            });    
+        }
+      });
+    }
+    setActive(!active);
+  }
+
   return (
     <section class="grid grid-cols-5 max-w-[1300px]">
       <div />
@@ -113,8 +154,8 @@ const BooksPageGenerator = ({ book }) => {
                 <Heart
                   style={{ width: "20px" }}
                   isActive={active}
-                  onClick={() => setActive(!active)}
-                  activeColor={"#404252"}
+                  onClick={() => addOrRemoveFromWishlist()}
+                  activeColor={"#70161E"}
                 />
               </span>
             </ul>

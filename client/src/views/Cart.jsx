@@ -1,11 +1,12 @@
-import { React, Component } from "react";
+import { Component } from "react";
 import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 
 // import books from "../Books";
 import axios from "axios";
-import { cartChange } from "../../components/NavBar/NavBar";
+// import { cartChange } from "../../components/NavBar/NavBar";
+import { cartChange } from "../components/NavBar/NavBar";
 import swal from "sweetalert2";
 
 cartChange();
@@ -271,7 +272,7 @@ class MainCart extends Component {
   };
 
   checkOutChecker = () => {
-    if(this.calculatePrice() === 0){
+    if (this.calculatePrice() === 0) {
       return true;
     }
     return false;

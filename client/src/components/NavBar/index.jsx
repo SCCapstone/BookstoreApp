@@ -14,11 +14,11 @@ import BooksPageGenerator from "../../views/BooksPageGenerator";
 // import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
 import CreateForum from "../../views/CreateForum";
-import MainCart from "../../views/Cart/Cart";
+import MainCart from "../../views/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
 import MyAccount from "../../views/MyAccount";
-import axios from "axios";
+import Favorites from "../../views/Favorites";
 import Orders from "../../views/Orders";
 import EditBlogpage from "../../views/EditBlogPage";
 
@@ -96,6 +96,12 @@ const CompleteNavbar = () => {
                 <MyAccount currentUser={localStorage.getItem("userID")} />
               }
             />
+            <Route
+              path="/favorites"
+              element={
+                <Favorites currentUser={localStorage.getItem("userID")} />
+              }
+            />
 
             {/* Admin */}
             <Route path="/add_book" element={<AddBook currentUser={user} />} />
@@ -124,7 +130,7 @@ const CompleteNavbar = () => {
             {books.map((book) => (
               <Route
                 path={`/${book.author}/${book.title}/`}
-                element={<BooksPageGenerator book={book} />}
+                element={<BooksPageGenerator book={book} user={localStorage.getItem("userID")} />}
               />
             ))}
 

@@ -21,6 +21,7 @@ export default function ProfileIcon(currentUser) {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (currentUser?.currentUser === null) return;
       const url = "/api/users/" + currentUser.currentUser;
       let res = await axios.get(url);
       res.data.password = "";
@@ -134,7 +135,7 @@ export default function ProfileIcon(currentUser) {
               href="/favorites"
               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
             >
-              Favorites
+              Wishlist
             </a>
           </li>
         </MenuItem>
