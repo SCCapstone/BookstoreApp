@@ -3,6 +3,21 @@ const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const passwordComplexity = require("joi-password-complexity");
 
+/**
+ *   const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    role: "customer",
+    balance: 0,
+    favorites: [],
+    verifyEmailToken: "",
+    updatePasswordToken: "",
+    emailVerified: false
+  });
+ */
+
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -11,6 +26,9 @@ const userSchema = new mongoose.Schema({
   role: { type: String, required: true, enum: ["admin", "customer"] },
   balance: { type: mongoose.Schema.Types.Decimal128, required: false },
   favorites: { type: Array, required: false },
+  verifyEmailToken: { type: String, required: true },
+  updatePasswordToken: { type: String, required: false },
+  emailVerified: { type: Boolean, required: true }
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -36,6 +54,9 @@ const validate = (data) => {
       .required()
       .label("Favorites")
       .error(new Error("Favorites is invalid")),
+    verifyEmailToken: Joi.string().required().label("Verified Email Token"),
+    updatePasswordToken: Joi.string().required().label("Forgot password token"),
+    emailVerified: Joi.boolean().required().label("Is the user email verified")
   });
   return schema.validate(data);
 };
