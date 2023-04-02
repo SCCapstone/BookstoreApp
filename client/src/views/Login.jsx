@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import { TextField } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import swal from "sweetalert2";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -41,6 +42,39 @@ const Login = () => {
         setOpen(true);
       }
     }
+  };
+
+  const openForgotPassword = async () => {
+    let email = "";
+    swal.fire({
+      title: "Send email to retrieve your password?",
+      input: 'email',
+      inputLabel: 'Your email address',
+      inputPlaceholder: 'Enter your email address',
+      confirmButtonText: "Send Email",
+      showCancelButton: true,
+    }).then((result) => {
+      console.log(result);
+      if (!result.isConfirmed) {
+        swal.fire(
+          'Email failure!',
+          `Failed to send email to ${email}`,
+          'error'
+        );
+      }
+
+      try {
+        const url = `/api/auth/${email}`;
+        axios.getEmail(url).then((res) => {
+          if (true) {
+
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      
+    })
   };
 
   const handleClose = (event, reason) => {
@@ -107,8 +141,8 @@ const Login = () => {
               </Button>
 
               <Button
-                href="/forgot-password"
                 class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
+                onClick={(openForgotPassword)}
               >
                 Forgot Password?
               </Button>
