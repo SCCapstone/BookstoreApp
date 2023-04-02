@@ -111,8 +111,35 @@ class MainCart extends Component {
       }
     }
     console.log(booksSource);
-    return this.state.books;
+    return booksSource;
+    // return this.state.books;
   };
+
+  // purchaseBooks = () => {
+  //   if (currentUser && currentUser.length !== 0) {
+  //     if (currentBalance - calculatePrice(books, booksCartNames) >= 0) {
+  //       if (currentBalance - calculatePrice(books, booksCartNames) === 0) {
+  //         data.balance = "0";
+  //       } else {
+  //         data.balance = round(
+  //           currentBalance - calculatePrice(books, booksCartNames),
+  //           2
+  //         );
+  //       }
+  //       orderSetter();
+  //       console.log(userData(allUsers, currentUser));
+  //       localStorage.setItem("books_cart", JSON.stringify([]));
+  //       localStorage.setItem("booksCartNames", JSON.stringify({}));
+  //       handleChange();
+  //     } else {
+  //       handleChange();
+  //       window.location.reload();
+  //     }
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // };
+
 
   render() {
     // this.updateIteration();
@@ -127,7 +154,7 @@ class MainCart extends Component {
           <div
             className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
           >
-            {this.getKeys().map((book) => (
+            {this.getKeys().map(([book, qty]) => (
               <div
                 className={`flex-1 flex justify-start items-center flex-row m-3`}
               >
@@ -149,7 +176,7 @@ class MainCart extends Component {
                   </h3>
                   <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
                     Quantity:
-                    {/* {booksCartNames[bookName]} */}
+                    {qty}
                     <div className="flex pb-2 pt-2">
                       <Chip
                         avatar={
@@ -202,7 +229,7 @@ class MainCart extends Component {
             <button
               class="col-span-2 bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
               // onClick={() => {
-              //   puchaseBooks(currentUser);
+              //   purchaseBooks(currentUser);
               // }}
               type="submit"
             >
