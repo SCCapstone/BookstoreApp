@@ -21,6 +21,7 @@ export default function ProfileIcon(currentUser) {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (currentUser?.currentUser === null) return;
       const url = "/api/users/" + currentUser.currentUser;
       let res = await axios.get(url);
       res.data.password = "";
