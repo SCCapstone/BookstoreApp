@@ -1,23 +1,15 @@
-import { CartProvider, useCart } from "react-use-cart";
-import { React, useState, useEffect, Component } from "react";
-import { Remove, Add, Javascript } from "@mui/icons-material";
+import { React, Component } from "react";
+import { Remove, Add,  } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 
 // import books from "../Books";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { cartChange } from "../../components/NavBar/NavBar";
 import swal from "sweetalert2";
 
 cartChange();
 
-function clear_cart() {
-  localStorage.setItem("books_cart", JSON.stringify([]));
-  localStorage.setItem("booksCartNames", JSON.stringify({}));
-
-  window.location.reload(false);
-}
 function round(value, decimals) {
   return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
 }
@@ -90,7 +82,7 @@ class MainCart extends Component {
     user["orderPrice"] = this.calculatePrice();
     user["orderDate"] = new Date().toLocaleString();
     user["orderStatus"] = "In-Progress";
-    console.log(user);
+    // console.log(user);
     return user;
   };
 
@@ -108,7 +100,7 @@ class MainCart extends Component {
       swal.fire({
         icon: "error",
         title: "Not enough balance",
-        text: "please add more to the balance",
+        text: "Please add more to the balance",
       });
       return false;
     }
@@ -119,16 +111,16 @@ class MainCart extends Component {
       this.setState((state) => ({
         user: tmpUser,
       }));
-      console.log(tmpUser);
+      // console.log(tmpUser);
     }else {
 
       var tmpUser = this.state.user;
-      console.log(tmpUser);
+      // console.log(tmpUser);
       tmpUser.balance = round(
         this.availableBalance() - this.calculatePrice(),
         2
       );
-      console.log(tmpUser);
+      // console.log(tmpUser);
       this.setState((state) => ({
         user: tmpUser,
       }));

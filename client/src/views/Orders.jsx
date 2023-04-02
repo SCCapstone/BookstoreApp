@@ -48,9 +48,16 @@ export default class Orders extends React.Component {
   sendToLogin = () => {
     window.location.href = "/login";
   };
+  isLoggedIn = () => {
+    const currentUser = this.props.currentUser;
+    console.log(currentUser);
+    return currentUser && currentUser.length !== 0;
+  };
 
   render() {
-    return (
+
+    return this.isLoggedIn() ?( 
+      
       <div className="bg-gainsboro">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -88,6 +95,14 @@ export default class Orders extends React.Component {
           </table>
         </div>
       </div>
-    );
+    )
+    : (
+      (this.sendToLogin(),
+      (
+        <div>
+          <h1>Restricted to authenticated users only!</h1>
+        </div>
+      ))
+    );;
   }
 }
