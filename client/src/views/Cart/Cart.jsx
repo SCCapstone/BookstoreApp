@@ -73,6 +73,7 @@ class MainCart extends Component {
       booksCartNames: booksCartNames,
     }));
     // console.log(this.state);
+    // console.log(localStorage.getItem("books_cart"));
   }
 
   updateIteration = () => {
@@ -171,6 +172,30 @@ class MainCart extends Component {
     }));
   };
 
+  clearCart = () => {
+    localStorage.setItem("books_cart", JSON.stringify([]));
+    localStorage.setItem("booksCartNames", JSON.stringify({}));
+  
+    window.location.reload(false);
+    this.setState((state) => ({
+      booksCartNames: [],
+    }));
+  };
+
+  calculatePrice = () => {
+    var total = 0;
+    for (let i in this.state.booksCartNames) {
+      for (let j = 0; j < this.state.books.length; ++j) {
+        if (i == this.state.books[j].title) {
+          total =
+            total + this.state.booksCartNames[i] * this.state.books[j].price;
+        }
+      }
+    }
+    console.log(total);
+    return round(total, 2);
+  };
+
   render() {
     // this.updateIteration();
     return (
@@ -238,7 +263,7 @@ class MainCart extends Component {
             ))}
           </div>
           <div className="ml-2">
-            {/* <Button onClick={() => clear_cart()}>Clear Cart</Button> */}
+            <Button onClick={() => this.clearCart()}>Clear Cart</Button>
           </div>
           <form
             className={`grid grid-cols-3 flex-1 flex justify-start items-center  m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
@@ -248,7 +273,7 @@ class MainCart extends Component {
             // }}
           >
             <h4 className="col-span-1 font-poppins font-semibold xs:text-[30.89px] text-[25.89px] xs:leading-[43.16px] leading-[30.16px]">
-              Total: ${/* {calculatePrice(books, booksCartNames)} */}
+              Total: ${this.calculatePrice()}
             </h4>
             <button
               class="col-span-2 bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
