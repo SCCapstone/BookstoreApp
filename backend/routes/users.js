@@ -93,6 +93,11 @@ router.put("/:id", async (req, res) => {
         user.favorites.push(req.body.favorites);
       }
     }
+
+    if (req.body.emailVerified) {
+      user.emailVerified = req.body.emailVerified;
+    }
+
     await user.save();
     res.send({ message: "User role updated" });
   } catch (error) {
