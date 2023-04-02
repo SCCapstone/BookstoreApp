@@ -45,7 +45,6 @@ const Login = () => {
   };
 
   const openForgotPassword = async () => {
-    let email = "";
     swal.fire({
       title: "Send email to retrieve your password?",
       input: 'email',
@@ -55,20 +54,29 @@ const Login = () => {
       showCancelButton: true,
     }).then((result) => {
       console.log(result);
-      if (!result.isConfirmed) {
+      if (!result.isConfirmed || result.value?.length <= 0) {
         swal.fire(
           'Email failure!',
-          `Failed to send email to ${email}`,
+          `Failed to send email`,
           'error'
         );
+        return;
       }
-
+      const email = result.value;
       try {
-        const url = `/api/auth/${email}`;
-        axios.getEmail(url).then((res) => {
-          if (true) {
-
-          }
+        const url = `/api/users/email/${email}`;
+        console.log(url);
+        axios.get(url).then((res) => {
+          // SEND EMAIL HERE
+        }).catch((error) => {
+          if (error.response.status === 404) {
+            swal.fire(
+              'Email failure!',
+              "There is no user with that email address.",
+              'error'
+            );
+          } 
+          console.log(error);
         });
       } catch (error) {
         console.log(error);

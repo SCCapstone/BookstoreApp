@@ -38,6 +38,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/email/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
