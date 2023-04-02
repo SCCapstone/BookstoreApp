@@ -10,6 +10,7 @@ const SignUp = () => {
     password: "",
     role: "customer",
     balance: 0,
+    favorites: []
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -26,10 +27,8 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const url = "/api/users";
-      console.log(data);
       const res = await axios.post(url, data);
       navigate("/login");
-      console.log(res.message);
     } catch (error) {
       console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {
