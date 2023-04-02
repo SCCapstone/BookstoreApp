@@ -33,6 +33,7 @@ const Login = () => {
       // console.log(res.data.data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userType", res.data.userType);
+      localStorage.setItem("role", res.data.role);
       localStorage.setItem("userID", res.data.userID);
       window.location = "/";
     } catch (error) {

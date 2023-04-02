@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Fragment } from "react";
+import swal from "sweetalert2";
 import OrdersRow from "../components/OrdersRow";
 
 export default class Orders extends React.Component {
@@ -45,19 +46,26 @@ export default class Orders extends React.Component {
     this.getOrders();
   }
 
-  sendToLogin = () => {
-    window.location.href = "/login";
-  };
+  // sendToLogin = () => {
+  //   if (this.props.currentUser === "customer") {
+  //     swal.fire({
+  //       icon: "error",
+  //       title: "User cannot access orders",
+  //       text: "Please update your permission level",
+  //     });
+  //     return;
+  //   } else {
+  //     window.location.href = "/login";
+  //   }
+  // };
   isLoggedIn = () => {
     const currentUser = this.props.currentUser;
-    console.log(currentUser);
-    return currentUser && currentUser.length !== 0;
+    return currentUser && currentUser.length !== 0 ;
   };
 
-  render() {
 
-    return this.isLoggedIn() ?( 
-      
+  render() {
+    return this.isLoggedIn() ? (
       <div className="bg-gainsboro">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -95,14 +103,15 @@ export default class Orders extends React.Component {
           </table>
         </div>
       </div>
-    )
-    : (
-      (this.sendToLogin(),
+    ) : (
+      // (this.sendToLogin(),
       (
-        <div>
+        <div className="pt-10 mt-10">
           <h1>Restricted to authenticated users only!</h1>
+          {this.props.currentUser}
         </div>
-      ))
-    );;
+      )
+      // )
+    );
   }
 }

@@ -1,5 +1,5 @@
 import { React, Component } from "react";
-import { Remove, Add,  } from "@mui/icons-material";
+import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 
@@ -30,7 +30,7 @@ class MainCart extends Component {
     const url = "/api/books";
     await axios.get(url).then((res) => {
       let books = res.data;
-      console.log(books);
+      // console.log(books);
       this.setState((state) => ({
         books: books,
       }));
@@ -87,33 +87,30 @@ class MainCart extends Component {
   };
 
   purchaseBooks = () => {
-
     // Is user logged in?
-    if(!this.state.currentUser && this.state.currentUser === 0){
+    if (!this.state.currentUser || this.state.currentUser.length === 0) {
       console.log("USER NEED TO LOGIN");
       return false;
     }
 
     var updatedBalance = this.availableBalance() - this.calculatePrice();
 
-    if(updatedBalance < 0){
+    // console.log(updatedBalance);
+    if (updatedBalance < 0) {
       swal.fire({
         icon: "error",
         title: "Not enough balance",
         text: "Please add more to the balance",
       });
       return false;
-    }
-
-    if(updatedBalance === 0) {
+    } else if (updatedBalance === 0) {
       var tmpUser = this.state.user;
-      tmpUser.balance = 0;
+      tmpUser.balance = "0";
       this.setState((state) => ({
         user: tmpUser,
       }));
       // console.log(tmpUser);
-    }else {
-
+    } else {
       var tmpUser = this.state.user;
       // console.log(tmpUser);
       tmpUser.balance = round(
@@ -167,7 +164,7 @@ class MainCart extends Component {
     e.preventDefault();
 
     var purchase = this.purchaseBooks();
-    if (this.state.currentUser && this.state.currentUser !== 0) {
+    if (this.state.currentUser && this.state.currentUser.length !== 0) {
       var user = {};
 
       user["firstName"] = this.state.user.firstName;
