@@ -140,7 +140,6 @@ class MainCart extends Component {
   //   }
   // };
 
-
   render() {
     // this.updateIteration();
     return (
@@ -160,7 +159,6 @@ class MainCart extends Component {
               >
                 <div class="min-w-[80px] max-w-[120px]">
                   <img
-                    // src={getBook(books, bookName).imageId}
                     src={book.imageId}
                     alt=""
                     className="row-span-2 border-2 justify-right"
@@ -168,11 +166,10 @@ class MainCart extends Component {
                 </div>
                 <div>
                   <h3 className="font-poppins font-bold xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
-                    {/* {getBook(books, bookName).title} by{" "}
-                    {getBook(books, bookName).author} */}
+                    {book.title} by {book.author}
                   </h3>
                   <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
-                    Price: ${/* {getBook(books, bookName).price} */}
+                    Price: ${book.price}
                   </h3>
                   <h3 className="font-poppins font-normal xs:text-[20.45px] text-[15.45px] xs:leading-[26.58px] leading-[21.58px] ml-3">
                     Quantity:
