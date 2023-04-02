@@ -10,6 +10,7 @@ const SignUp = () => {
     password: "",
     role: "customer",
     balance: 0,
+    favorites: []
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
