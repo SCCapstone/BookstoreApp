@@ -123,41 +123,6 @@ class MainCart extends Component {
       }));
     }
     return true;
-
-    // if (this.state.currentUser && this.state.currentUser !== 0) {
-    //   if (this.availableBalance() - this.calculatePrice() >= 0) {
-    //     if (this.availableBalance() - this.calculatePrice() === 0) {
-    //       var tmpUser = this.state.user;
-    //       tmpUser.balance = 0;
-    //       this.setState((state) => ({
-    //         user: tmpUser,
-    //       }));
-    //       console.log(tmpUser);
-    //     } else {
-    //       var tmpUser = this.state.user;
-    //       console.log(tmpUser);
-    //       tmpUser.balance = round(
-    //         this.availableBalance() - this.calculatePrice(),
-    //         2
-    //       );
-    //       console.log(tmpUser);
-    //       this.setState((state) => ({
-    //         user: tmpUser,
-    //       }));
-    //     }
-    //     return true;
-    //   } else {
-    //     swal.fire({
-    //       icon: "error",
-    //       title: "Not enough balance",
-    //       text: "please add more to the balance",
-    //     });
-    //     return false;
-    //   }
-    // } else {
-    //   console.log("USER NEED TO LOGIN");
-    // }
-    // return false;
   };
 
   async handleSubmit(e) {
@@ -305,6 +270,13 @@ class MainCart extends Component {
     return round(total, 2);
   };
 
+  checkOutChecker = () => {
+    if(this.calculatePrice() === 0){
+      return true;
+    }
+    return false;
+  };
+
   render() {
     // this.updateIteration();
     return (
@@ -386,6 +358,7 @@ class MainCart extends Component {
             <button
               class="col-span-2 bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
               type="submit"
+              disabled={this.checkOutChecker() ? true : false}
             >
               Check out
             </button>
