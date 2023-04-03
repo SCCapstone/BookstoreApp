@@ -1,5 +1,4 @@
 import React from "react";
-import book_dispensary from "../assets/book_dispensary.jpg";
 import { styles } from "../styles";
 
 const Aboutus = () => {
@@ -22,11 +21,7 @@ const Aboutus = () => {
           books for cheap from our custom bookstore. We provide all kinds of books in many different
           genres so people have a wide variety of choices depending on their mood and interests.
         </p>
-        <img
-          src={book_dispensary}
-          alt="Book Dispensary"
-          className="row-span-2"
-        />
+
         <p className={`${styles.paragraph}`}>
           Location to Visit Us: 123 UniversitySC Ave, Columbia, SC 29210
         </p>
