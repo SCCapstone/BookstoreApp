@@ -5,6 +5,7 @@ router.get("/", async (req, res) => {
   try {
     Book.find({}, function (err, books) {
       res.send(books);
+      // console.log(books);
     });
   } catch (error) {
     console.log(error);

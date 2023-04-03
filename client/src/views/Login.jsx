@@ -32,6 +32,7 @@ const Login = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userType", res.data.userType);
+      localStorage.setItem("role", res.data.role);
       localStorage.setItem("userID", res.data.userID);
       window.location = "/";
     } catch (error) {

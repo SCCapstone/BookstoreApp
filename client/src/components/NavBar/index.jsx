@@ -26,6 +26,7 @@ import VerifyEmail from "../../views/VerifyEmail";
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
+  const role = localStorage.getItem("role");
   const items = JSON.parse(localStorage.getItem("cartItemsQuantity"));
   // console.log(items);
 
@@ -47,6 +48,23 @@ const CompleteNavbar = () => {
     fetchBooks();
     fetchUsers();
   }, []);
+
+  // function clear_cart() {
+  //   localStorage.setItem("books_cart", JSON.stringify([]));
+  //   localStorage.setItem("booksCartNames", JSON.stringify({}));
+
+  //   window.location.reload(false);
+  // }
+  // console.log(localStorage.getItem("books_cart"));
+  // console.log(localStorage.getItem("booksCartNames"));
+
+  // if (
+  //   !localStorage.getItem("books_cart") ||
+  //   !localStorage.getItem("booksCartNames")
+  // ) {
+  //   clear_cart();
+  //   console.log("Cart Initialized");
+  // }
   // const saveBooksToLocalStorage = () => {
   //   if (books.length !== 0) {
   //     //this line is new
@@ -113,7 +131,10 @@ const CompleteNavbar = () => {
             />
 
             {/* Admin, Employee, and Customer */}
-            <Route path="/createforums" element={<CreateForum user={localStorage.getItem("userID")}/>} />
+            <Route
+              path="/createforums"
+              element={<CreateForum user={localStorage.getItem("userID")} />}
+            />
 
             {/* Mapped Routes */}
             {books.map((book) => (
@@ -124,8 +145,10 @@ const CompleteNavbar = () => {
             ))}
             {/* Mapped Route for Reviews */}
             {books.map((book) => (
-              <Route path = {`/${book.author}/${book.title}/reviews`}
-              element={<Reviews book={book}/>} />
+              <Route
+                path={`/${book.author}/${book.title}/reviews`}
+                element={<Reviews book={book} />}
+              />
             ))}
 
             {/* Mapped Route for Validating Emails */}

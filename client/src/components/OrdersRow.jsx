@@ -39,6 +39,15 @@ const OrdersRow = ({ order, handleUpdate, handleDelete }) => {
           <option value="Fulfilled">Fulfilled</option>
         </select>
       </td>
+      <td className="">
+        <button
+          class="bg-persian_plum text-white ml-4 py-2 px-4"
+          type="button"
+          onClick={() => handleDelete(order)}
+        >
+          Delete
+        </button>
+      </td>
     </tr>
   );
 };

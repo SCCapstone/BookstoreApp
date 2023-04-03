@@ -27,8 +27,7 @@ function iterate(iterable, callback) {
 }
 
 const BooksPageGenerator = ({ book, user }) => {
-
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
 
   function addItem(book, quantity) {
     var books_cart = JSON.parse(localStorage.getItem("books_cart"));
@@ -62,8 +61,17 @@ const BooksPageGenerator = ({ book, user }) => {
     window.location.reload(false);
   }
 
-  function add(quantity) {
-    setQuantity(quantity + 1);
+  function add(qty) {
+    var books = JSON.parse(localStorage.getItem("booksCartNames"));
+    if (books == null) {
+      books = {};
+    }
+    if (
+      book.stock - books[book.title] > qty ||
+      (!books[book.title] && book.stock - quantity > 0)
+    ) {
+      setQuantity(qty + 1);
+    }
   }
 
   function subtract(quantity) {
@@ -72,12 +80,17 @@ const BooksPageGenerator = ({ book, user }) => {
     }
   }
 
+  function countBookQuantity() {
+    var books = JSON.parse(localStorage.getItem("booksCartNames"));
+    return book.stock - books[book.title];
+  }
+
   const [active, setActive] = useState(false);
 
   React.useEffect(() => {
-    const url = "/api/users/" +  user;
+    const url = "/api/users/" + user;
     axios.get(url).then((response) => {
-      const userFavs =  response.data.favorites;
+      const userFavs = response.data.favorites;
       const isActive = userFavs.includes(book._id);
       setActive(isActive);
     });
@@ -87,27 +100,29 @@ const BooksPageGenerator = ({ book, user }) => {
     // don't do anything if not logged-in
     if (!user || user.length === 0) return;
 
-    const url = "/api/users/" +  user;
+    const url = "/api/users/" + user;
     const tempUser = {
-      favorites: book._id
-    }
+      favorites: book._id,
+    };
 
-    if (active) { // deleting from wishlist
-      axios.put(url, tempUser).then(res => {
+    if (active) {
+      // deleting from wishlist
+      axios.put(url, tempUser).then((res) => {
         if (res.status === 200) {
-            swal.fire({
-                icon: 'success',
-                title: 'Successfully Removed from wishlist'
-            });    
+          swal.fire({
+            icon: "success",
+            title: "Successfully Removed from wishlist",
+          });
         }
       });
-    } else { // adding to wishlist
-      axios.put(url, tempUser).then(res => {
+    } else {
+      // adding to wishlist
+      axios.put(url, tempUser).then((res) => {
         if (res.status === 200) {
-            swal.fire({
-                icon: 'success',
-                title: 'Successfully Added to Wishlist'
-            });    
+          swal.fire({
+            icon: "success",
+            title: "Successfully Added to Wishlist",
+          });
         }
       });
     }
@@ -149,7 +164,9 @@ const BooksPageGenerator = ({ book, user }) => {
               </span>
             </ul>
             <u>
-              <a href={`/${book.author}/${book.title}/reviews`}>View Reviews of the Book here!</a>
+              <a href={`/${book.author}/${book.title}/reviews`}>
+                View Reviews of the Book here!
+              </a>
             </u>
 
             <div className="flex pb-2 pt-2">
