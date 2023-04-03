@@ -160,7 +160,7 @@ const CompleteNavbar = () => {
 
             {/* Mapped Route for Changing Passwords */}
             {users.map((user) => (
-              <Route path = {`/validate/${user.updatePasswordToken}`}
+              <Route path = {`/forgot/${user.updatePasswordToken}`}
               element={<ChangePassword user={user}/>} />
             ))}
             

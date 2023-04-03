@@ -74,16 +74,24 @@ const Login = () => {
           const putURL = '/api/users/' + res.data._id;
           axios.put(putURL, res.data).then(
             emailjs.send(
-              "serviceID",
-              "templateID",
+              "service_trb6232",
+              "template_jetptvm",
               {
-                link: "http://bookstore-app.herokuapp.com/forgot/" + res.data.updatePasswordToken;
+                pw_link: "http://bookstore-app.herokuapp.com/forgot/" + res.data.updatePasswordToken,
+                to_email: email,
+                to_name: res.data.firstName,
               },
-              "password/key for email js"
+              "0v71YVpIY79kGX06h"
             ).then(
-              // navigate them back to the home page
+              swal.fire(
+                'Email successfully sent',
+                "Check your email for the link to reset your password",
+                'success'
+              )
             )
-          )
+          ).catch((error) => {
+            console.log(error);
+          })
         }).catch((error) => {
           if (error.response.status === 404) {
             swal.fire(

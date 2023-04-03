@@ -112,6 +112,10 @@ router.put("/:id", async (req, res) => {
       user.emailVerified = req.body.emailVerified;
     }
 
+    if (req.body.updatePasswordToken) {
+      user.updatePasswordToken = req.body.updatePasswordToken;
+    }
+
     await user.save();
     res.send({ message: "User role updated" });
   } catch (error) {
