@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import { TextField } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import swal from "sweetalert2";
+import emailjs from "@emailjs/browser";
+import { v4 as uuidv4 } from 'uuid';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -42,6 +45,60 @@ const Login = () => {
         setOpen(true);
       }
     }
+  };
+
+  const openForgotPassword = async () => {
+    swal.fire({
+      title: "Send email to retrieve your password?",
+      input: 'email',
+      inputLabel: 'Your email address',
+      inputPlaceholder: 'Enter your email address',
+      confirmButtonText: "Send Email",
+      showCancelButton: true,
+    }).then((result) => {
+      console.log(result);
+      if (!result.isConfirmed || result.value?.length <= 0) {
+        swal.fire(
+          'Email failure!',
+          `Failed to send email`,
+          'error'
+        );
+        return;
+      }
+      const email = result.value;
+      try {
+        const url = `/api/users/email/${email}`;
+        console.log(url);
+        axios.get(url).then((res) => {
+          res.data.updatePasswordToken = uuidv4();
+          const putURL = '/api/users/' + res.data._id;
+          axios.put(putURL, res.data).then(
+            emailjs.send(
+              "serviceID",
+              "templateID",
+              {
+                link: "http://bookstore-app.herokuapp.com/forgot/" + res.data.updatePasswordToken;
+              },
+              "password/key for email js"
+            ).then(
+              // navigate them back to the home page
+            )
+          )
+        }).catch((error) => {
+          if (error.response.status === 404) {
+            swal.fire(
+              'Email failure!',
+              "There is no user with that email address.",
+              'error'
+            );
+          } 
+          console.log(error);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      
+    })
   };
 
   const handleClose = (event, reason) => {
@@ -108,8 +165,8 @@ const Login = () => {
               </Button>
 
               <Button
-                href="/forgot-password"
                 class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
+                onClick={(openForgotPassword)}
               >
                 Forgot Password?
               </Button>

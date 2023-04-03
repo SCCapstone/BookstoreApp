@@ -22,6 +22,7 @@ import Favorites from "../../views/Favorites";
 import Orders from "../../views/Orders";
 import EditBlogpage from "../../views/EditBlogPage";
 import VerifyEmail from "../../views/VerifyEmail";
+import ChangePassword from "../../views/ChangePassword";
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -155,6 +156,12 @@ const CompleteNavbar = () => {
             {users.map((user) => (
               <Route path = {`/validate/${user.verifyEmailToken}`}
               element={<VerifyEmail user={user}/>} />
+            ))}
+
+            {/* Mapped Route for Changing Passwords */}
+            {users.map((user) => (
+              <Route path = {`/validate/${user.updatePasswordToken}`}
+              element={<ChangePassword user={user}/>} />
             ))}
             
           </Routes>
