@@ -1,5 +1,4 @@
 import React from "react";
-import book_dispensary from "../assets/book_dispensary.jpg";
 import { styles } from "../styles";
 
 const Aboutus = () => {
@@ -14,23 +13,17 @@ const Aboutus = () => {
       </div>
       <div class="xl:ml-20 xl:w-8/12 lg:w-8/12 md:w-4/12 w-4/12 py-2 grid grid-rows-auto max-w-[1400px]">
         <p className={`${styles.paragraph} max-w-[1158px]`}>
-          The Book Dispensary is a local, family owned business that began life
-          December 2, 1975 in Columbia's St. Andrews area, near the intersection
-          of Bush River Road and I-126 in what was then Boardwalk Plaza Shopping
-          Center. For nearly 40 years we have been providing the people of
-          Columbia and central South Carolina as well as people from all over
-          the rest of the US and many other parts of the world with everything
-          from paperbacks to world class collectible books and maps. This
-          website has been refurbished so that both employees and customers can
-          use this site.
+          The Bugsy's Barn Books was invented by a group of University of South Carolina students
+          on August 21, 2022 on campus. After the COVID pandemic, many people lost interest in reading
+          or have stopped reading all together unless it pertains to their courses or for their jobs. 
+          As such, we felt that it would be nice and encouraging for people to get back into the habit 
+          to read for fun. We decided to create a web platform where people of all ages can purchase 
+          books for cheap from our custom bookstore. We provide all kinds of books in many different
+          genres so people have a wide variety of choices depending on their mood and interests.
         </p>
-        <img
-          src={book_dispensary}
-          alt="Book Dispensary"
-          className="row-span-2"
-        />
+
         <p className={`${styles.paragraph}`}>
-          Location to Visit Us: 710-C Gracern Rd, Columbia, SC 29210
+          Location to Visit Us: 123 UniversitySC Ave, Columbia, SC 29210
         </p>
       </div>
     </section>
