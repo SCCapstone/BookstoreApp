@@ -26,9 +26,9 @@ const userSchema = new mongoose.Schema({
   role: { type: String, required: true, enum: ["admin", "customer"] },
   balance: { type: mongoose.Schema.Types.Decimal128, required: false },
   favorites: { type: Array, required: false },
-  verifyEmailToken: { type: String, required: true },
+  verifyEmailToken: { type: String, required: false },
   updatePasswordToken: { type: String, required: false },
-  emailVerified: { type: Boolean, required: true }
+  emailVerified: { type: Boolean, required: false }
 });
 
 userSchema.methods.generateAuthToken = function () {
@@ -54,9 +54,9 @@ const validate = (data) => {
       .required()
       .label("Favorites")
       .error(new Error("Favorites is invalid")),
-    verifyEmailToken: Joi.string().required().label("Verified Email Token"),
-    updatePasswordToken: Joi.string().required().label("Forgot password token"),
-    emailVerified: Joi.boolean().required().label("Is the user email verified")
+    verifyEmailToken: Joi.string().label("Verified Email Token"),
+    updatePasswordToken: Joi.string().label("Forgot password token"),
+    emailVerified: Joi.boolean().label("Is the user email verified")
   });
   return schema.validate(data);
 };
