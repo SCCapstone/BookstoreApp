@@ -197,7 +197,7 @@ const BooksPageGenerator = ({ book, user }) => {
             <ul className="row-span-6" />
           </div>
         </div>
-        <div className="grid text-center text-black text-xl py-3 pr-14 mr-14 max-w-[2000px]">
+        <div className="grid text-left text-black text-xl py-3 pr-14 mr-14 max-w-[2000px]">
           {book.summary}
         </div>
       </div>
