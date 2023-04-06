@@ -15,24 +15,13 @@ export default class Orders extends React.Component {
     const url = "/api/orders";
     axios.get(url).then((res) => {
       const orders = res.data.reverse();
-      // console.log(orders);
       this.setState({ orders: orders });
     });
   };
 
-  changePage = (e, p) => {
-    this.setState((state) => ({
-      currentPage: p,
-    }));
+  componentDidMount() {
+    this.getOrders();
   };
-
-  getPaginatedOrders(currentPage) {
-    const firstPageIndex = (currentPage-1) * this.state.pageSize;
-    const lastPageIndex = firstPageIndex + this.state.pageSize;
-    const curOrders = this.state.orders.slice(firstPageIndex, lastPageIndex);
-    console.log(curOrders);
-    return curOrders;
-  }
 
   async editOrder(order, orderStatus) {
     const id = order._id;
@@ -57,15 +46,22 @@ export default class Orders extends React.Component {
     }
   };
 
-  componentDidMount() {
-    this.getOrders();
-  };
-
   isLoggedIn = () => {
     const currentUser = this.props.currentUser;
     return currentUser && currentUser.length !== 0 ;
   };
 
+  changePage = (e, p) => {
+    this.setState((state) => ({
+      currentPage: p,
+    }));
+  };
+
+  getPaginatedOrders(currentPage) {
+    const firstPageIndex = (currentPage-1) * this.state.pageSize;
+    const lastPageIndex = firstPageIndex + this.state.pageSize;
+    return this.state.orders.slice(firstPageIndex, lastPageIndex);
+  }
 
   render() {
     return this.isLoggedIn() ? (
