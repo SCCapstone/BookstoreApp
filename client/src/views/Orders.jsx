@@ -7,7 +7,7 @@ import { Pagination } from "@mui/material";
 export default class Orders extends React.Component {
   state = {
     orders: [],
-    pageSize: 12,
+    pageSize: 10,
     currentPage: 1
   };
 
@@ -94,6 +94,7 @@ export default class Orders extends React.Component {
               {this.getPaginatedOrders(this.state.currentPage).map((order) => (
                 <OrdersRow
                   order={order}
+                  ordererId={order.userId}
                   handleUpdate={this.editOrder}
                   handleDelete={this.deleteOrder}
                 />
