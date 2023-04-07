@@ -2,8 +2,6 @@ import React from "react";
 import { styles } from "../styles";
 
 const Aboutus = () => {
-  var books_cart = JSON.parse(localStorage.getItem("books_cart"));
-  console.log(books_cart);
   return (
     <section>
       <div class="py-4">

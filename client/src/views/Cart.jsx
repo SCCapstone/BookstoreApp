@@ -68,35 +68,26 @@ class MainCart extends Component {
       booksCartNames: booksCartNames,
     }));
     // console.log(this.state);
-    // console.log(localStorage.getItem("books_cart"));
+    // console.log(localStorage.getItem("book_cart"));
   }
 
-  orderSetter = () => {
-    var user = {};
-
-    user["firstName"] = this.state.user.firstName;
-    user["lastName"] = this.state.user.lastName;
-    user["email"] = this.state.user.email;
-    user["role"] = this.state.user.role;
-
-    user["order"] = this.state.booksCartNames;
-    user["orderPrice"] = this.calculatePrice();
-    user["orderDate"] = new Date().toLocaleString();
-    user["orderStatus"] = "In-Progress";
-    // console.log(user);
-    return user;
-  };
-
-  purchaseBooks = () => {
-    // Is user logged in?
+  canPurchaseBooks = () => {
+    // User cannot purchae if not logged in
     if (!this.state.currentUser || this.state.currentUser.length === 0) {
+      swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "User need to login!",
+        footer: "<a href='/login'>Login</a>",
+      });
       console.log("USER NEED TO LOGIN");
       return false;
     }
 
     var updatedBalance = this.availableBalance() - this.calculatePrice();
 
-    // console.log(updatedBalance);
+    // User cannot purchase books if balance is 
+    // lower than the cost of the books
     if (updatedBalance < 0) {
       swal.fire({
         icon: "error",
@@ -104,82 +95,78 @@ class MainCart extends Component {
         text: "Please add more to the balance",
       });
       return false;
-    } else if (updatedBalance === 0) {
-      var tmpUser = this.state.user;
-      tmpUser.balance = "0";
-      this.setState((state) => ({
-        user: tmpUser,
-      }));
-      // console.log(tmpUser);
-    } else {
-      var tmpUser = this.state.user;
-      // console.log(tmpUser);
-      tmpUser.balance = round(
-        this.availableBalance() - this.calculatePrice(),
-        2
-      );
-      // console.log(tmpUser);
-      this.setState((state) => ({
-        user: tmpUser,
-      }));
-    }
+    } 
+
     return true;
   };
 
   async handleSubmit(e) {
     e.preventDefault();
 
-    var purchase = this.purchaseBooks();
-    if (this.state.currentUser && this.state.currentUser.length !== 0) {
-      var user = {};
+    // canPurchase will store boolean value reflecting
+    // if user can purchase books
+    if (!this.canPurchaseBooks()) return;
 
-      user["firstName"] = this.state.user.firstName;
-      user["lastName"] = this.state.user.lastName;
-      user["email"] = this.state.user.email;
-      user["role"] = this.state.user.role;
+    var order = {
+      orderId: this.state.user._id,
+      order: this.state.booksCartNames,
+      orderPrice: this.calculatePrice(),
+      orderDate: new Date(),
+      orderStatus: "In-Progress"
+    };
+    console.log(this.state.booksCartNames);
+    console.log(order);
 
-      user["order"] = this.state.booksCartNames;
-      user["orderPrice"] = this.calculatePrice();
-      user["orderDate"] = new Date().toLocaleString();
-      user["orderStatus"] = "In-Progress";
-      console.log(user);
-
-      e.preventDefault();
-
-      if (purchase) {
-        try {
-          const url = "/api/orders";
-          axios.post(url, user).then((res) => {
-            console.log(res.status);
-          });
-        } catch (error) {
-          if (error.response?.status >= 400 && error.response.status <= 500) {
-            console.log(error.response.data.message);
-          }
-        }
+    // Step 1: Add new order to orders
+    try {
+      const orderUrl = "/api/orders";
+      axios.post(orderUrl, order).then((res) => {
+        console.log(res.status);
+        // if order successfully went through, empty out cart
         this.clearCart();
-      }
-
-      try {
-        const url = "/api/users/" + this.state.currentUser;
-        const usr = { balance: this.state.user.balance };
-        const res = await axios.put(url, usr);
-      } catch (error) {
-        if (error.response?.status >= 400 && error.response.status <= 500) {
-          console.log(error.response.data.message);
-        }
-      }
-      if (purchase) {
-        window.location.reload();
-      }
-    } else {
-      swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "User need to login!",
-        footer: "<a href='/login'>Login</a>",
       });
+    } catch (error) {
+      if (error.response?.status >= 400 && error.response.status <= 500) {
+        console.log(error.response.data.message);
+        swal.fire({
+          icon: "error",
+          title: "Error adding order",
+          text: error.response.data.message,
+        });
+      }
+      return;
     }
+
+    // Step 2: Update Current User's Balance
+    var updatedBalance = this.availableBalance() - this.calculatePrice();
+    if (updatedBalance === 0) updatedBalance = "0";
+    else updatedBalance = round(updatedBalance, 2);
+ 
+    try {
+      const url = "/api/users/" + this.state.currentUser;
+      const usr = { balance: updatedBalance };
+      axios.put(url, usr).then((res) => {
+        let tempUser = this.state.user;
+        tempUser.balance = updatedBalance;
+        this.setState((state) => ({
+          user: tempUser,
+        }));
+      });
+    } catch (error) {
+      if (error.response?.status >= 400 && error.response.status <= 500) {
+        console.log(error.response.data.message);
+        swal.fire({
+          icon: "error",
+          title: "Error updating user balanace",
+          text: error.response.data.message,
+        });
+      }
+      return;
+    }
+      
+    // TO-DO: Step 3: Update Each Book's Quantity Sold
+
+    window.location.reload();
   }
 
   updateIteration = () => {
@@ -249,7 +236,7 @@ class MainCart extends Component {
   };
 
   clearCart = () => {
-    localStorage.setItem("books_cart", JSON.stringify([]));
+    localStorage.setItem("book_cart", JSON.stringify([]));
     localStorage.setItem("booksCartNames", JSON.stringify({}));
 
     // window.location.reload(false);
@@ -262,7 +249,7 @@ class MainCart extends Component {
     var total = 0;
     for (let i in this.state.booksCartNames) {
       for (let j = 0; j < this.state.books.length; ++j) {
-        if (i == this.state.books[j].title) {
+        if (i === this.state.books[j].title) {
           total =
             total + this.state.booksCartNames[i] * this.state.books[j].price;
         }

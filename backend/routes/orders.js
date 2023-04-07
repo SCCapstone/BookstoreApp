@@ -4,6 +4,7 @@ const { Order, validate } = require("../models/orders");
 router.post("/", async (req, res) => {
   try {
     const { error } = validate(req.body);
+    console.log(req.body);
     if (error)
       return res.status(400).send({ message: error.details[0].message });
     await new Order(req.body).save();
@@ -36,13 +37,11 @@ router.put("/:id", async (req, res) => {
     }
     await order.save();
 
-    
     res.send("Updated order status!");
   } catch (error) {
     console.log(error);
   }
 });
-
 
 router.delete("/:id", async (req, res) => {
   try {
