@@ -22,7 +22,11 @@ function findQuantity(booksCartNames) {
   return count;
 }
 
-const NavBar = ({ user, items }) => {
+function clearCart() {
+  localStorage.removeItem("booksCartNames");
+}
+
+const NavBar = ({ user, items, isLoggedIn }) => { // add isLoggedIn prop to indicate if the user is logged in
   const navigate = useNavigate();
   const [shoppingCartQuantity, setShoppingCartQuantity] = useState(0);
 
@@ -31,6 +35,13 @@ const NavBar = ({ user, items }) => {
       setShoppingCartQuantity(val);
     }
   }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      clearCart(); // clear cart when user logs out
+      setShoppingCartQuantity(0);
+    }
+  }, [isLoggedIn]);
 
   return (
     <div>
@@ -46,24 +57,26 @@ const NavBar = ({ user, items }) => {
             </a>
           </span>
           <div class="flex md:order-2 grid grid-cols-5">
-            <Badge
-              badgeContent={val}
-              color="primary"
-              className=""
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            >
-              <IoMdCart
-                onClick={() => navigate("/cart")}
+            {isLoggedIn && ( // render cart icon only if user is logged in
+              <Badge
+                badgeContent={val}
+                color="primary"
                 className=""
-                style={{
-                  position: "",
-                  top: "10px",
-                  right: "70px",
-                }}
-                size="40px"
-                color="white"
-              />
-            </Badge>
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+              >
+                <IoMdCart
+                  onClick={() => navigate("/cart")}
+                  className=""
+                  style={{
+                    position: "",
+                    top: "10px",
+                    right: "70px",
+                  }}
+                  size="40px"
+                  color="white"
+                />
+              </Badge>
+            )}
             <div />
             <ProfileIcon currentUser={user} />
           </div>
