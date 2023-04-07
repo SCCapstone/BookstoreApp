@@ -174,7 +174,7 @@ class MainCart extends Component {
     try {
       if (this.state.user && this.state.user !== 0) {
         let balance = 0;
-        if (this.state.user.balance > 0) {
+        if (this.state.user.balance >= 0) {
           balance = this.state.user.balance;
         } else if (this.state.user.balance.$numberDecimal !== "") {
           balance = this.state.user.balance.$numberDecimal;
