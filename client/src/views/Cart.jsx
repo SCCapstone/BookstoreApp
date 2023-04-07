@@ -20,18 +20,37 @@ class MainCart extends Component {
     this.state = {
       books: [],
       booksCartNames: [],
-      booksCart: [],
+      bookCart: [],
       user: {},
       currentUser: "",
     };
   }
 
   async componentDidMount() {
+    // setting books cart
+    var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
+    this.setState((state) => ({
+      booksCartNames: booksCartNames,
+    }));
+    var bookCart = JSON.parse(localStorage.getItem("book_cart"));
+    this.setState((state) => ({
+      bookCart: bookCart
+    }))
+
+    // check cart
+    const bookIds = this.getKeys(bookCart);
+    console.log(bookIds);
+    if (this.bookIds?.length <= 0) {
+      console.log('THERE ARE NO BOOKS IN CART');
+      return;
+    }
+
     // get the books
-    const url = "/api/books";
-    await axios.get(url).then((res) => {
+    const bookUrl = "/api/books/" + bookIds;
+    console.log(bookUrl);
+    await axios.get(bookUrl).then((res) => {
       let books = res.data;
-      // console.log(books);
+      console.log(books);
       this.setState((state) => ({
         books: books,
       }));
@@ -61,14 +80,6 @@ class MainCart extends Component {
     } catch (error) {
       console.log("USER NEED TO LOGIN");
     }
-
-    // setting books cart
-    var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
-    this.setState((state) => ({
-      booksCartNames: booksCartNames,
-    }));
-    // console.log(this.state);
-    // console.log(localStorage.getItem("book_cart"));
   }
 
   canPurchaseBooks = () => {
@@ -109,12 +120,13 @@ class MainCart extends Component {
 
     var order = {
       orderId: this.state.user._id,
-      order: this.state.booksCartNames,
+      order: this.state.bookCart,
       orderPrice: this.calculatePrice(),
       orderDate: new Date(),
       orderStatus: "In-Progress"
     };
     console.log(this.state.booksCartNames);
+    console.log(this.state.bookCart);
     console.log(order);
 
     // Step 1: Add new order to orders
@@ -169,12 +181,6 @@ class MainCart extends Component {
     window.location.reload();
   }
 
-  updateIteration = () => {
-    this.setState((state) => ({
-      booksCartNames: JSON.parse(localStorage.getItem("booksCartNames")),
-    }));
-  };
-
   // getting user balance
   availableBalance = () => {
     try {
@@ -188,31 +194,39 @@ class MainCart extends Component {
     }
   };
 
-  getKeys = () => {
-    let booksSource = [];
-
-    for (let i = 0; i < this.state.books.length; ++i) {
-      for (let book in this.state.booksCartNames) {
-        if (book === this.state.books[i].title) {
-          booksSource.push([
-            this.state.books[i],
-            this.state.booksCartNames[book],
-          ]);
-        }
-      }
+  getKeys(obj) {
+    var keys = [];
+    this.iterate(obj, function (oVal, oKey) {
+      keys.push(oKey);
+    });
+    return keys;
+  }
+  
+  iterate(iterable, callback) {
+    for (var key in iterable) {
+      if (
+        key === "length" ||
+        key === "prototype" ||
+        !Object.prototype.hasOwnProperty.call(iterable, key)
+      )
+        continue;
+      callback(iterable[key], key, iterable);
     }
-    return booksSource;
-  };
+  }
 
   setQtyValue = ([book, value]) => {
-    // console.log([book, value]);
     if (this.checkCartUpdate([book, value])) {
       var tmp = this.state.booksCartNames;
       tmp[book.title] = value;
       console.log(tmp);
+      var tmp2 = this.state.bookCart;
+      tmp2[book._id] = value;
+      console.log(tmp2);
       localStorage.setItem("booksCartNames", JSON.stringify(tmp));
+      localStorage.setItem("book_cart", JSON.stringify(tmp2));
       this.setState((state) => ({
         booksCartNames: tmp,
+        bookCart: tmp2
       }));
     }
   };
@@ -229,29 +243,35 @@ class MainCart extends Component {
     var tmp = this.state.booksCartNames;
     delete tmp[book.title];
     console.log(tmp);
+    var tmp2 = this.state.bookCart;
+    delete tmp2[book._id];
+    console.log(tmp2);
     localStorage.setItem("booksCartNames", JSON.stringify(tmp));
+    localStorage.setItem("book_cart", JSON.stringify(tmp2));
     this.setState((state) => ({
       booksCartNames: tmp,
+      bookCart: tmp2
     }));
   };
 
   clearCart = () => {
-    localStorage.setItem("book_cart", JSON.stringify([]));
+    localStorage.setItem("book_cart", JSON.stringify({}));
     localStorage.setItem("booksCartNames", JSON.stringify({}));
 
     // window.location.reload(false);
     this.setState((state) => ({
       booksCartNames: [],
+      bookCart: {}
     }));
   };
 
   calculatePrice = () => {
     var total = 0;
-    for (let i in this.state.booksCartNames) {
+    for (let i in this.state.bookCart) {
       for (let j = 0; j < this.state.books.length; ++j) {
-        if (i === this.state.books[j].title) {
+        if (i === this.state.books[j]._id) {
           total =
-            total + this.state.booksCartNames[i] * this.state.books[j].price;
+            total + this.state.bookCart[i] * this.state.books[j].price;
         }
       }
     }
@@ -265,8 +285,22 @@ class MainCart extends Component {
     return false;
   };
 
+  mapper = () => {
+    let booksSource = [];
+    for (let i = 0; i < this.state.books.length; ++i) {
+      for (let bookId in this.state.bookCart) {
+        if (bookId === this.state.books[i]._id) {
+          booksSource.push([
+            this.state.books[i],
+            this.state.bookCart[bookId],
+          ]);
+        }
+      }
+    }
+    return booksSource;
+  };
+
   render() {
-    // this.updateIteration();
     return (
       <div class="py-6 bg-gainsboro">
         <Grid item xs={12}>
@@ -278,7 +312,7 @@ class MainCart extends Component {
           <div
             className={`flex justify-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 flex-row flex-wrap sm:mb-20 mb-6`}
           >
-            {this.getKeys().map(([book, qty]) => (
+            {this.mapper().map(([book, qty]) => (
               <div
                 className={`flex-1 flex justify-start items-center flex-row m-3`}
               >
