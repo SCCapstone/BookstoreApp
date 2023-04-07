@@ -26,19 +26,19 @@ function clearCart() {
   localStorage.removeItem("booksCartNames"); 
 }
 
-const NavBar = ({ user, items, isLoggedIn }) => { // add isLoggedIn prop to indicate if the user is logged in
+const NavBar = ({ user, items, isLoggedIn }) => { // add isLoggedIn prop to see if the user is logged in
   const navigate = useNavigate();
   const [shoppingCartQuantity, setShoppingCartQuantity] = useState(0);
 
   useEffect(() => {
-    if (val && isLoggedIn) { // update useEffect to check if val has a value and the user is logged in
+    if (val && isLoggedIn) { // update the useEffect to check if val has a value and if the user is logged in
       setShoppingCartQuantity(val);
     }
   }, [isLoggedIn]);
 
   useEffect(() => {
     if (!isLoggedIn) {
-      clearCart(); // clear cart when user logs out
+      clearCart(); // clear the cart when user is logged out
       setShoppingCartQuantity(0);
     }
   }, [isLoggedIn]);
@@ -57,7 +57,7 @@ const NavBar = ({ user, items, isLoggedIn }) => { // add isLoggedIn prop to indi
             </a>
           </span>
           <div class="flex md:order-2 grid grid-cols-5">
-            {isLoggedIn && ( // render cart icon only if user is logged in
+            {isLoggedIn && ( // show the cart icon only if user is logged in
               <Badge
                 badgeContent={val}
                 color="primary"
