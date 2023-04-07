@@ -34,7 +34,6 @@ class MainCart extends Component {
 
     // check cart
     const bookIds = this.getKeys(bookCart);
-    console.log(bookIds);
     if (this.bookIds?.length <= 0) {
       console.log('THERE ARE NO BOOKS IN CART');
       return;
@@ -42,10 +41,8 @@ class MainCart extends Component {
 
     // get the books
     const bookUrl = "/api/books/" + bookIds;
-    console.log(bookUrl);
     await axios.get(bookUrl).then((res) => {
       let books = res.data;
-      console.log(books);
       this.setState((state) => ({
         books: books,
       }));
@@ -114,7 +111,7 @@ class MainCart extends Component {
     if (!this.canPurchaseBooks()) return;
 
     var order = {
-      orderId: this.state.user._id,
+      userId: this.state.user._id,
       order: this.state.bookCart,
       orderPrice: this.calculatePrice(),
       orderDate: new Date(),
@@ -125,7 +122,6 @@ class MainCart extends Component {
     try {
       const orderUrl = "/api/orders";
       axios.post(orderUrl, order).then((res) => {
-        console.log(res.status);
         // if order successfully went through, empty out cart
         this.clearCart();
       });
@@ -151,7 +147,7 @@ class MainCart extends Component {
       const usr = { balance: updatedBalance };
       axios.put(url, usr).then((res) => {
         let tempUser = this.state.user;
-        tempUser.balance = updatedBalance;
+        tempUser.balance = Number(updatedBalance);
         this.setState((state) => ({
           user: tempUser,
         }));
@@ -170,14 +166,20 @@ class MainCart extends Component {
       
     // TO-DO: Step 3: Update Each Book's Quantity Sold
 
-    window.location.reload();
+    //window.location.reload();
   }
 
   // getting user balance
   availableBalance = () => {
     try {
       if (this.state.user && this.state.user !== 0) {
-        return round(this.state.user.balance.$numberDecimal, 2);
+        let balance = 0;
+        if (this.state.user.balance > 0) {
+          balance = this.state.user.balance;
+        } else if (this.state.user.balance.$numberDecimal !== "") {
+          balance = this.state.user.balance.$numberDecimal;
+        } 
+        return round(balance, 2);
       } else {
         return 0;
       }
@@ -230,13 +232,10 @@ class MainCart extends Component {
   };
 
   removeBookItem = (book) => {
-    console.log(book);
     var tmp = this.state.booksCartNames;
     delete tmp[book.title];
-    console.log(tmp);
     var tmp2 = this.state.bookCart;
     delete tmp2[book._id];
-    console.log(tmp2);
     localStorage.setItem("booksCartNames", JSON.stringify(tmp));
     localStorage.setItem("book_cart", JSON.stringify(tmp2));
     this.setState((state) => ({
