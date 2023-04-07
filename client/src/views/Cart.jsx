@@ -19,7 +19,6 @@ class MainCart extends Component {
     super(props);
     this.state = {
       books: [],
-      booksCartNames: [],
       bookCart: [],
       user: {},
       currentUser: "",
@@ -28,10 +27,6 @@ class MainCart extends Component {
 
   async componentDidMount() {
     // setting books cart
-    var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
-    this.setState((state) => ({
-      booksCartNames: booksCartNames,
-    }));
     var bookCart = JSON.parse(localStorage.getItem("book_cart"));
     this.setState((state) => ({
       bookCart: bookCart
@@ -125,9 +120,6 @@ class MainCart extends Component {
       orderDate: new Date(),
       orderStatus: "In-Progress"
     };
-    console.log(this.state.booksCartNames);
-    console.log(this.state.bookCart);
-    console.log(order);
 
     // Step 1: Add new order to orders
     try {
@@ -216,7 +208,7 @@ class MainCart extends Component {
 
   setQtyValue = ([book, value]) => {
     if (this.checkCartUpdate([book, value])) {
-      var tmp = this.state.booksCartNames;
+      var tmp = JSON.parse(localStorage.getItem("booksCartNames"));
       tmp[book.title] = value;
       console.log(tmp);
       var tmp2 = this.state.bookCart;
@@ -225,7 +217,6 @@ class MainCart extends Component {
       localStorage.setItem("booksCartNames", JSON.stringify(tmp));
       localStorage.setItem("book_cart", JSON.stringify(tmp2));
       this.setState((state) => ({
-        booksCartNames: tmp,
         bookCart: tmp2
       }));
     }
@@ -249,7 +240,6 @@ class MainCart extends Component {
     localStorage.setItem("booksCartNames", JSON.stringify(tmp));
     localStorage.setItem("book_cart", JSON.stringify(tmp2));
     this.setState((state) => ({
-      booksCartNames: tmp,
       bookCart: tmp2
     }));
   };
@@ -260,7 +250,6 @@ class MainCart extends Component {
 
     // window.location.reload(false);
     this.setState((state) => ({
-      booksCartNames: [],
       bookCart: {}
     }));
   };
