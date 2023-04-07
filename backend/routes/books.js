@@ -56,7 +56,6 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(req.body);
     const book = await Book.findById(id);
     // we only need to be able to put in new reviews
     // we don't need to be able (necessarily, though it would be nice)
