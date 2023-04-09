@@ -113,13 +113,13 @@ class AddBook extends Component {
   render() {
     return this.isLoggedIn() ? (
       <Grid container spacing={2}>
-        <Grid item xs={12} className="justify-center py-5">
-          <span class="text-center px-16 py-16 text-lg">Add Book</span>
+        <Grid item xs={12} className="justify-center py-5" style={{ fontSize: 27 }}>
+          <span class="text-center px-16 py-16 text-lg" style={{ fontSize: 27 }}>Add Book</span>
         </Grid>
-        <Grid item xs={6}></Grid>
+        <Grid item xs={1}></Grid>
         <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
           <form>
-            <Grid item ms={12} class="pb-3">
+            <Grid item ms={1} class="pb-3">
               <TextField
                 variant="filled"
                 required
@@ -129,7 +129,7 @@ class AddBook extends Component {
                 value={this.state.title}
                 onChange={this.handleChange}
               />
-            </Grid>
+            </Grid >
             <h2>Choose an image for the book *</h2>
             <FileBase64
               type="file"
