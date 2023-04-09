@@ -145,7 +145,7 @@ class AddBook extends Component {
               value={this.state.author}
               onChange={this.handleChange}
             />
-            <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
+            <FormControl variant="filled" required>
               <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
               <FilledInput
                 startAdornment={
