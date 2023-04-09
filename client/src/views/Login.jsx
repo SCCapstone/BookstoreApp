@@ -5,6 +5,9 @@ import Button from '@mui/material/Button';
 import { TextField } from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import swal from "sweetalert2";
+import emailjs from "@emailjs/browser";
+import { v4 as uuidv4 } from 'uuid';
 
 {/* The Login Page is where users will login with their registered email and password.
 If a user does not have a login credential they will click on the register button to get navigated to a sign up/register page
@@ -47,6 +50,7 @@ const Login = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userType", res.data.userType);
+      localStorage.setItem("role", res.data.role);
       localStorage.setItem("userID", res.data.userID);
       //set initially to the home 
       window.location = "/";
@@ -59,7 +63,68 @@ const Login = () => {
     }
   };
 
-  //once event happens click to re-route
+  const openForgotPassword = async () => {
+    swal.fire({
+      title: "Send email to retrieve your password?",
+      input: 'email',
+      inputLabel: 'Your email address',
+      inputPlaceholder: 'Enter your email address',
+      confirmButtonText: "Send Email",
+      showCancelButton: true,
+    }).then((result) => {
+      console.log(result);
+      if (!result.isConfirmed || result.value?.length <= 0) {
+        swal.fire(
+          'Email failure!',
+          `Failed to send email`,
+          'error'
+        );
+        return;
+      }
+      const email = result.value;
+      try {
+        const url = `/api/users/email/${email}`;
+        console.log(url);
+        axios.get(url).then((res) => {
+          res.data.updatePasswordToken = uuidv4();
+          const putURL = '/api/users/' + res.data._id;
+          axios.put(putURL, res.data).then(
+            emailjs.send(
+              "service_trb6232",
+              "template_jetptvm",
+              {
+                pw_link: "http://bookstore-app.herokuapp.com/forgot/" + res.data.updatePasswordToken,
+                to_email: email,
+                to_name: res.data.firstName,
+              },
+              "0v71YVpIY79kGX06h"
+            ).then(
+              swal.fire(
+                'Email successfully sent',
+                "Check your email for the link to reset your password",
+                'success'
+              )
+            )
+          ).catch((error) => {
+            console.log(error);
+          })
+        }).catch((error) => {
+          if (error.response.status === 404) {
+            swal.fire(
+              'Email failure!',
+              "There is no user with that email address.",
+              'error'
+            );
+          } 
+          console.log(error);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      
+    })
+  };
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -125,8 +190,8 @@ const Login = () => {
               </Button>
 
               <Button
-                href="/forgot-password"
                 class="text-slate-800 h-13 font-semibold hover:text-black bg-polished_pine rounded p-3 border-2"
+                onClick={(openForgotPassword)}
               >
                 Forgot Password?
               </Button>

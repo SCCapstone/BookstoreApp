@@ -1,11 +1,11 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import ReactStars from "react-stars";
 import Heart from "react-heart";
-import { Grid, Chip, Avatar } from "@mui/material";
+import { Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 import swal from "sweetalert2";
-import { cartChange } from "../components/NavBar/NavBar";
+import axios from "axios";
 
 function getKeys(obj) {
   var keys = [];
@@ -26,8 +26,8 @@ function iterate(iterable, callback) {
   }
 }
 
-const BooksPageGenerator = ({ book }) => {
-  const [quantity, setQuantity] = useState(1);
+const BooksPageGenerator = ({ book, user }) => {
+  const [quantity, setQuantity] = useState(0);
 
   function addItem(book, quantity) {
     var books_cart = JSON.parse(localStorage.getItem("books_cart"));
@@ -61,8 +61,17 @@ const BooksPageGenerator = ({ book }) => {
     window.location.reload(false);
   }
 
-  function add(quantity) {
-    setQuantity(quantity + 1);
+  function add(qty) {
+    var books = JSON.parse(localStorage.getItem("booksCartNames"));
+    if (books == null) {
+      books = {};
+    }
+    if (
+      book.stock - books[book.title] > qty ||
+      (!books[book.title] && book.stock - quantity > 0)
+    ) {
+      setQuantity(qty + 1);
+    }
   }
 
   function subtract(quantity) {
@@ -71,12 +80,59 @@ const BooksPageGenerator = ({ book }) => {
     }
   }
 
+  function countBookQuantity() {
+    var books = JSON.parse(localStorage.getItem("booksCartNames"));
+    return book.stock - books[book.title];
+  }
+
   const [active, setActive] = useState(false);
+
+  React.useEffect(() => {
+    const url = "/api/users/" + user;
+    axios.get(url).then((response) => {
+      const userFavs = response.data.favorites;
+      const isActive = userFavs.includes(book._id);
+      setActive(isActive);
+    });
+  }, []);
+
+  function addOrRemoveFromWishlist() {
+    // don't do anything if not logged-in
+    if (!user || user.length === 0) return;
+
+    const url = "/api/users/" + user;
+    const tempUser = {
+      favorites: book._id,
+    };
+
+    if (active) {
+      // deleting from wishlist
+      axios.put(url, tempUser).then((res) => {
+        if (res.status === 200) {
+          swal.fire({
+            icon: "success",
+            title: "Successfully Removed from wishlist",
+          });
+        }
+      });
+    } else {
+      // adding to wishlist
+      axios.put(url, tempUser).then((res) => {
+        if (res.status === 200) {
+          swal.fire({
+            icon: "success",
+            title: "Successfully Added to Wishlist",
+          });
+        }
+      });
+    }
+    setActive(!active);
+  }
 
   return (
     <section class="grid grid-cols-5 max-w-[1300px]">
       <div />
-      <div className="py-4 col-span-3">
+      <div className="py-4 col-span-4">
         <div class="grid text-center text-black text-3xl py-3 max-w-[1300px]">
           {book.title} by {book.author}
         </div>
@@ -102,13 +158,15 @@ const BooksPageGenerator = ({ book }) => {
                 <Heart
                   style={{ width: "20px" }}
                   isActive={active}
-                  onClick={() => setActive(!active)}
-                  activeColor={"#404252"}
+                  onClick={() => addOrRemoveFromWishlist()}
+                  activeColor={"#70161E"}
                 />
               </span>
             </ul>
             <u>
-              <a href={`/${book.author}/${book.title}/reviews`}>View Reviews of the Book here!</a>
+              <a href={`/${book.author}/${book.title}/reviews`}>
+                View Reviews of the Book here!
+              </a>
             </u>
 
             <div className="flex pb-2 pt-2">
@@ -138,6 +196,9 @@ const BooksPageGenerator = ({ book }) => {
             </div>
             <ul className="row-span-6" />
           </div>
+        </div>
+        <div className="grid text-left text-black text-xl py-3 pr-14 mr-14 max-w-[2000px]">
+          {book.summary}
         </div>
       </div>
     </section>

@@ -1,6 +1,8 @@
 import  React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import { v4 as uuidv4 } from 'uuid';
+import emailjs from "@emailjs/browser"; 
 
 const SignUp = () => {
   const [data, setData] = useState({
@@ -10,6 +12,10 @@ const SignUp = () => {
     password: "",
     role: "customer",
     balance: 0,
+    favorites: [],
+    verifyEmailToken: "",
+    updatePasswordToken: "nahfam",
+    emailVerified: false
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -24,12 +30,23 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    data.verifyEmailToken = uuidv4();
     try {
       const url = "/api/users";
-      console.log(data);
+      const form = {
+        to_name: data.firstName + " " + data.lastName,
+        to_email: data.email,
+        link: "http://bookstore-app.herokuapp.com/validate/" + data.verifyEmailToken,
+      };
       const res = await axios.post(url, data);
-      navigate("/login");
-      console.log(res.message);
+      emailjs.send(
+        "service_ddw3f6r",
+        "template_pkc6crh",
+        form,
+        "MEck6kXn4BPEa6daF"
+      ).then(
+        navigate("/login")
+      );
     } catch (error) {
       console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {

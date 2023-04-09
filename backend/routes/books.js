@@ -5,7 +5,27 @@ router.get("/", async (req, res) => {
   try {
     Book.find({}, function (err, books) {
       res.send(books);
+      // console.log(books);
     });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/:ids", async (req, res) => {
+  const { ids } = req.params;
+  splitIds = ids.split(",");
+  try {
+    Book.find(
+      {
+        _id: {
+          $in: splitIds,
+        },
+      },
+      function (err, books) {
+        res.send(books);
+      }
+    );
   } catch (error) {
     console.log(error);
   }
