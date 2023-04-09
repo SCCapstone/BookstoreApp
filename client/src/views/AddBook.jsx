@@ -112,15 +112,16 @@ class AddBook extends Component {
 
   render() {
     return this.isLoggedIn() ? (
-      <Grid container spacing={2}>
-        <Grid item xs={12} className="justify-center py-5" style={{ fontSize: 27 }}>
-          <span class="text-center px-16 py-16 text-lg" style={{ fontSize: 27 }}>Add Book</span>
+      <Grid container spacing={2} fullWidth sx={{ m: 1 }}>
+        <Grid item xs={12} className="justify-center py-5">
+          <span class="text-center px-16 py-16 text-lg">Add Book</span>
         </Grid>
-        <Grid item xs={1}></Grid>
-        <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
+        <Grid item xs={6}></Grid>
+        <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6" fullWidth sx={{ m: 1 }}>
           <form>
-            <Grid item ms={1} class="pb-3">
+            <Grid item ms={12} class="pb-3">
               <TextField
+                fullWidth sx={{ m: 1 }}
                 variant="filled"
                 required
                 label="Title"
@@ -129,14 +130,17 @@ class AddBook extends Component {
                 value={this.state.title}
                 onChange={this.handleChange}
               />
-            </Grid >
-            <h2>Choose an image for the book *</h2>
-            <FileBase64
-              type="file"
-              multiple={false}
-              onDone={({ base64 }) => (this.state.imageId = base64)}
-            />
+            </Grid>
+            <Grid fullWidth sx={{ m: 1 }}>
+              <h2>Choose an image for the book*</h2>
+              <FileBase64
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) => (this.state.imageId = base64)}
+              />
+            </Grid>
             <TextField
+              fullWidth sx={{ m: 1 }}
               variant="filled"
               required
               label="Author"
@@ -145,7 +149,7 @@ class AddBook extends Component {
               value={this.state.author}
               onChange={this.handleChange}
             />
-            <FormControl variant="filled" required>
+            <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
               <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
               <FilledInput
                 startAdornment={
@@ -159,6 +163,7 @@ class AddBook extends Component {
               />
             </FormControl>
             <TextField
+              fullWidth sx={{ m: 1 }}
               variant="filled"
               required
               label="Summary"
@@ -187,6 +192,7 @@ class AddBook extends Component {
               options={this.potentialGenres}
               renderInput={(params) => (
                 <TextField
+                  fullWidth sx={{ m: 1 }}
                   {...params}
                   variant="filled"
                   label="Genres"
@@ -198,6 +204,7 @@ class AddBook extends Component {
               <Chip
                 avatar={
                   <Avatar
+                    fullWidth sx={{ m: 1 }}
                     onClick={() =>
                       this.handleChange({
                         target: { name: "stock", value: this.state.stock - 1 },
@@ -227,14 +234,17 @@ class AddBook extends Component {
               </button>
             </div>
 
-            <div class="text-center lg:text-left grid pb-6">
-              <Button
-                class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
-                onClick={this.submit}
-              >
-                SUBMIT
-              </Button>
-            </div>
+            <Grid fullWidth sx={{ m: 1 }}>
+              <div class="text-center lg:text-left grid pb-6">
+                <Button
+                  fullWidth sx={{ m: 1 }}
+                  class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
+                  onClick={this.submit}
+                >
+                  SUBMIT
+                </Button>
+              </div>
+            </Grid>
           </form>
         </Grid>
       </Grid>
