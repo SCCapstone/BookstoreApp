@@ -132,7 +132,7 @@ const BooksPageGenerator = ({ book, user }) => {
   return (
     <section class="grid grid-cols-5 max-w-[1300px]">
       <div />
-      <div className="py-4 col-span-3">
+      <div className="py-4 col-span-4">
         <div class="grid text-center text-black text-3xl py-3 max-w-[1300px]">
           {book.title} by {book.author}
         </div>
@@ -196,6 +196,9 @@ const BooksPageGenerator = ({ book, user }) => {
             </div>
             <ul className="row-span-6" />
           </div>
+        </div>
+        <div className="grid text-left text-black text-xl py-3 pr-14 mr-14 max-w-[2000px]">
+          {book.summary}
         </div>
       </div>
     </section>
