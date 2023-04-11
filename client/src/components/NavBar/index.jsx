@@ -50,33 +50,6 @@ const CompleteNavbar = () => {
     fetchUsers();
   }, []);
 
-  // function clear_cart() {
-  //   localStorage.setItem("books_cart", JSON.stringify([]));
-  //   localStorage.setItem("booksCartNames", JSON.stringify({}));
-
-  //   window.location.reload(false);
-  // }
-  // console.log(localStorage.getItem("books_cart"));
-  // console.log(localStorage.getItem("booksCartNames"));
-
-  // if (
-  //   !localStorage.getItem("books_cart") ||
-  //   !localStorage.getItem("booksCartNames")
-  // ) {
-  //   clear_cart();
-  //   console.log("Cart Initialized");
-  // }
-  // const saveBooksToLocalStorage = () => {
-  //   if (books.length !== 0) {
-  //     //this line is new
-  //     localStorage.setItem("booksFromTheDatabase", JSON.stringify(books));
-  //   }
-  // };
-  // saveBooksToLocalStorage();
-  // console.log(books);
-
-  // const items = JSON.parse(localStorage.getItem('cartItemsQuantity'));
-
   return (
     <div className="pt-16 bg-gainsboro">
       <div className="flex">

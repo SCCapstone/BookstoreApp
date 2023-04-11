@@ -10,7 +10,7 @@ const bookSchema = new mongoose.Schema({
   stars: { type: Number, required: true },
   summary: { type: String, required: true },
   imageId: { type: String, required: true },
-  quantitySold: { type: String, required: false },
+  quantitySold: { type: Number, required: false },
   reviews: { type: Array, required: false, default: [] },
   genre: { type: Array, required: true },
   dateAdded: { type: Date, required: false },
