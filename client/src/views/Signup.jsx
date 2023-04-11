@@ -1,6 +1,7 @@
 import  React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import emailjs from "@emailjs/browser"; 
 
@@ -33,6 +34,15 @@ const SignUp = () => {
     data.verifyEmailToken = uuidv4();
     try {
       const url = "/api/users";
+      console.log(data);
+      const compexP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+      if(!compexP.test(data.password)) {
+        swal.fire({
+          icon: "Error",
+          title: "Password must be at least 8 characters and include a combination of letters, numbers, and special characters!'",
+        });
+        throw Error("Password must be at least 8 characters and include a combination of letters, numbers, and special characters!");
+      }
       const form = {
         to_name: data.firstName + " " + data.lastName,
         to_email: data.email,
