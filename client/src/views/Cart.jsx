@@ -150,16 +150,38 @@ class MainCart extends Component {
         console.log(error.response.data.message);
         swal.fire({
           icon: "error",
-          title: "Error updating user balanace",
+          title: "Error updating user balance",
           text: error.response.data.message,
         });
       }
       return;
     }
       
-    // TO-DO: Step 3: Update Each Book's Quantity Sold
+    // Step 3: Update Each Book's Quantity Sold
+    for (let bookId in order.order) {
+      try {
+        const url = "api/books/" + bookId;
+        const newBook = {
+          quantitySold: order.order[bookId]
+        };
+        // TO-DO: Update stock as well 
+        axios.put(url, newBook).catch((e) => {
+          swal.fire({
+            icon: "error",
+            title: "Error updating book data",
+            text: "Quantity of that book sold improperly updated"
+          });
+        })
+      } catch {
+        swal.fire({
+          icon: "error",
+          title: "Error updating book data",
+          text: "Quantity of that book sold improperly updated"
+        });
+      }
+    }
 
-    //window.location.reload();
+    window.location.reload();
   }
 
   // getting user balance
