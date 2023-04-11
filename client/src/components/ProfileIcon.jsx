@@ -21,6 +21,7 @@ export default function ProfileIcon(currentUser) {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (currentUser?.currentUser === null) return;
       const url = "/api/users/" + currentUser.currentUser;
       let res = await axios.get(url);
       res.data.password = "";
@@ -110,7 +111,7 @@ export default function ProfileIcon(currentUser) {
           <li>
             <a
               href="/my_account"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-black"
             >
               Manage Account
             </a>
@@ -121,7 +122,7 @@ export default function ProfileIcon(currentUser) {
           <li>
             <a
               href="/cart"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-black"
             >
               Cart & Earnings
             </a>
@@ -132,9 +133,9 @@ export default function ProfileIcon(currentUser) {
           <li>
             <a
               href="/favorites"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-black"
             >
-              Favorites
+              Wishlist
             </a>
           </li>
         </MenuItem>
@@ -143,7 +144,7 @@ export default function ProfileIcon(currentUser) {
           <li>
           <a
               href="/"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-black"
             >
               Logout
             </a>

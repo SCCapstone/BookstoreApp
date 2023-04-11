@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { Fragment } from "react";
 import UserRow from "../components/UserRow";
+import { Pagination } from "@mui/material";
 
 export default class ValidatedUsers extends React.Component {
   state = {
     currentUser: "",
     users: [],
+    pageSize: 12,
+    currentPage: 1
   };
 
   async getValidatedUsers() {
@@ -63,6 +66,18 @@ export default class ValidatedUsers extends React.Component {
     window.location.href = "/login";
   };
 
+  changePage = (e, p) => {
+    this.setState((state) => ({
+      currentPage: p,
+    }));
+  };
+
+  getPaginatedUsers(currentPage) {
+    const firstPageIndex = (currentPage-1) * this.state.pageSize;
+    const lastPageIndex = firstPageIndex + this.state.pageSize;
+    return this.state.users.slice(firstPageIndex, lastPageIndex);
+  };
+
   render() {
     return this.isLoggedIn() ? (
       <div className="bg-gainsboro">
@@ -94,7 +109,7 @@ export default class ValidatedUsers extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.users.map((user) => (
+              {this.getPaginatedUsers(this.state.currentPage).map((user) => (
                 <UserRow
                   contact={user}
                   handleDelete={this.deleteUser}
@@ -104,6 +119,11 @@ export default class ValidatedUsers extends React.Component {
               ))}
             </tbody>
           </table>
+          <Pagination
+            count={Math.ceil(this.state.users.length / this.state.pageSize)}
+            page={this.state.currentPage}
+            onChange={this.changePage}
+          />
         </div>
       </div>
     ) : (
