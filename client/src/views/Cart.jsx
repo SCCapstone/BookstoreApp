@@ -232,7 +232,7 @@ class MainCart extends Component {
   };
 
   removeBookItem = (book) => {
-    var tmp = this.state.booksCartNames;
+    var tmp = JSON.parse(localStorage.getItem("booksCartNames"));
     delete tmp[book.title];
     var tmp2 = this.state.bookCart;
     delete tmp2[book._id];
@@ -241,6 +241,7 @@ class MainCart extends Component {
     this.setState((state) => ({
       bookCart: tmp2
     }));
+    window.location.reload(false);
   };
 
   clearCart = () => {
