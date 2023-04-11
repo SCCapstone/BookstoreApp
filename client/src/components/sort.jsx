@@ -19,9 +19,6 @@ const sort = (books, selection) => {
   var books_changed = [];
 
   switch (selection) {
-    case "Relevent":
-      books_changed = books;
-      break;
     case "Best Selling":
       books_changed = books.sort(function (a, b) {
         return Number(b.quantitySold) - Number(a.quantitySold);
