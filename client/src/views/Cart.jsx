@@ -35,7 +35,6 @@ class MainCart extends Component {
     // check cart
     const bookIds = this.getKeys(bookCart);
     if (this.bookIds?.length <= 0) {
-      console.log('THERE ARE NO BOOKS IN CART');
       return;
     }
 
@@ -51,24 +50,19 @@ class MainCart extends Component {
     // user login
     try {
       const currentUser = localStorage.getItem("userID");
-      // console.log(currentUser);
       if (currentUser && currentUser != null) {
         const userURL = "/api/users/" + localStorage.getItem("userID");
 
         await axios.get(userURL).then(async (res) => {
           if (res.status === 200) {
             let user = res.data;
-            // console.log(user);
             await this.setState((state) => ({
               user: user,
               currentUser: currentUser,
             }));
-            // console.log(this.state.user);
           }
         });
-      } else {
-        console.log("USER NEED TO LOGIN");
-      }
+      } 
     } catch (error) {
       console.log("USER NEED TO LOGIN");
     }
@@ -83,7 +77,6 @@ class MainCart extends Component {
         text: "User need to login!",
         footer: "<a href='/login'>Login</a>",
       });
-      console.log("USER NEED TO LOGIN");
       return false;
     }
 
@@ -212,10 +205,8 @@ class MainCart extends Component {
     if (this.checkCartUpdate([book, value])) {
       var tmp = JSON.parse(localStorage.getItem("booksCartNames"));
       tmp[book.title] = value;
-      console.log(tmp);
       var tmp2 = this.state.bookCart;
       tmp2[book._id] = value;
-      console.log(tmp2);
       localStorage.setItem("booksCartNames", JSON.stringify(tmp));
       localStorage.setItem("book_cart", JSON.stringify(tmp2));
       this.setState((state) => ({
