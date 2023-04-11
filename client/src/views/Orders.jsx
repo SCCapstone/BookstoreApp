@@ -2,20 +2,26 @@ import axios from "axios";
 import React, { Fragment } from "react";
 import swal from "sweetalert2";
 import OrdersRow from "../components/OrdersRow";
+import { Pagination } from "@mui/material";
 
 export default class Orders extends React.Component {
   state = {
     orders: [],
+    pageSize: 12,
+    currentPage: 1
   };
 
   async getOrders() {
     const url = "/api/orders";
     axios.get(url).then((res) => {
-      const orders = res.data;
-      // console.log(orders);
+      const orders = res.data.reverse();
       this.setState({ orders: orders });
     });
-  }
+  };
+
+  componentDidMount() {
+    this.getOrders();
+  };
 
   async editOrder(order, orderStatus) {
     const id = order._id;
@@ -26,42 +32,36 @@ export default class Orders extends React.Component {
     } catch (error) {
       console.log("Error: ", error);
     }
-  }
+  };
 
-  async deletOrder(order) {
+  async deleteOrder(order) {
     const id = order._id;
     const url = "/api/orders/" + id;
     try {
-      // console.log(orderStatus);
       var tmpOrder = { delete: "DELETE" };
       await axios.delete(url, tmpOrder);
       window.location.reload();
     } catch (error) {
       console.log("Error: ", error);
     }
-  }
+  };
 
-  componentDidMount() {
-    this.getOrders();
-  }
-
-  // sendToLogin = () => {
-  //   if (this.props.currentUser === "customer") {
-  //     swal.fire({
-  //       icon: "error",
-  //       title: "User cannot access orders",
-  //       text: "Please update your permission level",
-  //     });
-  //     return;
-  //   } else {
-  //     window.location.href = "/login";
-  //   }
-  // };
   isLoggedIn = () => {
     const currentUser = this.props.currentUser;
     return currentUser && currentUser.length !== 0 ;
   };
 
+  changePage = (e, p) => {
+    this.setState((state) => ({
+      currentPage: p,
+    }));
+  };
+
+  getPaginatedOrders(currentPage) {
+    const firstPageIndex = (currentPage-1) * this.state.pageSize;
+    const lastPageIndex = firstPageIndex + this.state.pageSize;
+    return this.state.orders.slice(firstPageIndex, lastPageIndex);
+  }
 
   render() {
     return this.isLoggedIn() ? (
@@ -91,15 +91,20 @@ export default class Orders extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.orders.map((order) => (
+              {this.getPaginatedOrders(this.state.currentPage).map((order) => (
                 <OrdersRow
                   order={order}
                   handleUpdate={this.editOrder}
-                  handleDelete={this.deletOrder}
+                  handleDelete={this.deleteOrder}
                 />
               ))}
             </tbody>
           </table>
+          <Pagination
+            count={Math.ceil(this.state.orders.length / this.state.pageSize)}
+            page={this.state.currentPage}
+            onChange={this.changePage}
+          />
         </div>
       </div>
     ) : (
@@ -112,5 +117,5 @@ export default class Orders extends React.Component {
       )
       // )
     );
-  }
+  };
 }
