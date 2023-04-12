@@ -80,7 +80,7 @@ export default class Favorites extends Component {
     render() {
         return this.anyFavorites() ? (
             <div class="py-6">
-                <div class="py-4">
+                <div class="sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1150px] xl:max-w-[1200px] max-w-[200px]">
                     <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
                     Wishlist
                     </div>
