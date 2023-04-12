@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import books from "./Books.js";
 
 export default class Favorites extends Component {
     constructor(props) {
@@ -33,7 +32,7 @@ export default class Favorites extends Component {
         await axios.get(bookUrl).then(res => {
             let favoriteBooks = res.data;
             if (!res.data || res.data.length === 0) {
-                favoriteBooks = books;
+                favoriteBooks = [];
             }
 
             this.setState((state) => ({
