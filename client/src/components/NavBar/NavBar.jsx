@@ -1,7 +1,9 @@
 import { React, useState, useEffect, Link } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
+
 import navbar_logo from "../NavBar/navbar_logo.jpg"
+
 import { ButtonGroup, Button, AddIcon, RemoveIcon } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
@@ -20,28 +22,15 @@ function findQuantity(booksCartNames) {
   return count;
 }
 
-function clearCart() {
-  localStorage.removeItem("booksCartNames"); 
-}
-
-const NavBar = ({ user, items, isLoggedIn}) => {
+const NavBar = ({ user, items }) => {
   const navigate = useNavigate();
   const [shoppingCartQuantity, setShoppingCartQuantity] = useState(0);
 
   useEffect(() => {
-    if (val && isLoggedIn) {
+    if (val) {
       setShoppingCartQuantity(val);
-    } else {
-      clearCart();
     }
-  }, [isLoggedIn]);
-
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     clearCart(); // clear the cart when user is logged out
-  //     setShoppingCartQuantity(0);
-  //   }
-  // }, [isLoggedIn]);
+  }, []);
 
   return (
     <div>
