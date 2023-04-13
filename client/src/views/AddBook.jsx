@@ -166,18 +166,18 @@ class AddBook extends Component {
                 />
               </FormControl>
               <details>
-                <TextField
-                  fullWidth sx={{ m: 1 }}
-                  variant="filled"
-                  required
-                  label="Summary"
-                  placeholder="Summary"
-                  name="summary"
-                  value={this.state.summary}
-                  multiline
-                  rows={3}
-                  onChange={this.handleChange}
-                />
+                  <TextField
+                    fullWidth sx={{ m: 1 }}
+                    variant="filled"
+                    required
+                    label="Summary"
+                    placeholder="Summary"
+                    name="summary"
+                    value={this.state.summary}
+                    multiline
+                    rows={3}
+                    onChange={this.handleChange}  
+                  />
               </details>
               <Autocomplete
                 multiple
