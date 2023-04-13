@@ -138,8 +138,10 @@ class AddBook extends Component {
                 <h2>Choose an image for the book*</h2>
                 <FileBase64
                   type="file"
+                  name="myImage" 
+                  accept="image/png, image/gif, image/jpeg"
                   multiple={false}
-                  onDone={({ base64 }) => (this.state.imageId = base64)}
+                  onDone={({ base64 }) => (this.state.accept.imageId = base64)}
                 />
               </Grid>
               <TextField
@@ -165,7 +167,8 @@ class AddBook extends Component {
                   onChange={this.handleChange}
                 />
               </FormControl>
-              <details>
+              <details open>
+                <ul>
                   <TextField
                     fullWidth sx={{ m: 1 }}
                     variant="filled"
@@ -178,6 +181,7 @@ class AddBook extends Component {
                     rows={3}
                     onChange={this.handleChange}  
                   />
+                </ul>
               </details>
               <Autocomplete
                 multiple
