@@ -30,6 +30,9 @@ const EmployeeHomepage = () => {
         try {
             const response = await axios.post("/api/events", newEvent);
             setEvents([...events, response.data]);
+            event.target.eventTitle.value = ""; // clear event title
+            event.target.eventStart.value = ""; // clear event start date
+            event.target.eventEnd.value = ""; // clear event end date
             swal.fire({
                 icon: "success",
                 title: 'Successfully added the event',
