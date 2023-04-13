@@ -34,8 +34,7 @@ export default function ProfileIcon(currentUser) {
     localStorage.removeItem("token");
     localStorage.removeItem("userType");
     localStorage.removeItem("userID");
-    localStorage.removeItem("book_cart");
-    localStorage.removeItem("booksCartNames");
+    localStorage.removeItem("userInitials"); // remove the user initials from local storage when log out
     window.location.reload();
     window.location.href = "/";
     console.log("logout");
@@ -55,7 +54,18 @@ export default function ProfileIcon(currentUser) {
     } else {
       initials = "##";
     }
-    return initials.toUpperCase();
+    initials = initials.toUpperCase();
+  
+    // Check if the initials are in local storage
+    let storedInitials = localStorage.getItem("userInitials");
+    if (storedInitials && storedInitials === initials) {
+      // If the stored initials match, return the stored initials
+      return storedInitials;
+    } else {
+      // If the stored initials do not match, store the computed initials in local storage and return it
+      localStorage.setItem("userInitials", initials);
+      return initials;
+    }
   }
 
   return isLoggedIn() ? (
