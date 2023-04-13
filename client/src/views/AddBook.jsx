@@ -139,7 +139,7 @@ class AddBook extends Component {
                 <FileBase64
                   type="file"
                   name="myImage" 
-                  accept="image/png, image/gif, image/jpeg"
+                  accept="image/png, image/jpeg"
                   multiple={false}
                   onDone={({ base64 }) => (this.state.accept.imageId = base64)}
                 />
