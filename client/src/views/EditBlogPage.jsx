@@ -48,9 +48,8 @@ const EditBlogpage = () => {
   const handleDelete = async (id, index) => {
     try {
       await axios.delete(`/api/blogs/${id}`);
-      const newBlogPosts = [...blogPosts];
-      newBlogPosts.splice(index, 1);
-      setBlogPosts(newBlogPosts);
+      const response = await axios.get("/api/blogs");
+      setBlogPosts(response.data);
       setBlogPost("");
       setBlogTitle("");
       setSubmitted(false);
