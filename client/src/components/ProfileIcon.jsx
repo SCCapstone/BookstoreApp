@@ -31,12 +31,14 @@ export default function ProfileIcon(currentUser) {
   },[]);
 
   const logout = () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("userType");
-      localStorage.removeItem("userID");
-      window.location.reload();
-      window.location.href = "/";
-      console.log("logout");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("userID");
+    localStorage.removeItem("book_cart");
+    localStorage.removeItem("booksCartNames");
+    window.location.reload();
+    window.location.href = "/";
+    console.log("logout");
   };
   
   const isLoggedIn = () => {

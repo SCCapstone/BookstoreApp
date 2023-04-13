@@ -19,17 +19,14 @@ const sort = (books, selection) => {
   var books_changed = [];
 
   switch (selection) {
-    case "Relevent":
-      books_changed = books;
-      break;
     case "Best Selling":
       books_changed = books.sort(function (a, b) {
-        return b.quantitySold - a.quantitySold;
+        return Number(b.quantitySold) - Number(a.quantitySold);
       });
       break;
     case "New Arrivals":
       books_changed = books.sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date);
+        return (b.dateAdded > a.dateAdded) ? 1 : -1;
       });
       break;
     case "Price: low to high":

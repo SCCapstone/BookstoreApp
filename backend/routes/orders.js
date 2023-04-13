@@ -36,13 +36,11 @@ router.put("/:id", async (req, res) => {
     }
     await order.save();
 
-    
     res.send("Updated order status!");
   } catch (error) {
     console.log(error);
   }
 });
-
 
 router.delete("/:id", async (req, res) => {
   try {

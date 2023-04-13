@@ -30,6 +30,9 @@ const EmployeeHomepage = () => {
         try {
             const response = await axios.post("/api/events", newEvent);
             setEvents([...events, response.data]);
+            event.target.eventTitle.value = ""; // clear event title
+            event.target.eventStart.value = ""; // clear event start date
+            event.target.eventEnd.value = ""; // clear event end date
             swal.fire({
                 icon: "success",
                 title: 'Successfully added the event',
@@ -63,6 +66,17 @@ const EmployeeHomepage = () => {
                 title: "There is an error",
             });
         }
+    };
+
+    const formatAMPM = (date) => {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
     };
 
     return (
@@ -99,6 +113,9 @@ const EmployeeHomepage = () => {
                         const eventsThatStartOnDate = events.filter(
                             event => new Date(event.start).toDateString() === date.toDateString()
                         );
+                        const eventsThatEndOnDate = events.filter(
+                            event => new Date(event.end).toDateString() === date.toDateString()
+                        );
                         const eventsThatSpanAcrossDate = events.filter(
                             event => {
                             const start = new Date(event.start);
@@ -110,6 +127,9 @@ const EmployeeHomepage = () => {
                             );
                             }
                         );
+                        const sameDay = (date1, date2) => {
+                            return (date1.getDay() === date2.getDay());
+                        };
                         return (
                             <div>
                             {eventsThatStartOnDate.map(event => (
@@ -118,7 +138,7 @@ const EmployeeHomepage = () => {
                                         <span>{event.title}</span>
                                     </div>
                                     <div>
-                                        <span>{event.start} - {event.end}</span>
+                                        <span>{formatAMPM(new Date(event.start))} - {sameDay(date, new Date(event.end)) ? formatAMPM(new Date(event.end)) : null}</span>
                                     </div>
                                     <div>
                                         <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center text-sm italic">
@@ -133,7 +153,7 @@ const EmployeeHomepage = () => {
                                         <span>{event.title}</span>
                                     </div>
                                     <div>
-                                        <span>{event.start} - {event.end}</span>
+                                        <span>{sameDay(date, new Date(event.start)) ? formatAMPM(new Date(event.start)) : null} - {sameDay(date, new Date(event.end)) ? formatAMPM(new Date(event.end)) : null}</span>
                                     </div>
                                     <div>
                                         <button onClick={() => handleEventDelete(event)} className="bg-black text-white p-2 mt-4 rounded hover:bg-white hover:text-black text-center text-sm italic">
