@@ -6,10 +6,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import axios from 'axios';
+
 export default function ProfileIcon(currentUser) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [user, setUser] = useState({});
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -18,17 +17,6 @@ export default function ProfileIcon(currentUser) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (currentUser?.currentUser === null) return;
-      const url = "/api/users/" + currentUser.currentUser;
-      let res = await axios.get(url);
-      res.data.password = "";
-      setUser(res.data);
-    };
-    fetchData();
-  },[]);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -45,27 +33,7 @@ export default function ProfileIcon(currentUser) {
   };
 
   const userInitials = () => {
-    let initials = "";
-    if (user?.firstName?.length > 0) {
-      initials += user.firstName[0];
-      if (user?.lastName.length>0) {
-        initials += user.lastName[0];
-      }
-    } else {
-      initials = "##";
-    }
-    initials = initials.toUpperCase();
-  
-    // Check if the initials are in local storage
-    let storedInitials = localStorage.getItem("userInitials");
-    if (storedInitials && storedInitials === initials) {
-      // If the stored initials match, return the stored initials
-      return storedInitials;
-    } else {
-      // If the stored initials do not match, store the computed initials in local storage and return it
-      localStorage.setItem("userInitials", initials);
-      return initials;
-    }
+    return localStorage.getItem("userInitials").toUpperCase();
   }
 
   return isLoggedIn() ? (
