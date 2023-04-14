@@ -41,29 +41,7 @@ class AddBook extends Component {
   }
 
   potentialGenres = [
-    "Fantasy",
-    "Science Fiction",
-    "Action",
-    "Mystery",
-    "Horror",
-    "Thriller",
-    "Historical Fiction",
-    "Romance",
-    "Graphic Novel",
-    "Young Adult",
-    "Children",
-    "Biography",
-    "Cooking",
-    "Art",
-    "Self-Help",
-    "History",
-    "Travel",
-    "True Crime",
-    "Humor",
-    "Guides",
-    "Religion and Spirituality",
-    "Parenting",
-    "Science",
+    "Action","Art","Biography","Children","Cooking","Fantasy","Graphic Novel","Guides","Historical Fiction","History","Horror","Humor","Mystery","Parenting","Religion and Spirituality","Romance","Science Fiction","Science","Self-Help","Thriller","Travel","True Crime","Young Adult"
   ];
 
   handleChange = (e) => {
@@ -73,6 +51,15 @@ class AddBook extends Component {
     }));
   };
 
+  handleStock = (e) => {
+    if (Number(e.target.value) > 999) {
+      e.target.value = 999;
+    }else if (Number(e.target.value) < 1){
+      e.target.value = 1;
+    }
+    this.handleChange(e)
+  };
+
   submit = (e) => {
     e.preventDefault();
 
@@ -80,6 +67,7 @@ class AddBook extends Component {
       const url = "/api/books";
       let inputData = this.state;
       delete inputData.inputGenres;
+      console.log(inputData);
       axios.post(url, inputData).then((res) => {
         if (res.status === 200 || res.status === 201) {
           swal.fire({
@@ -88,10 +76,6 @@ class AddBook extends Component {
           });
         }
       });
-      // localStorage.setItem("token", res.data);
-
-      // TO-DO: SET LOCATION TO BROWSE - RECENTLY ADDED
-      // window.location = "/";
     } catch (error) {
       console.log(error);
       if (error.response?.status >= 400 && error.response.status <= 500) {
@@ -142,7 +126,7 @@ class AddBook extends Component {
                     name="myImage" 
                     accept="image/png, image/jpeg"
                     multiple={false}
-                    onDone={({ base64 }) => (this.state.accept.imageId = base64)}
+                    onDone={({ base64 }) => (this.state.imageId = base64)}
                   />
                 </Grid>
                 <TextField
@@ -207,27 +191,15 @@ class AddBook extends Component {
                   )}
                 />
                 <div className="flex pb-2 pt-2">
-                  <Chip
-                    avatar={
-                      <Avatar
-                        fullWidth sx={{ m: 1 }}
-                        onClick={() =>
-                          this.handleChange({
-                            target: { name: "stock", value: this.state.stock - 1 },
-                          })
-                        }
-                      >
-                        <Remove />
-                      </Avatar>
-                    }
-                    label={<p className="px-2 text-lg ">{this.state.stock}</p>}
-                    clickable
-                    onDelete={() =>
-                      this.handleChange({
-                        target: { name: "stock", value: this.state.stock + 1 },
-                      })
-                    }
-                    deleteIcon={<Add />}
+                    <TextField
+                      variant="filled"
+                      type="number"
+                      name="stock"
+                      label="Total Number of Books in the Inventory"
+                      InputProps={{ inputProps: { min: "1", max: "999", step: "1" } }}
+                      fullWidth sx={{ m: 1 }}
+                      value={this.state.stock}
+                      onChange={this.handleStock}
                   />
                   <button
                     className="pl-4"
