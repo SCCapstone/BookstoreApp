@@ -101,7 +101,7 @@ const CompleteNavbar = () => {
 
             <Route
               path="/edit_blog"
-              element={<EditBlogpage currentUser={userType} />}
+              element={<EditBlogpage userRole={userType} />}
             />
 
             {/* Admin, Employee, and Customer */}

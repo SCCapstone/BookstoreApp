@@ -1,3 +1,6 @@
+// PermissionUtils page is for commonly used functions
+// regarding permissions
+
 // isLoggedIn() will accept either a token, userType, or userId
 // to return true if they are not empty strings and therefore
 // the user is logged in
@@ -16,8 +19,14 @@ function sendToLogin() {
   window.location.href = "/login";
 }
 
+// sendToHome() will send the user to the login page
+function sendToHome() {
+  window.location.href = "/";
+}
+
 module.exports = {
   isLoggedIn,
   isAdmin,
   sendToLogin,
+  sendToHome,
 };
