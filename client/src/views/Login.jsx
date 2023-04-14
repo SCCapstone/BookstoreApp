@@ -35,8 +35,18 @@ const Login = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userType", res.data.userType);
-      localStorage.setItem("role", res.data.role);
       localStorage.setItem("userID", res.data.userID);
+      console.log(res.data);
+      let initials = "";
+      if (res.data?.firstName?.length > 0) {
+        initials += res.data.firstName[0];
+        if (res.data?.lastName?.length > 0) {
+          initials += res.data.lastName[0];
+        }
+      } else {
+        initials = "";
+      }
+      localStorage.setItem("userInitials", initials);
       window.location = "/";
     } catch (error) {
       console.log(error);

@@ -27,7 +27,6 @@ import ChangePassword from "../../views/ChangePassword";
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
-  const role = localStorage.getItem("role");
   const items = JSON.parse(localStorage.getItem("cartItemsQuantity"));
   // console.log(items);
 
