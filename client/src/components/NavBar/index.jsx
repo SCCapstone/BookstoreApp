@@ -87,7 +87,7 @@ const CompleteNavbar = () => {
             />
 
             {/* Admin */}
-            <Route path="/add_book" element={<AddBook currentUser={user} />} />
+            <Route path="/add_book" element={<AddBook role={userType} />} />
             <Route
               path="/users"
               element={<ValidatedUsers currentUser={userType} />}

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component } from "react";
 import FileBase64 from "react-file-base64";
 import axios from "axios";
 import { Button, Grid } from "@mui/material";
@@ -10,18 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Remove, Add } from "@mui/icons-material";
 import swal from "sweetalert2";
-
-function getBase64() {
-  var file = "./Books/default.jpg";
-  var reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = function () {
-    console.log(reader.result);
-  };
-  reader.onerror = function (error) {
-    console.log("Error: ", error);
-  };
-}
+import { isAdmin } from "../utils/PermissionUtils";
 
 class AddBook extends Component {
   constructor(props) {
@@ -101,17 +90,12 @@ class AddBook extends Component {
     }
   };
 
-  isLoggedIn = () => {
-    const currentUser = this.props.currentUser;
-    return currentUser && currentUser.length !== 0;
-  };
-
   sendToLogin = () => {
     window.location.href = "/login";
   };
 
   render() {
-    return this.isLoggedIn() ? (
+    return isAdmin(this.props.role) ? (
       <Grid container spacing={2}>
         <Grid item xs={12} className="justify-center py-5">
           <span class="text-center px-16 py-16 text-lg">Add Book</span>
@@ -242,7 +226,7 @@ class AddBook extends Component {
       (this.sendToLogin(),
       (
         <div>
-          <h1>Restricted to authenticated users only!</h1>
+          <h1>Restricted to administrators only!</h1>
         </div>
       ))
     );
