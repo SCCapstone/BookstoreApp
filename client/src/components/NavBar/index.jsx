@@ -95,7 +95,7 @@ const CompleteNavbar = () => {
             />
             <Route
               path="/emp_page"
-              element={<EmployeeHomepage currentUser={userType} />}
+              element={<EmployeeHomepage userRole={userType} />}
             />
             <Route path="/orders" element={<Orders currentUser={userType} />} />
 

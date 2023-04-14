@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Calendar from 'react-calendar';
 import axios from "axios";
 import swal from 'sweetalert2';
+import { isAdmin, sendToHome } from "../utils/PermissionUtils";
 
-const EmployeeHomepage = () => { 
+const EmployeeHomepage = ({ userRole }) => { 
     const [date, setDate] = useState(new Date());
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -79,7 +80,7 @@ const EmployeeHomepage = () => {
         return strTime;
     };
 
-    return (
+    return isAdmin(userRole) ? (
 
         <div className="max-w-screen-md mx-auto p-4 text-center"> 
             <h1 className="text-2xl font-medium mb-4 text-center">
@@ -221,6 +222,13 @@ const EmployeeHomepage = () => {
                     </a>
                 </div>
         </div>
+    ) : (
+        (sendToHome(),
+        (
+            <div>
+            <h1>Restricted to administrators only!</h1>
+            </div>
+        ))
     );
 };
 

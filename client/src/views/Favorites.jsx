@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { isLoggedIn, sendToLogin } from "../utils/PermissionUtils";
 
 export default class Favorites extends Component {
     constructor(props) {
@@ -78,6 +79,18 @@ export default class Favorites extends Component {
     }
 
     render() {
+        if (!isLoggedIn(this.props.currentUser)) {
+            return (
+                (sendToLogin(),
+                    (
+                        <div>
+                        <h1>Restricted to authenticated users only!</h1>
+                        </div>
+                    )
+                )
+            )
+        }
+        
         return this.anyFavorites() ? (
             <div class="py-6">
                 <div class="sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1150px] xl:max-w-[1200px] max-w-[200px]">

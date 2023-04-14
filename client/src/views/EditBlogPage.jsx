@@ -108,9 +108,9 @@ const EditBlogpage = ({ userRole }) => {
     (sendToHome(),
       (
         <div>
-          <h1>Restricted to authenticated users only!</h1>
+          <h1>Restricted to administrators only!</h1>
         </div>
-      ))
+    ))
   );
 };
 
