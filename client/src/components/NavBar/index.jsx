@@ -65,7 +65,7 @@ const CompleteNavbar = () => {
             <Route path="/terms_of_service" element={<TOS />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browse" element={<Browse />} />
-            <Route path="/create_account" element={<Signup />} />
+            <Route path="/create_account" element={<Signup currentUser={userId} />} />
             <Route
               path="/cart"
               element={
@@ -91,13 +91,13 @@ const CompleteNavbar = () => {
             <Route path="/add_book" element={<AddBook role={userType} />} />
             <Route
               path="/users"
-              element={<ValidatedUsers currentUser={userType} />}
+              element={<ValidatedUsers userRole={userType} />}
             />
             <Route
               path="/emp_page"
               element={<EmployeeHomepage userRole={userType} />}
             />
-            <Route path="/orders" element={<Orders currentUser={userType} />} />
+            <Route path="/orders" element={<Orders userRole={userType} />} />
 
             <Route
               path="/edit_blog"

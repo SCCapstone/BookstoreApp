@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { Fragment } from "react";
+import React from "react";
 import UserRow from "../components/UserRow";
 import { Pagination } from "@mui/material";
+import { isAdmin, sendToHome } from "../utils/PermissionUtils";
 
 export default class ValidatedUsers extends React.Component {
   state = {
-    currentUser: "",
     users: [],
     pageSize: 12,
     currentPage: 1
@@ -15,7 +15,7 @@ export default class ValidatedUsers extends React.Component {
     const url = "/api/users";
     axios.get(url).then((res) => {
       const users = res.data;
-      this.setState({ currentUser: this.props.currentUser, users: users });
+      this.setState({ users: users });
     });
   }
 
@@ -56,16 +56,6 @@ export default class ValidatedUsers extends React.Component {
     }
   }
 
-  // functionality for ensuring unauthenticated users cannot view
-  isLoggedIn = () => {
-    const currentUser = this.props.currentUser;
-    return currentUser && currentUser.length !== 0;
-  };
-
-  sendToLogin = () => {
-    window.location.href = "/login";
-  };
-
   changePage = (e, p) => {
     this.setState((state) => ({
       currentPage: p,
@@ -79,7 +69,7 @@ export default class ValidatedUsers extends React.Component {
   };
 
   render() {
-    return this.isLoggedIn() ? (
+    return isAdmin(this.props.userRole) ? (
       <div className="bg-gainsboro">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -88,12 +78,6 @@ export default class ValidatedUsers extends React.Component {
                 <th scope="col" class="px-6 py-3">
                   Name
                 </th>
-                {/* <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Id
-
-                  </div>
-                </th> */}
                 <th scope="col" class="px-6 py-3">
                   <div class="flex items-center">Email</div>
                 </th>
@@ -127,10 +111,10 @@ export default class ValidatedUsers extends React.Component {
         </div>
       </div>
     ) : (
-      (this.sendToLogin(),
+      (sendToHome(),
       (
         <div>
-          <h1>Restricted to authenticated users only!</h1>
+          <h1>Restricted to administrators only!</h1>
         </div>
       ))
     );
