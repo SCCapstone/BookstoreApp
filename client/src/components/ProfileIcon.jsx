@@ -6,10 +6,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-// import axios from 'axios';
+
 export default function ProfileIcon(currentUser) {
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [user, setUser] = useState({});
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -18,17 +17,6 @@ export default function ProfileIcon(currentUser) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     if (currentUser?.currentUser === null) return;
-  //     const url = "/api/users/" + currentUser.currentUser;
-  //     let res = await axios.get(url);
-  //     res.data.password = "";
-  //     setUser(res.data);
-  //   };
-  //   fetchData();
-  // },[]);
 
   const logout = () => {
     localStorage.removeItem("token");
