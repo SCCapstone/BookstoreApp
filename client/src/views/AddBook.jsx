@@ -10,7 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Remove, Add } from "@mui/icons-material";
 import swal from "sweetalert2";
-import { isAdmin } from "../utils/PermissionUtils";
+import { isAdmin, sendToLogin } from "../utils/PermissionUtils";
 
 class AddBook extends Component {
   constructor(props) {
@@ -88,10 +88,6 @@ class AddBook extends Component {
         console.log(error.response.data.message);
       }
     }
-  };
-
-  sendToLogin = () => {
-    window.location.href = "/login";
   };
 
   render() {
@@ -223,7 +219,7 @@ class AddBook extends Component {
         </Grid>
       </Grid>
     ) : (
-      (this.sendToLogin(),
+      (sendToLogin(),
       (
         <div>
           <h1>Restricted to administrators only!</h1>
