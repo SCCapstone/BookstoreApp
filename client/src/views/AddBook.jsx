@@ -112,152 +112,150 @@ class AddBook extends Component {
 
   render() {
     return this.isLoggedIn() ? (
-      <div class="pb-4 h-full text-gray-800 max-w-[1500px]">
-        <Grid container spacing={2} fullWidth sx={{ m: 1 }}>
-          <div class="py-4">
-            <div class="grid text-center text-3xl py-3 ">
+      <section>
+        <div class="pb-4 h-full text-gray-800 max-w-[1500px]">
+          <div className="py-4">
+            <div className="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 max-w-[1400px]">
               Add Book
             </div>
           </div>
-          <Grid item xs={6}></Grid>
-          <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6" fullWidth sx={{ m: 1 }}>
-            <form>
-              <Grid item ms={12} class="pb-3">
-                <TextField
-                  fullWidth sx={{ m: 1 }}
-                  variant="filled"
-                  required
-                  label="Title"
-                  placeholder="Title"
-                  name="title"
-                  value={this.state.title}
-                  onChange={this.handleChange}
-                />
-              </Grid>
-              <Grid fullWidth sx={{ m: 1 }}>
-                <h2>Choose an image for the book*</h2>
-                <FileBase64
-                  type="file"
-                  name="myImage" 
-                  accept="image/png, image/jpeg"
-                  multiple={false}
-                  onDone={({ base64 }) => (this.state.accept.imageId = base64)}
-                />
-              </Grid>
-              <TextField
-                fullWidth sx={{ m: 1 }}
-                variant="filled"
-                required
-                label="Author"
-                placeholder="Author"
-                name="author"
-                value={this.state.author}
-                onChange={this.handleChange}
-              />
-              <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
-                <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
-                <FilledInput
-                  startAdornment={
-                    <InputAdornment position="start">$</InputAdornment>
-                  }
-                  label="Price"
-                  type="number"
-                  name="price"
-                  data={this.state.price}
-                  onChange={this.handleChange}
-                />
-              </FormControl>
-              <details open>
-                <ul>
+          <Grid container spacing={2} fullWidth sx={{ m: 1 }} >
+            <Grid item xs={6}></Grid>
+            <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6" fullWidth sx={{ m: 1 }}>
+              <form>
+                <Grid item ms={12} class="pb-3">
                   <TextField
                     fullWidth sx={{ m: 1 }}
                     variant="filled"
                     required
-                    label="Summary"
-                    placeholder="Summary"
-                    name="summary"
-                    value={this.state.summary}
-                    multiline
-                    rows={3}
-                    onChange={this.handleChange}  
+                    label="Title"
+                    placeholder="Title"
+                    name="title"
+                    value={this.state.title}
+                    onChange={this.handleChange}
                   />
-                </ul>
-              </details>
-              <Autocomplete
-                multiple
-                name="genre"
-                value={this.state.genre}
-                onChange={(event, newValue) => {
-                  this.setState((state) => ({
-                    genre: newValue,
-                  }));
-                }}
-                inputValue={this.state.inputGenres}
-                onInputChange={(event, newInputValue) => {
-                  this.setState((state) => ({
-                    inputGenres: newInputValue,
-                  }));
-                }}
-                options={this.potentialGenres}
-                renderInput={(params) => (
-                  <TextField
-                    fullWidth sx={{ m: 1 }}
-                    {...params}
-                    variant="filled"
-                    label="Genres"
-                    placeholder="Genres"
+                </Grid>
+                <Grid fullWidth sx={{ m: 1 }}>
+                  <h2>Choose an image for the book*</h2>
+                  <FileBase64
+                    type="file"
+                    name="myImage" 
+                    accept="image/png, image/jpeg"
+                    multiple={false}
+                    onDone={({ base64 }) => (this.state.accept.imageId = base64)}
                   />
-                )}
-              />
-              <div className="flex pb-2 pt-2">
-                <Chip
-                  avatar={
-                    <Avatar
-                      fullWidth sx={{ m: 1 }}
-                      onClick={() =>
-                        this.handleChange({
-                          target: { name: "stock", value: this.state.stock - 1 },
-                        })
-                      }
-                    >
-                      <Remove />
-                    </Avatar>
-                  }
-                  label={<p className="px-2 text-lg ">{this.state.stock}</p>}
-                  clickable
-                  onDelete={() =>
-                    this.handleChange({
-                      target: { name: "stock", value: this.state.stock + 1 },
-                    })
-                  }
-                  deleteIcon={<Add />}
+                </Grid>
+                <TextField
+                  fullWidth sx={{ m: 1 }}
+                  variant="filled"
+                  required
+                  label="Author"
+                  placeholder="Author"
+                  name="author"
+                  value={this.state.author}
+                  onChange={this.handleChange}
                 />
-                <button
-                  className="pl-4"
-                  onClick={() =>
-                    this.handleChange({ target: { name: "stock", value: 0 } })
-                  }
-                >
-                  {" "}
-                  Clear{" "}
-                </button>
-              </div>
-
-              <Grid fullWidth sx={{ m: 1 }}>
-                <div class="text-center lg:text-left grid pb-6">
-                  <Button
-                    fullWidth sx={{ m: 1 }}
-                    class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
-                    onClick={this.submit}
+                <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
+                  <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
+                  <FilledInput
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    label="Price"
+                    type="number"
+                    name="price"
+                    data={this.state.price}
+                    onChange={this.handleChange}
+                  />
+                </FormControl>
+                    <TextField
+                      fullWidth sx={{ m: 1 }}
+                      variant="filled"
+                      required
+                      label="Summary"
+                      placeholder="Summary"
+                      name="summary"
+                      value={this.state.summary}
+                      multiline
+                      rows={13}
+                      onChange={this.handleChange}  
+                    />
+                <Autocomplete
+                  multiple
+                  name="genre"
+                  value={this.state.genre}
+                  onChange={(event, newValue) => {
+                    this.setState((state) => ({
+                      genre: newValue,
+                    }));
+                  }}
+                  inputValue={this.state.inputGenres}
+                  onInputChange={(event, newInputValue) => {
+                    this.setState((state) => ({
+                      inputGenres: newInputValue,
+                    }));
+                  }}
+                  options={this.potentialGenres}
+                  renderInput={(params) => (
+                    <TextField
+                      fullWidth sx={{ m: 1 }}
+                      {...params}
+                      variant="filled"
+                      label="Genres"
+                      placeholder="Genres"
+                    />
+                  )}
+                />
+                <div className="flex pb-2 pt-2">
+                  <Chip
+                    avatar={
+                      <Avatar
+                        fullWidth sx={{ m: 1 }}
+                        onClick={() =>
+                          this.handleChange({
+                            target: { name: "stock", value: this.state.stock - 1 },
+                          })
+                        }
+                      >
+                        <Remove />
+                      </Avatar>
+                    }
+                    label={<p className="px-2 text-lg ">{this.state.stock}</p>}
+                    clickable
+                    onDelete={() =>
+                      this.handleChange({
+                        target: { name: "stock", value: this.state.stock + 1 },
+                      })
+                    }
+                    deleteIcon={<Add />}
+                  />
+                  <button
+                    className="pl-4"
+                    onClick={() =>
+                      this.handleChange({ target: { name: "stock", value: 0 } })
+                    }
                   >
-                    SUBMIT
-                  </Button>
+                    {" "}
+                    Clear{" "}
+                  </button>
                 </div>
-              </Grid>
-            </form>
+
+                <Grid fullWidth sx={{ m: 1 }}>
+                  <div class="text-center lg:text-left grid pb-6">
+                    <Button
+                      fullWidth sx={{ m: 1 }}
+                      class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
+                      onClick={this.submit}
+                    >
+                      SUBMIT
+                    </Button>
+                  </div>
+                </Grid>
+              </form>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
+      </section>
     ) : (
       (this.sendToLogin(),
       (
