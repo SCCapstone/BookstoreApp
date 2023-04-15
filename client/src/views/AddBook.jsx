@@ -73,9 +73,7 @@ class AddBook extends Component {
 
   // The following function converts the uploaded image to base64 and prepares it to before its sent to the database.
   handleImage = (e) => {
-    let base64txt = e[0].base64_file;
-    let base64File = base64txt.substring(base64txt.indexOf("base64") + 7);
-    base64File = "data:" + e[0].file_type + ";base64," + base64File;
+    let base64File = e[0].base64_file;
     let imageTitle = e[0].file_name;
     this.setState((state) => ({
       imageId: base64File,
