@@ -21,7 +21,6 @@ class Browse extends Component {
     await axios.get(url).then(res => {
       if (res.status === 200) {
         let books = res.data;
-        console.log(books);
 
         this.setState((state) => ({
             books: books
@@ -30,13 +29,8 @@ class Browse extends Component {
         this.setState((state) => ({
           books: defaultBooks
         }));
-        console.log(defaultBooks);
       }
     });
-    // let books = JSON.parse(localStorage.getItem("booksFromTheDatabase"));
-    // this.setState((state) => ({
-    //   books: books,
-    // }));
   }
 
   changeOption(option) {
@@ -50,7 +44,10 @@ class Browse extends Component {
     options.forEach((element) => {
       const baseTitle = element.title.replace(",", "").toLowerCase();
       const baseAuthor = element.author.replace(",", "").toLowerCase();
-      const baseGenre = element.genre[0].replace(",", "").toLowerCase();
+      let baseGenre = "";
+      if (element.genre.length > 0) {
+        baseGenre = element.genre[0]?.replace(",","").toLowerCase();
+      }
       const baseInput = state.inputValue.toLowerCase();
       if (
         baseTitle.includes(baseInput) ||
