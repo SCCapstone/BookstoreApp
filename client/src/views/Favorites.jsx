@@ -50,26 +50,6 @@ export default class Favorites extends Component {
         }
     }
 
-    iterate(iterable, callback) {
-        for (var key in iterable) {
-          if (
-            key === "length" ||
-            key === "prototype" ||
-            !Object.prototype.hasOwnProperty.call(iterable, key)
-          )
-            continue;
-            callback(iterable[key], key, iterable);
-        }
-    }
-
-    getKeys(obj) {
-        var keys = [];
-        this.iterate(obj, function (oVal, oKey) {
-            keys.push(oKey);
-        });
-        return keys;
-    }
-
     favoriteTitles() {
         return this.state.favorites.map(x => x.title);
     }
@@ -90,7 +70,7 @@ export default class Favorites extends Component {
                 )
             )
         }
-        
+
         return this.anyFavorites() ? (
             <div class="py-6">
                 <div class="sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1150px] xl:max-w-[1200px] max-w-[200px]">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { getKeys } from "../utils/IterationUtils";
 
 const OrdersRow = ({ order, ordererId, handleUpdate, handleDelete }) => {
   var currentOrder = order.order;
@@ -24,26 +25,6 @@ const OrdersRow = ({ order, ordererId, handleUpdate, handleDelete }) => {
     getUser();
     getBooks();
   }, []);
-
-  const getKeys = (obj) => {
-    var keys = [];
-    iterate(obj, function (oVal, oKey) {
-      keys.push(oKey);
-    });
-    return keys;
-  }
-  
-  const iterate = (iterable, callback) => {
-    for (var key in iterable) {
-      if (
-        key === "length" ||
-        key === "prototype" ||
-        !Object.prototype.hasOwnProperty.call(iterable, key)
-      )
-        continue;
-      callback(iterable[key], key, iterable);
-    }
-  }
 
   const showOrder = ({ order }) => {
     return Object.keys(order).map((key, i) => {
