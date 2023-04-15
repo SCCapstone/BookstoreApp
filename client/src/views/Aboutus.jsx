@@ -29,10 +29,6 @@ const Aboutus = () => {
           alt="Book Dispensary"
           className="row-span-2"
         />
-        {/*Location of the Book Dispensary */}
-        <p className={`${styles.paragraph}`}>
-          Location to Visit Us: 123 UniversitySC Ave, Columbia, SC 29210
-        </p>
       </div>
     </section>
   );
