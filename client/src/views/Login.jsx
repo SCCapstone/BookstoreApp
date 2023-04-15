@@ -7,12 +7,13 @@ import MuiAlert from '@mui/material/Alert';
 import swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
 import { v4 as uuidv4 } from 'uuid';
+import { isLoggedIn, sendToHome } from "../utils/PermissionUtils";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Login = () => {
+const Login = ({ currentUser }) => {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -35,8 +36,18 @@ const Login = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userType", res.data.userType);
-      localStorage.setItem("role", res.data.role);
       localStorage.setItem("userID", res.data.userID);
+      console.log(res.data);
+      let initials = "";
+      if (res.data?.firstName?.length > 0) {
+        initials += res.data.firstName[0];
+        if (res.data?.lastName?.length > 0) {
+          initials += res.data.lastName[0];
+        }
+      } else {
+        initials = "";
+      }
+      localStorage.setItem("userInitials", initials);
       window.location = "/";
     } catch (error) {
       console.log(error);
@@ -116,7 +127,7 @@ const Login = () => {
     setOpen(false);
   };
   
-  return (
+  return !isLoggedIn(currentUser) ? (
     <div class="pb-4 h-full text-gray-800 max-w-[1400px]">
       <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
         <div />
@@ -183,6 +194,13 @@ const Login = () => {
         </div>
       </div>
     </div>
+  ) : (
+    (sendToHome(),
+      (
+          <div>
+          <h1>User is already logged in!</h1>
+          </div>
+      ))
   );
 };
 

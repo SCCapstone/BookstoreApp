@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { Fragment } from "react";
-import swal from "sweetalert2";
+import React from "react";
 import OrdersRow from "../components/OrdersRow";
 import { Pagination } from "@mui/material";
+import { isAdmin, sendToHome } from "../utils/PermissionUtils";
 
 export default class Orders extends React.Component {
   state = {
@@ -46,11 +46,6 @@ export default class Orders extends React.Component {
     }
   };
 
-  isLoggedIn = () => {
-    const currentUser = this.props.currentUser;
-    return currentUser && currentUser.length !== 0 ;
-  };
-
   changePage = (e, p) => {
     this.setState((state) => ({
       currentPage: p,
@@ -64,7 +59,7 @@ export default class Orders extends React.Component {
   }
 
   render() {
-    return this.isLoggedIn() ? (
+    return isAdmin(this.props.userRole) ? (
       <div className="bg-gainsboro">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -109,14 +104,13 @@ export default class Orders extends React.Component {
         </div>
       </div>
     ) : (
-      // (this.sendToLogin(),
-      (
-        <div className="pt-10 mt-10">
-          <h1>Restricted to authenticated users only!</h1>
-          {this.props.currentUser}
-        </div>
+      (sendToHome(),
+        (
+          <div className="pt-10 mt-10">
+            <h1>Restricted to administrators only!</h1>
+          </div>
+        )
       )
-      // )
     );
   };
 }

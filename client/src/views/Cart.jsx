@@ -8,6 +8,7 @@ import axios from "axios";
 // import { cartChange } from "../../components/NavBar/NavBar";
 import { cartChange } from "../components/NavBar/NavBar";
 import swal from "sweetalert2";
+import { getKeys } from "../utils/IterationUtils";
 
 cartChange();
 
@@ -33,7 +34,7 @@ class MainCart extends Component {
     }))
 
     // check cart
-    const bookIds = this.getKeys(bookCart);
+    const bookIds = getKeys(bookCart);
     if (this.bookIds?.length <= 0) {
       return;
     }
@@ -202,26 +203,6 @@ class MainCart extends Component {
       return 0;
     }
   };
-
-  getKeys(obj) {
-    var keys = [];
-    this.iterate(obj, function (oVal, oKey) {
-      keys.push(oKey);
-    });
-    return keys;
-  }
-  
-  iterate(iterable, callback) {
-    for (var key in iterable) {
-      if (
-        key === "length" ||
-        key === "prototype" ||
-        !Object.prototype.hasOwnProperty.call(iterable, key)
-      )
-        continue;
-      callback(iterable[key], key, iterable);
-    }
-  }
 
   setQtyValue = ([book, value]) => {
     if (this.checkCartUpdate([book, value])) {

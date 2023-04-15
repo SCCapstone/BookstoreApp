@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom"
 import swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import emailjs from "@emailjs/browser"; 
+import { isLoggedIn, sendToHome } from "../utils/PermissionUtils";
 
-const SignUp = () => {
+const SignUp = ({ currentUser }) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -65,7 +66,7 @@ const SignUp = () => {
     }
   };
 
-  return (
+  return !isLoggedIn(currentUser) ? (
     <div class="pb-4 h-full text-gray-800 max-w-[1400px]">
       <div class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6">
           <div />
@@ -144,6 +145,13 @@ const SignUp = () => {
         </div>
       </div>
     </div>
+    ) : (
+      (sendToHome(),
+        (
+            <div>
+            <h1>User is already logged in!</h1>
+            </div>
+        ))
     );
 }
 

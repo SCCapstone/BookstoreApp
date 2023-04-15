@@ -1,28 +1,15 @@
-import React, { Component, useEffect, useState } from "react";
-//import FileBase64 from "react-file-base64";
+import React, { Component } from "react";
 import ReactImageFileToBase64 from "react-file-image-to-base64";
 import axios from "axios";
 import { Button, Grid } from "@mui/material";
-import { Chip, Avatar, Autocomplete } from "@mui/material";
+import { Autocomplete } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import FilledInput from "@mui/material/FilledInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Remove, Add } from "@mui/icons-material";
 import swal from "sweetalert2";
-
-function getBase64() {
-  var file = "./Books/default.jpg";
-  var reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = function () {
-    console.log(reader.result);
-  };
-  reader.onerror = function (error) {
-    console.log("Error: ", error);
-  };
-}
+import { isAdmin, sendToHome } from "../utils/PermissionUtils";
 
 class AddBook extends Component {
   constructor(props) {
@@ -101,17 +88,8 @@ class AddBook extends Component {
     }
   };
 
-  isLoggedIn = () => {
-    const currentUser = this.props.currentUser;
-    return currentUser && currentUser.length !== 0;
-  };
-
-  sendToLogin = () => {
-    window.location.href = "/login";
-  };
-
   render() {
-    return this.isLoggedIn() ? (
+    return isAdmin(this.props.role) ? (
       <section>
         <div class="pb-4 h-full text-gray-800 max-w-[1500px]">
           <div className="py-4">
@@ -244,10 +222,10 @@ class AddBook extends Component {
         </div>
       </section>
     ) : (
-      (this.sendToLogin(),
+      (sendToHome(),
       (
         <div>
-          <h1>Restricted to authenticated users only!</h1>
+          <h1>Restricted to administrators only!</h1>
         </div>
       ))
     );
