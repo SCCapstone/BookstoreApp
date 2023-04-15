@@ -25,12 +25,34 @@ class AddBook extends Component {
       stock: 1,
       genre: [],
       inputGenres: "",
-      imageTitle: ""
+      imageTitle: "",
     };
   }
 
   potentialGenres = [
-    "Action","Art","Biography","Children","Cooking","Fantasy","Graphic Novel","Guides","Historical Fiction","History","Horror","Humor","Mystery","Parenting","Religion and Spirituality","Romance","Science Fiction","Science","Self-Help","Thriller","Travel","True Crime","Young Adult"
+    "Action",
+    "Art",
+    "Biography",
+    "Children",
+    "Cooking",
+    "Fantasy",
+    "Graphic Novel",
+    "Guides",
+    "Historical Fiction",
+    "History",
+    "Horror",
+    "Humor",
+    "Mystery",
+    "Parenting",
+    "Religion and Spirituality",
+    "Romance",
+    "Science Fiction",
+    "Science",
+    "Self-Help",
+    "Thriller",
+    "Travel",
+    "True Crime",
+    "Young Adult",
   ];
 
   handleChange = (e) => {
@@ -43,21 +65,24 @@ class AddBook extends Component {
   handleStock = (e) => {
     if (Number(e.target.value) > 999) {
       e.target.value = 999;
-    }else if (Number(e.target.value) < 1){
+    } else if (Number(e.target.value) < 1) {
       e.target.value = 1;
     }
-    this.handleChange(e)
+    this.handleChange(e);
   };
 
   handleImage = (e) => {
     console.log(e);
     let base64txt = e[0].base64_file;
     let base64File = base64txt.substring(base64txt.indexOf("base64") + 7);
+    let extension = "data:image;base64,";
+    let file = e[0].file_type;
+    base64File = base64File.concat(extension);
     let imageTitle = e[0].file_name;
     console.log(imageTitle);
     this.setState((state) => ({
       imageId: base64File,
-      imageTitle: imageTitle
+      imageTitle: imageTitle,
     }));
   };
 
@@ -96,13 +121,18 @@ class AddBook extends Component {
               Add Book
             </div>
           </div>
-          <Grid container spacing={2} fullWidth sx={{ m: 1 }} >
+          <Grid container spacing={2} fullWidth sx={{ m: 1 }}>
             <Grid item xs={6}></Grid>
-            <Grid class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6" fullWidth sx={{ m: 1 }}>
+            <Grid
+              class="flex xl:justify-center lg:justify-between justify-center items-center grid grid-cols-3 h-full g-6"
+              fullWidth
+              sx={{ m: 1 }}
+            >
               <form>
                 <Grid item ms={12} class="pb-3">
                   <TextField
-                    fullWidth sx={{ m: 1 }}
+                    fullWidth
+                    sx={{ m: 1 }}
                     variant="filled"
                     required
                     label="Title"
@@ -113,16 +143,19 @@ class AddBook extends Component {
                   />
                 </Grid>
                 <Grid fullWidth sx={{ m: 1 }}>
-                  <h2>Choose an image for the book - must be in .png or .jpeg*</h2>
+                  <h2>
+                    Choose an image for the book - must be in .png or .jpeg*
+                  </h2>
                   <ReactImageFileToBase64
-                    name="myImage" 
+                    name="myImage"
                     multiple={false}
                     onCompleted={this.handleImage}
                   />
                   <span>{this.state.imageTitle}</span>
                 </Grid>
                 <TextField
-                  fullWidth sx={{ m: 1 }}
+                  fullWidth
+                  sx={{ m: 1 }}
                   variant="filled"
                   required
                   label="Author"
@@ -132,7 +165,9 @@ class AddBook extends Component {
                   onChange={this.handleChange}
                 />
                 <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
-                  <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
+                  <InputLabel htmlFor="outlined-adornment-amount">
+                    Price
+                  </InputLabel>
                   <FilledInput
                     startAdornment={
                       <InputAdornment position="start">$</InputAdornment>
@@ -144,18 +179,19 @@ class AddBook extends Component {
                     onChange={this.handleChange}
                   />
                 </FormControl>
-                    <TextField
-                      fullWidth sx={{ m: 1 }}
-                      variant="filled"
-                      required
-                      label="Summary"
-                      placeholder="Summary"
-                      name="summary"
-                      value={this.state.summary}
-                      multiline
-                      rows={13}
-                      onChange={this.handleChange}  
-                    />
+                <TextField
+                  fullWidth
+                  sx={{ m: 1 }}
+                  variant="filled"
+                  required
+                  label="Summary"
+                  placeholder="Summary"
+                  name="summary"
+                  value={this.state.summary}
+                  multiline
+                  rows={13}
+                  onChange={this.handleChange}
+                />
                 <Autocomplete
                   multiple
                   name="genre"
@@ -174,7 +210,8 @@ class AddBook extends Component {
                   options={this.potentialGenres}
                   renderInput={(params) => (
                     <TextField
-                      fullWidth sx={{ m: 1 }}
+                      fullWidth
+                      sx={{ m: 1 }}
                       {...params}
                       variant="filled"
                       label="Genres"
@@ -183,15 +220,18 @@ class AddBook extends Component {
                   )}
                 />
                 <div className="flex pb-2 pt-2">
-                    <TextField
-                      variant="filled"
-                      type="number"
-                      name="stock"
-                      label="Total Number of Books in the Inventory"
-                      InputProps={{ inputProps: { min: "1", max: "999", step: "1" } }}
-                      fullWidth sx={{ m: 1 }}
-                      value={this.state.stock}
-                      onChange={this.handleStock}
+                  <TextField
+                    variant="filled"
+                    type="number"
+                    name="stock"
+                    label="Total Number of Books in the Inventory"
+                    InputProps={{
+                      inputProps: { min: "1", max: "999", step: "1" },
+                    }}
+                    fullWidth
+                    sx={{ m: 1 }}
+                    value={this.state.stock}
+                    onChange={this.handleStock}
                   />
                   <button
                     className="pl-4"
@@ -207,7 +247,8 @@ class AddBook extends Component {
                 <Grid fullWidth sx={{ m: 1 }}>
                   <div class="text-center lg:text-left grid pb-6">
                     <Button
-                      fullWidth sx={{ m: 1 }}
+                      fullWidth
+                      sx={{ m: 1 }}
                       class="py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
                       onClick={this.submit}
                     >
