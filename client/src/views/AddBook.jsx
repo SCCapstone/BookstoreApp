@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
-import FileBase64 from "react-file-base64";
+//import FileBase64 from "react-file-base64";
+import ReactImageFileToBase64 from "react-file-image-to-base64";
 import axios from "axios";
 import { Button, Grid } from "@mui/material";
 import { Chip, Avatar, Autocomplete } from "@mui/material";
@@ -37,6 +38,7 @@ class AddBook extends Component {
       stock: 1,
       genre: [],
       inputGenres: "",
+      imageTitle: ""
     };
   }
 
@@ -60,6 +62,19 @@ class AddBook extends Component {
     this.handleChange(e)
   };
 
+  handleImage = (e) => {
+    console.log(e);
+    let base64txt = e[0].base64_file;
+    let base64File = base64txt.substring(base64txt.indexOf("base64") + 7);
+    console.log(base64File);
+    let imageTitle = e[0].file_name;
+    console.log(imageTitle);
+    this.setState((state) => ({
+      imageId: base64File,
+      imageTitle: imageTitle
+    }));
+  };
+
   submit = (e) => {
     e.preventDefault();
 
@@ -67,6 +82,7 @@ class AddBook extends Component {
       const url = "/api/books";
       let inputData = this.state;
       delete inputData.inputGenres;
+      delete inputData.imageTitle;
       console.log(inputData);
       axios.post(url, inputData).then((res) => {
         if (res.status === 200 || res.status === 201) {
@@ -120,14 +136,13 @@ class AddBook extends Component {
                   />
                 </Grid>
                 <Grid fullWidth sx={{ m: 1 }}>
-                  <h2>Choose an image for the book*</h2>
-                  <FileBase64
-                    type="file"
+                  <h2>Choose an image for the book - must be in .png or .jpeg*</h2>
+                  <ReactImageFileToBase64
                     name="myImage" 
-                    accept="image/png, image/jpeg"
                     multiple={false}
-                    onDone={({ base64 }) => (this.state.imageId = base64)}
+                    onCompleted={this.handleImage}
                   />
+                  <span>{this.state.imageTitle}</span>
                 </Grid>
                 <TextField
                   fullWidth sx={{ m: 1 }}
