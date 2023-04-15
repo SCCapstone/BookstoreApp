@@ -60,7 +60,7 @@ const CompleteNavbar = () => {
           <Routes>
             {/* All users */}
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login currentUser={userId} />} />
             <Route path="/about" element={<Aboutus />} />
             <Route path="/terms_of_service" element={<TOS />} />
             <Route path="/contact" element={<ContactUs />} />
