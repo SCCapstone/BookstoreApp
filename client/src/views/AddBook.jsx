@@ -71,13 +71,13 @@ class AddBook extends Component {
     this.handleChange(e);
   };
 
+  // The following function converts the uploaded image to base64 and prepares it to before its sent to the database.
   handleImage = (e) => {
     console.log(e);
     let base64txt = e[0].base64_file;
     let base64File = base64txt.substring(base64txt.indexOf("base64") + 7);
-    let extension = "data:image;base64,";
-    let file = e[0].file_type;
-    base64File = base64File.concat(extension);
+    base64File = "data:" + e[0].file_type + ";base64," + base64File;
+    console.log(base64File);
     let imageTitle = e[0].file_name;
     console.log(imageTitle);
     this.setState((state) => ({
