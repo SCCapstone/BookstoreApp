@@ -53,7 +53,6 @@ class AddBook extends Component {
     console.log(e);
     let base64txt = e[0].base64_file;
     let base64File = base64txt.substring(base64txt.indexOf("base64") + 7);
-    console.log(base64File);
     let imageTitle = e[0].file_name;
     console.log(imageTitle);
     this.setState((state) => ({
