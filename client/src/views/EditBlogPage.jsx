@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert2";
+import { isAdmin, sendToHome } from "../utils/PermissionUtils";
 
-const EditBlogpage = () => {
+const EditBlogpage = ({ userRole }) => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [blogPost, setBlogPost] = useState("");
   const [blogTitle, setBlogTitle] = useState("");
@@ -48,9 +49,8 @@ const EditBlogpage = () => {
   const handleDelete = async (id, index) => {
     try {
       await axios.delete(`/api/blogs/${id}`);
-      const newBlogPosts = [...blogPosts];
-      newBlogPosts.splice(index, 1);
-      setBlogPosts(newBlogPosts);
+      const response = await axios.get("/api/blogs");
+      setBlogPosts(response.data);
       setBlogPost("");
       setBlogTitle("");
       setSubmitted(false);
@@ -64,7 +64,7 @@ const EditBlogpage = () => {
     }
   };
 
-  return (
+  return isAdmin(userRole) ? (
     <div className="max-w-screen-md mx-auto p-4 text-center">
       <h1 className="text-2xl font-medium mb-4 text-center">
         Edit the Blog!
@@ -104,6 +104,13 @@ const EditBlogpage = () => {
         </div>
       ))}
     </div>
+  ) : (
+    (sendToHome(),
+      (
+        <div>
+          <h1>Restricted to administrators only!</h1>
+        </div>
+    ))
   );
 };
 

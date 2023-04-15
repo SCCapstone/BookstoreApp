@@ -6,57 +6,33 @@ import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 import swal from "sweetalert2";
 import axios from "axios";
-
-function getKeys(obj) {
-  var keys = [];
-  iterate(obj, function (oVal, oKey) {
-    keys.push(oKey);
-  });
-  return keys;
-}
-function iterate(iterable, callback) {
-  for (var key in iterable) {
-    if (
-      key === "length" ||
-      key === "prototype" ||
-      !Object.prototype.hasOwnProperty.call(iterable, key)
-    )
-      continue;
-    callback(iterable[key], key, iterable);
-  }
-}
+import { getKeys } from "../utils/IterationUtils";
 
 const BooksPageGenerator = ({ book, user }) => {
   const [quantity, setQuantity] = useState(0);
 
   function addItem(book, quantity) {
-    var books_cart = JSON.parse(localStorage.getItem("books_cart"));
-    if (books_cart == null) {
-      books_cart = [];
-      localStorage.setItem("books_cart", JSON.stringify([]));
+    var book_cart = JSON.parse(localStorage.getItem("book_cart"));
+    if (book_cart === null) {
+      book_cart = {};
+      localStorage.setItem("book_cart", JSON.stringify({}));
       localStorage.setItem("booksCartNames", JSON.stringify({}));
     }
-    for (let i = 0; i < quantity; i++) {
-      books_cart.push(book);
-    }
-
-    localStorage.setItem("books_cart", JSON.stringify(books_cart));
 
     var booksCartNames = JSON.parse(localStorage.getItem("booksCartNames"));
-    var bookNames = getKeys(booksCartNames);
-
-    if (booksCartNames == null) {
+    if (booksCartNames === null) {
       booksCartNames = [];
     }
 
-    if (
-      bookNames.includes(book.title) !== null &&
-      !bookNames.includes(book.title)
-    ) {
+    var bookIds = getKeys(book_cart);
+
+    if (!bookIds.includes(book.title)) {
+      book_cart[book._id] = 0;
       booksCartNames[book.title] = 0;
     }
-
+    book_cart[book._id] = book_cart[book._id] + quantity;
     booksCartNames[book.title] = booksCartNames[book.title] + quantity;
+    localStorage.setItem("book_cart", JSON.stringify(book_cart));
     localStorage.setItem("booksCartNames", JSON.stringify(booksCartNames));
     window.location.reload(false);
   }

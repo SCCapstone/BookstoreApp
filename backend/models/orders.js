@@ -2,10 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const orderSchema = new mongoose.Schema({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  email: { type: String, required: true },
-  role: { type: String, required: true },
+  userId: { type: String, required: true },
   order: { type: Object, required: true },
   orderPrice: { type: Number, required: true },
   orderDate: { type: String, required: true },
@@ -16,22 +13,10 @@ const Order = mongoose.model("orders", orderSchema);
 
 const validate = (data) => {
   const schema = Joi.object({
-    firstName: Joi.string()
+    userId: Joi.string()
       .required()
-      .label("firstName")
-      .error(new Error("firstName is invalid")),
-    lastName: Joi.string()
-      .required()
-      .label("lastName")
-      .error(new Error("lastName is invalid")),
-    email: Joi.string()
-      .required()
-      .label("email")
-      .error(new Error("email is invalid")),
-    role: Joi.string()
-      .required()
-      .label("role")
-      .error(new Error("role is invalid")),
+      .label("User ID")
+      .error(new Error("Invalid User ID")),
     order: Joi.object()
       .required()
       .label("order")

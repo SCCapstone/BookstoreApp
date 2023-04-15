@@ -1,7 +1,9 @@
 //imports 
 import axios from "axios";
-import React, { Fragment } from "react";
+import React from "react";
 import UserRow from "../components/UserRow";
+import { Pagination } from "@mui/material";
+import { isAdmin, sendToHome } from "../utils/PermissionUtils";
 
 {/* The validated users page is restricted to authenticated users only such as employees and admin. 
 Admin of the website have the ability to delete a user, edit the user's role, and and edit the balance
@@ -11,8 +13,9 @@ new credentials if anything has been changed or updated.*/}
 //the ValidatedUsers class extends the built in function of react component which takes a state that has the current user and the array of users as well
 export default class ValidatedUsers extends React.Component {
   state = {
-    currentUser: "",
     users: [],
+    pageSize: 12,
+    currentPage: 1
   };
 
   //async function which ensures to return a promise of getting the validated users
@@ -72,10 +75,10 @@ export default class ValidatedUsers extends React.Component {
     }
   }
 
-  // functionality for ensuring unauthenticated users cannot view
-  isLoggedIn = () => {
-    const currentUser = this.props.currentUser;
-    return currentUser && currentUser.length !== 0;
+  changePage = (e, p) => {
+    this.setState((state) => ({
+      currentPage: p,
+    }));
   };
 
   //sends the updated info of the user to login
@@ -85,7 +88,7 @@ export default class ValidatedUsers extends React.Component {
 
   //shows the name, email, actions, role, and balance of the user which can be changed by restricted users only!
   render() {
-    return this.isLoggedIn() ? (
+    return isAdmin(this.props.userRole) ? (
       <div className="bg-gainsboro">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -94,12 +97,6 @@ export default class ValidatedUsers extends React.Component {
                 <th scope="col" class="px-6 py-3">
                   Name
                 </th>
-                {/* <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">
-                    Id
-
-                  </div>
-                </th> */}
                 <th scope="col" class="px-6 py-3">
                   <div class="flex items-center">Email</div>
                 </th>
@@ -115,7 +112,7 @@ export default class ValidatedUsers extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.users.map((user) => (
+              {this.getPaginatedUsers(this.state.currentPage).map((user) => (
                 <UserRow
                   contact={user}
                   handleDelete={this.deleteUser}
@@ -125,13 +122,18 @@ export default class ValidatedUsers extends React.Component {
               ))}
             </tbody>
           </table>
+          <Pagination
+            count={Math.ceil(this.state.users.length / this.state.pageSize)}
+            page={this.state.currentPage}
+            onChange={this.changePage}
+          />
         </div>
       </div>
     ) : (
-      (this.sendToLogin(),
+      (sendToHome(),
       (
         <div>
-          <h1>Restricted to authenticated users only!</h1>
+          <h1>Restricted to administrators only!</h1>
         </div>
       ))
     );

@@ -6,10 +6,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import axios from 'axios';
+
 export default function ProfileIcon(currentUser) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [user, setUser] = useState({});
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -19,24 +18,14 @@ export default function ProfileIcon(currentUser) {
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (currentUser?.currentUser === null) return;
-      const url = "/api/users/" + currentUser.currentUser;
-      let res = await axios.get(url);
-      res.data.password = "";
-      setUser(res.data);
-    };
-    fetchData();
-  },[]);
-
   const logout = () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("userType");
-      localStorage.removeItem("userID");
-      window.location.reload();
-      window.location.href = "/";
-      console.log("logout");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("userID");
+    localStorage.removeItem("userInitials"); // remove the user initials from local storage when log out
+    window.location.reload();
+    window.location.href = "/";
+    console.log("logout");
   };
   
   const isLoggedIn = () => {
@@ -44,16 +33,7 @@ export default function ProfileIcon(currentUser) {
   };
 
   const userInitials = () => {
-    let initials = "";
-    if (user?.firstName?.length > 0) {
-      initials += user.firstName[0];
-      if (user?.lastName.length>0) {
-        initials += user.lastName[0];
-      }
-    } else {
-      initials = "##";
-    }
-    return initials.toUpperCase();
+    return localStorage.getItem("userInitials").toUpperCase();
   }
 
   return isLoggedIn() ? (

@@ -8,6 +8,7 @@ import MuiAlert from '@mui/material/Alert';
 import swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
 import { v4 as uuidv4 } from 'uuid';
+import { isLoggedIn, sendToHome } from "../utils/PermissionUtils";
 
 {/* The Login Page is where users will login with their registered email and password.
 If a user does not have a login credential they will click on the register button to get navigated to a sign up/register page
@@ -50,7 +51,6 @@ const Login = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userType", res.data.userType);
-      localStorage.setItem("role", res.data.role);
       localStorage.setItem("userID", res.data.userID);
       //set initially to the home 
       window.location = "/";
@@ -200,6 +200,13 @@ const Login = () => {
         </div>
       </div>
     </div>
+  ); : (
+    (sendToHome(),
+      (
+          <div>
+          <h1>User is already logged in!</h1>
+          </div>
+      ))
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import books from "./Books.js";
+import { isLoggedIn, sendToLogin } from "../utils/PermissionUtils";
 
 export default class Favorites extends Component {
     constructor(props) {
@@ -33,7 +33,7 @@ export default class Favorites extends Component {
         await axios.get(bookUrl).then(res => {
             let favoriteBooks = res.data;
             if (!res.data || res.data.length === 0) {
-                favoriteBooks = books;
+                favoriteBooks = [];
             }
 
             this.setState((state) => ({
@@ -50,26 +50,6 @@ export default class Favorites extends Component {
         }
     }
 
-    iterate(iterable, callback) {
-        for (var key in iterable) {
-          if (
-            key === "length" ||
-            key === "prototype" ||
-            !Object.prototype.hasOwnProperty.call(iterable, key)
-          )
-            continue;
-            callback(iterable[key], key, iterable);
-        }
-    }
-
-    getKeys(obj) {
-        var keys = [];
-        this.iterate(obj, function (oVal, oKey) {
-            keys.push(oKey);
-        });
-        return keys;
-    }
-
     favoriteTitles() {
         return this.state.favorites.map(x => x.title);
     }
@@ -79,9 +59,21 @@ export default class Favorites extends Component {
     }
 
     render() {
+        if (!isLoggedIn(this.props.currentUser)) {
+            return (
+                (sendToLogin(),
+                    (
+                        <div>
+                        <h1>Restricted to authenticated users only!</h1>
+                        </div>
+                    )
+                )
+            )
+        }
+
         return this.anyFavorites() ? (
             <div class="py-6">
-                <div class="py-4">
+                <div class="sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1150px] xl:max-w-[1200px] max-w-[200px]">
                     <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
                     Wishlist
                     </div>

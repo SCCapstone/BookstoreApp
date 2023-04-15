@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import swal from 'sweetalert2';
 import { Autocomplete, TextField } from "@mui/material";
+import { isLoggedIn, sendToLogin } from "../utils/PermissionUtils";
 
 export default class CreateForum extends Component {
     constructor(props) {
@@ -70,51 +71,49 @@ export default class CreateForum extends Component {
             post: text,
             date: Date().toString(),
         }};
-        // console.log(theReview);
         const res = await axios.put(url, theReview);
-        // console.log(res.data);
         swal.fire({
           icon: 'success',
           title: "Review posted successfully"
         })
     }
 
-    render () { return (
-    <section className="">
-    <div className="py-4">
-      <div className="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
-        Post a Forum
-      </div>
-    <Autocomplete
-      className="rounded border bg-white py-2 max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px]"
-      onChange={(event, newValue) => {
-        this.setState((state) => ({
-            book: newValue
-        }));
-        }}
-        inputValue={this.state.inputBook}
-        onInputChange={(event, newInputValue) => {
-            this.setState((state) => ({
-                inputBook: newInputValue
-            }));
-        }}
-        options={this.state.books}
-        getOptionLabel={(option) => option.title}
-        groupBy={(option) => option.genre[0] }
-        filterOptions={this.filterOptions}
-        renderInput={(params) => (
-            <TextField
-                {...params}
-                variant="filled"
-                label="Select"
-                placeholder="Select Book"
-            />
-        )}
-    />
-    </div>
-      <form onSubmit={this.handleSubmit}>
+    render () { 
+      return isLoggedIn(this.props.currentUser) ? (
+        <section className="">
+          <div className="py-4">
+            <div className="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
+              Post a Forum
+            </div>
+          <Autocomplete
+            className="rounded border bg-white py-2 max-w-[1158px] px-4 w-[500px] xl:w-[1100px] lg:w-[600px] md:w-[500px]"
+            onChange={(event, newValue) => {
+              this.setState((state) => ({
+                  book: newValue
+              }));
+            }}
+            inputValue={this.state.inputBook}
+            onInputChange={(event, newInputValue) => {
+                this.setState((state) => ({
+                    inputBook: newInputValue
+                }));
+            }}
+            options={this.state.books}
+            getOptionLabel={(option) => option.title}
+            groupBy={(option) => option.genre[0] }
+            filterOptions={this.filterOptions}
+            renderInput={(params) => (
+                <TextField
+                    {...params}
+                    variant="filled"
+                    label="Select"
+                    placeholder="Select Book"
+                />
+            )}
+          />
+          </div>
+          <form onSubmit={this.handleSubmit}>
             <div>
-
               <label>What would you like to share about this book? </label>
               <textarea
                 name="message"
@@ -130,8 +129,15 @@ export default class CreateForum extends Component {
                 className="inline-block px-10 py-3 bg-persian_plum font-semibold text-white font-medium leading-snug uppercase rounded"
               />
             </div>
-        </form>
+          </form>
         </section>
-    )
-    }
+    ) : (
+      (sendToLogin(),
+      (
+        <div>
+          <h1>Restricted to authenticated users only!</h1>
+        </div>
+      ))
+    );
+  }
 }
