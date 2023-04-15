@@ -1,32 +1,30 @@
 import React, { useState } from "react";
 
 const BookRow = ({
-  contact,
+  book,
   handleEditClick,
   handleDelete,
-  handleEditBalance,
+  handleEditStock,
 }) => {
-  // console.log(contact)
-  const [balance, setBalance] = useState(contact.balance["$numberDecimal"]);
+  console.log(book)
+  const [stock, setStock] = useState(book.stock);
   const updateChange = (e) => {
-    setBalance(e.target.value);
+    setStock(e.target.value);
   };
   const handleChange = (e) => {
     const newUserType = e.target.value;
-    handleEditClick(contact, newUserType);
+    handleEditClick(book, newUserType);
   };
 
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       <td class="px-6 py-4">
-        {contact.fullName
-          ? contact.fullName
-          : contact.firstName + " " + contact.lastName}
+        {book.title}
       </td>
       {/* <td class="px-6 py-4">
         {contact.username ? contact.username : contact._id}
       </td> */}
-      <td class="px-6 py-4">{contact.email}</td>
+      <td class="px-6 py-4">{book.author}</td>
       <td>
         {/* <button
           type="button"
@@ -37,33 +35,24 @@ const BookRow = ({
         <button
           class="bg-persian_plum text-white ml-4 py-2 px-4"
           type="button"
-          onClick={() => handleDelete(contact)}
+          onClick={() => handleDelete(book)}
         >
           Delete
         </button>
       </td>
-      <td>
-        <select
-          value={contact.role}
-          onChange={handleChange}
-          class="form-select block w-full"
-        >
-          <option value="customer">customer</option>
-          <option value="admin">admin</option>
-        </select>
-      </td>
+
       <td className="">
         <input
-          type="balance"
-          placeholder={balance}
-          value={balance}
+          type="stock"
+          placeholder={stock}
+          value={stock}
           className="text-black placeholder-black text-center w-24"
           onChange={(e) => updateChange(e)}
         />
         <button
           class="bg-persian_plum text-white ml-4 py-2 px-4"
           type="button"
-          onClick={() => handleEditBalance(contact, balance)}
+          onClick={() => handleEditStock(book, stock)}
         >
           Update
         </button>
