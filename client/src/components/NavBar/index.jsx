@@ -27,6 +27,7 @@ import ChangePassword from "../../views/ChangePassword";
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
   const userType = localStorage.getItem("userType");
+  const userId = localStorage.getItem("userID");
   const items = JSON.parse(localStorage.getItem("cartItemsQuantity"));
   // console.log(items);
 
@@ -55,20 +56,20 @@ const CompleteNavbar = () => {
         <SideBar user={user} />
         <div className="px-16"></div>
         <BrowserRouter>
-          <NavBar user={localStorage.getItem("userID")} userType={userType} items={items} />
+          <NavBar user={userId} userType={userType} items={items} />
           <Routes>
             {/* All users */}
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login currentUser={userId} />} />
             <Route path="/about" element={<Aboutus />} />
             <Route path="/terms_of_service" element={<TOS />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browse" element={<Browse />} />
-            <Route path="/create_account" element={<Signup />} />
+            <Route path="/create_account" element={<Signup currentUser={userId} />} />
             <Route
               path="/cart"
               element={
-                <MainCart currentUser={localStorage.getItem("userID")} />
+                <MainCart currentUser={userId} />
               }
             />
 
@@ -76,44 +77,44 @@ const CompleteNavbar = () => {
             <Route
               path="/my_account"
               element={
-                <MyAccount currentUser={localStorage.getItem("userID")} />
+                <MyAccount currentUser={userId} />
               }
             />
             <Route
               path="/favorites"
               element={
-                <Favorites currentUser={localStorage.getItem("userID")} />
+                <Favorites currentUser={userId} />
               }
             />
 
             {/* Admin */}
-            <Route path="/add_book" element={<AddBook currentUser={user} />} />
+            <Route path="/add_book" element={<AddBook role={userType} />} />
             <Route
               path="/users"
-              element={<ValidatedUsers currentUser={userType} />}
+              element={<ValidatedUsers userRole={userType} />}
             />
             <Route
               path="/emp_page"
-              element={<EmployeeHomepage currentUser={userType} />}
+              element={<EmployeeHomepage userRole={userType} />}
             />
-            <Route path="/orders" element={<Orders currentUser={userType} />} />
+            <Route path="/orders" element={<Orders userRole={userType} />} />
 
             <Route
               path="/edit_blog"
-              element={<EditBlogpage currentUser={userType} />}
+              element={<EditBlogpage userRole={userType} />}
             />
 
             {/* Admin, Employee, and Customer */}
             <Route
               path="/createforums"
-              element={<CreateForum user={localStorage.getItem("userID")} />}
+              element={<CreateForum currentUser={userId} />}
             />
 
             {/* Mapped Routes */}
             {books.map((book) => (
               <Route
                 path={`/${book.author}/${book.title}/`}
-                element={<BooksPageGenerator book={book} user={localStorage.getItem("userID")} />}
+                element={<BooksPageGenerator book={book} user={userId} />}
               />
             ))}
             {/* Mapped Route for Reviews */}

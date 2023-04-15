@@ -6,26 +6,7 @@ import { Remove, Add } from "@mui/icons-material";
 import Popup from "reactjs-popup";
 import swal from "sweetalert2";
 import axios from "axios";
-
-function getKeys(obj) {
-  var keys = [];
-  iterate(obj, function (oVal, oKey) {
-    keys.push(oKey);
-  });
-  return keys;
-}
-
-function iterate(iterable, callback) {
-  for (var key in iterable) {
-    if (
-      key === "length" ||
-      key === "prototype" ||
-      !Object.prototype.hasOwnProperty.call(iterable, key)
-    )
-      continue;
-    callback(iterable[key], key, iterable);
-  }
-}
+import { getKeys } from "../utils/IterationUtils";
 
 const BooksPageGenerator = ({ book, user }) => {
   const [quantity, setQuantity] = useState(0);

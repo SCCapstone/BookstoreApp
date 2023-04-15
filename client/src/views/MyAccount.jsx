@@ -1,6 +1,7 @@
 import React, { Component }  from "react";
 import axios from "axios";
 import swal from 'sweetalert2';
+import { isLoggedIn, sendToLogin } from "../utils/PermissionUtils";
 
 export default class MyAccount extends Component {
     constructor(props) {
@@ -66,7 +67,7 @@ export default class MyAccount extends Component {
     }
     
     render() {
-        return (
+        return isLoggedIn(this.props.currentUser) ? (
             <div class="py-4">
                     <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 max-w-[1300px]">
                         My Account Profile
@@ -142,6 +143,13 @@ export default class MyAccount extends Component {
                     </div>
                 </form>
             </div>
-        )
+        ) : (
+            (sendToLogin(),
+            (
+                <div>
+                <h1>Restricted to authenticated users only!</h1>
+                </div>
+            ))
+        );
     }
 }
