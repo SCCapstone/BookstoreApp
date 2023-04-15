@@ -8,7 +8,7 @@ export default class UpdateBooks extends React.Component {
   state = {
     books: [],
     pageSize: 12,
-    currentPage: 1
+    currentPage: 1,
   };
 
   async getBooks() {
@@ -21,7 +21,7 @@ export default class UpdateBooks extends React.Component {
 
   componentDidMount() {
     this.getBooks();
-    console.log(this.state.books)
+    console.log(this.state.books);
   }
 
   async deleteBook(book) {
@@ -46,12 +46,12 @@ export default class UpdateBooks extends React.Component {
     }
   }
 
-  async editBalance(book, newBalance) {
+  async editStock(book, newStock) {
     const id = book._id;
     const url = "/api/books/" + id;
     try {
-      await axios.put(url, { balance: newBalance });
-      // window.location.reload();
+      await axios.put(url, { stock: newStock });
+      this.getBooks();
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -64,10 +64,10 @@ export default class UpdateBooks extends React.Component {
   };
 
   getPaginatedBooks(currentPage) {
-    const firstPageIndex = (currentPage-1) * this.state.pageSize;
+    const firstPageIndex = (currentPage - 1) * this.state.pageSize;
     const lastPageIndex = firstPageIndex + this.state.pageSize;
     return this.state.books.slice(firstPageIndex, lastPageIndex);
-  };
+  }
 
   render() {
     return isAdmin(this.props.userRole) ? (
@@ -104,7 +104,6 @@ export default class UpdateBooks extends React.Component {
                 <th scope="col" class="px-6 py-3">
                   <div class="flex items-center">Sold</div>
                 </th>  */}
-
               </tr>
             </thead>
             <tbody>
@@ -112,16 +111,16 @@ export default class UpdateBooks extends React.Component {
                 <BookRow
                   book={book}
                   handleDelete={this.deleteBook}
-                  handleEditStock={this.editBalance}
+                  handleEditStock={this.editStock}
                 />
               ))}
             </tbody>
           </table>
-          {/* <Pagination
+          <Pagination
             count={Math.ceil(this.state.books.length / this.state.pageSize)}
             page={this.state.currentPage}
             onChange={this.changePage}
-          /> */}
+          />
         </div>
       </div>
     ) : (
