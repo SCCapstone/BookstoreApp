@@ -5,6 +5,7 @@ const admin_menu_options = [
   { name: "Write a Review", link: "/createForums" },
   { name: "Validated Users", link: "/users" },
   { name: "Add Book", link: "/add_book" },
+  { name: "Update Books", link: "/update_books" },
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
   { name: "Terms of Service", link: "/terms_of_service" },
