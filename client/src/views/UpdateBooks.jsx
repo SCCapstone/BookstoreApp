@@ -92,10 +92,10 @@ export default class UpdateBooks extends React.Component {
                   <div class="flex items-center">Stock</div>
                 </th>
 
-                {/* <th scope="col" class="px-6 py-3">
-                  <div class="flex items-center">Author</div>
-                </th>
                 <th scope="col" class="px-6 py-3">
+                  <div class="flex items-center">Remove Book</div>
+                </th>
+                {/* <th scope="col" class="px-6 py-3">
                   <div class="flex items-center">Price</div>
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -103,7 +103,7 @@ export default class UpdateBooks extends React.Component {
                 </th>
                 <th scope="col" class="px-6 py-3">
                   <div class="flex items-center">Sold</div>
-                </th> */}
+                </th>  */}
 
               </tr>
             </thead>
