@@ -49,11 +49,12 @@ export default class UpdateBooks extends React.Component {
     }
   }
 
-  async editStock(book, newStock) {
+  async editStock(book, newStock, newPrice) {
     const id = book._id;
     const url = "/api/books/" + id;
+
     try {
-      await axios.put(url, { stock: newStock });
+      await axios.put(url, { stock: newStock, price: newPrice });
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -64,12 +65,6 @@ export default class UpdateBooks extends React.Component {
       currentPage: p,
     }));
   };
-
-  getPaginatedBooks(currentPage) {
-    const firstPageIndex = (currentPage - 1) * this.state.pageSize;
-    const lastPageIndex = firstPageIndex + this.state.pageSize;
-    return this.state.books.slice(firstPageIndex, lastPageIndex);
-  }
 
   render() {
     return isAdmin(this.props.userRole) ? (
@@ -109,7 +104,7 @@ export default class UpdateBooks extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.getPaginatedBooks(this.state.currentPage).map((book) => (
+              {this.state.books.map((book) => (
                 <BookRow
                   book={book}
                   handleDelete={this.deleteBook}
@@ -118,11 +113,6 @@ export default class UpdateBooks extends React.Component {
               ))}
             </tbody>
           </table>
-          <Pagination
-            count={Math.ceil(this.state.books.length / this.state.pageSize)}
-            page={this.state.currentPage}
-            onChange={this.changePage}
-          />
         </div>
       </div>
     ) : (
