@@ -261,7 +261,6 @@ class MainCart extends Component {
 
   checkOutChecker = () => {
     if (this.calculatePrice() === 0) {
-      this.removeBookItem();
       return true;
     }
     return false;
@@ -271,11 +270,12 @@ class MainCart extends Component {
     let booksSource = [];
     for (let i = 0; i < this.state.books.length; ++i) {
       for (let bookId in this.state.bookCart) {
-        if (bookId === this.state.books[i]._id) {
+        if (bookId === this.state.books[i]._id && this.state.bookCart[bookId] !== 0) {
           booksSource.push([this.state.books[i], this.state.bookCart[bookId]]);
         }
       }
     }
+    console.log(booksSource);
     return booksSource;
   };
 
@@ -330,7 +330,7 @@ class MainCart extends Component {
                         className="pl-4"
                         onClick={() => this.removeBookItem(book)}
                       >
-                        Clear
+                        Remove
                       </button>
                     </div>
                   </h3>
