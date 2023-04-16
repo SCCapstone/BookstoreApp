@@ -1,5 +1,10 @@
 import React from "react";
 import { styles } from "../styles";
+import {alfred} from "../assets/alfred-headshot.png"
+import {jack} from "../assets/jack-headshot.jpeg"
+import {sai} from "../assets/alfred-headshot.jpeg"
+import {hobbs} from "../assets/hobbs-headshot.jpeg"
+import {rahul} from "../assets/rahul-headshot.jpeg"
 
 const Aboutus = () => {
   return (
@@ -27,6 +32,11 @@ const Aboutus = () => {
           The members of this project are Rahul Bulusu, William Hobbs, Alfred Lin, Jack Oberman, and Sai Oruganti. 
           {/* Add linkedin links of everyone as well as a headshot*/}
         </p>
+        <div>
+        <a href="" target="_blank" rel="noreferrer">
+        <img src={cbLogo} alt="Coding Beauty logo"></img>
+      </a>
+        </div>
       </div>
     </section>
   );
