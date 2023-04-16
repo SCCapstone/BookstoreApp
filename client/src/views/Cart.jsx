@@ -270,7 +270,10 @@ class MainCart extends Component {
     let booksSource = [];
     for (let i = 0; i < this.state.books.length; ++i) {
       for (let bookId in this.state.bookCart) {
-        if (bookId === this.state.books[i]._id && this.state.bookCart[bookId] !== 0) {
+        if (
+          bookId === this.state.books[i]._id &&
+          this.state.bookCart[bookId] !== 0
+        ) {
           booksSource.push([this.state.books[i], this.state.bookCart[bookId]]);
         }
       }
