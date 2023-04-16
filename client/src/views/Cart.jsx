@@ -245,6 +245,7 @@ class MainCart extends Component {
     this.setState((state) => ({
       bookCart: {},
     }));
+    window.location.reload(false);
   };
 
   calculatePrice = () => {
@@ -276,7 +277,6 @@ class MainCart extends Component {
         ) {
           booksSource.push([this.state.books[i], this.state.bookCart[bookId]]);
         }
-
       }
     }
     console.log(booksSource);
