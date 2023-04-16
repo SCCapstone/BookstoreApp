@@ -44,6 +44,7 @@ export default class UpdateBooks extends React.Component {
     } catch (error) {
       console.log("Error: ", error);
     }
+    this.getBooks();
   }
 
   async editStock(book, newStock) {
@@ -51,17 +52,16 @@ export default class UpdateBooks extends React.Component {
     const url = "/api/books/" + id;
     try {
       await axios.put(url, { stock: newStock });
-      this.getBooks();
     } catch (error) {
       console.log("Error: ", error);
     }
+    this.getBooks();
   }
 
   changePage = (e, p) => {
     this.setState((state) => ({
       currentPage: p,
     }));
-    this.getBooks();
   };
 
   getPaginatedBooks(currentPage) {
