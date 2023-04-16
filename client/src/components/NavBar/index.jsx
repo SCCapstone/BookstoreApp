@@ -63,6 +63,7 @@ const CompleteNavbar = () => {
             <Route path="/terms_of_service" element={<TOS />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browse" element={<Browse />} />
+            <Route path='/create_account' element={<Signup />} />
             <Route
               path="/cart"
               element={
