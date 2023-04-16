@@ -39,7 +39,7 @@ const SignUp = ({ currentUser }) => {
       const compexP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
       if(!compexP.test(data.password)) {
         swal.fire({
-          icon: "Error",
+          icon: "error",
           title: "Password must be at least 8 characters and include a combination of letters, numbers, and special characters!'",
         });
         throw Error("Password must be at least 8 characters and include a combination of letters, numbers, and special characters!");
