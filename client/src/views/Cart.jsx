@@ -81,9 +81,6 @@ class MainCart extends Component {
   canPurchaseBooks() {
     // User cannot purchae if not logged in
 
-    if (!this.checkOutChecker()) return false;
-
-    console.log(this.state.currentUser);
     if (!this.state.currentUser || this.state.currentUser.length === 0) {
       swal.fire({
         icon: "error",
@@ -114,22 +111,16 @@ class MainCart extends Component {
     e.preventDefault();
 
     if (!this.checkOutChecker()) {
-      console.log(this.checkOutChecker());
-      console.log("can't checkout");
       return;
     }
     // canPurchase will store boolean value reflecting
     // if user can purchase books
 
     if (this.mapper().length === 0) {
-      console.log(this.mapper());
-      console.log("not hitting the mapper");
       return;
     }
-    console.log(this.mapper().length);
 
     if (!this.canPurchaseBooks()) {
-      console.log("can't checkout");
       return;
     }
 
@@ -212,7 +203,7 @@ class MainCart extends Component {
     }
     this.clearCart();
 
-    window.location.reload();
+    // window.location.reload();
   }
 
   // getting user balance
