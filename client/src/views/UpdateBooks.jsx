@@ -61,6 +61,7 @@ export default class UpdateBooks extends React.Component {
     this.setState((state) => ({
       currentPage: p,
     }));
+    this.getBooks();
   };
 
   getPaginatedBooks(currentPage) {
