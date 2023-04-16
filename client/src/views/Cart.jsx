@@ -219,7 +219,7 @@ class MainCart extends Component {
   };
 
   checkCartUpdate = ([book, value]) => {
-    if (book.stock >= value && value >= 0) {
+    if (book.stock >= value && value > 0) {
       return true;
     }
     return false;
@@ -276,6 +276,7 @@ class MainCart extends Component {
         ) {
           booksSource.push([this.state.books[i], this.state.bookCart[bookId]]);
         }
+
       }
     }
     console.log(booksSource);
