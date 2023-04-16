@@ -3,6 +3,7 @@ import { Remove, Add } from "@mui/icons-material";
 import { Grid, Chip, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 
+
 // import books from "../Books";
 import axios from "axios";
 // import { cartChange } from "../../components/NavBar/NavBar";
@@ -97,7 +98,7 @@ class MainCart extends Component {
     return true;
   };
 
-  async handleSubmit(e) {
+  handleSubmit = async (e) => {
     e.preventDefault();
 
     // canPurchase will store boolean value reflecting
@@ -115,16 +116,25 @@ class MainCart extends Component {
     // Step 1: Add new order to orders
     try {
       const orderUrl = "/api/orders";
-      axios.post(orderUrl, order).then((res) => {
-        // if order successfully went through, empty out cart
-        this.clearCart();
+      const res = await axios.post(orderUrl, order);
+      
+      // if order successfully went through, empty out cart
+      this.clearCart();
+
+      // Show success message
+      swal.fire({
+        icon: 'success',
+        title: 'Order Successfully Check out!',
+        showConfirmButton: false,
+        timer: 20000
       });
+
     } catch (error) {
       if (error.response?.status >= 400 && error.response.status <= 500) {
         console.log(error.response.data.message);
         swal.fire({
           icon: "error",
-          title: "Error adding order",
+          title: "Error Checking out",
           text: error.response.data.message,
         });
       }
