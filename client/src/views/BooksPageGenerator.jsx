@@ -76,6 +76,11 @@ const BooksPageGenerator = ({ book, user }) => {
     });
   }, []);
 
+  function round(value, decimals) {
+    const roundedValue = Math.round(value * 10 ** decimals) / 10 ** decimals;
+    return roundedValue.toFixed(decimals);
+  }
+
   function addOrRemoveFromWishlist() {
     // don't do anything if not logged-in
     if (!user || user.length === 0) return;
@@ -121,7 +126,7 @@ const BooksPageGenerator = ({ book, user }) => {
             <img src={book.imageId} alt="" className="row-span-2 border-2" />
           </div>
           <div className="pt-12 grid grid-auto-rows">
-            <ul className="text-bold text-xl">${book.price}</ul>
+            <ul className="text-bold text-xl">${round(book.price, 2)}</ul>
             <ReactStars
               count={5}
               value={book.stars}
