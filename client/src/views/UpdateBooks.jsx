@@ -13,9 +13,12 @@ export default class UpdateBooks extends React.Component {
 
   async getBooks() {
     const url = "/api/books";
-    axios.get(url).then((res) => {
-      const books = res.data;
-      this.setState({ books: books });
+
+    await axios.get(url).then((res) => {
+      let books = res.data;
+      this.setState((state) => ({
+        books: books,
+      }));
     });
   }
 
@@ -44,7 +47,6 @@ export default class UpdateBooks extends React.Component {
     } catch (error) {
       console.log("Error: ", error);
     }
-    this.getBooks();
   }
 
   async editStock(book, newStock) {
@@ -55,7 +57,6 @@ export default class UpdateBooks extends React.Component {
     } catch (error) {
       console.log("Error: ", error);
     }
-    this.getBooks();
   }
 
   changePage = (e, p) => {
