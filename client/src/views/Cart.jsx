@@ -13,8 +13,10 @@ import { getKeys } from "../utils/IterationUtils";
 cartChange();
 
 function round(value, decimals) {
-  return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+  const roundedValue = Math.round(value * 10 ** decimals) / 10 ** decimals;
+  return roundedValue.toFixed(decimals);
 }
+
 class MainCart extends Component {
   constructor(props) {
     super(props);
