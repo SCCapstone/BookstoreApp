@@ -96,11 +96,11 @@ const EditBlogpage = ({ userRole }) => {
             <p className="whitespace-normal break-all">{post.post}</p>
           </div>
           <button
-  className="bg-black text-white py-2 px-4 rounded my-4 focus:shadow-outline whitespace-normal"
-  onClick={() => handleDelete(post._id, index)}
->
-  Delete {post.title}
-</button>
+            className="bg-black text-white py-2 px-4 rounded my-4 focus:shadow-outline whitespace-normal break-all"
+            onClick={() => handleDelete(post._id, index)}
+          >
+            Delete {post.title}
+          </button>
         </div>
       ))}
     </div>
