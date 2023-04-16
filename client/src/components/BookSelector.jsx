@@ -58,7 +58,6 @@ export default class BookSelector extends Component {
                     <TextField
                         {...params}
                         variant="filled"
-                        // label="Search"
                         placeholder="Search Books"
                     />
                 )}
