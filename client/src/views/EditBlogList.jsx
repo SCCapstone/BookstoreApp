@@ -23,7 +23,7 @@ const EditBlogList = () => {
     <div> 
       {rBlogPosts.map((post, index) => (
         <div key={post._id}>
-          <div className="bg-camel px-2 py-2 text-lg mb-4">
+          <div className="flex flex-col bg-camel px-2 py-2 text-lg mb-4">
             <h2 className="text-xl font-bold">{post.title}</h2>
             <p>{post.post}</p>
           </div>
