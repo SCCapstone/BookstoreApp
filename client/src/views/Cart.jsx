@@ -30,8 +30,8 @@ class MainCart extends Component {
     // setting books cart
     var bookCart = JSON.parse(localStorage.getItem("book_cart"));
     this.setState((state) => ({
-      bookCart: bookCart
-    }))
+      bookCart: bookCart,
+    }));
 
     // check cart
     const bookIds = getKeys(bookCart);
@@ -63,7 +63,7 @@ class MainCart extends Component {
             }));
           }
         });
-      } 
+      }
     } catch (error) {
       console.log("USER NEED TO LOGIN");
     }
@@ -83,7 +83,7 @@ class MainCart extends Component {
 
     var updatedBalance = this.availableBalance() - this.calculatePrice();
 
-    // User cannot purchase books if balance is 
+    // User cannot purchase books if balance is
     // lower than the cost of the books
     if (updatedBalance < 0) {
       swal.fire({
@@ -92,7 +92,7 @@ class MainCart extends Component {
         text: "Please add more to the balance",
       });
       return false;
-    } 
+    }
 
     return true;
   };
@@ -109,7 +109,7 @@ class MainCart extends Component {
       order: this.state.bookCart,
       orderPrice: this.calculatePrice(),
       orderDate: new Date(),
-      orderStatus: "In-Progress"
+      orderStatus: "In-Progress",
     };
 
     // Step 1: Add new order to orders
@@ -135,7 +135,7 @@ class MainCart extends Component {
     var updatedBalance = this.availableBalance() - this.calculatePrice();
     if (updatedBalance === 0) updatedBalance = "0";
     else updatedBalance = round(updatedBalance, 2);
- 
+
     try {
       const url = "/api/users/" + this.state.currentUser;
       const usr = { balance: updatedBalance };
@@ -157,27 +157,27 @@ class MainCart extends Component {
       }
       return;
     }
-      
+
     // Step 3: Update Each Book's Quantity Sold
     for (let bookId in order.order) {
       try {
         const url = "api/books/" + bookId;
         const newBook = {
-          quantitySold: order.order[bookId]
+          quantitySold: order.order[bookId],
         };
-        // TO-DO: Update stock as well 
+        // TO-DO: Update stock as well
         axios.put(url, newBook).catch((e) => {
           swal.fire({
             icon: "error",
             title: "Error updating book data",
-            text: "Quantity of that book sold improperly updated"
+            text: "Quantity of that book sold improperly updated",
           });
-        })
+        });
       } catch {
         swal.fire({
           icon: "error",
           title: "Error updating book data",
-          text: "Quantity of that book sold improperly updated"
+          text: "Quantity of that book sold improperly updated",
         });
       }
     }
@@ -194,7 +194,7 @@ class MainCart extends Component {
           balance = this.state.user.balance;
         } else if (this.state.user.balance.$numberDecimal !== "") {
           balance = this.state.user.balance.$numberDecimal;
-        } 
+        }
         return round(balance, 2);
       } else {
         return 0;
@@ -213,7 +213,7 @@ class MainCart extends Component {
       localStorage.setItem("booksCartNames", JSON.stringify(tmp));
       localStorage.setItem("book_cart", JSON.stringify(tmp2));
       this.setState((state) => ({
-        bookCart: tmp2
+        bookCart: tmp2,
       }));
     }
   };
@@ -233,7 +233,7 @@ class MainCart extends Component {
     localStorage.setItem("booksCartNames", JSON.stringify(tmp));
     localStorage.setItem("book_cart", JSON.stringify(tmp2));
     this.setState((state) => ({
-      bookCart: tmp2
+      bookCart: tmp2,
     }));
     window.location.reload(false);
   };
@@ -241,10 +241,9 @@ class MainCart extends Component {
   clearCart = () => {
     localStorage.setItem("book_cart", JSON.stringify({}));
     localStorage.setItem("booksCartNames", JSON.stringify({}));
-
     // window.location.reload(false);
     this.setState((state) => ({
-      bookCart: {}
+      bookCart: {},
     }));
   };
 
@@ -253,8 +252,7 @@ class MainCart extends Component {
     for (let i in this.state.bookCart) {
       for (let j = 0; j < this.state.books.length; ++j) {
         if (i === this.state.books[j]._id) {
-          total =
-            total + this.state.bookCart[i] * this.state.books[j].price;
+          total = total + this.state.bookCart[i] * this.state.books[j].price;
         }
       }
     }
@@ -263,6 +261,7 @@ class MainCart extends Component {
 
   checkOutChecker = () => {
     if (this.calculatePrice() === 0) {
+      this.removeBookItem();
       return true;
     }
     return false;
@@ -273,10 +272,7 @@ class MainCart extends Component {
     for (let i = 0; i < this.state.books.length; ++i) {
       for (let bookId in this.state.bookCart) {
         if (bookId === this.state.books[i]._id) {
-          booksSource.push([
-            this.state.books[i],
-            this.state.bookCart[bookId],
-          ]);
+          booksSource.push([this.state.books[i], this.state.bookCart[bookId]]);
         }
       }
     }
@@ -332,15 +328,9 @@ class MainCart extends Component {
                       />
                       <button
                         className="pl-4"
-                        onClick={() => this.setQtyValue([book, 0])}
-                      >
-                        Clear
-                      </button>
-                      <button
-                        className="pl-4"
                         onClick={() => this.removeBookItem(book)}
                       >
-                        Delete
+                        Clear
                       </button>
                     </div>
                   </h3>
@@ -349,7 +339,7 @@ class MainCart extends Component {
             ))}
           </div>
           <div className="ml-2">
-            <Button onClick={() => this.clearCart()}>Clear Cart</Button>
+            <Button onClick={() => this.clearCart()}>Remove All Items</Button>
           </div>
           <form
             className={`grid grid-cols-3 flex-1 flex justify-start items-center  m-3 bg-camel py-4 px-4 rounded min-w-[500px] max-w-[600px] gap-16`}
