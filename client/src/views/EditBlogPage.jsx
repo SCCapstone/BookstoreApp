@@ -75,12 +75,14 @@ const EditBlogpage = ({ userRole }) => {
           placeholder="Enter blog title here"
           value={blogTitle}
           onChange={(e) => setBlogTitle(e.target.value)}
+          style={{ minHeight: "2em" }}
         />
         <textarea
           className="border-2 focus:shadow-outline focus:bg-white w-full h-48"
           placeholder="Enter blog post here..."
           value={blogPost}
           onChange={(e) => setBlogPost(e.target.value)}
+          style={{ minHeight: "2em" }}
         />
         <button
           className=" bg-black text-white py-2 px-4 rounded my-4 focus:shadow-outline"
