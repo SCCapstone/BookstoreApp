@@ -92,7 +92,7 @@ const EditBlogpage = ({ userRole }) => {
       {rBlogPosts.map((post, index) => (
         <div key={post._id}>
           <div className="bg-camel px-2 py-2 text-lg mb-4">
-            <h2 className="text-xl font-bold">{post.title}</h2>
+          <h2 className="text-xl font-bold">{post.title}</h2>
             <p className="whitespace-normal">{post.post}</p>
           </div>
           <button
