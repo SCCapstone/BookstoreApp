@@ -71,8 +71,19 @@ class MainCart extends Component {
     }
   }
 
-  canPurchaseBooks = () => {
+  checkOutChecker = () => {
+    if (this.calculatePrice() === 0) {
+      return false;
+    }
+    return true;
+  };
+
+  canPurchaseBooks() {
     // User cannot purchae if not logged in
+
+    if (!this.checkOutChecker()) return false;
+
+    console.log(this.state.currentUser);
     if (!this.state.currentUser || this.state.currentUser.length === 0) {
       swal.fire({
         icon: "error",
@@ -97,14 +108,30 @@ class MainCart extends Component {
     }
 
     return true;
-  };
+  }
 
   async handleSubmit(e) {
     e.preventDefault();
 
+    if (!this.checkOutChecker()) {
+      console.log(this.checkOutChecker());
+      console.log("can't checkout");
+      return;
+    }
     // canPurchase will store boolean value reflecting
     // if user can purchase books
-    if (!this.canPurchaseBooks()) return;
+
+    if (this.mapper().length === 0) {
+      console.log(this.mapper());
+      console.log("not hitting the mapper");
+      return;
+    }
+    console.log(this.mapper().length);
+
+    if (!this.canPurchaseBooks()) {
+      console.log("can't checkout");
+      return;
+    }
 
     var order = {
       userId: this.state.user._id,
@@ -183,6 +210,7 @@ class MainCart extends Component {
         });
       }
     }
+    this.clearCart();
 
     window.location.reload();
   }
@@ -262,13 +290,6 @@ class MainCart extends Component {
     return round(total, 2);
   };
 
-  checkOutChecker = () => {
-    if (this.calculatePrice() === 0) {
-      return true;
-    }
-    return false;
-  };
-
   mapper = () => {
     let booksSource = [];
     for (let i = 0; i < this.state.books.length; ++i) {
@@ -281,7 +302,6 @@ class MainCart extends Component {
         }
       }
     }
-    console.log(booksSource);
     return booksSource;
   };
 
@@ -359,7 +379,7 @@ class MainCart extends Component {
             <button
               class="col-span-2 bg-persian_plum hover:bg-green text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded float-right ml-1"
               type="submit"
-              disabled={this.checkOutChecker() ? true : false}
+              disabled={this.checkOutChecker() ? false : true}
             >
               Check out
             </button>
