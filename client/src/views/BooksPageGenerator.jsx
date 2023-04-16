@@ -3,13 +3,15 @@ import ReactStars from "react-stars";
 import Heart from "react-heart";
 import { Chip, Avatar } from "@mui/material";
 import { Remove, Add } from "@mui/icons-material";
-import Popup from "reactjs-popup";
+import AddReview from "../components/AddReview";
+import Reviews from "../components/Reviews";
 import swal from "sweetalert2";
 import axios from "axios";
 import { getKeys } from "../utils/IterationUtils";
 
 const BooksPageGenerator = ({ book, user }) => {
   const [quantity, setQuantity] = useState(0);
+  const [userFullName, setUserFullName] = useState("");
 
   function addItem(book, quantity) {
     var book_cart = JSON.parse(localStorage.getItem("book_cart"));
@@ -69,6 +71,8 @@ const BooksPageGenerator = ({ book, user }) => {
       const userFavs = response.data.favorites;
       const isActive = userFavs.includes(book._id);
       setActive(isActive);
+      const userFullName = response.data.firstName + " " + response.data.lastName;
+      setUserFullName(userFullName);
     });
   }, []);
 
@@ -106,9 +110,9 @@ const BooksPageGenerator = ({ book, user }) => {
   }
 
   return (
-    <section class="grid grid-cols-5 max-w-[1300px]">
+    <section class="grid grid-cols-5 max-w-[1200px]">
       <div />
-      <div className="py-4 col-span-4">
+      <div className="py-4 col-span-3">
         <div class="grid text-center text-black text-3xl py-3 max-w-[1300px]">
           {book.title} by {book.author}
         </div>
@@ -176,6 +180,8 @@ const BooksPageGenerator = ({ book, user }) => {
         <div className="grid text-left text-black text-xl py-3 pr-14 mr-14 max-w-[2000px]">
           {book.summary}
         </div>
+        <Reviews book={book} />
+        <AddReview book={book} currentUser={userFullName} />
       </div>
     </section>
   );
