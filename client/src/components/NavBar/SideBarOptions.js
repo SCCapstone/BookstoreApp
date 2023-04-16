@@ -4,6 +4,7 @@ const admin_menu_options = [
   { name: "Orders", link: "/orders" },
   { name: "Validated Users", link: "/users" },
   { name: "Add Book", link: "/add_book" },
+  { name: "Update Books", link: "/update_books" },
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
   { name: "Terms of Service", link: "/terms_of_service" },
