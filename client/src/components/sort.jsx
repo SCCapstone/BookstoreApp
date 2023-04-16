@@ -44,6 +44,11 @@ const sort = (books, selection) => {
       break;
   }
 
+function round(value, decimals) {
+  const roundedValue = Math.round(value * 10 ** decimals) / 10 ** decimals;
+  return roundedValue.toFixed(decimals);
+}
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-2 sm:max-w-[500px] md:max-w-[700px] lg:max-w-[1000px] max-w-[1150px]">
       {books_changed.map((book) => (
@@ -56,7 +61,7 @@ const sort = (books, selection) => {
             <div class="text-lg">{book.title}</div>
             <div class="felx items-end">by: {book.author}</div>
 
-            <div>${book.price}</div>
+            <div>${round(book.price, 2)}</div>
           </a>
         </div>
       ))}
