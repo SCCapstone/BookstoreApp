@@ -1,10 +1,10 @@
 import React from "react";
 import { styles } from "../styles";
-import {alfred} from "../assets/alfred-headshot.png"
-import {jack} from "../assets/jack-headshot.jpeg"
-import {sai} from "../assets/alfred-headshot.jpeg"
-import {hobbs} from "../assets/hobbs-headshot.jpeg"
-import {rahul} from "../assets/rahul-headshot.jpeg"
+import rahul_headshot from "../assets/rahul_headshot.jpg";
+import hobbs_headshot from "../assets/hobbs_headshot.jpg";
+import alfred_headshot from "../assets/alfred_headshot.png";
+import jack_headshot from "../assets/jack_headshot.jpg";
+import sai_headshot from "../assets/sai_headshot.jpg";
 
 const Aboutus = () => {
   return (
@@ -30,12 +30,46 @@ const Aboutus = () => {
           The Bugsy's Barn Books was created by a group of University of South Carolina students to fulfill the 
           requirements of CSCE 490 (Capstone Computing Project I) and CSCE 492 (Capstone Computing Project II). 
           The members of this project are Rahul Bulusu, William Hobbs, Alfred Lin, Jack Oberman, and Sai Oruganti. 
+          To view a member's profile from the group click on their picture which will take you to either their LinkedIn profile 
+          or their GitHub page. 
           {/* Add linkedin links of everyone as well as a headshot*/}
         </p>
         <div>
-        <a href="" target="_blank" rel="noreferrer">
-        <img src={cbLogo} alt="Coding Beauty logo"></img>
-      </a>
+          <a href="https://www.linkedin.com/in/rahul-bulusu-4889771b1/" target="_blank" rel="noreferrer">
+            <img 
+              src={rahul_headshot} 
+              alt="Rahul Bulusu"
+              className="max-w-[200px]"
+            />
+          </a>
+          <a href="https://github.com/wihobbs" target="_blank" rel="noreferrer">
+            <img 
+              src={hobbs_headshot} 
+              alt="William Hobbs"
+              className="max-w-[200px]"
+            />
+          </a>
+          <a href="https://github.com/linalfred08" target="_blank" rel="noreferrer">
+            <img 
+              src={alfred_headshot} 
+              alt="Alfred Lin"
+              className="max-w-[200px]"
+            />
+          </a>
+          <a href="https://www.linkedin.com/in/jack-c-oberman/" target="_blank" rel="noreferrer">
+            <img 
+              src={jack_headshot} 
+              alt="Jack Oberman"
+              className="max-w-[200px]"
+            />
+          </a>
+          <a href="https://www.linkedin.com/in/sai-durga-rithvik-oruganti-4a5950245/" target="_blank" rel="noreferrer">
+            <img 
+              src={sai_headshot} 
+              alt="Sai Oruganti"
+              className="max-w-[200px]"
+            />
+          </a>
         </div>
       </div>
     </section>
