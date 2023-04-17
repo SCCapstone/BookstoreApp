@@ -15,6 +15,7 @@ const Aboutus = () => {
         </div>
       </div>
       <div>
+      {/* Selling Advertisement statement for our bookstore*/}
       <p>
         The current market for book selling demands that book sellers enter the online marketplace. 
         Heavy competition from big-box retail booksellers already hinders the reach of independent stores, 
@@ -37,6 +38,7 @@ const Aboutus = () => {
         While the second option does not require an intense effort, it shifts the effort on the book seller. Finally, the last option does not guarantee success and requires significant effort. 
         A website that enables independent bookstores to upload, maintain, and sell their books would solve both the second and third issues, offering them a lifeline against the big-box retail booksellers.   
       </p>
+      {/* The vision of the bookstore */}
       <p> 
           The vision of this website came from our group member, Jack Oberman. Over the summer, he had worked 
           at a local bookstore called The Book Dispensary. He had brought the problem up of how bad their website
@@ -47,13 +49,15 @@ const Aboutus = () => {
           has become so much more with many different unique features that users can experince.
           The platform could really revolutionize the making of websites for bookstores in the near future as well. 
         </p>
+        {/* Screenshots of the App */}
+        {/* short description about the group members */}
         <p>
           The Bugsy's Barn Books was created by a group of University of South Carolina students to fulfill the 
           requirements of CSCE 490 (Capstone Computing Project I) and CSCE 492 (Capstone Computing Project II). 
           The members of this project are Rahul Bulusu, William Hobbs, Alfred Lin, Jack Oberman, and Sai Oruganti.
           All work done for this website was split fairly among the group members.  
-          {/* Add linkedin links of everyone as well as a headshot*/}
         </p>
+        {/* Add linkedin and github links of everyone as well as a headshot*/}
         <div class="flex pb-2 text-center">
           <div>
             <a href="https://www.linkedin.com/in/rahul-bulusu-4889771b1/" target="_blank" rel="noreferrer">
