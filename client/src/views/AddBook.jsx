@@ -149,7 +149,7 @@ class AddBook extends Component {
                 </Grid>
                 <Grid fullWidth sx={{ m: 1 }}>
                   <h2>
-                    Choose an image for the book - must be in .png or .jpeg*
+                    Choose an image for the book - must be in .png or .jpeg* and must be 200KB or less
                   </h2>
                   <ReactImageFileToBase64
                     name="myImage"
