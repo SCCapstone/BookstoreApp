@@ -56,42 +56,67 @@ const Aboutus = () => {
           or their GitHub page. 
           {/* Add linkedin links of everyone as well as a headshot*/}
         </p>
-        <div class="flex pb-2">
-          <a href="https://www.linkedin.com/in/rahul-bulusu-4889771b1/" target="_blank" rel="noreferrer">
-            <img 
-              src={rahul_headshot} 
-              alt="Rahul Bulusu"
-              className="max-w-[160px]"
-            />
-          </a>
-          <a href="https://github.com/wihobbs" target="_blank" rel="noreferrer">
-            <img 
-              src={hobbs_headshot} 
-              alt="William Hobbs"
-              className="max-w-[200px]"
-            />
-          </a>
-          <a href="https://github.com/linalfred08" target="_blank" rel="noreferrer">
-            <img 
-              src={alfred_headshot} 
-              alt="Alfred Lin"
-              className="max-w-[227.5px]"
-            />
-          </a>
-          <a href="https://www.linkedin.com/in/jack-c-oberman/" target="_blank" rel="noreferrer">
-            <img 
-              src={jack_headshot} 
-              alt="Jack Oberman"
-              className="max-w-[200px]"
-            />
-          </a>
-          <a href="https://www.linkedin.com/in/sai-durga-rithvik-oruganti-4a5950245/" target="_blank" rel="noreferrer">
-            <img 
-              src={sai_headshot} 
-              alt="Sai Oruganti"
-              className="max-w-[200px]"
-            />
-          </a>
+        <div class="flex pb-2 text-center">
+          <div>
+            <a href="https://www.linkedin.com/in/rahul-bulusu-4889771b1/" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>Rahul Bulusu</span>
+            </a>
+            <a href="https://www.linkedin.com/in/rahul-bulusu-4889771b1/" target="_blank" rel="noreferrer">
+              <img 
+                src={rahul_headshot} 
+                alt="Rahul Bulusu"
+                className="max-w-[160px]"
+              />
+            </a>
+          </div>
+          <div>
+            <a href="https://www.linkedin.com/in/wihobbs/" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>William Hobbs</span>
+            </a>
+            <a href="https://www.linkedin.com/in/wihobbs/" target="_blank" rel="noreferrer">
+              <img 
+                src={hobbs_headshot} 
+                alt="William Hobbs"
+                className="max-w-[200px]"
+              />
+            </a>
+          </div>
+          <div>
+            <a href="https://github.com/linalfred08" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>Alfred Lin</span>
+            </a>
+            <a href="https://github.com/linalfred08" target="_blank" rel="noreferrer">
+              <img 
+                src={alfred_headshot} 
+                alt="Alfred Lin"
+                className="max-w-[227.5px]"
+              />
+            </a>
+          </div>
+          <div>
+            <a href="https://www.linkedin.com/in/jack-c-oberman/" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>Jack Oberman</span>
+            </a>
+            <a href="https://www.linkedin.com/in/jack-c-oberman/" target="_blank" rel="noreferrer">
+              <img 
+                src={jack_headshot} 
+                alt="Jack Oberman"
+                className="max-w-[200px]"
+              />
+            </a>
+          </div>
+          <div>
+            <a href="https://www.linkedin.com/in/sai-durga-rithvik-oruganti-4a5950245/" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>Sai Oruganti</span>
+            </a>
+            <a href="https://www.linkedin.com/in/sai-durga-rithvik-oruganti-4a5950245/" target="_blank" rel="noreferrer">
+              <img 
+                src={sai_headshot} 
+                alt="Sai Oruganti"
+                className="max-w-[200px]"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </section>
