@@ -50,6 +50,9 @@ const Aboutus = () => {
           The platform could really revolutionize the making of websites for bookstores in the near future as well. 
         </p>
         {/* Screenshots of the App */}
+
+        {/* short discription of how the app works and how to navigate */}
+
         {/* short description about the group members */}
         <p>
           The Bugsy's Barn Books was created by a group of University of South Carolina students to fulfill the 
