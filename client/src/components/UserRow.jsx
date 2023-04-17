@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const UserRow = ({
   contact,
@@ -8,6 +8,14 @@ const UserRow = ({
 }) => {
   // console.log(contact)
   const [balance, setBalance] = useState(contact.balance["$numberDecimal"]);
+  
+  useEffect(() => {
+    if (contact.balance["$numberDecimal"] !== balance) {
+      setBalance(contact.balance["$numberDecimal"]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contact])
+  
   const updateChange = (e) => {
     setBalance(e.target.value);
   };

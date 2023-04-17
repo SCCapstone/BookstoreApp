@@ -74,6 +74,7 @@ const BooksPageGenerator = ({ book, user }) => {
       const userFullName = response.data.firstName + " " + response.data.lastName;
       setUserFullName(userFullName);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function round(value, decimals) {
