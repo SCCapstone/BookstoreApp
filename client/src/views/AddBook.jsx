@@ -73,6 +73,7 @@ class AddBook extends Component {
 
   // The following function converts the uploaded image to base64 and prepares it to before its sent to the database.
   handleImage = (e) => {
+    // ensure file size is less than 200KB. If greater, error and return
     if (e[0].default_file.size > 200000) {
       swal.fire({
         icon: "error",
@@ -83,6 +84,7 @@ class AddBook extends Component {
     }
     let base64File = e[0].base64_file;
     let imageTitle = e[0].file_name;
+    //set to new file
     this.setState((state) => ({
       imageId: base64File,
       imageTitle: imageTitle,
