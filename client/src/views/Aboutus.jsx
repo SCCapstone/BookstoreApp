@@ -52,8 +52,6 @@ const Aboutus = () => {
           requirements of CSCE 490 (Capstone Computing Project I) and CSCE 492 (Capstone Computing Project II). 
           The members of this project are Rahul Bulusu, William Hobbs, Alfred Lin, Jack Oberman, and Sai Oruganti.
           All work done for this website was split fairly among the group members.  
-          To view a member's profile from the group click on their picture which will take you to either their LinkedIn profile 
-          or their GitHub page. 
           {/* Add linkedin links of everyone as well as a headshot*/}
         </p>
         <div class="flex pb-2 text-center">
@@ -68,6 +66,9 @@ const Aboutus = () => {
                 className="max-w-[160px]"
               />
             </a>
+            <a href="https://github.com/rahulbulusu" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>GitHub</span>
+            </a>
           </div>
           <div>
             <a href="https://www.linkedin.com/in/wihobbs/" target="_blank" rel="noreferrer">
@@ -79,6 +80,9 @@ const Aboutus = () => {
                 alt="William Hobbs"
                 className="max-w-[200px]"
               />
+            </a>
+            <a href="https://github.com/wihobbs" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>GitHub</span>
             </a>
           </div>
           <div>
@@ -92,6 +96,9 @@ const Aboutus = () => {
                 className="max-w-[227.5px]"
               />
             </a>
+            <a href="https://github.com/linalfred08" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>GitHub</span>
+            </a>
           </div>
           <div>
             <a href="https://www.linkedin.com/in/jack-c-oberman/" target="_blank" rel="noreferrer">
@@ -103,6 +110,9 @@ const Aboutus = () => {
                 alt="Jack Oberman"
                 className="max-w-[200px]"
               />
+            </a>
+            <a href="https://github.com/jackcoberman" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>GitHub</span>
             </a>
           </div>
           <div>
@@ -116,8 +126,15 @@ const Aboutus = () => {
                 className="max-w-[200px]"
               />
             </a>
+            <a href="https://github.com/s-orug" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>GitHub</span>
+            </a>
           </div>
         </div>
+        <p>
+        *To view a member's profile from the group click on their name or picture which will take you to their LinkedIn profile if they have one
+        or click on the GitHub link below the member's headshot to redirect to their GitHub page.*
+        </p>
       </div>
     </section>
   );
