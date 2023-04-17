@@ -21,6 +21,8 @@ import Orders from "../../views/Orders";
 import EditBlogpage from "../../views/EditBlogPage";
 import VerifyEmail from "../../views/VerifyEmail";
 import ChangePassword from "../../views/ChangePassword";
+import UpdateBooks from "../../views/UpdateBooks";
+
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -90,6 +92,10 @@ const CompleteNavbar = () => {
             <Route
               path="/users"
               element={<ValidatedUsers userRole={userType} />}
+            />
+            <Route
+              path="/update_books"
+              element={<UpdateBooks userRole={userType} />}
             />
             <Route
               path="/emp_page"

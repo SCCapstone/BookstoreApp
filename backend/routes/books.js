@@ -72,6 +72,12 @@ router.put("/:id", async (req, res) => {
 
       book.reviews.push(req.body.review);
     }
+    if (req.body.price) {
+      book.price = req.body.price;
+    }
+    if (req.body.stock) {
+      book.stock = req.body.stock;
+    }
     if (req.body.quantitySold) {
       book.quantitySold += req.body.quantitySold;
     }
