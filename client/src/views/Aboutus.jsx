@@ -1,5 +1,5 @@
 import React from "react";
-import { styles } from "../styles";
+import GitHubIcon from '@mui/icons-material/GitHub';
 import rahul_headshot from "../assets/rahul_headshot.jpg";
 import hobbs_headshot from "../assets/hobbs_headshot.jpg";
 import alfred_headshot from "../assets/alfred_headshot.png";
@@ -17,23 +17,6 @@ const Aboutus = () => {
       <div>
       {/* Selling Advertisement statement for our bookstore*/}
       <p>
-        The current market for book selling demands that book sellers enter the online marketplace. 
-        Heavy competition from big-box retail booksellers already hinders the reach of independent stores, 
-        but with the customer base shifting towards online shopping, independent sellers are faced with the option of providing customers with some online portal or simply go out of business. 
-        This is uniquely prevalent to our base in Columbia, South Carolina, which has several long-standing, independent bookstores. 
-        This is to the extent that it is common for customers to take “Book Tours” throughout Columbia, going to multiple different independent bookstores in one day. 
-        The demand for these bookstores is that they provide better service and atmosphere, as well as reuse books and typically sell books for cheaper. 
-        They also offer a wider range of books, as they take in and resell most of the books which filter through their doors. 
-        A limitation for this is that, if an individual customer was looking for a specific book, they can either:  
-        <p>
-          a. Order the book on an online marketplace such as Amazon, or 
-        </p>
-        <p>
-          b. Call ahead of time and ask the book sellers if they have a certain book, or 
-        </p>
-        <p>
-          c. Go to the store and pore through their collection, without a guarantee of finding their desired work. 
-        </p>
         For many customers, the first option is the selected choice simply out of convenience. It is generally guaranteed to be successful and reduces effort. 
         While the second option does not require an intense effort, it shifts the effort on the book seller. Finally, the last option does not guarantee success and requires significant effort. 
         A website that enables independent bookstores to upload, maintain, and sell their books would solve both the second and third issues, offering them a lifeline against the big-box retail booksellers.   
@@ -74,7 +57,7 @@ const Aboutus = () => {
               />
             </a>
             <a href="https://github.com/rahulbulusu" target="_blank" rel="noreferrer">
-              <span style={{ fontWeight: 'bold' }}>GitHub</span>
+              <span className="height: 60px vertical-align: bottom" style={{ fontWeight: 'bold' }}><GitHubIcon/>GitHub</span>
             </a>
           </div>
           <div>
@@ -89,7 +72,7 @@ const Aboutus = () => {
               />
             </a>
             <a href="https://github.com/wihobbs" target="_blank" rel="noreferrer">
-              <span style={{ fontWeight: 'bold' }}>GitHub</span>
+              <span className="height: 60px vertical-align: bottom" style={{ fontWeight: 'bold' }}><GitHubIcon/>GitHub</span>
             </a>
           </div>
           <div>
@@ -104,7 +87,7 @@ const Aboutus = () => {
               />
             </a>
             <a href="https://github.com/linalfred08" target="_blank" rel="noreferrer">
-              <span style={{ fontWeight: 'bold' }}>GitHub</span>
+              <span className="height: 60px vertical-align: bottom" style={{ fontWeight: 'bold' }}><GitHubIcon/>GitHub</span>
             </a>
           </div>
           <div>
@@ -119,7 +102,7 @@ const Aboutus = () => {
               />
             </a>
             <a href="https://github.com/jackcoberman" target="_blank" rel="noreferrer">
-              <span style={{ fontWeight: 'bold' }}>GitHub</span>
+              <span className="height: 60px vertical-align: bottom" style={{ fontWeight: 'bold' }}><GitHubIcon/>GitHub</span>
             </a>
           </div>
           <div>
@@ -134,7 +117,7 @@ const Aboutus = () => {
               />
             </a>
             <a href="https://github.com/s-orug" target="_blank" rel="noreferrer">
-              <span style={{ fontWeight: 'bold' }}>GitHub</span>
+              <span className="height: 60px vertical-align: bottom" style={{ fontWeight: 'bold' }}><GitHubIcon/>GitHub</span>
             </a>
           </div>
         </div>
