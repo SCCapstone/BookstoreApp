@@ -22,6 +22,8 @@ const Aboutus = () => {
         </div>
       </div>
       <div>
+      {/* Demo Video */}
+
       {/* Selling Advertisement statement for why users should use our bookstore*/}
       <h1 className="text-2xl font-medium mb-4 text-center">
           Marketing Statement for Bugsy's Barn Books
