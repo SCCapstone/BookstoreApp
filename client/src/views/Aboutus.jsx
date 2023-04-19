@@ -23,7 +23,13 @@ const Aboutus = () => {
       </div>
       <div>
       {/* Demo Video */}
-
+      <h1 className="text-2xl font-medium mb-4 text-center">
+          A Demonstration Video
+      </h1>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/grgvuKlXzjs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <p>
+        Note that this placeholder video is a demonstration video from Hobbs's Research Milestone.
+      </p>
       {/* Selling Advertisement statement for why users should use our bookstore*/}
       <h1 className="text-2xl font-medium mb-4 text-center">
           Marketing Statement for Bugsy's Barn Books
@@ -32,13 +38,11 @@ const Aboutus = () => {
         Our bookstore web application provides an effortless and seamless browsing experience, 
         allowing users to easily discover and purchase a wide range of books from various genres, authors, 
         and sort by various other options all in one convenient place.
-        With our user-friendly interface, our bookstore web application also provides convenient features such as book reviews, 
-        ratings (out of 5 stars), and adding a book to a wishlist, empowering users with 
+        With our user-friendly interface, our bookstore web application also provides convenient features such as book reviews and adding a book to a wishlist, empowering users with 
         valuable insights and information to make informed purchasing decisions, fostering a sense of trust and credibility in our platform. 
         For admin/employees, our application gives a seamless experience for them to add blogs and special deals, add and update books, fulfill orders on time, 
         and a place for employees to see important meetings/events. 
-        Lastly, our bookstore web application prioritizes user security and privacy with safely storing user's account information in the database that only
-        employee/admin are allowed to look at. All user's are required to have some form of a complex password to ensure this. 
+        Lastly, our bookstore web application prioritizes user security and privacy with requiring users to have some form of a complex password and hashing these passwords. 
       </p>
       {/* The vision of the bookstore */}
       <h1 className="text-2xl font-medium mb-4 text-center">
@@ -51,11 +55,20 @@ const Aboutus = () => {
           So, as a group we decided to essentially refurbish their website. Later into the second part of the 
           semester we had created our own logo for a bookstore, so we branched out and created our own custom, dummy 
           bookstore for users to experience. Our bookstore website, even though it has a been based on The Book Dispensary,
-          has become so much more with many different unique features that users can experince.
+          has become so much more with many different unique features that users can experience.
           The platform could really revolutionize the making of websites for bookstores in the near future as well. 
         </p>
+      <h2 className="text-2xl font-medium mb-4 text-center">
+        Our GitHub Repository (Private)
+      </h2>
+      <a href="https://github.com/SCCapstone/BufferOverload" target="_blank" rel="noreferrer">
+              <span style={{ fontWeight: 'bold' }}>Our GitHub Repository is linked here.</span>
+            </a>
         {/* Screenshots of the App and short discription of how the app works and how to navigate */}
         <div>
+        <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
+          Application Features
+        </div>
           <h1 className="text-2xl font-medium mb-4 text-center">
             How does Bugsy's Barn Books work?
           </h1>
@@ -81,8 +94,8 @@ const Aboutus = () => {
               className="max-w-[5999px]"
             />
             <p>
-              The Browse Page is where userca can view all the books that are available in our bookstore inventory for potential purchase. 
-              Users can find a book in multiple ways by simply browsing around, searcing using the book title, or by the 
+              The Browse Page is where users can view all the books that are available in our bookstore inventory for potential purchase. 
+              Users can find a book in multiple ways by simply browsing around, searching using the book title, or by the 
               “Sort by” dropdown menu feature which has the following options: “Best Selling,” “New Arrivals,” “Price: low to high,” or “Price: high to low.” 
             </p>
           </div>
@@ -105,7 +118,7 @@ const Aboutus = () => {
             The Validated Users page is restricted to employees/admin, and it shows all the users who have accounts in the database. 
             Employees/admin have the ability to promote a customer to admin if they are employees of course. 
             Additionally, this is where admin can update/hardcode the balance for purchasing books. 
-            The validated users page is broken into 5 categories: name of the user, email of the user, action (means the user can be deleted from our database upon request), the role (either customer or admin – resembles either employee or admin), and the balance for purchasing books.   
+            The validated users page is broken into 5 categories: name of the user, email of the user, action (means the user can be deleted from our database upon request), the role (either customer or admin - resembles either employee or admin), and the balance for purchasing books.   
           </p>
           <img 
             src={contactUs} 
@@ -114,8 +127,7 @@ const Aboutus = () => {
           />
           <p>
             The Contact Us page is for if users have questions about anything relating to the bookstore website or purchasing books.
-            Users can get in touch one of two ways: by email by filling out a small form which consists of the user’s name, email, and the message 
-            or by calling us directly using the provided number on the website under the “Phone” heading.
+            Users can get in touch by email by filling out a small form which consists of the user's name, email, and the message.
           </p>
           <img 
             src={employeePage} 
@@ -138,20 +150,22 @@ const Aboutus = () => {
             className="max-w-[5999px]"
           />
           <p>
-            The Edit Blog page which is restricted to employees/admin. 
-            This can serve as both a blogs page as well as new information and latest deals. 
+            The Edit Blog page is restricted to employees/admin. 
+            This can serve for both blogs as well as new information and latest deals. 
             Once an employee/admin creates and posts a blog, it appears on this page as well as the “Home” page where all users can view as well. 
-            It is a very simple process: employees need to enter the title of the blog in the first box and enter a brief description in the next box. Then they can click post. 
+            It is a very simple process: employees need to enter the title of the blog in the first box and enter a brief description in the next box. Then they click post. 
             They also have the ability to delete a blog as well. 
           </p>
         </div>
 
         {/* short description about the group members */}
+        <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
+          Group Members
+        </div>
         <p>
           The Bugsy's Barn Books was created by a group of University of South Carolina Computer Science and Computer Engineering
           students to fulfill the requirements of CSCE 490 (Capstone Computing Project I) and CSCE 492 
-          (Capstone Computing Project II). The members of this project are Rahul Bulusu, William Hobbs, Alfred Lin, Jack Oberman, and Sai Oruganti.
-          All work done for this website was split fairly among the group members.  
+          (Capstone Computing Project II). The members of this project are Rahul Bulusu, William Hobbs, Alfred Lin, Jack Oberman, and Sai Oruganti. 
         </p>
         {/* Add linkedin and github links of everyone as well as a headshot*/}
         <div class="flex pb-2 text-center">
