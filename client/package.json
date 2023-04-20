@@ -19,6 +19,7 @@
     "react-animated-heart": "^0.0.7",
     "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
+    "react-file-image-to-base64": "^1.0.1",
     "react-heart": "^1.0.6",
     "react-icons": "^4.7.1",
     "react-router": "^6.6.1",

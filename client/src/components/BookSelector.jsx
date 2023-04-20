@@ -15,7 +15,10 @@ export default class BookSelector extends Component {
         options.forEach((element) => {
           const baseTitle = element.title.replace(",", "").toLowerCase();
           const baseAuthor = element.author.replace(",", "").toLowerCase();
-          const baseGenre = element.genre[0].replace(",","").toLowerCase();
+          let baseGenre = "";
+          if (element.genre.length > 0) {
+            baseGenre = element.genre[0]?.replace(",","").toLowerCase();
+          }
           const baseInput = state.inputValue.toLowerCase();
           if (baseTitle.includes(baseInput) ||
               baseAuthor.includes(baseInput) ||
@@ -44,13 +47,17 @@ export default class BookSelector extends Component {
                 }}
                 options={this.props.books}
                 getOptionLabel={(option) => option.title}
-                groupBy={(option) => option.genre[0] }
+                groupBy={(option) => {
+                    if (option.genre.length > 0) {
+                        return option.genre[0];
+                    }
+                    else return option.title;
+                }}
                 filterOptions={this.filterOptions}
                 renderInput={(params) => (
                     <TextField
                         {...params}
                         variant="filled"
-                        label="Search"
                         placeholder="Search Books"
                     />
                 )}

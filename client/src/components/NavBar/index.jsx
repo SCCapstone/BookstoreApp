@@ -7,13 +7,11 @@ import Login from "../../views/Login";
 import Aboutus from "../../views/Aboutus";
 import TOS from "../../views/TOS";
 import ContactUs from "../../views/ContactUs";
-import Reviews from "../../views/ReviewsPageGenerator";
 import Browse from "../../views/Browse";
 import Signup from "../../views/Signup";
 import BooksPageGenerator from "../../views/BooksPageGenerator";
 // import books from "../../views/Books";
 import ValidatedUsers from "../../views/ValidatedUsers";
-import CreateForum from "../../views/CreateForum";
 import MainCart from "../../views/Cart";
 import AddBook from "../../views/AddBook";
 import EmployeeHomepage from "../../views/EmployeeHomePage";
@@ -23,6 +21,8 @@ import Orders from "../../views/Orders";
 import EditBlogpage from "../../views/EditBlogPage";
 import VerifyEmail from "../../views/VerifyEmail";
 import ChangePassword from "../../views/ChangePassword";
+import UpdateBooks from "../../views/UpdateBooks";
+
 
 const CompleteNavbar = () => {
   const user = localStorage.getItem("token");
@@ -65,7 +65,7 @@ const CompleteNavbar = () => {
             <Route path="/terms_of_service" element={<TOS />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browse" element={<Browse />} />
-            <Route path="/create_account" element={<Signup currentUser={userId} />} />
+            <Route path='/create_account' element={<Signup />} />
             <Route
               path="/cart"
               element={
@@ -94,6 +94,10 @@ const CompleteNavbar = () => {
               element={<ValidatedUsers userRole={userType} />}
             />
             <Route
+              path="/update_books"
+              element={<UpdateBooks userRole={userType} />}
+            />
+            <Route
               path="/emp_page"
               element={<EmployeeHomepage userRole={userType} />}
             />
@@ -104,24 +108,11 @@ const CompleteNavbar = () => {
               element={<EditBlogpage userRole={userType} />}
             />
 
-            {/* Admin, Employee, and Customer */}
-            <Route
-              path="/createforums"
-              element={<CreateForum currentUser={userId} />}
-            />
-
             {/* Mapped Routes */}
             {books.map((book) => (
               <Route
                 path={`/${book.author}/${book.title}/`}
                 element={<BooksPageGenerator book={book} user={userId} />}
-              />
-            ))}
-            {/* Mapped Route for Reviews */}
-            {books.map((book) => (
-              <Route
-                path={`/${book.author}/${book.title}/reviews`}
-                element={<Reviews book={book} />}
               />
             ))}
 

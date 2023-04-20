@@ -75,12 +75,14 @@ const EditBlogpage = ({ userRole }) => {
           placeholder="Enter blog title here"
           value={blogTitle}
           onChange={(e) => setBlogTitle(e.target.value)}
+          style={{ minHeight: "2em" }}
         />
         <textarea
           className="border-2 focus:shadow-outline focus:bg-white w-full h-48"
           placeholder="Enter blog post here..."
           value={blogPost}
           onChange={(e) => setBlogPost(e.target.value)}
+          style={{ minHeight: "2em" }}
         />
         <button
           className=" bg-black text-white py-2 px-4 rounded my-4 focus:shadow-outline"
@@ -92,11 +94,11 @@ const EditBlogpage = ({ userRole }) => {
       {rBlogPosts.map((post, index) => (
         <div key={post._id}>
           <div className="bg-camel px-2 py-2 text-lg mb-4">
-            <h2 className="text-xl font-bold">{post.title}</h2>
-            <p>{post.post}</p>
+            <h2 className="text-xl font-bold break-all">{post.title}</h2>
+            <p className="whitespace-normal break-all">{post.post}</p>
           </div>
           <button
-            className=" bg-black text-white py-2 px-4 rounded my-4 focus:shadow-outline"
+            className="bg-black text-white py-2 px-4 rounded my-4 focus:shadow-outline whitespace-normal break-all"
             onClick={() => handleDelete(post._id, index)}
           >
             Delete {post.title}

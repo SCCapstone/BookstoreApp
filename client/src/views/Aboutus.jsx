@@ -10,7 +10,7 @@ const Aboutus = () => {
     <section>
       <div class="py-4">
         <div class="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 ">
-          About us
+          About Us
         </div>
       </div>
       {/*paragraph block with a description of what the Book Dispensary is and what it has to offer*/}

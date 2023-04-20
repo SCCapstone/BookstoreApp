@@ -5,18 +5,20 @@ import { styles } from "../styles"; //import styles for the aesthetics
 
 // initializes long and short constant, fixed strings which make up the TOS
 const longText =
-  "Our site uses an order form for customers to request information, products, and services. We request visitor's contact information (name, address, and email address) and financial information (payment information to make purchases). Contact information from the order form is used to ship orders to customers. The customer's contact information is used to contact the visitor when necessary. Financial information that is collected is used to bill the customer for products and services.";
+  "This is a FAKE bookstore.";
 const longText2 =
-  "The website has security measures in place to protect the loss, misuse, and alteration of the information under our control. We use 128-bit SSL encryption to protect your financial information";
+  "We do not sell real books even though we have examples of books, those are for demostrations only.";
 const longText3 =
-  "We provide users the following information options for removing their information from our database and to not receive any further communications from our service.";
+  "Do not use real payments such as the following below:";
 const longText4 =
-  "If you have any questions about our terms and service, the practices of this site, or your dealings with our website, feel free to contact us at: ";
-const shortText = "The Book Dispensary";
-const shortText1 = "710-C Gracern Rd,";
+  "You will not recieve any warranty, we do not isssue any warranty, NO EXCEPTIONS.";
+const longText5 =
+  "THIS WEBSITE IS ONLY FOR EDUCATION PURPOSE ONLY";
+const shortText = "The Bugsy's Barn Books";
+const shortText1 = "123 UniversitySC Ave,";
 const shortText2 = "Columbia, SC 29210";
-const point1 = "You can send an email to info@mybookdispensary.com";
-const point2 = "You can send a letter to the following postal address.";
+const point1 = "Credit Cards / Debit Cards / etc...";
+const point2 = "PayPal / AppplePay / GooglePay / etc...";
 
 //const page which can only be modified through the code
 const TOS = () => {
@@ -35,6 +37,7 @@ const TOS = () => {
         <li className={`${styles.paragraph} max-w-[1158px] ml-8`}>{point1}</li>
         <li className={`${styles.paragraph} max-w-[1158px] ml-8`}>{point2}</li>
         <p className={`${styles.paragraph} max-w-[1158px]`}>{longText4}</p>
+        <p className={`${styles.paragraph} max-w-[1158px]`}>{longText5}</p>
         <p className={`${styles.paragraph} max-w-[1158px]`}>{shortText}</p>
         <p className={`${styles.paragraph} max-w-[1158px]`}>{shortText1}</p>
         <p className={`${styles.paragraph} max-w-[1158px]`}>{shortText2}</p>
