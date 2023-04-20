@@ -26,10 +26,7 @@ const Aboutus = () => {
       <h1 className="text-2xl font-medium mb-4 text-center">
           A Demonstration Video
       </h1>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/grgvuKlXzjs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <p>
-        Note that this placeholder video is a demonstration video from Hobbs's Research Milestone.
-      </p>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/mCepHNEqVIg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       {/* Selling Advertisement statement for why users should use our bookstore*/}
       <h1 className="text-2xl font-medium mb-4 text-center">
           Marketing Statement for Bugsy's Barn Books
