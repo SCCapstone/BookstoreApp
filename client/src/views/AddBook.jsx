@@ -1,3 +1,4 @@
+//imports
 import React, { Component } from "react";
 import ReactImageFileToBase64 from "react-file-image-to-base64";
 import axios from "axios";
@@ -11,6 +12,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 import swal from "sweetalert2";
 import { isAdmin, sendToHome } from "../utils/PermissionUtils";
 
+{/* This is the add book where it is only restricted to employees/admin and they can add a book to the inventory*/}
+
+//takes in a props constructor, a state, title, author, price which is initially set to 1, summary, stars which is initially set to 0
+//quantity sold which is also set to 0, the imageID which is the book image, stock which is set to 1 initially, genre which is an arry
+//the input genre, and image title
 class AddBook extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +35,7 @@ class AddBook extends Component {
     };
   }
 
+  //array for storing the potential genres - is in alphabetical order 
   potentialGenres = [
     "Action",
     "Art",
@@ -55,6 +62,7 @@ class AddBook extends Component {
     "Young Adult",
   ];
 
+  //this function handles the change given the name and the value in this case adding a new book
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState((state) => ({
@@ -62,6 +70,7 @@ class AddBook extends Component {
     }));
   };
 
+  // This function handles the stock number for the number of books in our inventory
   handleStock = (e) => {
     if (Number(e.target.value) > 999) {
       e.target.value = 999;
@@ -91,6 +100,8 @@ class AddBook extends Component {
     }));
   };
 
+  //in a try catch method to submit a book. If true then a swal happens alerting that it was successful adding a book
+  //if false then an error response appears in the console log
   submit = (e) => {
     e.preventDefault();
 
@@ -117,11 +128,13 @@ class AddBook extends Component {
     }
   };
 
+  //only render if admin 
   render() {
     return isAdmin(this.props.role) ? (
       <section>
         <div class="pb-4 h-full text-gray-800 max-w-[1500px]">
           <div className="py-4">
+            {/* title of the screen */}
             <div className="grid bg-polished_pine text-center text-white border-black border-2 text-3xl rounded py-3 max-w-[1400px]">
               Add Book
             </div>
@@ -133,7 +146,9 @@ class AddBook extends Component {
               fullWidth
               sx={{ m: 1 }}
             >
+              {/* grid form for filling out the information pertaining to adding a book */}
               <form>
+                {/* title of the book */}
                 <Grid item ms={12} class="pb-3">
                   <TextField
                     fullWidth
@@ -147,6 +162,7 @@ class AddBook extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
+                {/* choosing an image for the corresponding book *must be in png or jpeg format and must be 200KB or less size limit */}
                 <Grid fullWidth sx={{ m: 1 }}>
                   <h2>
                     Choose an image for the book - must be in .png or .jpeg* and must be 200KB or less
@@ -158,6 +174,7 @@ class AddBook extends Component {
                   />
                   <span>{this.state.imageTitle}</span>
                 </Grid>
+                {/* author of the book */}
                 <TextField
                   fullWidth
                   sx={{ m: 1 }}
@@ -169,6 +186,7 @@ class AddBook extends Component {
                   value={this.state.author}
                   onChange={this.handleChange}
                 />
+                {/* price of the book */}
                 <FormControl fullWidth sx={{ m: 1 }} variant="filled" required>
                   <InputLabel htmlFor="outlined-adornment-amount">
                     Price
@@ -184,6 +202,7 @@ class AddBook extends Component {
                     onChange={this.handleChange}
                   />
                 </FormControl>
+                {/* summary of the book */}
                 <TextField
                   fullWidth
                   sx={{ m: 1 }}
@@ -197,6 +216,7 @@ class AddBook extends Component {
                   rows={13}
                   onChange={this.handleChange}
                 />
+                {/* autocomplete of the genre of the book based on the array created above */}
                 <Autocomplete
                   multiple
                   name="genre"
@@ -224,6 +244,7 @@ class AddBook extends Component {
                     />
                   )}
                 />
+                {/* stock of the number of books in the inventory */}
                 <div className="flex pb-2 pt-2">
                   <TextField
                     variant="filled"
@@ -248,7 +269,8 @@ class AddBook extends Component {
                     Clear{" "}
                   </button>
                 </div>
-
+                
+                {/* submit button to submit the add book form */}
                 <Grid fullWidth sx={{ m: 1 }}>
                   <div class="text-center lg:text-left grid pb-6">
                     <Button
@@ -267,6 +289,7 @@ class AddBook extends Component {
         </div>
       </section>
     ) : (
+      {/* renders to the home page once added and must be a restricted personale of the bookstore */}
       (sendToHome(),
       (
         <div>
