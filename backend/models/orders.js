@@ -1,6 +1,11 @@
+//this is the backend for the orders page which utilizes MongoDB to store all the orders
+//initialize mongoose and Joi
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
+//schema for orders using mongoDB
+//utilizes the userID (type String), order (type Object), orderPrice (type number), orderDate (type String), and orderStatus (type String)
+//all are set to required 
 const orderSchema = new mongoose.Schema({
   userId: { type: String, required: true },
   order: { type: Object, required: true },
@@ -9,8 +14,10 @@ const orderSchema = new mongoose.Schema({
   orderStatus: { type: String, required: true },
 });
 
+//order for the MongoDB using the order schema
 const Order = mongoose.model("orders", orderSchema);
 
+//validate orders with the userID, order, orderPrice, orderDate, and orderStatus and checks for the error using the Joi 
 const validate = (data) => {
   const schema = Joi.object({
     userId: Joi.string()
