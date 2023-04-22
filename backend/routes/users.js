@@ -28,6 +28,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//routes back to home page and finds the user
 router.get("/", async (req, res) => {
   try {
     User.find({}, function (err, users) {
@@ -38,6 +39,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//gets the email for that specific user using request 
 router.get("/email/:email", async (req, res) => {
   try {
     const { email } = req.params;
@@ -52,6 +54,7 @@ router.get("/email/:email", async (req, res) => {
   }
 });
 
+//gets the user id by finding the user by the identifying id
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -67,6 +70,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//if user not found by id sends an error
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -123,6 +127,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//delete a user
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;

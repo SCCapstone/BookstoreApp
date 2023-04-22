@@ -1,7 +1,11 @@
+//this is the backend for the book page which utilizes MongoDB to store all the books 
+//initialize mongoose, jwt, and Joi
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 
+//book schema which takes a title, author, price, stock, stars, summary, imageID, quantitySold, reviews, genre, and dataAdded
+//some are set to true and some are set to false and have a type as well depending on what it is 
 const bookSchema = new mongoose.Schema({
   title: { type: String, required: true },
   author: { type: String, required: true },
@@ -16,8 +20,12 @@ const bookSchema = new mongoose.Schema({
   dateAdded: { type: Date, required: false },
 });
 
+//mongoose model for books which utilizes the schema
 const Book = mongoose.model("book", bookSchema);
 
+//the function is for the book reviews 
+//@param data - used to store the books in the data
+//utilizes the userID, post, and review data 
 const validateReview = (data) => {
   const reviewSchema = Joi.object({
     user: Joi.string()
@@ -36,6 +44,8 @@ const validateReview = (data) => {
   return reviewSchema.validate(data);
 };
 
+//validate function is used to make sure the books are current in the data 
+//references the user, post, and review data 
 const validate = (data) => {
   const reviewSchema = Joi.object({
     user: Joi.string()
@@ -52,6 +62,7 @@ const validate = (data) => {
       .error(new Error("Review Date is invalid")),
   });
 
+  //books schema which takes the title, author, price, quantity, stars, summary, imageID, quantity sold, reviews, genre, and when the book is added
   const schema = Joi.object({
     title: Joi.string()
       .required()
