@@ -3,6 +3,7 @@ const Joi = require("joi");
 const { User } = require("../models/user");
 const bcrypt = require("bcryptjs");
 
+//router post for authuntication 
 router.post("/", async (req, res) => {
   try {
     const { error } = validate(req.body);
@@ -12,14 +13,17 @@ router.post("/", async (req, res) => {
     if (!user)
       return res.status(401).send({ message: "Invalid Email or Password" });
 
-    const validPassword = await bcrypt.compare(
+      //validate the password by byte encryption comparsion 
+      const validPassword = await bcrypt.compare(
       req.body.password,
       user.password
     );
+    //checks if the password is incorrect and sends an error message if it is
     if (!validPassword)
       return res.status(401).send({ message: "Invalid Email or Password" });
 
-    const token = user.generateAuthToken();
+    //generates an authuntication token which gets a token, the user id, the user role, and user's first and last name
+      const token = user.generateAuthToken();
     res.status(200).send({
       data: {
         token: token,
@@ -35,6 +39,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//validation schema which takes the email and password 
 const validate = (data) => {
   const schema = Joi.object({
     email: Joi.string().email().required().label("Email"),

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Forum, validate } = require("../models/forum");
 
+//router to post a forum which validtes and creates a forum successfully or sends an internal server
 router.post("/", async (req, res) => {
   try {
     const { error } = validate(req.body);
@@ -13,6 +14,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//finds a forum and sends it to the server
 router.get("/", async (req, res) => {
   try {
     Forum.find({}, function (err, forums) {

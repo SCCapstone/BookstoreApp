@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { Book, validate, validateReview } = require("../models/book");
 
+//method to route the books
+//find and send the books to the server and if it didn't work then send error message
 router.get("/", async (req, res) => {
   try {
     Book.find({}, function (err, books) {
@@ -12,6 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//method to get the book id's using the split function
 router.get("/:ids", async (req, res) => {
   const { ids } = req.params;
   splitIds = ids.split(",");
@@ -31,6 +34,7 @@ router.get("/:ids", async (req, res) => {
   }
 });
 
+//method to post the books to the browse page 
 router.post("/", async (req, res) => {
   try {
     req.body.dateAdded = new Date();
@@ -40,6 +44,7 @@ router.post("/", async (req, res) => {
       return res.status(400).send({ message: error.details[0].message });
     }
 
+    //method to find a book and checks to see if the title exists and checks to make sure it's added successfully
     const book = await Book.findOne({ title: req.body.title });
     if (book) {
       return res
@@ -72,6 +77,7 @@ router.put("/:id", async (req, res) => {
 
       book.reviews.push(req.body.review);
     }
+    //attributes of the book
     if (req.body.price) {
       book.price = req.body.price;
     }
@@ -88,6 +94,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//method to delete a book
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;

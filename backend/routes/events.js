@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Event, validate } = require("../models/event");
 
+//route to post a new event which utilizes a title and start/end time
 router.post("/", async (req, res) => {
   try {
     const newEvent = new Event({
@@ -8,6 +9,7 @@ router.post("/", async (req, res) => {
       start: req.body.start,
       end: req.body.end
     });
+    //method to save an event
     const savedEvent = await newEvent.save();
     res.json(savedEvent);
   } catch (error) {
@@ -15,6 +17,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//method to find and send an event to a the serve
 router.get("/", async (req, res) => {
   try {
     Event.find({}, function (err, events) {
