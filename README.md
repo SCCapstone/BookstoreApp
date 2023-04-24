@@ -48,6 +48,9 @@ Our end-to-end tests require Cypress, which requires a bit more setup. After ins
 The automated unit tests can be run with `cd backend && npm run test` from the home directory. The server and react pages need not be running to run the unit tests.
 The end-to-end tests run on Cypress and can be run after the server is running. In a terminal, run the server with `npm run build` and then `npm run start`. After that, open a new terminal, and run `npm run cypress:test` from the `client` folder.
 
+## Test Directories/Current Tests
+All of our unit tests are located in the `/backend/routes` folder and named `*.test.js`. All of our integration tests are located in the `/client/cypress/e2e/` folder.
+
 ## Authors
 
 * Rahul Bulusu: rbulusu@email.sc.edu
